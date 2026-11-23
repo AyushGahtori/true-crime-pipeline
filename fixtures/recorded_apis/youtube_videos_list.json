@@ -1,0 +1,38 @@
+{
+  "fixture_kind": "youtube_videos_list",
+  "kind": "youtube#videoListResponse",
+  "etag": "fixture-etag-ep-golden-004",
+  "pageInfo": {
+    "totalResults": 1,
+    "resultsPerPage": 1
+  },
+  "items": [
+    {
+      "kind": "youtube#video",
+      "etag": "fixture-etag-video-01",
+      "id": "fixtureVid20min01",
+      "snippet": {
+        "publishedAt": "2026-10-01T12:00:00Z",
+        "channelId": "UCfixtureChannel0001",
+        "title": "Marlow County case overview",
+        "description": "Public episode title only.",
+        "channelTitle": "Fixture Scout Channel"
+      },
+      "statistics": {
+        "viewCount": "250000",
+        "likeCount": "1200",
+        "commentCount": "80"
+      },
+      "contentDetails": {
+        "duration": "PT22M10S"
+      }
+    }
+  ],
+  "fixture_controls": {
+    "live_http": false,
+    "authorization_header_present": false,
+    "api_key_material_present": false,
+    "captions_download_called": false,
+    "note": "Recorded videos.list payload. No revenue field is included."
+  }
+}

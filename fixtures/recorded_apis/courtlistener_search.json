@@ -1,0 +1,28 @@
+{
+  "fixture_kind": "courtlistener_search",
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1042001,
+      "resource_uri": "https://www.courtlistener.com/api/rest/v4/opinions/1042001/",
+      "absolute_url": "https://www.courtlistener.com/opinion/1042001/state-v-hale/",
+      "case_name": "State v. Hale",
+      "docket_number": "2019-CR-1042",
+      "court": "Montana Supreme Court",
+      "court_id": "mont",
+      "date_filed": "2021-06-18",
+      "citation": [
+        "2021 MT 142"
+      ]
+    }
+  ],
+  "fixture_controls": {
+    "live_http": false,
+    "authorization_header_present": false,
+    "api_key_material_present": false,
+    "quota_bucket": "courtlistener",
+    "daily_limit": 125
+  }
+}
