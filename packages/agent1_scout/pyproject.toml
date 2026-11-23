@@ -1,0 +1,20 @@
+[project]
+name = "tc-agent1-scout"
+version = "0.1.0"
+description = "Agent 1 deduplicated alias search runner. Offline injected YouTube list calls only."
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
