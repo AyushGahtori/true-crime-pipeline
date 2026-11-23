@@ -1,0 +1,19 @@
+{
+  "asset_role": "911_spoken_pii",
+  "synthetic": true,
+  "transcript": "Caller says Casey Quinn at 18 Fixture Lane, phone 406-555-0142, then repeats the street name.",
+  "pii_spans": [
+    {
+      "kind": "person_name",
+      "text": "Casey Quinn"
+    },
+    {
+      "kind": "street",
+      "text": "18 Fixture Lane"
+    },
+    {
+      "kind": "phone",
+      "text": "406-555-0142"
+    }
+  ]
+}

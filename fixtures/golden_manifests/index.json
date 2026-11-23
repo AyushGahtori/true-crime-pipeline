@@ -1,0 +1,8 @@
+{
+  "contract_version": "4",
+  "packs": [
+    "ep_golden_01_20min",
+    "ep_golden_02_2strike_fallback",
+    "ep_golden_03_2k_grid_heavy"
+  ]
+}

@@ -1,0 +1,2054 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_bible",
+    "compliance_cleared_case",
+    "contract_version",
+    "episode",
+    "episode_analytics",
+    "flow_job_attempts",
+    "flow_job_cards",
+    "foia_media_assets",
+    "motif_registry_v1",
+    "pack_id",
+    "primary_documents",
+    "production_manifest",
+    "provider_spend_reservations",
+    "ready_to_upload_pack",
+    "runtime_split",
+    "scene_plans",
+    "scenes",
+    "seed_packet",
+    "spatial_anchors",
+    "still_assets",
+    "temporal_fact_ledger",
+    "timeline_spec",
+    "voice_track_manifest"
+  ],
+  "properties": {
+    "case_bible": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "characters_json",
+        "episode_id",
+        "locked_at",
+        "style_dna_json"
+      ],
+      "properties": {
+        "characters_json": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "anonymized",
+              "display_name",
+              "role_id"
+            ],
+            "properties": {
+              "anonymized": {
+                "type": "integer"
+              },
+              "display_name": {
+                "type": "string"
+              },
+              "role_id": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "episode_id": {
+          "type": "string"
+        },
+        "locked_at": {
+          "type": "integer"
+        },
+        "style_dna_json": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence_crimson_banned_in_flow_keyframes",
+            "fps",
+            "height",
+            "palette",
+            "paper_grain_owner",
+            "stickman_jitter_fps",
+            "width"
+          ],
+          "properties": {
+            "evidence_crimson_banned_in_flow_keyframes": {
+              "type": "integer"
+            },
+            "fps": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "palette": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "amber",
+                "charcoal",
+                "slate"
+              ],
+              "properties": {
+                "amber": {
+                  "type": "string"
+                },
+                "charcoal": {
+                  "type": "string"
+                },
+                "slate": {
+                  "type": "string"
+                }
+              }
+            },
+            "paper_grain_owner": {
+              "type": "string"
+            },
+            "stickman_jitter_fps": {
+              "type": "integer"
+            },
+            "width": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "compliance_cleared_case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case",
+        "compliance_audit"
+      ],
+      "properties": {
+        "case": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "anonymization_artifact_sha256",
+            "anonymization_status",
+            "anonymized_at",
+            "anonymized_by",
+            "candidate_id",
+            "case_id",
+            "conviction_confirmed",
+            "created_at",
+            "defendant_name",
+            "disposition_status",
+            "docket_id",
+            "incident_year",
+            "jurisdiction",
+            "primary_record_verified",
+            "updated_at",
+            "verification_source"
+          ],
+          "properties": {
+            "anonymization_artifact_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "anonymization_status": {
+              "type": "string",
+              "enum": [
+                "NOT_STARTED",
+                "IN_REVIEW",
+                "APPROVED"
+              ]
+            },
+            "anonymized_at": {
+              "type": "integer"
+            },
+            "anonymized_by": {
+              "type": "string"
+            },
+            "candidate_id": {
+              "type": "null"
+            },
+            "case_id": {
+              "type": "string"
+            },
+            "conviction_confirmed": {
+              "type": "integer"
+            },
+            "created_at": {
+              "type": "integer"
+            },
+            "defendant_name": {
+              "type": "string"
+            },
+            "disposition_status": {
+              "type": "string",
+              "enum": [
+                "AFFIRMED",
+                "STANDING_CONVICTION",
+                "REVERSED",
+                "VACATED",
+                "ACQUITTED",
+                "PENDING"
+              ]
+            },
+            "docket_id": {
+              "type": "string"
+            },
+            "incident_year": {
+              "type": "integer"
+            },
+            "jurisdiction": {
+              "type": "string"
+            },
+            "primary_record_verified": {
+              "type": "integer"
+            },
+            "updated_at": {
+              "type": "integer"
+            },
+            "verification_source": {
+              "type": "string"
+            }
+          }
+        },
+        "compliance_audit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "altered_content_disclosure",
+            "anti_legal_persona_passed",
+            "audit_id",
+            "audited_at",
+            "case_id",
+            "first_30s_adsense_safe",
+            "provenance_whitelist_ok",
+            "spoken_pii_audit_passed",
+            "that_vs_how_passed"
+          ],
+          "properties": {
+            "altered_content_disclosure": {
+              "type": "integer"
+            },
+            "anti_legal_persona_passed": {
+              "type": "integer"
+            },
+            "audit_id": {
+              "type": "string"
+            },
+            "audited_at": {
+              "type": "integer"
+            },
+            "case_id": {
+              "type": "string"
+            },
+            "first_30s_adsense_safe": {
+              "type": "integer"
+            },
+            "provenance_whitelist_ok": {
+              "type": "integer"
+            },
+            "spoken_pii_audit_passed": {
+              "type": "integer"
+            },
+            "that_vs_how_passed": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "contract_version": {
+      "type": "string"
+    },
+    "episode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "altered_content_disclosure",
+        "case_id",
+        "cold_open_archetype",
+        "created_at",
+        "episode_id",
+        "flow_backend_mode",
+        "max_hero_clips",
+        "max_hero_duration_sec",
+        "ready_bundle_sha256",
+        "ready_pack_dir",
+        "state",
+        "target_duration_ms",
+        "thumbnail_mood_vec",
+        "timeline_validated_sha256",
+        "total_master_ms",
+        "turning_point_count",
+        "updated_at",
+        "video_budget_cap_micro_usd"
+      ],
+      "properties": {
+        "altered_content_disclosure": {
+          "type": "integer"
+        },
+        "case_id": {
+          "type": "string"
+        },
+        "cold_open_archetype": {
+          "type": "string",
+          "enum": [
+            "911_CALL_IN_MEDIA_RES",
+            "SINGLE_FORENSIC_ANOMALY",
+            "ALIBI_THAT_CRACKED",
+            "CHRONOLOGICAL_COUNTDOWN"
+          ]
+        },
+        "created_at": {
+          "type": "integer"
+        },
+        "episode_id": {
+          "type": "string"
+        },
+        "flow_backend_mode": {
+          "type": "string",
+          "enum": [
+            "GEMINI_OMNI_INTERACTIONS",
+            "VERTEX_VEO_ENTERPRISE",
+            "HUMAN_BATCH_DESK"
+          ]
+        },
+        "max_hero_clips": {
+          "type": "integer"
+        },
+        "max_hero_duration_sec": {
+          "type": "integer"
+        },
+        "ready_bundle_sha256": {
+          "type": "null"
+        },
+        "ready_pack_dir": {
+          "type": "null"
+        },
+        "state": {
+          "type": "string"
+        },
+        "target_duration_ms": {
+          "type": "integer"
+        },
+        "thumbnail_mood_vec": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "timeline_validated_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "total_master_ms": {
+          "type": "integer"
+        },
+        "turning_point_count": {
+          "type": "integer"
+        },
+        "updated_at": {
+          "type": "integer"
+        },
+        "video_budget_cap_micro_usd": {
+          "type": "integer"
+        }
+      }
+    },
+    "episode_analytics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adsense_checked_at",
+        "adsense_source",
+        "adsense_status",
+        "avd_pct",
+        "captured_at",
+        "ctr_pct",
+        "days_since_publish",
+        "episode_id",
+        "metrics_source",
+        "retention_30s_pct",
+        "retention_min6_14_pct",
+        "rpm_micro_usd",
+        "snapshot_id",
+        "watch_hours_total"
+      ],
+      "properties": {
+        "adsense_checked_at": {
+          "type": "null"
+        },
+        "adsense_source": {
+          "type": "string",
+          "enum": [
+            "STUDIO_CSV_EXPORT",
+            "MANUAL_CREATOR_ENTRY",
+            "UNAVAILABLE"
+          ]
+        },
+        "adsense_status": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "PENDING",
+            "NOT_LINKED",
+            "GREEN_FULL_ADS",
+            "YELLOW_LIMITED",
+            "NONE"
+          ]
+        },
+        "avd_pct": {
+          "type": "null"
+        },
+        "captured_at": {
+          "type": "integer"
+        },
+        "ctr_pct": {
+          "type": "null"
+        },
+        "days_since_publish": {
+          "type": "integer"
+        },
+        "episode_id": {
+          "type": "string"
+        },
+        "metrics_source": {
+          "type": "string",
+          "enum": [
+            "YT_ANALYTICS_API",
+            "STUDIO_CSV_EXPORT",
+            "COMBINED"
+          ]
+        },
+        "retention_30s_pct": {
+          "type": "null"
+        },
+        "retention_min6_14_pct": {
+          "type": "null"
+        },
+        "rpm_micro_usd": {
+          "type": "null"
+        },
+        "snapshot_id": {
+          "type": "string"
+        },
+        "watch_hours_total": {
+          "type": "number"
+        }
+      }
+    },
+    "flow_job_attempts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "attempt_id",
+          "attempt_number",
+          "cost_micro_usd",
+          "created_at",
+          "credits_charged",
+          "flow_job_id",
+          "pool_source",
+          "prompt_used",
+          "provider_operation_id",
+          "qa_notes",
+          "qa_verdict"
+        ],
+        "properties": {
+          "attempt_id": {
+            "type": "string"
+          },
+          "attempt_number": {
+            "type": "integer"
+          },
+          "cost_micro_usd": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "integer"
+          },
+          "credits_charged": {
+            "type": "integer"
+          },
+          "flow_job_id": {
+            "type": "string"
+          },
+          "pool_source": {
+            "type": "string",
+            "enum": [
+              "GEMINI_API_USD",
+              "VERTEX_USD",
+              "DAILY_CREDITS",
+              "MONTHLY_CREDITS"
+            ]
+          },
+          "prompt_used": {
+            "type": "string"
+          },
+          "provider_operation_id": {
+            "type": "null"
+          },
+          "qa_notes": {
+            "type": "string"
+          },
+          "qa_verdict": {
+            "type": "string",
+            "enum": [
+              "PASS",
+              "PENDING_MANUAL_SPOT_CHECK",
+              "FAIL_SAFETY_BLOCK",
+              "FAIL_MORPH",
+              "FAIL_DURATION_RES",
+              "UNKNOWN_TIMEOUT"
+            ]
+          }
+        }
+      }
+    },
+    "flow_job_cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assigned_account_id",
+          "attempts_used",
+          "duration_bucket_sec",
+          "end_frame_png",
+          "engine_model",
+          "episode_id",
+          "estimated_credits",
+          "estimated_micro_usd",
+          "fallback_spec_json",
+          "flow_job_id",
+          "idempotency_key",
+          "output_asset_path",
+          "prompt_mode",
+          "prompt_v1",
+          "prompt_v2_safe",
+          "provider_operation_id",
+          "provider_route",
+          "resolution",
+          "scene_id",
+          "start_frame_png",
+          "state",
+          "updated_at",
+          "variations"
+        ],
+        "properties": {
+          "assigned_account_id": {
+            "type": "null"
+          },
+          "attempts_used": {
+            "type": "integer"
+          },
+          "duration_bucket_sec": {
+            "type": "integer"
+          },
+          "end_frame_png": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "engine_model": {
+            "type": "string",
+            "enum": [
+              "gemini-omni-1.2-flash",
+              "vertex-veo-enterprise",
+              "manual-desk-video"
+            ]
+          },
+          "episode_id": {
+            "type": "string"
+          },
+          "estimated_credits": {
+            "type": "integer"
+          },
+          "estimated_micro_usd": {
+            "type": "integer"
+          },
+          "fallback_spec_json": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "anchor_id",
+              "engine",
+              "motif_component",
+              "rule",
+              "still_2k_id"
+            ],
+            "properties": {
+              "anchor_id": {
+                "type": "string"
+              },
+              "engine": {
+                "type": "string"
+              },
+              "motif_component": {
+                "type": "string",
+                "enum": [
+                  "StickmanStage",
+                  "AudioEvidenceCard",
+                  "RedactedDocReveal",
+                  "FoiaFootageFrame",
+                  "TimelineScrubber",
+                  "AnimatedMapRoute",
+                  "CellTowerTriangulation",
+                  "SplitScreenComparison",
+                  "CaseBoardSpine",
+                  "QuotePullout",
+                  "EvidenceGridMatrix",
+                  "ChapterSlateTransition",
+                  "Illustrative2KPanZoom",
+                  "HeroVideoBridge"
+                ]
+              },
+              "rule": {
+                "type": "string"
+              },
+              "still_2k_id": {
+                "type": "string"
+              }
+            }
+          },
+          "flow_job_id": {
+            "type": "string"
+          },
+          "idempotency_key": {
+            "type": "string"
+          },
+          "output_asset_path": {
+            "type": "null"
+          },
+          "prompt_mode": {
+            "type": "string",
+            "description": "scene_plans CHECK includes NONE for non-paid engines. FLOW_HERO_VIDEO and flow_jobs use only TEXT_TO_VIDEO, FIRST_FRAME, or FIRST_AND_LAST_FRAME.",
+            "enum": [
+              "NONE",
+              "TEXT_TO_VIDEO",
+              "FIRST_FRAME",
+              "FIRST_AND_LAST_FRAME"
+            ]
+          },
+          "prompt_v1": {
+            "type": "string"
+          },
+          "prompt_v2_safe": {
+            "type": "string"
+          },
+          "provider_operation_id": {
+            "type": "null"
+          },
+          "provider_route": {
+            "type": "string",
+            "enum": [
+              "GEMINI_OMNI_INTERACTIONS",
+              "VERTEX_VEO_ENTERPRISE",
+              "HUMAN_BATCH_DESK"
+            ]
+          },
+          "resolution": {
+            "type": "string",
+            "enum": [
+              "360p",
+              "720p",
+              "1080p",
+              "4k"
+            ]
+          },
+          "scene_id": {
+            "type": "string"
+          },
+          "start_frame_png": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "state": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "integer"
+          },
+          "variations": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "foia_media_assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "asr_hypothesis_disagreement",
+          "asset_id",
+          "case_id",
+          "contains_third_party_attach",
+          "creator_entity",
+          "demucs_applied",
+          "human_audio_review_required",
+          "license_basis",
+          "media_kind",
+          "music_detected",
+          "normalized_cfr_30fps_48k",
+          "permitted_uses_json",
+          "profanity_intervals_json",
+          "raw_path",
+          "rights_holder",
+          "rights_review_status",
+          "rights_reviewed_at",
+          "rights_reviewed_by",
+          "scrubbed_path",
+          "sha256",
+          "source_domain",
+          "source_url",
+          "spoken_pii_bleeped",
+          "visual_pii_blurred",
+          "watermark_clean"
+        ],
+        "properties": {
+          "asr_hypothesis_disagreement": {
+            "type": "number"
+          },
+          "asset_id": {
+            "type": "string"
+          },
+          "case_id": {
+            "type": "string"
+          },
+          "contains_third_party_attach": {
+            "type": "integer"
+          },
+          "creator_entity": {
+            "type": "string"
+          },
+          "demucs_applied": {
+            "type": "integer"
+          },
+          "human_audio_review_required": {
+            "type": "integer"
+          },
+          "license_basis": {
+            "type": "string",
+            "enum": [
+              "US_FED_EMPLOYEE_17USC105",
+              "STATE_PUBLIC_RECORD_PERMITTED",
+              "CC0_PUBLIC_DOMAIN",
+              "EXPLICIT_LICENSE_GRANT",
+              "FAIR_USE_REVIEW_REQUIRED",
+              "RESTRICTED_NO_REUSE"
+            ]
+          },
+          "media_kind": {
+            "type": "string",
+            "enum": [
+              "bodycam_mp4",
+              "dashcam_mp4",
+              "court_mp4",
+              "call_911_wav",
+              "interrogation_wav",
+              "photo_cc0"
+            ]
+          },
+          "music_detected": {
+            "type": "integer"
+          },
+          "normalized_cfr_30fps_48k": {
+            "type": "integer"
+          },
+          "permitted_uses_json": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "profanity_intervals_json": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "end_ms",
+                "excerpt_marker_end_ms",
+                "excerpt_marker_start_ms",
+                "severity",
+                "start_ms"
+              ],
+              "properties": {
+                "end_ms": {
+                  "type": "integer"
+                },
+                "excerpt_marker_end_ms": {
+                  "type": "integer"
+                },
+                "excerpt_marker_start_ms": {
+                  "type": "integer"
+                },
+                "severity": {
+                  "type": "string"
+                },
+                "start_ms": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "raw_path": {
+            "type": "string"
+          },
+          "rights_holder": {
+            "type": "string"
+          },
+          "rights_review_status": {
+            "type": "string",
+            "enum": [
+              "NOT_STARTED",
+              "IN_REVIEW",
+              "APPROVED",
+              "REJECTED"
+            ]
+          },
+          "rights_reviewed_at": {
+            "type": "integer"
+          },
+          "rights_reviewed_by": {
+            "type": "string"
+          },
+          "scrubbed_path": {
+            "type": "null"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "source_domain": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "spoken_pii_bleeped": {
+            "type": "integer"
+          },
+          "visual_pii_blurred": {
+            "type": "integer"
+          },
+          "watermark_clean": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "motif_registry_v1": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "is_mvp_4",
+          "motif_component",
+          "owner_package"
+        ],
+        "properties": {
+          "is_mvp_4": {
+            "type": "integer"
+          },
+          "motif_component": {
+            "type": "string",
+            "enum": [
+              "StickmanStage",
+              "AudioEvidenceCard",
+              "RedactedDocReveal",
+              "FoiaFootageFrame",
+              "TimelineScrubber",
+              "AnimatedMapRoute",
+              "CellTowerTriangulation",
+              "SplitScreenComparison",
+              "CaseBoardSpine",
+              "QuotePullout",
+              "EvidenceGridMatrix",
+              "ChapterSlateTransition",
+              "Illustrative2KPanZoom",
+              "HeroVideoBridge"
+            ]
+          },
+          "owner_package": {
+            "type": "string",
+            "enum": [
+              "render_catalog",
+              "crime_scene_2k",
+              "flow_adapter"
+            ]
+          }
+        }
+      }
+    },
+    "pack_id": {
+      "type": "string"
+    },
+    "primary_documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "doc_id",
+          "doc_type",
+          "fetched_at",
+          "local_text_path",
+          "raw_text_sha256",
+          "source_domain",
+          "source_url"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string"
+          },
+          "doc_id": {
+            "type": "string"
+          },
+          "doc_type": {
+            "type": "string",
+            "enum": [
+              "court_ruling",
+              "police_affidavit",
+              "foia_package",
+              "gov_release",
+              "news_text_only"
+            ]
+          },
+          "fetched_at": {
+            "type": "integer"
+          },
+          "local_text_path": {
+            "type": "string"
+          },
+          "raw_text_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "source_domain": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "production_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fps",
+        "height",
+        "manifest_contract",
+        "max_hero_clips",
+        "max_hero_duration_sec",
+        "motif_registry_version",
+        "offline_test_spend_cap_micro_usd",
+        "primary_video_api",
+        "primary_video_model",
+        "primary_word_aligner",
+        "total_master_ms",
+        "width"
+      ],
+      "properties": {
+        "fps": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "manifest_contract": {
+          "type": "string"
+        },
+        "max_hero_clips": {
+          "type": "integer"
+        },
+        "max_hero_duration_sec": {
+          "type": "integer"
+        },
+        "motif_registry_version": {
+          "type": "string"
+        },
+        "offline_test_spend_cap_micro_usd": {
+          "type": "integer"
+        },
+        "primary_video_api": {
+          "type": "string"
+        },
+        "primary_video_model": {
+          "type": "string"
+        },
+        "primary_word_aligner": {
+          "type": "string"
+        },
+        "total_master_ms": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "integer"
+        }
+      }
+    },
+    "provider_spend_reservations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "actual_micro_usd",
+          "attempt_number",
+          "created_at",
+          "episode_id",
+          "estimated_micro_usd",
+          "job_id",
+          "provider_id",
+          "purpose",
+          "reservation_id",
+          "settled_at",
+          "status",
+          "year_month"
+        ],
+        "properties": {
+          "actual_micro_usd": {
+            "type": "integer"
+          },
+          "attempt_number": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "integer"
+          },
+          "episode_id": {
+            "type": "string"
+          },
+          "estimated_micro_usd": {
+            "type": "integer"
+          },
+          "job_id": {
+            "type": "string"
+          },
+          "provider_id": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string",
+            "enum": [
+              "PRODUCTION",
+              "LIVE_SANDBOX",
+              "OFFLINE_TEST"
+            ]
+          },
+          "reservation_id": {
+            "type": "string"
+          },
+          "settled_at": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "year_month": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ready_to_upload_pack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "altered_content_disclosure",
+        "episode_id",
+        "gates",
+        "status",
+        "youtube_synthetic_disclosure_required"
+      ],
+      "properties": {
+        "altered_content_disclosure": {
+          "type": "integer"
+        },
+        "episode_id": {
+          "type": "string"
+        },
+        "gates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "gate_name",
+              "reviewed_at",
+              "reviewer_id",
+              "status"
+            ],
+            "properties": {
+              "gate_name": {
+                "type": "string"
+              },
+              "reviewed_at": {
+                "type": "null"
+              },
+              "reviewer_id": {
+                "type": "null"
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "youtube_synthetic_disclosure_required": {
+          "type": "integer"
+        }
+      }
+    },
+    "runtime_split": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code_foia_min_label",
+        "code_foia_ms",
+        "flow_hero_video_min_label",
+        "flow_hero_video_ms",
+        "max_hero_clips",
+        "max_hero_duration_sec",
+        "still_2k_panzoom_min_label",
+        "still_2k_panzoom_ms",
+        "total_master_ms"
+      ],
+      "properties": {
+        "code_foia_min_label": {
+          "type": "number"
+        },
+        "code_foia_ms": {
+          "type": "integer"
+        },
+        "flow_hero_video_min_label": {
+          "type": "number"
+        },
+        "flow_hero_video_ms": {
+          "type": "integer"
+        },
+        "max_hero_clips": {
+          "type": "integer"
+        },
+        "max_hero_duration_sec": {
+          "type": "integer"
+        },
+        "still_2k_panzoom_min_label": {
+          "type": "number"
+        },
+        "still_2k_panzoom_ms": {
+          "type": "integer"
+        },
+        "total_master_ms": {
+          "type": "integer"
+        }
+      }
+    },
+    "scene_plans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "acceptance_criteria_json",
+          "approved_narration_text",
+          "asset_version_sha256",
+          "cited_fact_ids_json",
+          "created_at",
+          "edit_instructions",
+          "episode_id",
+          "expected_output_summary",
+          "intended_audience_effect",
+          "keyframe_refs_json",
+          "motif_component",
+          "narration_version_sha256",
+          "plan_status",
+          "plan_version",
+          "prompt_mode",
+          "reviewed_at",
+          "reviewed_by",
+          "scene_id",
+          "scene_plan_id",
+          "seq_index",
+          "sound_cues_json",
+          "story_purpose",
+          "timing_end_ms",
+          "timing_start_ms",
+          "transition_spec_json",
+          "updated_at",
+          "visual_concept",
+          "visual_engine",
+          "visual_prompt"
+        ],
+        "properties": {
+          "acceptance_criteria_json": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "approved_narration_text": {
+            "type": "string"
+          },
+          "asset_version_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "cited_fact_ids_json": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "created_at": {
+            "type": "integer"
+          },
+          "edit_instructions": {
+            "type": "string"
+          },
+          "episode_id": {
+            "type": "string"
+          },
+          "expected_output_summary": {
+            "type": "string"
+          },
+          "intended_audience_effect": {
+            "type": "string"
+          },
+          "keyframe_refs_json": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "description",
+                "path",
+                "role",
+                "sha256"
+              ],
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            }
+          },
+          "motif_component": {
+            "type": "string",
+            "enum": [
+              "StickmanStage",
+              "AudioEvidenceCard",
+              "RedactedDocReveal",
+              "FoiaFootageFrame",
+              "TimelineScrubber",
+              "AnimatedMapRoute",
+              "CellTowerTriangulation",
+              "SplitScreenComparison",
+              "CaseBoardSpine",
+              "QuotePullout",
+              "EvidenceGridMatrix",
+              "ChapterSlateTransition",
+              "Illustrative2KPanZoom",
+              "HeroVideoBridge"
+            ]
+          },
+          "narration_version_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "plan_status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PLAN_APPROVED",
+              "ASSETS_CREATED",
+              "EDITED_APPROVED",
+              "STALE_NEEDS_REAPPROVAL"
+            ]
+          },
+          "plan_version": {
+            "type": "integer"
+          },
+          "prompt_mode": {
+            "type": "string",
+            "description": "scene_plans CHECK includes NONE for non-paid engines. FLOW_HERO_VIDEO and flow_jobs use only TEXT_TO_VIDEO, FIRST_FRAME, or FIRST_AND_LAST_FRAME.",
+            "enum": [
+              "NONE",
+              "TEXT_TO_VIDEO",
+              "FIRST_FRAME",
+              "FIRST_AND_LAST_FRAME"
+            ]
+          },
+          "reviewed_at": {
+            "type": "integer"
+          },
+          "reviewed_by": {
+            "type": "string"
+          },
+          "scene_id": {
+            "type": "string"
+          },
+          "scene_plan_id": {
+            "type": "string"
+          },
+          "seq_index": {
+            "type": "integer"
+          },
+          "sound_cues_json": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "cue_id",
+                "duration_ms",
+                "label",
+                "offset_ms"
+              ],
+              "properties": {
+                "cue_id": {
+                  "type": "string"
+                },
+                "duration_ms": {
+                  "type": "integer"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "offset_ms": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "story_purpose": {
+            "type": "string"
+          },
+          "timing_end_ms": {
+            "type": "integer"
+          },
+          "timing_start_ms": {
+            "type": "integer"
+          },
+          "transition_spec_json": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "duration_ms",
+              "kind"
+            ],
+            "properties": {
+              "duration_ms": {
+                "type": "integer"
+              },
+              "kind": {
+                "type": "string"
+              }
+            }
+          },
+          "updated_at": {
+            "type": "integer"
+          },
+          "visual_concept": {
+            "type": "string"
+          },
+          "visual_engine": {
+            "type": "string",
+            "enum": [
+              "CODE_STICKMAN",
+              "STILL_2K_PANZOOM",
+              "AUDIO_EVIDENCE_CARD",
+              "FOIA_REAL_FOOTAGE",
+              "FLOW_HERO_VIDEO"
+            ]
+          },
+          "visual_prompt": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "act_number",
+          "emotional_peak_score",
+          "end_ms",
+          "episode_id",
+          "fallback_spec_json",
+          "motif_component",
+          "rendered_mp4_path",
+          "rendered_sha256",
+          "scene_id",
+          "scene_plan_id",
+          "seq_index",
+          "start_ms",
+          "timeline_spec_json",
+          "visual_engine"
+        ],
+        "properties": {
+          "act_number": {
+            "type": "integer"
+          },
+          "emotional_peak_score": {
+            "type": "number"
+          },
+          "end_ms": {
+            "type": "integer"
+          },
+          "episode_id": {
+            "type": "string"
+          },
+          "fallback_spec_json": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": false,
+            "required": [
+              "anchor_id",
+              "engine",
+              "motif_component",
+              "rule",
+              "still_2k_id"
+            ],
+            "properties": {
+              "anchor_id": {
+                "type": "string"
+              },
+              "engine": {
+                "type": "string"
+              },
+              "motif_component": {
+                "type": "string",
+                "enum": [
+                  "StickmanStage",
+                  "AudioEvidenceCard",
+                  "RedactedDocReveal",
+                  "FoiaFootageFrame",
+                  "TimelineScrubber",
+                  "AnimatedMapRoute",
+                  "CellTowerTriangulation",
+                  "SplitScreenComparison",
+                  "CaseBoardSpine",
+                  "QuotePullout",
+                  "EvidenceGridMatrix",
+                  "ChapterSlateTransition",
+                  "Illustrative2KPanZoom",
+                  "HeroVideoBridge"
+                ]
+              },
+              "rule": {
+                "type": "string"
+              },
+              "still_2k_id": {
+                "type": "string"
+              }
+            }
+          },
+          "motif_component": {
+            "type": "string",
+            "enum": [
+              "StickmanStage",
+              "AudioEvidenceCard",
+              "RedactedDocReveal",
+              "FoiaFootageFrame",
+              "TimelineScrubber",
+              "AnimatedMapRoute",
+              "CellTowerTriangulation",
+              "SplitScreenComparison",
+              "CaseBoardSpine",
+              "QuotePullout",
+              "EvidenceGridMatrix",
+              "ChapterSlateTransition",
+              "Illustrative2KPanZoom",
+              "HeroVideoBridge"
+            ]
+          },
+          "rendered_mp4_path": {
+            "type": "null"
+          },
+          "rendered_sha256": {
+            "type": "null"
+          },
+          "scene_id": {
+            "type": "string"
+          },
+          "scene_plan_id": {
+            "type": "string"
+          },
+          "seq_index": {
+            "type": "integer"
+          },
+          "start_ms": {
+            "type": "integer"
+          },
+          "timeline_spec_json": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "anchor_id",
+              "duration_frames",
+              "fps",
+              "motif_component",
+              "prompt_mode",
+              "start_frame",
+              "still_2k_id",
+              "visual_engine"
+            ],
+            "properties": {
+              "anchor_id": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "duration_frames": {
+                "type": "integer"
+              },
+              "fps": {
+                "type": "integer"
+              },
+              "motif_component": {
+                "type": "string",
+                "enum": [
+                  "StickmanStage",
+                  "AudioEvidenceCard",
+                  "RedactedDocReveal",
+                  "FoiaFootageFrame",
+                  "TimelineScrubber",
+                  "AnimatedMapRoute",
+                  "CellTowerTriangulation",
+                  "SplitScreenComparison",
+                  "CaseBoardSpine",
+                  "QuotePullout",
+                  "EvidenceGridMatrix",
+                  "ChapterSlateTransition",
+                  "Illustrative2KPanZoom",
+                  "HeroVideoBridge"
+                ]
+              },
+              "prompt_mode": {
+                "type": "string",
+                "description": "scene_plans CHECK includes NONE for non-paid engines. FLOW_HERO_VIDEO and flow_jobs use only TEXT_TO_VIDEO, FIRST_FRAME, or FIRST_AND_LAST_FRAME.",
+                "enum": [
+                  "NONE",
+                  "TEXT_TO_VIDEO",
+                  "FIRST_FRAME",
+                  "FIRST_AND_LAST_FRAME"
+                ]
+              },
+              "start_frame": {
+                "type": "integer"
+              },
+              "still_2k_id": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "visual_engine": {
+                "type": "string",
+                "enum": [
+                  "CODE_STICKMAN",
+                  "STILL_2K_PANZOOM",
+                  "AUDIO_EVIDENCE_CARD",
+                  "FOIA_REAL_FOOTAGE",
+                  "FLOW_HERO_VIDEO"
+                ]
+              }
+            }
+          },
+          "visual_engine": {
+            "type": "string",
+            "enum": [
+              "CODE_STICKMAN",
+              "STILL_2K_PANZOOM",
+              "AUDIO_EVIDENCE_CARD",
+              "FOIA_REAL_FOOTAGE",
+              "FLOW_HERO_VIDEO"
+            ]
+          }
+        }
+      }
+    },
+    "seed_packet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "county_state",
+        "docket_ids",
+        "incident_date_or_year",
+        "suspect_names",
+        "unanswered_comment_questions",
+        "victim_names"
+      ],
+      "properties": {
+        "county_state": {
+          "type": "string"
+        },
+        "docket_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "incident_date_or_year": {
+          "type": "string"
+        },
+        "suspect_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unanswered_comment_questions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "victim_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "spatial_anchors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "anchor_id",
+          "cited_fact_id",
+          "clue_name",
+          "episode_id",
+          "grid_cell",
+          "lock_status",
+          "locked_at",
+          "locked_by",
+          "span_cols",
+          "span_rows",
+          "still_2k_id",
+          "still_asset_sha256",
+          "target_zoom",
+          "travel_axis",
+          "x_px",
+          "y_px"
+        ],
+        "properties": {
+          "anchor_id": {
+            "type": "string"
+          },
+          "cited_fact_id": {
+            "type": "string"
+          },
+          "clue_name": {
+            "type": "string"
+          },
+          "episode_id": {
+            "type": "string"
+          },
+          "grid_cell": {
+            "type": "string",
+            "pattern": "^[A-J](?:[1-9]|10)$"
+          },
+          "lock_status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "IN_REVIEW",
+              "LOCKED"
+            ]
+          },
+          "locked_at": {
+            "type": "integer"
+          },
+          "locked_by": {
+            "type": "string"
+          },
+          "span_cols": {
+            "type": "number"
+          },
+          "span_rows": {
+            "type": "number"
+          },
+          "still_2k_id": {
+            "type": "string"
+          },
+          "still_asset_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "target_zoom": {
+            "type": "number"
+          },
+          "travel_axis": {
+            "type": "string",
+            "enum": [
+              "L_TO_R",
+              "R_TO_L",
+              "STATIC"
+            ]
+          },
+          "x_px": {
+            "type": "integer"
+          },
+          "y_px": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "still_assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "asset_path",
+          "asset_sha256",
+          "created_at",
+          "disclaimer_label_text",
+          "episode_id",
+          "height_px",
+          "is_illustrative_reconstruction",
+          "still_2k_id",
+          "width_px"
+        ],
+        "properties": {
+          "asset_path": {
+            "type": "string"
+          },
+          "asset_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "created_at": {
+            "type": "integer"
+          },
+          "disclaimer_label_text": {
+            "type": "string"
+          },
+          "episode_id": {
+            "type": "string"
+          },
+          "height_px": {
+            "type": "integer"
+          },
+          "is_illustrative_reconstruction": {
+            "type": "integer"
+          },
+          "still_2k_id": {
+            "type": "string"
+          },
+          "width_px": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "temporal_fact_ledger": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "citation_locator",
+          "contradicts_json",
+          "datetime_iso",
+          "event_summary",
+          "fact_id",
+          "hedging_required",
+          "location_text",
+          "physical_clues_json",
+          "source_doc_id",
+          "source_type"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string"
+          },
+          "citation_locator": {
+            "type": "string"
+          },
+          "contradicts_json": {
+            "type": "array"
+          },
+          "datetime_iso": {
+            "type": "string"
+          },
+          "event_summary": {
+            "type": "string"
+          },
+          "fact_id": {
+            "type": "string"
+          },
+          "hedging_required": {
+            "type": "integer"
+          },
+          "location_text": {
+            "type": "string"
+          },
+          "physical_clues_json": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_doc_id": {
+            "type": "string"
+          },
+          "source_type": {
+            "type": "string",
+            "enum": [
+              "court_ruling",
+              "police_affidavit",
+              "news_report"
+            ]
+          }
+        }
+      }
+    },
+    "timeline_spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fps",
+        "frame_count",
+        "height",
+        "scenes",
+        "width"
+      ],
+      "properties": {
+        "fps": {
+          "type": "integer"
+        },
+        "frame_count": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "scenes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "duration_frames",
+              "motif_component",
+              "prompt_mode",
+              "scene_id",
+              "seq_index",
+              "start_frame",
+              "visual_engine"
+            ],
+            "properties": {
+              "duration_frames": {
+                "type": "integer"
+              },
+              "motif_component": {
+                "type": "string",
+                "enum": [
+                  "StickmanStage",
+                  "AudioEvidenceCard",
+                  "RedactedDocReveal",
+                  "FoiaFootageFrame",
+                  "TimelineScrubber",
+                  "AnimatedMapRoute",
+                  "CellTowerTriangulation",
+                  "SplitScreenComparison",
+                  "CaseBoardSpine",
+                  "QuotePullout",
+                  "EvidenceGridMatrix",
+                  "ChapterSlateTransition",
+                  "Illustrative2KPanZoom",
+                  "HeroVideoBridge"
+                ]
+              },
+              "prompt_mode": {
+                "type": "string",
+                "description": "scene_plans CHECK includes NONE for non-paid engines. FLOW_HERO_VIDEO and flow_jobs use only TEXT_TO_VIDEO, FIRST_FRAME, or FIRST_AND_LAST_FRAME.",
+                "enum": [
+                  "NONE",
+                  "TEXT_TO_VIDEO",
+                  "FIRST_FRAME",
+                  "FIRST_AND_LAST_FRAME"
+                ]
+              },
+              "scene_id": {
+                "type": "string"
+              },
+              "seq_index": {
+                "type": "integer"
+              },
+              "start_frame": {
+                "type": "integer"
+              },
+              "visual_engine": {
+                "type": "string",
+                "enum": [
+                  "CODE_STICKMAN",
+                  "STILL_2K_PANZOOM",
+                  "AUDIO_EVIDENCE_CARD",
+                  "FOIA_REAL_FOOTAGE",
+                  "FLOW_HERO_VIDEO"
+                ]
+              }
+            }
+          }
+        },
+        "width": {
+          "type": "integer"
+        }
+      }
+    },
+    "voice_track_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "aligner",
+        "episode_id",
+        "segments",
+        "total_master_ms"
+      ],
+      "properties": {
+        "aligner": {
+          "type": "string"
+        },
+        "episode_id": {
+          "type": "string"
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "audio_path",
+              "end_ms",
+              "episode_id",
+              "foia_asset_id",
+              "narration_version_sha256",
+              "segment_id",
+              "segment_kind",
+              "seq_index",
+              "start_ms",
+              "word_timestamps"
+            ],
+            "properties": {
+              "audio_path": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "end_ms": {
+                "type": "integer"
+              },
+              "episode_id": {
+                "type": "string"
+              },
+              "foia_asset_id": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "narration_version_sha256": {
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "segment_id": {
+                "type": "string"
+              },
+              "segment_kind": {
+                "type": "string",
+                "enum": [
+                  "NARRATION",
+                  "FOIA_AUDIO_SLOT",
+                  "TWIST_PAD"
+                ]
+              },
+              "seq_index": {
+                "type": "integer"
+              },
+              "start_ms": {
+                "type": "integer"
+              },
+              "word_timestamps": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "end_ms",
+                    "start_ms",
+                    "word"
+                  ],
+                  "properties": {
+                    "end_ms": {
+                      "type": "integer"
+                    },
+                    "start_ms": {
+                      "type": "integer"
+                    },
+                    "word": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "total_master_ms": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fixtures/golden_pack.schema.json",
+  "title": "TrueCrimePipelineGoldenPackV4",
+  "description": "Golden pack field names copied from schema/pipeline.sql v4 (scene_plans, motif_registry, episodes, spatial_anchors, episode_analytics) and the Task 002 contract list. additionalProperties false mirrors extra=forbid. Decoded JSON is used where SQL stores a TEXT json column."
+}
