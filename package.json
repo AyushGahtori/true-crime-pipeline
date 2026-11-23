@@ -1,0 +1,17 @@
+{
+  "name": "true-crime-pipeline",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.34.9",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "pnpm --filter \"./packages/**\" --filter \"./apps/**\" typecheck",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vitest": "^3.2.4"
+  }
+}
