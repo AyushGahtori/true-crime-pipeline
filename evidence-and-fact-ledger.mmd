@@ -1,0 +1,27 @@
+---
+title: Agent 2 — Evidence harvester, INSERT+UPDATE disposition guard and illustrative 2K lock (v3)
+---
+flowchart TB
+  SEED["SeedPacket from Agent 1<br/>(LEAD_ONLY metadata · never evidence)"]
+  GATE{"Standing Appellate Disposition Gate (INSERT + UPDATE)<br/>AFFIRMED / STANDING_CONVICTION?<br/>(Adverse Update Auto-Quarantines Downstream Episodes)"}
+  KILL["Auto-Kill / QUARANTINED_LEGAL_HOLD"]
+
+  subgraph HARVEST["Rate-Aware Acquisition & Explicit Anonymization"]
+    CL["CourtListener Appellate Opinions<br/>125/day · 5/min · 50/hr cache"]
+    MR["MuckRock / State Public Records<br/>(Component-level rights_review_status)"]
+    NEWS["Secondary News Text Only<br/>(Pixels never downloaded)"]
+  end
+
+  DS["DeepSeek-V4.1-Flash-1017 (1M Context)<br/>+ V4-Pro-0813 conflict resolver"]
+  LEDGER[("Temporal Fact Ledger (pipeline.db)<br/>anonymization_status: NOT_STARTED -> IN_REVIEW -> APPROVED")]
+  G2K["Early Illustrative 2K Plates (Before Scripting)<br/>still_assets (is_illustrative_reconstruction=1) -> Margin 10x10<br/>spatial_anchors: DRAFT -> IN_REVIEW -> LOCKED"]
+  TWIST["Extract >= 3 TurningPointBeats<br/>+ Record-Anchored Topology Phrasing"]
+
+  SEED --> GATE
+  GATE -->|No match or reversed| KILL
+  GATE -->|Confirmed Standing Conviction| HARVEST --> DS --> LEDGER --> G2K --> TWIST
+
+  classDef gate fill:#fff1ce,stroke:#947333,color:#40300b
+  classDef core fill:#daeae4,stroke:#316d5b,color:#173b30
+  class GATE gate
+  class LEDGER,DS,G2K,TWIST core

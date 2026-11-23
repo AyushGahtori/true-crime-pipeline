@@ -1,0 +1,27 @@
+# Database & State Design (`pipeline.db` v3 + `telemetry.db`)
+
+All durable state, paid-budget admission control, crash reconciliation, legal holds, and human release sign-offs live in **`pipeline.db`** (SQLite WAL mode), paired strictly with non-authoritative operational metrics in **`telemetry.db`**. Schema DDL: [schema/pipeline.sql](schema/pipeline.sql), [schema/telemetry.sql](schema/telemetry.sql), [schema/queries.sql](schema/queries.sql), [schema/schema-test.js](schema/schema-test.js). Diagram: [database-and-state-design.mmd](database-and-state-design.mmd).
+
+## 1. Runtime Version Pin, Single-Host Storage & Local Security Boundary (`F-19`, `F-22`)
+
+1. **Minimum SQLite Version Enforced at Startup (`F-22`):** Python verifies `sqlite3.sqlite_version_info >= (3, 51, 3)` on startup (fixing SQLite's documented WAL-reset concurrency bug per [SQLite WAL documentation](https://www.sqlite.org/wal.html)) and logs the active runtime build to `audit_log`.
+2. **Local Host Filesystem Only (`F-22`):** `pipeline.db` and its `-wal`/`-shm` sidecars MUST reside on a local filesystem (NTFS / ext4 / APFS). Startup hard-fails if the configured path resolves to an SMB, NFS, or UNC network share.
+3. **Python Sole Writer & Loopback Security (`F-19`):** Only the Python backend opens `pipeline.db` for writes using short `BEGIN IMMEDIATE` transactions (`PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;`). The FastAPI control plane binds strictly to `127.0.0.1` with a per-session `X-Local-Auth-Token` (`0600`), localhost-only CORS, canonical upload path containment, and immutable `audit_log`.
+4. **Backup, Restore & Disk Lifecycle Policy (`F-22`):**
+   - Automated daily hot backup via `VACUUM INTO 'backups/pipeline_<YYYYMMDD>.db'` verified by running `PRAGMA integrity_check` on the backup copy.
+   - Explicit disk watermarks: warn at `< 25 GB` free, pause new episode starts at `< 10 GB` free.
+   - Artifact retention schedule: intermediate uncompressed WAV/YUV temp directories purged immediately after `ready_to_upload/` SHA-256 verification; FOIA source packages and signed `provenance_bundle.json` archived under legal-hold policy (`>= 3 years` or until takedown).
+
+## 2. Authoritative Schema Guarantees (v3 — Verified by `schema-test.js` 12/12)
+
+| Table / Trigger | Guarantee & Audit Finding Resolved |
+|---|---|
+| `cases` + `trg_case_disposition_guard_insert` / `_update` + `trg_case_disposition_quarantine` | **F-03 & F-04:** Guards conviction confirmation on **both INSERT and UPDATE**; adverse disposition flips (`REVERSED`/`VACATED`/`ACQUITTED`/`PENDING`) automatically quarantine downstream episodes (`QUARANTINED_LEGAL_HOLD`) and revoke `release_approvals`. Replaces default-true booleans with `anonymization_status` (`NOT_STARTED -> IN_REVIEW -> APPROVED` + reviewer/timestamp/SHA-256). |
+| `still_assets` + `spatial_anchors` | **F-04, F-05, F-09:** Enforces `is_illustrative_reconstruction = 1` + disclaimer label on every 2K plate, FK from `spatial_anchors.still_2k_id`, `grid_cell GLOB '[A-J][1-9]' OR '[A-J]10'`, and explicit `lock_status` (`DRAFT -> IN_REVIEW -> LOCKED` + reviewer/timestamp/SHA-256). |
+| `foia_media_assets` | **F-14 & F-15:** Component-level `creator_entity`, `rights_holder`, `license_basis` (narrowing `US_FED_EMPLOYEE_17USC105`), `contains_third_party_attach`, `rights_review_status` (blocks approving `RESTRICTED_NO_REUSE`), and honest `asr_hypothesis_disagreement` + `human_audio_review_required`. |
+| `voice_segments` + `scenes` + overlap triggers | **F-09 & F-16:** Kind-specific non-null media checks (`NARRATION` requires `audio_path`, `FOIA_AUDIO_SLOT` requires `foia_asset_id`), `BEFORE INSERT/UPDATE` non-overlap triggers, FK to single authoritative `motif_registry`, and transactional `episodes.timeline_validated_sha256`. |
+| `flow_jobs` + `budget_reservations` + `trg_budget_cap_guard` | **F-01, F-02, F-07, F-10, F-18:** Supports `gemini-omni-1.2-flash`, `prompt_mode` (`TEXT_TO_VIDEO` null frames / `FIRST_FRAME` / `FIRST_AND_LAST_FRAME <= 10s`), `UNIQUE (episode_id, scene_id)`, `idempotency_key`, persisted `provider_operation_id`, crash states (`SUBMITTING`/`RUNNING`/`UNKNOWN_RECONCILE`/`PENDING_MANUAL_SPOT_CHECK`), and durable micro-USD cap enforcement inside SQLite (never async `telemetry.db`!). |
+| `release_approvals` + `trg_episode_release_gate` | **F-06 & Vision QA Fail-Closed:** Hard-blocks `READY_TO_UPLOAD` / `PUBLISHED` unless case is `AFFIRMED`/`STANDING_CONVICTION` + `anonymization_status = 'APPROVED'`, timeline validated, zero jobs in `UNKNOWN_RECONCILE`/`PENDING_MANUAL_SPOT_CHECK`, and ALL 5 human release gates (`FACTUAL_ACCURACY`, `PRIVACY_PII`, `SOURCE_RIGHTS`, `SYNTHETIC_DISCLOSURE`, `ILLUSTRATIVE_LABELING`) are `APPROVED` for `ready_bundle_sha256`. |
+| `google_accounts` + `atomic_refill_and_reserve_daily_account_credits` | **F-08:** Single atomic SQL statement handling both rolling `24h + 5m` refill and hard lockout before reset when daily pool is exhausted. |
+| `outlier_candidates` + `purge_expired_yt_api_records` | **F-20:** Enforces non-null 30-day `yt_ttl_expires_at` on `TRACK_A_OUTLIER` and purges ALL YouTube API-derived fields (`raw_yt_payload_json`, `views_count`, `outlier_ratio`, YT seed excerpts) on expiry. |
+| `episode_analytics` | **F-12:** Explicit `adsense_status` (`UNKNOWN`/`PENDING`/`NOT_LINKED`/`GREEN_FULL_ADS`/`YELLOW_LIMITED`/`NONE`), `adsense_source` (`STUDIO_CSV_EXPORT`/`MANUAL_CREATOR_ENTRY`/`UNAVAILABLE`), and nullable `ctr_pct` (no fabricated `videos.list` monetization fields). |

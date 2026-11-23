@@ -1,0 +1,35 @@
+---
+title: Automated True-Crime Pipeline — End-to-end 6-agent hybrid architecture (v3)
+---
+flowchart TB
+  subgraph P1["Part 1 · Upstream Brain & Control Plane (Developer A)"]
+    A1["Agent 1 v3 · Dual-Track Scout<br/>70% YT Outliers (Mutually Exclusive SI, 30d Full Purge)<br/>30% MuckRock / CourtListener · Authorized Metadata Leads Only"]
+    A2["Agent 2 · Evidence Harvester & Illustrative 2K Lock<br/>INSERT+UPDATE Disposition Guard + Auto-Quarantine<br/>Explicit Anonymization & Early Illustrative 2K Anchor Lock"]
+    A3["Agent 3 · Rights, PII & Policy Risk Gatekeeper<br/>Component Rights Provenance · Music-Gated Demucs (ASR Disagreement)<br/>Visual + Spoken PII Scrub · Illustrative & Dramatization Labels"]
+    VS["Voice-First Segmented Timeline<br/>Non-Overlapping Narration + FOIA Slots + Twist Pads<br/>ASR Proper-Noun Diff + RMS Envelope (CFR 30fps / 48kHz)"]
+    A4["Agent 4 · Two-Layer Director Compiler<br/>manifest_linter.py (13 Laws, Single MOTIF_REGISTRY_V1)<br/>13.0m Code / 5.67m 2K / 1.33m Omni Hero (<=10 clips)"]
+    A1 --> A2 --> A3 --> VS --> A4
+  end
+
+  subgraph CONV["Single-Host State & Security Control Plane (SQLite >= 3.51.3 WAL)"]
+    Q["Python Sole Writer + Loopback FastAPI (127.0.0.1 + Auth Token)<br/>Durable USD budget_reservations & Crash-Safe Idempotency"]
+  end
+
+  subgraph P2["Part 2 · Visual Synthesis, Mastering, Human Sign-Off & Analytics (Developer B)"]
+    A5A["Agent 5A · Remotion 2D Motif Catalog (30 fps)<br/>6 fps JS Boil (Zero SVG Turbulence) · 4-Motif MVP -> 12 Motifs<br/>13.0 min (780s) · $0 Video API · Clean Ungraded Output"]
+    A5B["Agent 5B · Illustrative 2K Pan/Zoom (crime_scene_2k Sole Owner)<br/>External-Margin 10x10 + Screen-Space Callouts + Illustrative Badge<br/>5.67 min (340s) · $0 Video API"]
+    A5C["Agent 5C · Gemini Omni 1.2 Flash Interactions API (Primary)<br/>T2V & 1/2-Frame (3-10s) · UNKNOWN_RECONCILE · Fail-Closed QA<br/>Separate Optional Vertex Enterprise & 24h+5m Batch Desk"]
+    A6["Agent 6 · Mastering, Fail-Closed QA & 5-Gate Human Release Sign-Off<br/>Per-Track Norm -> Linear -14 LUFS · Single Non-FOIA Grain<br/>5 Mandatory Human Approvals -> ready_to_upload/"]
+    AN["Honest Post-Publish Analytics Loop<br/>YT Analytics Watch-Hours/Retention + Studio CSV Monetization (UNKNOWN default)"]
+    A5A & A5B & A5C --> A6 --> AN
+  end
+
+  A4 --> Q --> P2
+  AN -.->|bounded calibration| A1
+
+  classDef p1 fill:#daeae4,stroke:#316d5b,color:#173b30
+  classDef gate fill:#fff1ce,stroke:#947333,color:#40300b
+  classDef p2 fill:#dce8f5,stroke:#2e5a88,color:#132a42
+  class A1,A2,A3,VS,A4 p1
+  class Q gate
+  class A5A,A5B,A5C,A6,AN p2

@@ -1,0 +1,407 @@
+---
+title: Automated True-Crime Documentary Pipeline — Complete Architecture Atlas
+---
+flowchart TB
+  subgraph CH_1["1 · Overview: End-to-End Hybrid Pipeline"]
+    direction TB
+    subgraph pa_ROOT["Automated True-Crime Pipeline — End-to-end 6-agent hybrid architecture (v3)"]
+      direction TB
+        subgraph pa_P1["Part 1 · Upstream Brain & Control Plane (Developer A)"]
+          pa_A1["Agent 1 v3 · Dual-Track Scout<br/>70% YT Outliers (Mutually Exclusive SI, 30d Full Purge)<br/>30% MuckRock / CourtListener · Authorized Metadata Leads Only"]
+          pa_A2["Agent 2 · Evidence Harvester & Illustrative 2K Lock<br/>INSERT+UPDATE Disposition Guard + Auto-Quarantine<br/>Explicit Anonymization & Early Illustrative 2K Anchor Lock"]
+          pa_A3["Agent 3 · Rights, PII & Policy Risk Gatekeeper<br/>Component Rights Provenance · Music-Gated Demucs (ASR Disagreement)<br/>Visual + Spoken PII Scrub · Illustrative & Dramatization Labels"]
+          pa_VS["Voice-First Segmented Timeline<br/>Non-Overlapping Narration + FOIA Slots + Twist Pads<br/>ASR Proper-Noun Diff + RMS Envelope (CFR 30fps / 48kHz)"]
+          pa_A4["Agent 4 · Two-Layer Director Compiler<br/>manifest_linter.py (13 Laws, Single MOTIF_REGISTRY_V1)<br/>13.0m Code / 5.67m 2K / 1.33m Omni Hero (<=10 clips)"]
+          pa_A1 --> pa_A2 --> pa_A3 --> pa_VS --> pa_A4
+        end
+
+        subgraph pa_CONV["Single-Host State & Security Control Plane (SQLite >= 3.51.3 WAL)"]
+          pa_Q["Python Sole Writer + Loopback FastAPI (127.0.0.1 + Auth Token)<br/>Durable USD budget_reservations & Crash-Safe Idempotency"]
+        end
+
+        subgraph pa_P2["Part 2 · Visual Synthesis, Mastering, Human Sign-Off & Analytics (Developer B)"]
+          pa_A5A["Agent 5A · Remotion 2D Motif Catalog (30 fps)<br/>6 fps JS Boil (Zero SVG Turbulence) · 4-Motif MVP -> 12 Motifs<br/>13.0 min (780s) · $0 Video API · Clean Ungraded Output"]
+          pa_A5B["Agent 5B · Illustrative 2K Pan/Zoom (crime_scene_2k Sole Owner)<br/>External-Margin 10x10 + Screen-Space Callouts + Illustrative Badge<br/>5.67 min (340s) · $0 Video API"]
+          pa_A5C["Agent 5C · Gemini Omni 1.2 Flash Interactions API (Primary)<br/>T2V & 1/2-Frame (3-10s) · UNKNOWN_RECONCILE · Fail-Closed QA<br/>Separate Optional Vertex Enterprise & 24h+5m Batch Desk"]
+          pa_A6["Agent 6 · Mastering, Fail-Closed QA & 5-Gate Human Release Sign-Off<br/>Per-Track Norm -> Linear -14 LUFS · Single Non-FOIA Grain<br/>5 Mandatory Human Approvals -> ready_to_upload/"]
+          pa_AN["Honest Post-Publish Analytics Loop<br/>YT Analytics Watch-Hours/Retention + Studio CSV Monetization (UNKNOWN default)"]
+          pa_A5A & pa_A5B & pa_A5C --> pa_A6 --> pa_AN
+        end
+
+        pa_A4 --> pa_Q --> pa_P2
+        pa_AN -.->|bounded calibration| pa_A1
+
+        classDef pa_p1 fill:#daeae4,stroke:#316d5b,color:#173b30
+        classDef pa_gate fill:#fff1ce,stroke:#947333,color:#40300b
+        classDef pa_p2 fill:#dce8f5,stroke:#2e5a88,color:#132a42
+        class pa_A1,pa_A2,pa_A3,pa_VS,pa_A4 pa_p1
+        class pa_Q pa_gate
+        class pa_A5A,pa_A5B,pa_A5C,pa_A6,pa_AN pa_p2
+
+    end
+  end
+  subgraph CH_2["2 · Parallel Two-Developer Split (Part 1 & Part 2)"]
+    direction TB
+    subgraph pp_ROOT["Parallel two-developer architecture — Part 1 vs Part 2 seam"]
+      direction LR
+        subgraph pp_FROZEN["Frozen Day-1 Seam (Tasks 001–004)"]
+          pp_SC["packages/shared_contracts<br/>Pydantic v2 + Zod + JSON Schema"]
+          pp_SQL["schema/pipeline.sql<br/>SQLite WAL · Job Queue · Escrow"]
+          pp_FIX["fixtures/golden_manifests<br/>3 full episode packs + synthetic WAV/MP4"]
+        end
+
+        subgraph pp_P1["Part 1 · Developer A (Tasks 005–100)"]
+          pp_A1["Agent 1 v2 · Scout & SI/OR"]
+          pp_A2["Agent 2 · Evidence & Fact Ledger"]
+          pp_A3["Agent 3 · Whitelist · Demucs · PII · AdSense"]
+          pp_VS["Voice-First · Gemini TTS + ASR Sync"]
+          pp_A4["Agent 4 · Director + 13-Law manifest_linter.py"]
+          pp_ORCH["Conveyor Orchestrator<br/>RenderBackendPort"]
+          pp_STUB["RenderBackendStub<br/>(Standalone P1 E2E)"]
+          pp_A1 --> pp_A2 --> pp_A3 --> pp_VS --> pp_A4 --> pp_ORCH
+          pp_ORCH -.->|standalone test| pp_STUB
+        end
+
+        subgraph pp_P2["Part 2 · Developer B (Tasks 101–192)"]
+          pp_RC["Remotion 12-Component Catalog<br/>StickFigure + DocumentaryGrade"]
+          pp_PM["Python Keyframes + Safety Gate"]
+          pp_G2K["2K 10x10 Grid + Cubic Pan/Zoom"]
+          pp_FA["FlowAssetBackend + 2-Strike Breaker"]
+          pp_UI["Batch Desk Web UI<br/>15-Min Shift Cockpit"]
+          pp_A6["Agent 6 · -14 LUFS + Vision QA + Packager"]
+          pp_OUT["ready_to_upload/<br/>1080p MP4 + Metadata Pack"]
+          pp_RC & pp_PM & pp_G2K & pp_FA --> pp_A6 --> pp_OUT
+          pp_UI <--> pp_FA
+        end
+
+        pp_SC & pp_SQL --> pp_P1
+        pp_SC & pp_SQL --> pp_P2
+        pp_FIX -.->|standalone test| pp_P2
+        pp_ORCH ==>|"Live Merge (Tasks 193–200)<br/>ProductionManifest + TimelineSpec + flow_jobs"| pp_P2
+
+        classDef pp_frozen fill:#fff1ce,stroke:#947333,color:#40300b
+        classDef pp_p1 fill:#daeae4,stroke:#316d5b,color:#173b30
+        classDef pp_p2 fill:#dce8f5,stroke:#2e5a88,color:#132a42
+        class pp_SC,pp_SQL,pp_FIX pp_frozen
+        class pp_A1,pp_A2,pp_A3,pp_VS,pp_A4,pp_ORCH,pp_STUB pp_p1
+        class pp_RC,pp_PM,pp_G2K,pp_FA,pp_UI,pp_A6,pp_OUT pp_p2
+
+    end
+  end
+  subgraph CH_3["3 · Part 1 Upstream Intelligence (Agents 1–3)"]
+    direction TB
+    subgraph sc_ROOT["Agent 1 v3 — Dual-track scout, authorized metadata leads and 30-day full YT purge"]
+      direction TB
+        subgraph sc_TA["Track A · 70% Small-Creator Outlier Miner"]
+          sc_WL["SQLite Watchlist (Mandatory Non-Null 30d YT TTL)<br/>Weekly Discovery/Pruning (2K-120K subs)"]
+          sc_POLL["Nightly Zero-Search Poll (~450 units, 0 search)<br/>playlistItems.list (UU...) + videos.list (50/batch)"]
+          sc_OR["Compute Outlier Ratio<br/>OR = views / 20-video median (>= 3.5x, >=20K, <=12mo)"]
+          sc_ALIAS["Canonical Alias Expansion (DeepSeek)<br/>3-4 aliases -> search.list (~60/100/day)"]
+          sc_SI["Mutually Exclusive SI + 90d Kill<br/>Instant Kill if >200K within 90d or SI >= 55"]
+          sc_GAP["Comment Quality Gap (LEAD_ONLY) + Safe-Title CTR Check"]
+          sc_WL --> sc_POLL --> sc_OR --> sc_ALIAS --> sc_SI --> sc_GAP
+        end
+
+        subgraph sc_TRACK_B["Track B · 30% Fresh Primary Radar"]
+          sc_MR["MuckRock FOIA Completed Drops"]
+          sc_CL["CourtListener Appellate Rulings<br/>125 req/day · 5/min · 50/hr cache"]
+        end
+
+        sc_XRAY["Authorized Metadata Lead Extractor<br/>videos.list + comments ONLY (No 3rd-party captions.download!)"]
+        sc_FW["Clean-Room Seed Firewall<br/>Factual lookup keys ONLY · Full 30-day YT field purge"]
+        sc_KILL{"Binary Policy Kill-Switch<br/>Minors / Mass Shootings / Terrorism /<br/>Unconvicted Suspects?"}
+        sc_UPG{"Mandatory 2-Upgrade Rule<br/>Beats outlier on >= 2 of 4 axes?"}
+        sc_SCORE["Rank Survivors<br/>0.30 Docs + 0.25 FOIA + 0.25 Twist + 0.20 Gap"]
+        sc_RECHECK["Pre-Render Saturation Re-Check<br/>Per-shift check + sunk-cost threshold (>50% spent)"]
+
+        sc_GAP --> sc_XRAY --> sc_FW --> sc_KILL
+        sc_MR & sc_CL --> sc_KILL
+        sc_KILL -->|Clean| sc_UPG
+        sc_KILL -->|Blocked| sc_DROP["Hard Drop"]
+        sc_UPG -->|>= 2 axes| sc_SCORE --> sc_RECHECK
+        sc_UPG -->|< 2 axes| sc_DROP
+
+        classDef sc_gate fill:#fff1ce,stroke:#947333,color:#40300b
+        classDef sc_core fill:#daeae4,stroke:#316d5b,color:#173b30
+        class sc_KILL,sc_UPG,sc_RECHECK sc_gate
+        class sc_FW,sc_SI,sc_SCORE sc_core
+
+    end
+    subgraph ev_ROOT["Agent 2 — Evidence harvester, INSERT+UPDATE disposition guard and illustrative 2K lock (v3)"]
+      direction TB
+        ev_SEED["SeedPacket from Agent 1<br/>(LEAD_ONLY metadata · never evidence)"]
+        ev_GATE{"Standing Appellate Disposition Gate (INSERT + UPDATE)<br/>AFFIRMED / STANDING_CONVICTION?<br/>(Adverse Update Auto-Quarantines Downstream Episodes)"}
+        ev_KILL["Auto-Kill / QUARANTINED_LEGAL_HOLD"]
+
+        subgraph ev_HARVEST["Rate-Aware Acquisition & Explicit Anonymization"]
+          ev_CL["CourtListener Appellate Opinions<br/>125/day · 5/min · 50/hr cache"]
+          ev_MR["MuckRock / State Public Records<br/>(Component-level rights_review_status)"]
+          ev_NEWS["Secondary News Text Only<br/>(Pixels never downloaded)"]
+        end
+
+        ev_DS["DeepSeek-V4.1-Flash-1017 (1M Context)<br/>+ V4-Pro-0813 conflict resolver"]
+        ev_LEDGER[("Temporal Fact Ledger (pipeline.db)<br/>anonymization_status: NOT_STARTED -> IN_REVIEW -> APPROVED")]
+        ev_G2K["Early Illustrative 2K Plates (Before Scripting)<br/>still_assets (is_illustrative_reconstruction=1) -> Margin 10x10<br/>spatial_anchors: DRAFT -> IN_REVIEW -> LOCKED"]
+        ev_TWIST["Extract >= 3 TurningPointBeats<br/>+ Record-Anchored Topology Phrasing"]
+
+        ev_SEED --> ev_GATE
+        ev_GATE -->|No match or reversed| ev_KILL
+        ev_GATE -->|Confirmed Standing Conviction| ev_HARVEST --> ev_DS --> ev_LEDGER --> ev_G2K --> ev_TWIST
+
+        classDef ev_gate fill:#fff1ce,stroke:#947333,color:#40300b
+        classDef ev_core fill:#daeae4,stroke:#316d5b,color:#173b30
+        class ev_GATE ev_gate
+        class ev_LEDGER,ev_DS,ev_G2K,ev_TWIST ev_core
+
+    end
+    subgraph lg_ROOT["Agent 3 — Legal, per-file provenance, music-gated Demucs and spoken+visual PII"]
+      direction TB
+        lg_IN_MEDIA["Raw Media URLs & FOIA Files"]
+        lg_WL{"Defense 1 · Granular Provenance<br/>State FOIA Statute Allowlist · MuckRock 3P Filter<br/>Wikimedia Commons API CC0/PD Check"}
+        lg_TXT["Text Extract Only<br/>Delete All Pixels"]
+
+        subgraph lg_SCRUB["FOIA Media & Audio Sanitization (CFR 30fps / 48kHz)"]
+          lg_DEM["Defense 2 · Music-Gated Demucs<br/>YAMNet/PANNs Music Check -> Demucs only on music<br/>ASR WER Gate (delta <= 15%)"]
+          lg_WM{"Defense 3 · Watermark & Visual/Spoken PII<br/>Reject TV Logos · Blur Bystanders<br/>ASR NER Bleep Spoken Names/Addresses/DOBs"}
+          lg_BLEEP["Whole-Clip Profanity Map<br/>Strict bleep on any slice routed to 0:00–0:30"]
+          lg_WL -->|Cleared Public Media| lg_DEM --> lg_WM --> lg_BLEEP
+        end
+
+        lg_SCRIPT["Fact Ledger + Locked 2K Anchors -> Draft Script"]
+        lg_LINT["Defense 4 · That-vs-How & Policy Linter<br/>1. Forensic 'that' vs graphic 'how'<br/>2. Zero AI legal-advice persona<br/>3. Mandatory news_report hedging<br/>4. TRANSCRIPT DRAMATIZATION badge on voiced quotes"]
+        lg_PASS["ComplianceClearedCase + Scrubbed CFR/48kHz FOIA"]
+
+        lg_IN_MEDIA --> lg_WL
+        lg_WL -->|News / 3rd-Party / CC-NC| lg_TXT
+        lg_SCRIPT --> lg_LINT --> lg_PASS
+        lg_BLEEP --> lg_PASS
+
+        classDef lg_gate fill:#fff1ce,stroke:#947333,color:#40300b
+        classDef lg_core fill:#daeae4,stroke:#316d5b,color:#173b30
+        class lg_WL,lg_WM lg_gate
+        class lg_DEM,lg_BLEEP,lg_LINT,lg_PASS lg_core
+
+    end
+  end
+  subgraph CH_4["4 · Part 1 Voice-First, Director 13 Laws & Economics"]
+    direction TB
+    subgraph vs_ROOT["Voice-first segmented timeline, proper-noun check and millisecond ASR sync"]
+      direction LR
+        vs_SCRIPT["Compliance-Cleared Script<br/>Narration Beats + FOIA Slot Placeholders + Twist Flags"]
+        vs_CHUNK["Scene Chunker (1–3 min segments)<br/>Under 16,384 token cap · Consistent style prefix"]
+        vs_TTS["Provider-Registry TTS Synthesis<br/>Gemini 3.8 TTS (Primary) / DeepSeek TTS Fallback<br/>Normalized to 48 kHz PCM + Per-Chunk LUFS/EQ Match"]
+        vs_PAD["Room-Tone Twist Pads (0.45s–0.75s)<br/>+ Explicit FOIA/911 Audio Slots (Non-Monolithic!)"]
+        vs_ASR["Millisecond ASR + Phonetic Diff Check<br/>DeepSeek ASR / WhisperX -> Flag mangled suspect/town names"]
+        vs_ENV["RMS Amplitude Envelope Extractor (30 fps)"]
+        vs_MAN["VoiceTrackManifest (Segmented Timeline)<br/>NarrationSegments + FoiaSlots + TwistPads = total_master_ms"]
+
+        vs_SCRIPT --> vs_CHUNK --> vs_TTS --> vs_PAD --> vs_ASR & vs_ENV --> vs_MAN
+
+        classDef vs_core fill:#daeae4,stroke:#316d5b,color:#173b30
+        class vs_PAD,vs_ASR,vs_MAN vs_core
+
+    end
+    subgraph dl_ROOT["Agent 4 — Two-layer director compiler and conflict-resolved 13 laws"]
+      direction TB
+        dl_IN["Segmented VoiceTrackManifest + Fact Ledger +<br/>Early-Locked 2K Anchors + Last 5 Episodes"]
+        dl_L1["Layer 1 · DeepSeek-V4.1-Flash-1017 Director<br/>Byte 0: Global Static Rules & Zod -> Episode CaseBible -> Dynamic Scene"]
+        dl_L2{"Layer 2 · manifest_linter.py (Zero LLM)<br/>Enforces RULE_01–RULE_13 (Conflict-Free)"}
+
+        subgraph dl_LAWS["Fixed Compiler Gates"]
+          direction LR
+          dl_BUD["Segmented RULE_01 & Act-Aware RULE_02<br/>sum(scenes)==total_master_ms<br/>Protect Act 2 >= 2 peaks · 6s+3.2s split"]
+          dl_SAFE["CSS Safe-Zone & Flexible Spine<br/>CaseBoardSpine 210–270s boundary snap<br/>Fallback != neighbor engine"]
+          dl_ANON["Split Law 11/12 & Whitelist<br/>Text-to-Video vs Frames Motion-Only<br/>Bigrams OK · Zero Crimson in Keyframes"]
+        end
+
+        dl_RETRY{"Violations?<br/>(Retries <= 3)"}
+        dl_DOWN["Act-Constrained Auto-Downgrade<br/>Swap excess hero -> non-neighbor fallback_spec"]
+        dl_DRY["15-Second Pre-Flight Animatic (--dry-run)<br/>Segmented Audio + 480p Wireframe Cards"]
+        dl_OUT["Validated ProductionManifest + TimelineSpec"]
+
+        dl_IN --> dl_L1 --> dl_L2
+        dl_L2 -.- dl_LAWS
+        dl_L2 -->|Fail, retries < 3| dl_RETRY -->|Exact RULE_ID diff| dl_L1
+        dl_RETRY -->|Retries == 3| dl_DOWN --> dl_DRY
+        dl_L2 -->|Pass 13/13 Laws| dl_DRY --> dl_OUT
+
+        classDef dl_gate fill:#fff1ce,stroke:#947333,color:#40300b
+        classDef dl_core fill:#daeae4,stroke:#316d5b,color:#173b30
+        class dl_L2,dl_RETRY dl_gate
+        class dl_L1,dl_DRY,dl_OUT dl_core
+
+    end
+    subgraph ec_ROOT["Economics, Gemini Omni 1.2 Flash Interactions API and 1,200s runtime split (v3)"]
+      direction TB
+        subgraph ec_PRIMARY["Primary Default · Gemini Interactions API ($135/mo Total Cap)"]
+          ec_OMNI_API["gemini-omni-1.2-flash Interactions API (~$0.10/sec 720p plan)<br/>Single-Config Cap: <=10 clips / 80s = $8.00 base / $10.40 DB Cap"]
+          ec_IMG_API["Official Gemini Image API (Early Illustrative 2K Plates)<br/>$0.30-$0.50/ep · Clearly Labeled Illustrative"]
+          ec_DS["DeepSeek V4.1 Flash / V4-Pro Reserve<br/>Byte-0 Static Cache + Off-Peak (~$0.75-$1.90/ep)"]
+          ec_TTS["Studio TTS + ASR + Vision QA<br/>~$0.45-$0.70/ep (verified in M0.5 sandbox)"]
+        end
+
+        subgraph ec_EP["Honest Single 20-Min (1,200s) Episode Allocation"]
+          ec_L1["Layer 1 · Code-to-Video + FOIA (13.0 min / 780s)<br/>$0 Video API · ~$0.95-$1.35 DeepSeek"]
+          ec_L2["Layer 2 · Illustrative 2K Stills (5.67 min / 340s)<br/>$0 Video API · crime_scene_2k Sole Owner"]
+          ec_L3["Layer 3 · Omni 1.2 Flash Hero (1.33 min / 80s, <=10 clips)<br/>$8.00 base / $10.40 durable SQLite USD cap"]
+        end
+
+        ec_OPT["Separate Optional Adapters (Non-Interchangeable)<br/>VERTEX_VEO_ENTERPRISE (GCP IAM/GCS) or<br/>HUMAN_BATCH_DESK (Atomic 24h+5m Lock + ToS Notice)"]
+
+        ec_OMNI_API --> ec_L3
+        ec_IMG_API --> ec_L2
+        ec_DS --> ec_L1 & ec_L2 & ec_L3
+        ec_OPT -.->|separate adapter route| ec_L3
+
+        classDef ec_core fill:#daeae4,stroke:#316d5b,color:#173b30
+        classDef ec_warn fill:#fff1ce,stroke:#947333,color:#40300b
+        class ec_L1,ec_L2,ec_L3 ec_core
+        class ec_OPT ec_warn
+
+    end
+  end
+  subgraph CH_5["5 · Part 2 Visual Synthesis (Remotion Catalog & 2K Grid)"]
+    direction TB
+    subgraph ca_ROOT["Agent 5A — Authoritative MOTIF_REGISTRY_V1 Remotion catalog (JS 6 fps boil, 30 fps)"]
+      direction TB
+        ca_SPEC["Validated TimelineSpec JSON<br/>+ CaseBible + Non-Overlapping voice_segments"]
+        ca_ZOD{"Zod Schema + MOTIF_REGISTRY_V1<br/>12-word limit & CSS Layout Safe-Zone Constraints"}
+
+        subgraph ca_CAT["Permanent Remotion 2D Catalog (@tc/render_catalog · 30 fps)"]
+          ca_L1["Layer 1 · StickFigure Rig<br/>6 fps JS Vertex-Jitter Line Boil (Zero SVG Turbulence)<br/>14 poses · 10 emotions · TTS RMS head-nod sync"]
+          ca_L2["Layer 2 · Authoritative 4-Motif MVP -> 12 Motifs<br/>MVP 4: StickmanStage · AudioEvidenceCard · RedactedDocReveal · FoiaFootageFrame<br/>Full +8: TimelineScrubber · AnimatedMapRoute · CellTowerTriangulation · SplitScreenComparison<br/>CaseBoardSpine · QuotePullout · EvidenceGridMatrix · ChapterSlateTransition"]
+          ca_L4["Layer 4 · Sandboxed CustomDiagramScene (~5% bespoke)"]
+        end
+
+        ca_SFX["scene_grade_manifest.json + Micro-SFX Emitter<br/>(Zero Remotion Grain · Single Pass in Agent 6)"]
+        ca_PY["Python python_motion & crime_scene_2k<br/>Monochrome Keyframes (Zero Crimson) + Sole Owner of Illustrative2KPanZoom"]
+        ca_MP4["Clean 1080p30 Ungraded MP4s (Design Target: <5s single-scene heal)"]
+
+        ca_SPEC --> ca_ZOD --> ca_CAT --> ca_SFX --> ca_MP4
+        ca_SPEC --> ca_PY
+
+        classDef ca_core fill:#daeae4,stroke:#316d5b,color:#173b30
+        classDef ca_gate fill:#fff1ce,stroke:#947333,color:#40300b
+        class ca_ZOD ca_gate
+        class ca_L1,ca_L2,ca_SFX,ca_MP4 ca_core
+
+    end
+    subgraph g2_ROOT["Agent 5B — Early 2K margin-grid grounding and cubic pan/zoom renderer"]
+      direction LR
+        g2_FACTS["Affidavit Clues + CaseBible Style (In Part 1 / Agent 2)"]
+        g2_NANO["Official Image API / Nano Banana 2K<br/>6–8 anchor clues + edit / 2 angles"]
+        g2_STAMP["External Margin Border Stamper<br/>A–J & 1–10 Outside Image + Thin Dashed Lines"]
+        g2_VLM["DeepSeek-V4.1-Flash Vision<br/>Returns grid_cell + span_cells (1.6x vs 3.8x zoom)"]
+        g2_MATH["Deterministic Mapper + Edge Clamp<br/>Maps A1–J10 -> (x, y, zoom) clamped in [0,W]x[0,H]"]
+        g2_LAW4["Lock spatial_anchors BEFORE Scripting (Part 1)"]
+        g2_ZOOM["Smooth Cubic Ease-In-Out Renderer (Part 2)<br/>Screen-Space Red Circles (Projected) + 12-Word Tags"]
+
+        g2_FACTS --> g2_NANO --> g2_STAMP --> g2_VLM --> g2_MATH --> g2_LAW4 --> g2_ZOOM
+        g2_NANO -->|Clean grid-free 2K source| g2_ZOOM
+
+        classDef g2_core fill:#daeae4,stroke:#316d5b,color:#173b30
+        class g2_STAMP,g2_MATH,g2_LAW4,g2_ZOOM g2_core
+
+    end
+  end
+  subgraph CH_6["6 · Part 2 Batch Desk Operations & Agent 6 Mastering"]
+    direction TB
+    subgraph bd_ROOT["Agent 5C — Crash-safe Gemini Omni 1.2 Flash backend and local loopback cockpit (v3)"]
+      direction TB
+        subgraph bd_CONV["Multi-Episode Conveyor & Durable USD Admission Control"]
+          bd_E2["Episode N+2 · Autonomous Part 1<br/>Scout -> Disposition & Anonymization -> Voice -> Manifest"]
+          bd_E1["Episode N+1 · Crash-Safe Video Execution<br/>Reserve USD in budget_reservations -> SUBMITTING -> RUNNING<br/>UNKNOWN_RECONCILE on crash · UNIQUE(episode_id, scene_id)"]
+          bd_E0["Episode N · Mastering & 5-Gate Human Release Sign-Off<br/>Per-Track Norm -> Linear -14 LUFS -> PENDING_HUMAN_SIGNOFF"]
+          bd_E2 --> bd_E1 --> bd_E0
+        end
+
+        bd_RECHK{"Per-Day Saturation Re-Check<br/>Sunk-cost guard (>50% spent & N_14d <= 5 -> finish)"}
+        bd_ABRT["Abort Cleanly"]
+
+        subgraph bd_DESK["Loopback FastAPI (127.0.0.1 + Token) & Optional Batch Desk"]
+          bd_S1["Atomic Daily Refill & 24h+5m Lock (Optional Accounts #1-#3)"]
+          bd_S2["gemini-omni-1.2-flash | T2V (3-15s) or 1/2-Frame (3-10s) | Zero Crimson PNGs"]
+          bd_S3["CFR 30fps Conformation -> 3-Frame Vision QA (Fail-Closed)"]
+          bd_S4{"2-Strike Breaker / QA Gate?"}
+          bd_AMB["Strike 1 Amber -> prompt_v2_safe"]
+          bd_SPOT["API Down -> PENDING_MANUAL_SPOT_CHECK (Blocks Export)"]
+          bd_FB["Strike 2 -> Non-Neighbor fallback_spec"]
+          bd_GRN["ACCEPTED"]
+
+          bd_S1 --> bd_S2 --> bd_S3 --> bd_S4
+          bd_S4 -->|Pass| bd_GRN
+          bd_S4 -->|Fail 1| bd_AMB --> bd_S3
+          bd_S4 -->|QA Outage| bd_SPOT
+          bd_S4 -->|Fail 2| bd_FB
+        end
+
+        bd_E1 --> bd_RECHK
+        bd_RECHK -->|Safe| bd_S1
+        bd_RECHK -->|Abort| bd_ABRT
+        bd_GRN & bd_FB -->|all jobs terminal| bd_E0
+
+        classDef bd_gate fill:#fff1ce,stroke:#947333,color:#40300b
+        classDef bd_core fill:#daeae4,stroke:#316d5b,color:#173b30
+        class bd_RECHK,bd_S4,bd_SPOT bd_gate
+        class bd_E2,bd_E0,bd_GRN,bd_FB bd_core
+
+    end
+    subgraph mq_ROOT["Agent 6 — Per-track normalization, single grade, -14 LUFS and analytics"]
+      direction TB
+        mq_CLIPS["Normalized CFR 30fps Scene MP4s<br/>(Code + 2K Pan/Zoom + Scrubbed FOIA + Flow / Fallbacks)"]
+
+        subgraph mq_AUDIO["Per-Track Pre-Norm -> Linear -14.0 LUFS"]
+          mq_T1["Track 1 · Narration (-16 LUFS + De-Esser)<br/>+ Room-Tone Twist Pads"]
+          mq_T2["Track 2 · Scrubbed FOIA (-18 LUFS Bandpass + Comp)<br/>+ 0.6–1.0s L-Cuts & Squelch/Click"]
+          mq_T3["Track 3 · Music Bed (-22 -> -36 LUFS Duck)<br/>+ Micro-SFX"]
+          mq_LIN["Final linear=true Pass<br/>Strict -14.0 LUFS · TP <= -1.0 dBTP (Zero Pumping)"]
+          mq_T1 & mq_T2 & mq_T3 --> mq_LIN
+        end
+
+        mq_COMP["Single Continuous Grain/Vignette Pass<br/>(All non-FOIA clips graded ONCE; FOIA kept raw)"]
+        mq_VQA{"2x2 Contact-Sheet Vision QA<br/>+ Rendered Pixel Safe-Zone Scan"}
+        mq_THUMB{"Brand-Coherent Thumbnail QA<br/>AdSense Clean + Composition/Mood Novelty"}
+        mq_PACK["ready_to_upload/<br/>1080p30 MP4 · youtube_metadata.json · compliance_audit.json"]
+        mq_AN["Post-Publish YouTube Analytics Feedback Loop"]
+
+        mq_CLIPS --> mq_COMP
+        mq_LIN & mq_COMP --> mq_VQA
+        mq_VQA -->|Pass| mq_THUMB
+        mq_VQA -->|Defect| mq_RE["Targeted <5s JSON Re-render"] --> mq_COMP
+        mq_THUMB -->|Pass| mq_PACK --> mq_AN
+        mq_THUMB -->|Flagged| mq_REGEN["Regenerate Thumbnail"] --> mq_THUMB
+
+        classDef mq_gate fill:#fff1ce,stroke:#947333,color:#40300b
+        classDef mq_core fill:#daeae4,stroke:#316d5b,color:#173b30
+        class mq_VQA,mq_THUMB mq_gate
+        class mq_LIN,mq_COMP,mq_PACK,mq_AN mq_core
+
+    end
+  end
+  subgraph CH_7["7 · SQLite State, Escrow & Conveyor Storage"]
+    direction TB
+    subgraph db_ROOT["Database and state design — Python sole-writer WAL and analytics loop"]
+      direction LR
+        subgraph db_PIPE["pipeline.db (SQLite WAL · Python Backend Sole Writer)"]
+          direction TB
+          db_AG1["Scouting & Quotas (30-Day YT ToS TTL)<br/>channels_watchlist · outlier_candidates<br/>saturation_checks · quota_buckets · courtlistener_cache"]
+          db_AG23["Evidence, Disposition & PII<br/>cases (disposition_status) · primary_documents<br/>fact_ledger · foia_media_assets (profanity+spoken_pii)<br/>compliance_audits"]
+          db_EP["Conveyor & Early Anchors<br/>episodes (up to 3 in Batch) · case_bibles<br/>spatial_anchors (span_cells) · scenes · voice_segments"]
+          db_FLOW["Flow Backend & 24h+5m Drift Guard<br/>google_accounts (next_daily_reset_utc_ms)<br/>credit_ledger (dynamic escrow) · flow_jobs · flow_job_attempts"]
+          db_OUT["QA & Post-Publish Analytics<br/>qa_reports · published_entropy_history · episode_analytics"]
+          db_AG1 --> db_AG23 --> db_EP --> db_FLOW --> db_OUT
+        end
+
+        db_UI["Batch Desk React UI<br/>(Calls FastAPI HTTP/WS — Zero Direct SQLite Writes!)"]
+        db_TEL[("telemetry.db (Lossy 30-day)<br/>provider_registry_costs · cache_hits · render_timings")]
+        db_CAS[("Local Artifact Store<br/>scrubbed_foia/ · stills_2k/ · ready_to_upload/")]
+
+        db_UI <-->|FastAPI HTTP/WS| db_PIPE
+        db_EP -.->|async metrics| db_TEL
+        db_OUT -->|SHA-256 paths| db_CAS
+
+        classDef db_core fill:#daeae4,stroke:#316d5b,color:#173b30
+        class db_PIPE db_core
+
+    end
+  end

@@ -1,0 +1,28 @@
+---
+title: Agent 3 — Legal, per-file provenance, music-gated Demucs and spoken+visual PII
+---
+flowchart TB
+  IN_MEDIA["Raw Media URLs & FOIA Files"]
+  WL{"Defense 1 · Granular Provenance<br/>State FOIA Statute Allowlist · MuckRock 3P Filter<br/>Wikimedia Commons API CC0/PD Check"}
+  TXT["Text Extract Only<br/>Delete All Pixels"]
+
+  subgraph SCRUB["FOIA Media & Audio Sanitization (CFR 30fps / 48kHz)"]
+    DEM["Defense 2 · Music-Gated Demucs<br/>YAMNet/PANNs Music Check -> Demucs only on music<br/>ASR WER Gate (delta <= 15%)"]
+    WM{"Defense 3 · Watermark & Visual/Spoken PII<br/>Reject TV Logos · Blur Bystanders<br/>ASR NER Bleep Spoken Names/Addresses/DOBs"}
+    BLEEP["Whole-Clip Profanity Map<br/>Strict bleep on any slice routed to 0:00–0:30"]
+    WL -->|Cleared Public Media| DEM --> WM --> BLEEP
+  end
+
+  SCRIPT["Fact Ledger + Locked 2K Anchors -> Draft Script"]
+  LINT["Defense 4 · That-vs-How & Policy Linter<br/>1. Forensic 'that' vs graphic 'how'<br/>2. Zero AI legal-advice persona<br/>3. Mandatory news_report hedging<br/>4. TRANSCRIPT DRAMATIZATION badge on voiced quotes"]
+  PASS["ComplianceClearedCase + Scrubbed CFR/48kHz FOIA"]
+
+  IN_MEDIA --> WL
+  WL -->|News / 3rd-Party / CC-NC| TXT
+  SCRIPT --> LINT --> PASS
+  BLEEP --> PASS
+
+  classDef gate fill:#fff1ce,stroke:#947333,color:#40300b
+  classDef core fill:#daeae4,stroke:#316d5b,color:#173b30
+  class WL,WM gate
+  class DEM,BLEEP,LINT,PASS core

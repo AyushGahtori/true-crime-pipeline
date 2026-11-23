@@ -1,0 +1,45 @@
+---
+title: Parallel two-developer architecture — Part 1 vs Part 2 seam
+---
+flowchart LR
+  subgraph FROZEN["Frozen Day-1 Seam (Tasks 001–004)"]
+    SC["packages/shared_contracts<br/>Pydantic v2 + Zod + JSON Schema"]
+    SQL["schema/pipeline.sql<br/>SQLite WAL · Job Queue · Escrow"]
+    FIX["fixtures/golden_manifests<br/>3 full episode packs + synthetic WAV/MP4"]
+  end
+
+  subgraph P1["Part 1 · Developer A (Tasks 005–100)"]
+    A1["Agent 1 v2 · Scout & SI/OR"]
+    A2["Agent 2 · Evidence & Fact Ledger"]
+    A3["Agent 3 · Whitelist · Demucs · PII · AdSense"]
+    VS["Voice-First · Gemini TTS + ASR Sync"]
+    A4["Agent 4 · Director + 13-Law manifest_linter.py"]
+    ORCH["Conveyor Orchestrator<br/>RenderBackendPort"]
+    STUB["RenderBackendStub<br/>(Standalone P1 E2E)"]
+    A1 --> A2 --> A3 --> VS --> A4 --> ORCH
+    ORCH -.->|standalone test| STUB
+  end
+
+  subgraph P2["Part 2 · Developer B (Tasks 101–192)"]
+    RC["Remotion 12-Component Catalog<br/>StickFigure + DocumentaryGrade"]
+    PM["Python Keyframes + Safety Gate"]
+    G2K["2K 10x10 Grid + Cubic Pan/Zoom"]
+    FA["FlowAssetBackend + 2-Strike Breaker"]
+    UI["Batch Desk Web UI<br/>15-Min Shift Cockpit"]
+    A6["Agent 6 · -14 LUFS + Vision QA + Packager"]
+    OUT["ready_to_upload/<br/>1080p MP4 + Metadata Pack"]
+    RC & PM & G2K & FA --> A6 --> OUT
+    UI <--> FA
+  end
+
+  SC & SQL --> P1
+  SC & SQL --> P2
+  FIX -.->|standalone test| P2
+  ORCH ==>|"Live Merge (Tasks 193–200)<br/>ProductionManifest + TimelineSpec + flow_jobs"| P2
+
+  classDef frozen fill:#fff1ce,stroke:#947333,color:#40300b
+  classDef p1 fill:#daeae4,stroke:#316d5b,color:#173b30
+  classDef p2 fill:#dce8f5,stroke:#2e5a88,color:#132a42
+  class SC,SQL,FIX frozen
+  class A1,A2,A3,VS,A4,ORCH,STUB p1
+  class RC,PM,G2K,FA,UI,A6,OUT p2

@@ -1,0 +1,30 @@
+---
+title: Agent 4 — Two-layer director compiler and conflict-resolved 13 laws
+---
+flowchart TB
+  IN["Segmented VoiceTrackManifest + Fact Ledger +<br/>Early-Locked 2K Anchors + Last 5 Episodes"]
+  L1["Layer 1 · DeepSeek-V4.1-Flash-1017 Director<br/>Byte 0: Global Static Rules & Zod -> Episode CaseBible -> Dynamic Scene"]
+  L2{"Layer 2 · manifest_linter.py (Zero LLM)<br/>Enforces RULE_01–RULE_13 (Conflict-Free)"}
+
+  subgraph LAWS["Fixed Compiler Gates"]
+    direction LR
+    BUD["Segmented RULE_01 & Act-Aware RULE_02<br/>sum(scenes)==total_master_ms<br/>Protect Act 2 >= 2 peaks · 6s+3.2s split"]
+    SAFE["CSS Safe-Zone & Flexible Spine<br/>CaseBoardSpine 210–270s boundary snap<br/>Fallback != neighbor engine"]
+    ANON["Split Law 11/12 & Whitelist<br/>Text-to-Video vs Frames Motion-Only<br/>Bigrams OK · Zero Crimson in Keyframes"]
+  end
+
+  RETRY{"Violations?<br/>(Retries <= 3)"}
+  DOWN["Act-Constrained Auto-Downgrade<br/>Swap excess hero -> non-neighbor fallback_spec"]
+  DRY["15-Second Pre-Flight Animatic (--dry-run)<br/>Segmented Audio + 480p Wireframe Cards"]
+  OUT["Validated ProductionManifest + TimelineSpec"]
+
+  IN --> L1 --> L2
+  L2 -.- LAWS
+  L2 -->|Fail, retries < 3| RETRY -->|Exact RULE_ID diff| L1
+  RETRY -->|Retries == 3| DOWN --> DRY
+  L2 -->|Pass 13/13 Laws| DRY --> OUT
+
+  classDef gate fill:#fff1ce,stroke:#947333,color:#40300b
+  classDef core fill:#daeae4,stroke:#316d5b,color:#173b30
+  class L2,RETRY gate
+  class L1,DRY,OUT core

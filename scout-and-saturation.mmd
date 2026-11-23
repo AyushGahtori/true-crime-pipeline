@@ -1,0 +1,37 @@
+---
+title: Agent 1 v3 — Dual-track scout, authorized metadata leads and 30-day full YT purge
+---
+flowchart TB
+  subgraph TA["Track A · 70% Small-Creator Outlier Miner"]
+    WL["SQLite Watchlist (Mandatory Non-Null 30d YT TTL)<br/>Weekly Discovery/Pruning (2K-120K subs)"]
+    POLL["Nightly Zero-Search Poll (~450 units, 0 search)<br/>playlistItems.list (UU...) + videos.list (50/batch)"]
+    OR["Compute Outlier Ratio<br/>OR = views / 20-video median (>= 3.5x, >=20K, <=12mo)"]
+    ALIAS["Canonical Alias Expansion (DeepSeek)<br/>3-4 aliases -> search.list (~60/100/day)"]
+    SI["Mutually Exclusive SI + 90d Kill<br/>Instant Kill if >200K within 90d or SI >= 55"]
+    GAP["Comment Quality Gap (LEAD_ONLY) + Safe-Title CTR Check"]
+    WL --> POLL --> OR --> ALIAS --> SI --> GAP
+  end
+
+  subgraph TRACK_B["Track B · 30% Fresh Primary Radar"]
+    MR["MuckRock FOIA Completed Drops"]
+    CL["CourtListener Appellate Rulings<br/>125 req/day · 5/min · 50/hr cache"]
+  end
+
+  XRAY["Authorized Metadata Lead Extractor<br/>videos.list + comments ONLY (No 3rd-party captions.download!)"]
+  FW["Clean-Room Seed Firewall<br/>Factual lookup keys ONLY · Full 30-day YT field purge"]
+  KILL{"Binary Policy Kill-Switch<br/>Minors / Mass Shootings / Terrorism /<br/>Unconvicted Suspects?"}
+  UPG{"Mandatory 2-Upgrade Rule<br/>Beats outlier on >= 2 of 4 axes?"}
+  SCORE["Rank Survivors<br/>0.30 Docs + 0.25 FOIA + 0.25 Twist + 0.20 Gap"]
+  RECHECK["Pre-Render Saturation Re-Check<br/>Per-shift check + sunk-cost threshold (>50% spent)"]
+
+  GAP --> XRAY --> FW --> KILL
+  MR & CL --> KILL
+  KILL -->|Clean| UPG
+  KILL -->|Blocked| DROP["Hard Drop"]
+  UPG -->|>= 2 axes| SCORE --> RECHECK
+  UPG -->|< 2 axes| DROP
+
+  classDef gate fill:#fff1ce,stroke:#947333,color:#40300b
+  classDef core fill:#daeae4,stroke:#316d5b,color:#173b30
+  class KILL,UPG,RECHECK gate
+  class FW,SI,SCORE core

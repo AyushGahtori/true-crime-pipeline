@@ -1,0 +1,9 @@
+{
+  "maxTextSize": 500000,
+  "maxEdges": 2000,
+  "flowchart": {
+    "curve": "basis",
+    "nodeSpacing": 35,
+    "rankSpacing": 50
+  }
+}

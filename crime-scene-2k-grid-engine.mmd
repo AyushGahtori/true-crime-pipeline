@@ -1,0 +1,17 @@
+---
+title: Agent 5B — Early 2K margin-grid grounding and cubic pan/zoom renderer
+---
+flowchart LR
+  FACTS["Affidavit Clues + CaseBible Style (In Part 1 / Agent 2)"]
+  NANO["Official Image API / Nano Banana 2K<br/>6–8 anchor clues + edit / 2 angles"]
+  STAMP["External Margin Border Stamper<br/>A–J & 1–10 Outside Image + Thin Dashed Lines"]
+  VLM["DeepSeek-V4.1-Flash Vision<br/>Returns grid_cell + span_cells (1.6x vs 3.8x zoom)"]
+  MATH["Deterministic Mapper + Edge Clamp<br/>Maps A1–J10 -> (x, y, zoom) clamped in [0,W]x[0,H]"]
+  LAW4["Lock spatial_anchors BEFORE Scripting (Part 1)"]
+  ZOOM["Smooth Cubic Ease-In-Out Renderer (Part 2)<br/>Screen-Space Red Circles (Projected) + 12-Word Tags"]
+
+  FACTS --> NANO --> STAMP --> VLM --> MATH --> LAW4 --> ZOOM
+  NANO -->|Clean grid-free 2K source| ZOOM
+
+  classDef core fill:#daeae4,stroke:#316d5b,color:#173b30
+  class STAMP,MATH,LAW4,ZOOM core

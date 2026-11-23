@@ -1,0 +1,24 @@
+---
+title: Agent 5A — Authoritative MOTIF_REGISTRY_V1 Remotion catalog (JS 6 fps boil, 30 fps)
+---
+flowchart TB
+  SPEC["Validated TimelineSpec JSON<br/>+ CaseBible + Non-Overlapping voice_segments"]
+  ZOD{"Zod Schema + MOTIF_REGISTRY_V1<br/>12-word limit & CSS Layout Safe-Zone Constraints"}
+
+  subgraph CAT["Permanent Remotion 2D Catalog (@tc/render_catalog · 30 fps)"]
+    L1["Layer 1 · StickFigure Rig<br/>6 fps JS Vertex-Jitter Line Boil (Zero SVG Turbulence)<br/>14 poses · 10 emotions · TTS RMS head-nod sync"]
+    L2["Layer 2 · Authoritative 4-Motif MVP -> 12 Motifs<br/>MVP 4: StickmanStage · AudioEvidenceCard · RedactedDocReveal · FoiaFootageFrame<br/>Full +8: TimelineScrubber · AnimatedMapRoute · CellTowerTriangulation · SplitScreenComparison<br/>CaseBoardSpine · QuotePullout · EvidenceGridMatrix · ChapterSlateTransition"]
+    L4["Layer 4 · Sandboxed CustomDiagramScene (~5% bespoke)"]
+  end
+
+  SFX["scene_grade_manifest.json + Micro-SFX Emitter<br/>(Zero Remotion Grain · Single Pass in Agent 6)"]
+  PY["Python python_motion & crime_scene_2k<br/>Monochrome Keyframes (Zero Crimson) + Sole Owner of Illustrative2KPanZoom"]
+  MP4["Clean 1080p30 Ungraded MP4s (Design Target: <5s single-scene heal)"]
+
+  SPEC --> ZOD --> CAT --> SFX --> MP4
+  SPEC --> PY
+
+  classDef core fill:#daeae4,stroke:#316d5b,color:#173b30
+  classDef gate fill:#fff1ce,stroke:#947333,color:#40300b
+  class ZOD gate
+  class L1,L2,SFX,MP4 core

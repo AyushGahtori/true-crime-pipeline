@@ -1,0 +1,31 @@
+---
+title: Agent 6 — Per-track normalization, single grade, -14 LUFS and analytics
+---
+flowchart TB
+  CLIPS["Normalized CFR 30fps Scene MP4s<br/>(Code + 2K Pan/Zoom + Scrubbed FOIA + Flow / Fallbacks)"]
+
+  subgraph AUDIO["Per-Track Pre-Norm -> Linear -14.0 LUFS"]
+    T1["Track 1 · Narration (-16 LUFS + De-Esser)<br/>+ Room-Tone Twist Pads"]
+    T2["Track 2 · Scrubbed FOIA (-18 LUFS Bandpass + Comp)<br/>+ 0.6–1.0s L-Cuts & Squelch/Click"]
+    T3["Track 3 · Music Bed (-22 -> -36 LUFS Duck)<br/>+ Micro-SFX"]
+    LIN["Final linear=true Pass<br/>Strict -14.0 LUFS · TP <= -1.0 dBTP (Zero Pumping)"]
+    T1 & T2 & T3 --> LIN
+  end
+
+  COMP["Single Continuous Grain/Vignette Pass<br/>(All non-FOIA clips graded ONCE; FOIA kept raw)"]
+  VQA{"2x2 Contact-Sheet Vision QA<br/>+ Rendered Pixel Safe-Zone Scan"}
+  THUMB{"Brand-Coherent Thumbnail QA<br/>AdSense Clean + Composition/Mood Novelty"}
+  PACK["ready_to_upload/<br/>1080p30 MP4 · youtube_metadata.json · compliance_audit.json"]
+  AN["Post-Publish YouTube Analytics Feedback Loop"]
+
+  CLIPS --> COMP
+  LIN & COMP --> VQA
+  VQA -->|Pass| THUMB
+  VQA -->|Defect| RE["Targeted <5s JSON Re-render"] --> COMP
+  THUMB -->|Pass| PACK --> AN
+  THUMB -->|Flagged| REGEN["Regenerate Thumbnail"] --> THUMB
+
+  classDef gate fill:#fff1ce,stroke:#947333,color:#40300b
+  classDef core fill:#daeae4,stroke:#316d5b,color:#173b30
+  class VQA,THUMB gate
+  class LIN,COMP,PACK,AN core
