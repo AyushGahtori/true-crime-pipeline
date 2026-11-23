@@ -1,0 +1,11 @@
+contract_version: v4
+rubric_id: craft_rubric_v4
+principles:
+  - principle_id: opening_question
+    summary: Raise one primary-record curiosity question inside the first twenty seconds.
+  - principle_id: visual_variation
+    summary: Change framing or motif within six seconds on static plates.
+  - principle_id: safe_zone_callouts
+    summary: Keep location and timestamp callouts inside CSS safe zones and cite fact ids.
+  - principle_id: claim_traceability
+    summary: Every spoken claim traces to a fact ledger id. Interactive means documentary pacing.

@@ -1,0 +1,2280 @@
+{
+  "contract_version": "v4",
+  "schemas": {
+    "SeedPacket": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "track": {
+          "enum": [
+            "TRACK_A_OUTLIER",
+            "TRACK_B_FOIA_RADAR"
+          ],
+          "title": "Track",
+          "type": "string"
+        },
+        "lead_classification": {
+          "const": "LEAD_ONLY",
+          "default": "LEAD_ONLY",
+          "title": "Lead Classification",
+          "type": "string"
+        },
+        "suspect_names": {
+          "items": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Suspect Names",
+          "type": "array"
+        },
+        "victim_names": {
+          "items": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Victim Names",
+          "type": "array"
+        },
+        "incident_date_or_year": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Incident Date Or Year",
+          "type": "string"
+        },
+        "county_state": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "County State",
+          "type": "string"
+        },
+        "docket_ids": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Docket Ids",
+          "type": "array"
+        },
+        "unanswered_comment_questions": {
+          "items": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Unanswered Comment Questions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "track",
+        "incident_date_or_year",
+        "county_state"
+      ],
+      "title": "SeedPacket",
+      "type": "object"
+    },
+    "TemporalFactLedger": {
+      "$defs": {
+        "TemporalFact": {
+          "additionalProperties": false,
+          "properties": {
+            "fact_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Fact Id",
+              "type": "string"
+            },
+            "case_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Case Id",
+              "type": "string"
+            },
+            "datetime_iso": {
+              "title": "Datetime Iso",
+              "type": "string"
+            },
+            "event_summary": {
+              "maxLength": 2000,
+              "minLength": 1,
+              "title": "Event Summary",
+              "type": "string"
+            },
+            "physical_clues_json": {
+              "items": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              "maxItems": 32,
+              "title": "Physical Clues Json",
+              "type": "array"
+            },
+            "location_text": {
+              "maxLength": 300,
+              "minLength": 1,
+              "title": "Location Text",
+              "type": "string"
+            },
+            "source_type": {
+              "enum": [
+                "court_ruling",
+                "police_affidavit",
+                "news_report"
+              ],
+              "title": "Source Type",
+              "type": "string"
+            },
+            "source_doc_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Source Doc Id",
+              "type": "string"
+            },
+            "citation_locator": {
+              "maxLength": 300,
+              "minLength": 1,
+              "title": "Citation Locator",
+              "type": "string"
+            },
+            "hedging_required": {
+              "title": "Hedging Required",
+              "type": "boolean"
+            },
+            "contradicts_json": {
+              "items": {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_-]+$",
+                "type": "string"
+              },
+              "title": "Contradicts Json",
+              "type": "array"
+            }
+          },
+          "required": [
+            "fact_id",
+            "case_id",
+            "datetime_iso",
+            "event_summary",
+            "location_text",
+            "source_type",
+            "source_doc_id",
+            "citation_locator",
+            "hedging_required"
+          ],
+          "title": "TemporalFact",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "facts": {
+          "items": {
+            "$ref": "#/$defs/TemporalFact"
+          },
+          "minItems": 1,
+          "title": "Facts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "case_id",
+        "facts"
+      ],
+      "title": "TemporalFactLedger",
+      "type": "object"
+    },
+    "ComplianceClearedCase": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "defendant_name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Defendant Name",
+          "type": "string"
+        },
+        "incident_year": {
+          "maximum": 2100,
+          "minimum": 1800,
+          "title": "Incident Year",
+          "type": "integer"
+        },
+        "jurisdiction": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Jurisdiction",
+          "type": "string"
+        },
+        "verification_source": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Verification Source",
+          "type": "string"
+        },
+        "disposition_status": {
+          "enum": [
+            "AFFIRMED",
+            "STANDING_CONVICTION"
+          ],
+          "title": "Disposition Status",
+          "type": "string"
+        },
+        "conviction_confirmed": {
+          "const": true,
+          "title": "Conviction Confirmed",
+          "type": "boolean"
+        },
+        "primary_record_verified": {
+          "const": true,
+          "title": "Primary Record Verified",
+          "type": "boolean"
+        },
+        "anonymization_status": {
+          "const": "APPROVED",
+          "title": "Anonymization Status",
+          "type": "string"
+        },
+        "anonymized_by": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Anonymized By",
+          "type": "string"
+        },
+        "anonymized_at": {
+          "minimum": 0,
+          "title": "Anonymized At",
+          "type": "integer"
+        },
+        "anonymization_artifact_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Anonymization Artifact Sha256",
+          "type": "string"
+        },
+        "audit_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Audit Id",
+          "type": "string"
+        },
+        "provenance_whitelist_ok": {
+          "const": true,
+          "title": "Provenance Whitelist Ok",
+          "type": "boolean"
+        },
+        "that_vs_how_passed": {
+          "const": true,
+          "title": "That Vs How Passed",
+          "type": "boolean"
+        },
+        "anti_legal_persona_passed": {
+          "const": true,
+          "title": "Anti Legal Persona Passed",
+          "type": "boolean"
+        },
+        "first_30s_adsense_safe": {
+          "const": true,
+          "title": "First 30S Adsense Safe",
+          "type": "boolean"
+        },
+        "spoken_pii_audit_passed": {
+          "const": true,
+          "title": "Spoken Pii Audit Passed",
+          "type": "boolean"
+        },
+        "altered_content_disclosure": {
+          "title": "Altered Content Disclosure",
+          "type": "boolean"
+        },
+        "audited_at": {
+          "minimum": 0,
+          "title": "Audited At",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "case_id",
+        "defendant_name",
+        "incident_year",
+        "jurisdiction",
+        "verification_source",
+        "disposition_status",
+        "conviction_confirmed",
+        "primary_record_verified",
+        "anonymization_status",
+        "anonymized_by",
+        "anonymized_at",
+        "anonymization_artifact_sha256",
+        "audit_id",
+        "provenance_whitelist_ok",
+        "that_vs_how_passed",
+        "anti_legal_persona_passed",
+        "first_30s_adsense_safe",
+        "spoken_pii_audit_passed",
+        "altered_content_disclosure",
+        "audited_at"
+      ],
+      "title": "ComplianceClearedCase",
+      "type": "object"
+    },
+    "ScenePlan": {
+      "$defs": {
+        "AcceptanceCriterion": {
+          "additionalProperties": false,
+          "properties": {
+            "criterion_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Criterion Id",
+              "type": "string"
+            },
+            "kind": {
+              "enum": [
+                "SEMANTIC",
+                "TECHNICAL"
+              ],
+              "title": "Kind",
+              "type": "string"
+            },
+            "text": {
+              "maxLength": 500,
+              "minLength": 1,
+              "title": "Text",
+              "type": "string"
+            }
+          },
+          "required": [
+            "criterion_id",
+            "kind",
+            "text"
+          ],
+          "title": "AcceptanceCriterion",
+          "type": "object"
+        },
+        "KeyframeRef": {
+          "additionalProperties": false,
+          "properties": {
+            "ref_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Ref Id",
+              "type": "string"
+            },
+            "role": {
+              "enum": [
+                "START",
+                "END"
+              ],
+              "title": "Role",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "title": "Sha256",
+              "type": "string"
+            }
+          },
+          "required": [
+            "ref_id",
+            "role",
+            "sha256"
+          ],
+          "title": "KeyframeRef",
+          "type": "object"
+        },
+        "SoundCue": {
+          "additionalProperties": false,
+          "properties": {
+            "cue_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Cue Id",
+              "type": "string"
+            },
+            "offset_ms": {
+              "minimum": 0,
+              "title": "Offset Ms",
+              "type": "integer"
+            },
+            "role": {
+              "enum": [
+                "BED",
+                "HIT",
+                "ROOM_TONE"
+              ],
+              "title": "Role",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cue_id",
+            "offset_ms",
+            "role"
+          ],
+          "title": "SoundCue",
+          "type": "object"
+        },
+        "TransitionSpec": {
+          "additionalProperties": false,
+          "properties": {
+            "transition_type": {
+              "enum": [
+                "CUT",
+                "DISSOLVE",
+                "MATCH_CUT"
+              ],
+              "title": "Transition Type",
+              "type": "string"
+            },
+            "duration_ms": {
+              "maximum": 1000,
+              "minimum": 0,
+              "title": "Duration Ms",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "transition_type",
+            "duration_ms"
+          ],
+          "title": "TransitionSpec",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "scene_plan_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Scene Plan Id",
+          "type": "string"
+        },
+        "episode_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "scene_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "plan_version": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Plan Version",
+          "type": "integer"
+        },
+        "seq_index": {
+          "minimum": 1,
+          "title": "Seq Index",
+          "type": "integer"
+        },
+        "story_purpose": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Story Purpose",
+          "type": "string"
+        },
+        "intended_audience_effect": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Intended Audience Effect",
+          "type": "string"
+        },
+        "approved_narration_text": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Approved Narration Text",
+          "type": "string"
+        },
+        "narration_version_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Narration Version Sha256",
+          "type": "string"
+        },
+        "cited_fact_ids_json": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Cited Fact Ids Json",
+          "type": "array"
+        },
+        "visual_concept": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Visual Concept",
+          "type": "string"
+        },
+        "visual_engine": {
+          "enum": [
+            "CODE_STICKMAN",
+            "STILL_2K_PANZOOM",
+            "AUDIO_EVIDENCE_CARD",
+            "FOIA_REAL_FOOTAGE",
+            "FLOW_HERO_VIDEO"
+          ],
+          "title": "Visual Engine",
+          "type": "string"
+        },
+        "motif_component": {
+          "enum": [
+            "StickmanStage",
+            "AudioEvidenceCard",
+            "RedactedDocReveal",
+            "FoiaFootageFrame",
+            "TimelineScrubber",
+            "AnimatedMapRoute",
+            "CellTowerTriangulation",
+            "SplitScreenComparison",
+            "CaseBoardSpine",
+            "QuotePullout",
+            "EvidenceGridMatrix",
+            "ChapterSlateTransition",
+            "Illustrative2KPanZoom",
+            "HeroVideoBridge"
+          ],
+          "title": "Motif Component",
+          "type": "string"
+        },
+        "prompt_mode": {
+          "enum": [
+            "NONE",
+            "TEXT_TO_VIDEO",
+            "FIRST_FRAME",
+            "FIRST_AND_LAST_FRAME"
+          ],
+          "title": "Prompt Mode",
+          "type": "string"
+        },
+        "visual_prompt": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Visual Prompt",
+          "type": "string"
+        },
+        "keyframe_refs_json": {
+          "items": {
+            "$ref": "#/$defs/KeyframeRef"
+          },
+          "title": "Keyframe Refs Json",
+          "type": "array"
+        },
+        "expected_output_summary": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Expected Output Summary",
+          "type": "string"
+        },
+        "timing_start_ms": {
+          "minimum": 0,
+          "title": "Timing Start Ms",
+          "type": "integer"
+        },
+        "timing_end_ms": {
+          "title": "Timing End Ms",
+          "type": "integer"
+        },
+        "transition_spec_json": {
+          "$ref": "#/$defs/TransitionSpec"
+        },
+        "sound_cues_json": {
+          "items": {
+            "$ref": "#/$defs/SoundCue"
+          },
+          "title": "Sound Cues Json",
+          "type": "array"
+        },
+        "edit_instructions": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Edit Instructions",
+          "type": "string"
+        },
+        "acceptance_criteria_json": {
+          "items": {
+            "$ref": "#/$defs/AcceptanceCriterion"
+          },
+          "minItems": 1,
+          "title": "Acceptance Criteria Json",
+          "type": "array"
+        },
+        "asset_version_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Asset Version Sha256"
+        },
+        "plan_status": {
+          "default": "DRAFT",
+          "enum": [
+            "DRAFT",
+            "PLAN_APPROVED",
+            "ASSETS_CREATED",
+            "EDITED_APPROVED",
+            "STALE_NEEDS_REAPPROVAL"
+          ],
+          "title": "Plan Status",
+          "type": "string"
+        },
+        "reviewed_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed By"
+        },
+        "reviewed_at": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewed At"
+        },
+        "created_at": {
+          "minimum": 0,
+          "title": "Created At",
+          "type": "integer"
+        },
+        "updated_at": {
+          "minimum": 0,
+          "title": "Updated At",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "scene_plan_id",
+        "episode_id",
+        "scene_id",
+        "seq_index",
+        "story_purpose",
+        "intended_audience_effect",
+        "approved_narration_text",
+        "narration_version_sha256",
+        "cited_fact_ids_json",
+        "visual_concept",
+        "visual_engine",
+        "motif_component",
+        "prompt_mode",
+        "visual_prompt",
+        "expected_output_summary",
+        "timing_start_ms",
+        "timing_end_ms",
+        "transition_spec_json",
+        "edit_instructions",
+        "acceptance_criteria_json",
+        "created_at",
+        "updated_at"
+      ],
+      "title": "ScenePlan",
+      "type": "object"
+    },
+    "VoiceTrackManifest": {
+      "$defs": {
+        "CuePoint": {
+          "additionalProperties": false,
+          "properties": {
+            "cue_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Cue Id",
+              "type": "string"
+            },
+            "at_ms": {
+              "minimum": 0,
+              "title": "At Ms",
+              "type": "integer"
+            },
+            "label": {
+              "maxLength": 120,
+              "minLength": 1,
+              "title": "Label",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cue_id",
+            "at_ms",
+            "label"
+          ],
+          "title": "CuePoint",
+          "type": "object"
+        },
+        "VoiceSegment": {
+          "additionalProperties": false,
+          "properties": {
+            "segment_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Segment Id",
+              "type": "string"
+            },
+            "episode_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Episode Id",
+              "type": "string"
+            },
+            "seq_index": {
+              "minimum": 1,
+              "title": "Seq Index",
+              "type": "integer"
+            },
+            "segment_kind": {
+              "enum": [
+                "NARRATION",
+                "FOIA_AUDIO_SLOT",
+                "TWIST_PAD"
+              ],
+              "title": "Segment Kind",
+              "type": "string"
+            },
+            "start_ms": {
+              "minimum": 0,
+              "title": "Start Ms",
+              "type": "integer"
+            },
+            "end_ms": {
+              "title": "End Ms",
+              "type": "integer"
+            },
+            "audio_path": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Audio Path"
+            },
+            "foia_asset_id": {
+              "anyOf": [
+                {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9_-]+$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Foia Asset Id"
+            },
+            "narration_version_sha256": {
+              "anyOf": [
+                {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Narration Version Sha256"
+            }
+          },
+          "required": [
+            "segment_id",
+            "episode_id",
+            "seq_index",
+            "segment_kind",
+            "start_ms",
+            "end_ms"
+          ],
+          "title": "VoiceSegment",
+          "type": "object"
+        },
+        "WordTimestamp": {
+          "additionalProperties": false,
+          "properties": {
+            "segment_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Segment Id",
+              "type": "string"
+            },
+            "word": {
+              "maxLength": 80,
+              "minLength": 1,
+              "title": "Word",
+              "type": "string"
+            },
+            "start_ms": {
+              "minimum": 0,
+              "title": "Start Ms",
+              "type": "integer"
+            },
+            "end_ms": {
+              "minimum": 0,
+              "title": "End Ms",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "segment_id",
+            "word",
+            "start_ms",
+            "end_ms"
+          ],
+          "title": "WordTimestamp",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "episode_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "total_master_ms": {
+          "minimum": 0,
+          "title": "Total Master Ms",
+          "type": "integer"
+        },
+        "segments": {
+          "items": {
+            "$ref": "#/$defs/VoiceSegment"
+          },
+          "minItems": 1,
+          "title": "Segments",
+          "type": "array"
+        },
+        "word_timestamps": {
+          "items": {
+            "$ref": "#/$defs/WordTimestamp"
+          },
+          "title": "Word Timestamps",
+          "type": "array"
+        },
+        "cue_points": {
+          "items": {
+            "$ref": "#/$defs/CuePoint"
+          },
+          "title": "Cue Points",
+          "type": "array"
+        },
+        "amplitude_envelope": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Amplitude Envelope",
+          "type": "array"
+        }
+      },
+      "required": [
+        "episode_id",
+        "total_master_ms",
+        "segments"
+      ],
+      "title": "VoiceTrackManifest",
+      "type": "object"
+    },
+    "SpatialAnchor": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "anchor_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Anchor Id",
+          "type": "string"
+        },
+        "episode_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "still_2k_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Still 2K Id",
+          "type": "string"
+        },
+        "clue_name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Clue Name",
+          "type": "string"
+        },
+        "cited_fact_id": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cited Fact Id"
+        },
+        "grid_cell": {
+          "pattern": "^[A-J]([1-9]|10)$",
+          "title": "Grid Cell",
+          "type": "string"
+        },
+        "span_cols": {
+          "default": 1.0,
+          "exclusiveMinimum": 0,
+          "maximum": 10,
+          "title": "Span Cols",
+          "type": "number"
+        },
+        "span_rows": {
+          "default": 1.0,
+          "exclusiveMinimum": 0,
+          "maximum": 10,
+          "title": "Span Rows",
+          "type": "number"
+        },
+        "x_px": {
+          "minimum": 0,
+          "title": "X Px",
+          "type": "integer"
+        },
+        "y_px": {
+          "minimum": 0,
+          "title": "Y Px",
+          "type": "integer"
+        },
+        "target_zoom": {
+          "default": 2.5,
+          "maximum": 3.8,
+          "minimum": 1.0,
+          "title": "Target Zoom",
+          "type": "number"
+        },
+        "travel_axis": {
+          "anyOf": [
+            {
+              "enum": [
+                "L_TO_R",
+                "R_TO_L",
+                "STATIC"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Travel Axis"
+        },
+        "lock_status": {
+          "default": "DRAFT",
+          "enum": [
+            "DRAFT",
+            "IN_REVIEW",
+            "LOCKED"
+          ],
+          "title": "Lock Status",
+          "type": "string"
+        },
+        "locked_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Locked By"
+        },
+        "locked_at": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Locked At"
+        },
+        "still_asset_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Still Asset Sha256"
+        }
+      },
+      "required": [
+        "anchor_id",
+        "episode_id",
+        "still_2k_id",
+        "clue_name",
+        "grid_cell",
+        "x_px",
+        "y_px"
+      ],
+      "title": "SpatialAnchor",
+      "type": "object"
+    },
+    "CaseBible": {
+      "$defs": {
+        "CharacterSpec": {
+          "additionalProperties": false,
+          "properties": {
+            "character_id": {
+              "maxLength": 64,
+              "pattern": "^[a-z][a-z0-9_]*$",
+              "title": "Character Id",
+              "type": "string"
+            },
+            "prop": {
+              "maxLength": 80,
+              "minLength": 1,
+              "title": "Prop",
+              "type": "string"
+            },
+            "color_hex": {
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "title": "Color Hex",
+              "type": "string"
+            }
+          },
+          "required": [
+            "character_id",
+            "prop",
+            "color_hex"
+          ],
+          "title": "CharacterSpec",
+          "type": "object"
+        },
+        "StyleDna": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence_crimson_hex": {
+              "default": "#C92A2A",
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "title": "Evidence Crimson Hex",
+              "type": "string"
+            },
+            "paper_bg_hex": {
+              "default": "#E9E2D2",
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "title": "Paper Bg Hex",
+              "type": "string"
+            },
+            "ink_hex": {
+              "default": "#1B1B1D",
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "title": "Ink Hex",
+              "type": "string"
+            },
+            "slate_hex": {
+              "default": "#3A4F66",
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "title": "Slate Hex",
+              "type": "string"
+            },
+            "flow_keyframe_safe_palette": {
+              "items": {
+                "pattern": "^#[0-9A-Fa-f]{6}$",
+                "type": "string"
+              },
+              "maxItems": 8,
+              "minItems": 1,
+              "title": "Flow Keyframe Safe Palette",
+              "type": "array"
+            }
+          },
+          "title": "StyleDna",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "episode_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "style_dna_json": {
+          "$ref": "#/$defs/StyleDna"
+        },
+        "characters_json": {
+          "items": {
+            "$ref": "#/$defs/CharacterSpec"
+          },
+          "minItems": 1,
+          "title": "Characters Json",
+          "type": "array"
+        },
+        "locked_at": {
+          "minimum": 0,
+          "title": "Locked At",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "episode_id",
+        "style_dna_json",
+        "characters_json",
+        "locked_at"
+      ],
+      "title": "CaseBible",
+      "type": "object"
+    },
+    "ProductionManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "manifest_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Manifest Id",
+          "type": "string"
+        },
+        "episode_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "fps": {
+          "const": 30,
+          "default": 30,
+          "title": "Fps",
+          "type": "integer"
+        },
+        "cold_open_archetype": {
+          "enum": [
+            "911_CALL_IN_MEDIA_RES",
+            "SINGLE_FORENSIC_ANOMALY",
+            "ALIBI_THAT_CRACKED",
+            "CHRONOLOGICAL_COUNTDOWN"
+          ],
+          "title": "Cold Open Archetype",
+          "type": "string"
+        },
+        "flow_backend_mode": {
+          "enum": [
+            "GEMINI_OMNI_INTERACTIONS",
+            "VERTEX_VEO_ENTERPRISE",
+            "HUMAN_BATCH_DESK"
+          ],
+          "title": "Flow Backend Mode",
+          "type": "string"
+        },
+        "target_duration_ms": {
+          "exclusiveMinimum": 0,
+          "title": "Target Duration Ms",
+          "type": "integer"
+        },
+        "code_foia_ms": {
+          "minimum": 0,
+          "title": "Code Foia Ms",
+          "type": "integer"
+        },
+        "still_2k_ms": {
+          "minimum": 0,
+          "title": "Still 2K Ms",
+          "type": "integer"
+        },
+        "hero_ms": {
+          "minimum": 0,
+          "title": "Hero Ms",
+          "type": "integer"
+        },
+        "max_hero_clips": {
+          "default": 10,
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Max Hero Clips",
+          "type": "integer"
+        },
+        "max_hero_duration_sec": {
+          "default": 80,
+          "maximum": 80,
+          "minimum": 0,
+          "title": "Max Hero Duration Sec",
+          "type": "integer"
+        },
+        "hero_clip_count": {
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Hero Clip Count",
+          "type": "integer"
+        },
+        "hero_duration_sec": {
+          "maximum": 80,
+          "minimum": 0,
+          "title": "Hero Duration Sec",
+          "type": "integer"
+        },
+        "scene_plan_ids": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Scene Plan Ids",
+          "type": "array"
+        },
+        "voice_total_master_ms": {
+          "minimum": 0,
+          "title": "Voice Total Master Ms",
+          "type": "integer"
+        },
+        "timeline_validated_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timeline Validated Sha256"
+        }
+      },
+      "required": [
+        "manifest_id",
+        "episode_id",
+        "case_id",
+        "cold_open_archetype",
+        "flow_backend_mode",
+        "target_duration_ms",
+        "code_foia_ms",
+        "still_2k_ms",
+        "hero_ms",
+        "hero_clip_count",
+        "hero_duration_sec",
+        "scene_plan_ids",
+        "voice_total_master_ms"
+      ],
+      "title": "ProductionManifest",
+      "type": "object"
+    },
+    "TimelineSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "episode_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "scene_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "scene_plan_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Scene Plan Id",
+          "type": "string"
+        },
+        "fps": {
+          "const": 30,
+          "default": 30,
+          "title": "Fps",
+          "type": "integer"
+        },
+        "width_px": {
+          "const": 1920,
+          "default": 1920,
+          "title": "Width Px",
+          "type": "integer"
+        },
+        "height_px": {
+          "const": 1080,
+          "default": 1080,
+          "title": "Height Px",
+          "type": "integer"
+        },
+        "motif_registry": {
+          "const": "MOTIF_REGISTRY_V1",
+          "default": "MOTIF_REGISTRY_V1",
+          "title": "Motif Registry",
+          "type": "string"
+        },
+        "motif_component": {
+          "enum": [
+            "StickmanStage",
+            "AudioEvidenceCard",
+            "RedactedDocReveal",
+            "FoiaFootageFrame"
+          ],
+          "title": "Motif Component",
+          "type": "string"
+        },
+        "prompt_mode": {
+          "enum": [
+            "TEXT_TO_VIDEO",
+            "FIRST_FRAME",
+            "FIRST_AND_LAST_FRAME"
+          ],
+          "title": "Prompt Mode",
+          "type": "string"
+        },
+        "duration_ms": {
+          "title": "Duration Ms",
+          "type": "integer"
+        },
+        "start_frame_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Frame Sha256"
+        },
+        "end_frame_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Frame Sha256"
+        }
+      },
+      "required": [
+        "episode_id",
+        "scene_id",
+        "scene_plan_id",
+        "motif_component",
+        "prompt_mode",
+        "duration_ms"
+      ],
+      "title": "TimelineSpec",
+      "type": "object"
+    },
+    "FlowJobCard": {
+      "$defs": {
+        "FallbackSpec": {
+          "additionalProperties": false,
+          "properties": {
+            "visual_engine": {
+              "enum": [
+                "CODE_STICKMAN",
+                "STILL_2K_PANZOOM",
+                "AUDIO_EVIDENCE_CARD",
+                "FOIA_REAL_FOOTAGE",
+                "FLOW_HERO_VIDEO"
+              ],
+              "title": "Visual Engine",
+              "type": "string"
+            },
+            "motif_component": {
+              "enum": [
+                "StickmanStage",
+                "AudioEvidenceCard",
+                "RedactedDocReveal",
+                "FoiaFootageFrame",
+                "TimelineScrubber",
+                "AnimatedMapRoute",
+                "CellTowerTriangulation",
+                "SplitScreenComparison",
+                "CaseBoardSpine",
+                "QuotePullout",
+                "EvidenceGridMatrix",
+                "ChapterSlateTransition",
+                "Illustrative2KPanZoom",
+                "HeroVideoBridge"
+              ],
+              "title": "Motif Component",
+              "type": "string"
+            },
+            "reason": {
+              "maxLength": 300,
+              "minLength": 1,
+              "title": "Reason",
+              "type": "string"
+            }
+          },
+          "required": [
+            "visual_engine",
+            "motif_component",
+            "reason"
+          ],
+          "title": "FallbackSpec",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "flow_job_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Flow Job Id",
+          "type": "string"
+        },
+        "episode_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "scene_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "idempotency_key": {
+          "maxLength": 200,
+          "minLength": 8,
+          "title": "Idempotency Key",
+          "type": "string"
+        },
+        "assigned_account_id": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assigned Account Id"
+        },
+        "provider_route": {
+          "default": "GEMINI_OMNI_INTERACTIONS",
+          "enum": [
+            "GEMINI_OMNI_INTERACTIONS",
+            "VERTEX_VEO_ENTERPRISE",
+            "HUMAN_BATCH_DESK"
+          ],
+          "title": "Provider Route",
+          "type": "string"
+        },
+        "engine_model": {
+          "default": "gemini-omni-1.2-flash",
+          "enum": [
+            "gemini-omni-1.2-flash",
+            "vertex-veo-enterprise",
+            "manual-desk-video"
+          ],
+          "title": "Engine Model",
+          "type": "string"
+        },
+        "prompt_mode": {
+          "enum": [
+            "TEXT_TO_VIDEO",
+            "FIRST_FRAME",
+            "FIRST_AND_LAST_FRAME"
+          ],
+          "title": "Prompt Mode",
+          "type": "string"
+        },
+        "resolution": {
+          "default": "720p",
+          "enum": [
+            "360p",
+            "720p",
+            "1080p",
+            "4k"
+          ],
+          "title": "Resolution",
+          "type": "string"
+        },
+        "duration_bucket_sec": {
+          "maximum": 15,
+          "minimum": 3,
+          "title": "Duration Bucket Sec",
+          "type": "integer"
+        },
+        "variations": {
+          "const": 1,
+          "default": 1,
+          "title": "Variations",
+          "type": "integer"
+        },
+        "estimated_micro_usd": {
+          "minimum": 0,
+          "title": "Estimated Micro Usd",
+          "type": "integer"
+        },
+        "estimated_credits": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Estimated Credits",
+          "type": "integer"
+        },
+        "start_frame_png": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Frame Png"
+        },
+        "end_frame_png": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Frame Png"
+        },
+        "prompt_v1": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Prompt V1",
+          "type": "string"
+        },
+        "prompt_v2_safe": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Prompt V2 Safe",
+          "type": "string"
+        },
+        "fallback_spec_json": {
+          "$ref": "#/$defs/FallbackSpec"
+        },
+        "provider_operation_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Operation Id"
+        },
+        "attempts_used": {
+          "default": 0,
+          "maximum": 2,
+          "minimum": 0,
+          "title": "Attempts Used",
+          "type": "integer"
+        },
+        "state": {
+          "default": "PENDING",
+          "enum": [
+            "PENDING",
+            "SUBMITTING",
+            "RUNNING",
+            "UNKNOWN_RECONCILE",
+            "PENDING_MANUAL_SPOT_CHECK",
+            "STRIKE_1_RETRY_SAFE",
+            "ACCEPTED",
+            "FAILED_TERMINAL",
+            "SWITCHED_TO_FALLBACK"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "output_asset_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Asset Path"
+        },
+        "updated_at": {
+          "minimum": 0,
+          "title": "Updated At",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "flow_job_id",
+        "episode_id",
+        "scene_id",
+        "idempotency_key",
+        "prompt_mode",
+        "duration_bucket_sec",
+        "estimated_micro_usd",
+        "prompt_v1",
+        "prompt_v2_safe",
+        "fallback_spec_json",
+        "updated_at"
+      ],
+      "title": "FlowJobCard",
+      "type": "object"
+    },
+    "EpisodeAnalyticsSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "snapshot_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "episode_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "days_since_publish": {
+          "minimum": 1,
+          "title": "Days Since Publish",
+          "type": "integer"
+        },
+        "ctr_pct": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ctr Pct"
+        },
+        "retention_30s_pct": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Retention 30S Pct"
+        },
+        "retention_min6_14_pct": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Retention Min6 14 Pct"
+        },
+        "avd_pct": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Avd Pct"
+        },
+        "watch_hours_total": {
+          "default": 0.0,
+          "minimum": 0,
+          "title": "Watch Hours Total",
+          "type": "number"
+        },
+        "rpm_micro_usd": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rpm Micro Usd"
+        },
+        "adsense_status": {
+          "default": "UNKNOWN",
+          "enum": [
+            "UNKNOWN",
+            "PENDING",
+            "NOT_LINKED",
+            "GREEN_FULL_ADS",
+            "YELLOW_LIMITED",
+            "NONE"
+          ],
+          "title": "Adsense Status",
+          "type": "string"
+        },
+        "adsense_source": {
+          "default": "UNAVAILABLE",
+          "enum": [
+            "STUDIO_CSV_EXPORT",
+            "MANUAL_CREATOR_ENTRY",
+            "UNAVAILABLE"
+          ],
+          "title": "Adsense Source",
+          "type": "string"
+        },
+        "adsense_checked_at": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Adsense Checked At"
+        },
+        "metrics_source": {
+          "default": "YT_ANALYTICS_API",
+          "enum": [
+            "YT_ANALYTICS_API",
+            "STUDIO_CSV_EXPORT",
+            "COMBINED"
+          ],
+          "title": "Metrics Source",
+          "type": "string"
+        },
+        "captured_at": {
+          "minimum": 0,
+          "title": "Captured At",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "snapshot_id",
+        "episode_id",
+        "days_since_publish",
+        "captured_at"
+      ],
+      "title": "EpisodeAnalyticsSnapshot",
+      "type": "object"
+    },
+    "ReadyToUploadPack": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "episode_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "episode_slug": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "title": "Episode Slug",
+          "type": "string"
+        },
+        "ready_pack_dir": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Ready Pack Dir",
+          "type": "string"
+        },
+        "ready_bundle_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Ready Bundle Sha256",
+          "type": "string"
+        },
+        "final_mp4_relpath": {
+          "const": "final_1080p30.mp4",
+          "title": "Final Mp4 Relpath",
+          "type": "string"
+        },
+        "final_mp4_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Final Mp4 Sha256",
+          "type": "string"
+        },
+        "integrated_lufs": {
+          "title": "Integrated Lufs",
+          "type": "number"
+        },
+        "true_peak_dbtp": {
+          "title": "True Peak Dbtp",
+          "type": "number"
+        },
+        "lufs_passed": {
+          "const": true,
+          "title": "Lufs Passed",
+          "type": "boolean"
+        },
+        "safe_zone_passed": {
+          "const": true,
+          "title": "Safe Zone Passed",
+          "type": "boolean"
+        },
+        "vision_frame_qa_status": {
+          "enum": [
+            "PASSED",
+            "PENDING_MANUAL_SPOT_CHECK"
+          ],
+          "title": "Vision Frame Qa Status",
+          "type": "string"
+        },
+        "thumbnail_brand_passed": {
+          "const": true,
+          "title": "Thumbnail Brand Passed",
+          "type": "boolean"
+        },
+        "thumbnail_relpaths": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "title": "Thumbnail Relpaths",
+          "type": "array"
+        },
+        "chapters_relpath": {
+          "const": "chapters.txt",
+          "title": "Chapters Relpath",
+          "type": "string"
+        },
+        "youtube_synthetic_disclosure_required": {
+          "title": "Youtube Synthetic Disclosure Required",
+          "type": "boolean"
+        },
+        "provenance_bundle_relpath": {
+          "const": "provenance_bundle.json",
+          "title": "Provenance Bundle Relpath",
+          "type": "string"
+        },
+        "qa_certificate_relpath": {
+          "const": "qa_certificate.json",
+          "title": "Qa Certificate Relpath",
+          "type": "string"
+        },
+        "human_review_flags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Human Review Flags",
+          "type": "array"
+        },
+        "approved_release_gates": {
+          "items": {
+            "enum": [
+              "FACTUAL_ACCURACY",
+              "PRIVACY_PII",
+              "SOURCE_RIGHTS",
+              "SYNTHETIC_DISCLOSURE",
+              "ILLUSTRATIVE_LABELING"
+            ],
+            "type": "string"
+          },
+          "maxItems": 5,
+          "minItems": 5,
+          "title": "Approved Release Gates",
+          "type": "array"
+        }
+      },
+      "required": [
+        "episode_id",
+        "episode_slug",
+        "ready_pack_dir",
+        "ready_bundle_sha256",
+        "final_mp4_relpath",
+        "final_mp4_sha256",
+        "integrated_lufs",
+        "true_peak_dbtp",
+        "lufs_passed",
+        "safe_zone_passed",
+        "vision_frame_qa_status",
+        "thumbnail_brand_passed",
+        "thumbnail_relpaths",
+        "chapters_relpath",
+        "youtube_synthetic_disclosure_required",
+        "provenance_bundle_relpath",
+        "qa_certificate_relpath",
+        "approved_release_gates"
+      ],
+      "title": "ReadyToUploadPack",
+      "type": "object"
+    },
+    "ProviderRegistry": {
+      "$defs": {
+        "ProviderEntry": {
+          "additionalProperties": false,
+          "properties": {
+            "model_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "title": "Model Id",
+              "type": "string"
+            },
+            "api": {
+              "maxLength": 128,
+              "minLength": 1,
+              "title": "Api",
+              "type": "string"
+            },
+            "pricing": {
+              "additionalProperties": {
+                "type": "number"
+              },
+              "title": "Pricing",
+              "type": "object"
+            },
+            "limits": {
+              "additionalProperties": {
+                "type": "integer"
+              },
+              "title": "Limits",
+              "type": "object"
+            }
+          },
+          "required": [
+            "model_id",
+            "api"
+          ],
+          "title": "ProviderEntry",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "providers": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ProviderEntry"
+          },
+          "minProperties": 1,
+          "title": "Providers",
+          "type": "object"
+        }
+      },
+      "required": [
+        "providers"
+      ],
+      "title": "ProviderRegistry",
+      "type": "object"
+    },
+    "CraftRubric": {
+      "$defs": {
+        "CraftPrinciple": {
+          "additionalProperties": false,
+          "properties": {
+            "principle_id": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "title": "Principle Id",
+              "type": "string"
+            },
+            "summary": {
+              "maxLength": 240,
+              "minLength": 1,
+              "title": "Summary",
+              "type": "string"
+            }
+          },
+          "required": [
+            "principle_id",
+            "summary"
+          ],
+          "title": "CraftPrinciple",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "rubric_id": {
+          "const": "craft_rubric_v4",
+          "title": "Rubric Id",
+          "type": "string"
+        },
+        "principles": {
+          "items": {
+            "$ref": "#/$defs/CraftPrinciple"
+          },
+          "maxItems": 40,
+          "minItems": 1,
+          "title": "Principles",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rubric_id",
+        "principles"
+      ],
+      "title": "CraftRubric",
+      "type": "object"
+    },
+    "RenderReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v4",
+          "default": "v4",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "backend_name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Backend Name",
+          "type": "string"
+        },
+        "output_relpath": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Output Relpath",
+          "type": "string"
+        },
+        "fps": {
+          "const": 30,
+          "default": 30,
+          "title": "Fps",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "backend_name",
+        "output_relpath",
+        "sha256"
+      ],
+      "title": "RenderReceipt",
+      "type": "object"
+    },
+    "MotifRegistryEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "motif_component": {
+          "minLength": 1,
+          "title": "Motif Component",
+          "type": "string"
+        },
+        "owner_package": {
+          "enum": [
+            "render_catalog",
+            "crime_scene_2k",
+            "flow_adapter"
+          ],
+          "title": "Owner Package",
+          "type": "string"
+        },
+        "is_mvp_4": {
+          "title": "Is Mvp 4",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "motif_component",
+        "owner_package",
+        "is_mvp_4"
+      ],
+      "title": "MotifRegistryEntry",
+      "type": "object"
+    }
+  }
+}

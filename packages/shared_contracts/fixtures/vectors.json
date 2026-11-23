@@ -1,0 +1,4763 @@
+{
+  "contract_version": "v4",
+  "valid": [
+    {
+      "id": "v001",
+      "model": "SeedPacket",
+      "payload": {
+        "track": "TRACK_A_OUTLIER",
+        "suspect_names": [
+          "Alex Rivera 0"
+        ],
+        "victim_names": [],
+        "incident_date_or_year": "1998",
+        "county_state": "King County, WA",
+        "docket_ids": [],
+        "unanswered_comment_questions": []
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "track": "TRACK_A_OUTLIER",
+        "lead_classification": "LEAD_ONLY",
+        "suspect_names": [
+          "Alex Rivera 0"
+        ],
+        "victim_names": [],
+        "incident_date_or_year": "1998",
+        "county_state": "King County, WA",
+        "docket_ids": [],
+        "unanswered_comment_questions": []
+      }
+    },
+    {
+      "id": "v002",
+      "model": "SeedPacket",
+      "payload": {
+        "track": "TRACK_B_FOIA_RADAR",
+        "suspect_names": [
+          "Alex Rivera 1"
+        ],
+        "victim_names": [],
+        "incident_date_or_year": "1999",
+        "county_state": "King County, WA 1",
+        "docket_ids": [],
+        "unanswered_comment_questions": [
+          "Who signed the affidavit?"
+        ],
+        "contract_version": "v4",
+        "lead_classification": "LEAD_ONLY"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "track": "TRACK_B_FOIA_RADAR",
+        "lead_classification": "LEAD_ONLY",
+        "suspect_names": [
+          "Alex Rivera 1"
+        ],
+        "victim_names": [],
+        "incident_date_or_year": "1999",
+        "county_state": "King County, WA 1",
+        "docket_ids": [],
+        "unanswered_comment_questions": [
+          "Who signed the affidavit?"
+        ]
+      }
+    },
+    {
+      "id": "v003",
+      "model": "SeedPacket",
+      "payload": {
+        "track": "TRACK_A_OUTLIER",
+        "suspect_names": [
+          "Alex Rivera 2"
+        ],
+        "victim_names": [],
+        "incident_date_or_year": "2000",
+        "county_state": "King County, WA 2",
+        "docket_ids": [],
+        "unanswered_comment_questions": [],
+        "contract_version": "v4",
+        "lead_classification": "LEAD_ONLY"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "track": "TRACK_A_OUTLIER",
+        "lead_classification": "LEAD_ONLY",
+        "suspect_names": [
+          "Alex Rivera 2"
+        ],
+        "victim_names": [],
+        "incident_date_or_year": "2000",
+        "county_state": "King County, WA 2",
+        "docket_ids": [],
+        "unanswered_comment_questions": []
+      }
+    },
+    {
+      "id": "v004",
+      "model": "SeedPacket",
+      "payload": {
+        "track": "TRACK_B_FOIA_RADAR",
+        "suspect_names": [],
+        "victim_names": [
+          "Jordan Hale"
+        ],
+        "incident_date_or_year": "2001",
+        "county_state": "King County, WA 3",
+        "docket_ids": [],
+        "unanswered_comment_questions": [],
+        "contract_version": "v4",
+        "lead_classification": "LEAD_ONLY"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "track": "TRACK_B_FOIA_RADAR",
+        "lead_classification": "LEAD_ONLY",
+        "suspect_names": [],
+        "victim_names": [
+          "Jordan Hale"
+        ],
+        "incident_date_or_year": "2001",
+        "county_state": "King County, WA 3",
+        "docket_ids": [],
+        "unanswered_comment_questions": []
+      }
+    },
+    {
+      "id": "v005",
+      "model": "SeedPacket",
+      "payload": {
+        "track": "TRACK_A_OUTLIER",
+        "suspect_names": [],
+        "victim_names": [],
+        "incident_date_or_year": "2002",
+        "county_state": "King County, WA 4",
+        "docket_ids": [
+          "docket_4"
+        ],
+        "unanswered_comment_questions": [],
+        "contract_version": "v4",
+        "lead_classification": "LEAD_ONLY"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "track": "TRACK_A_OUTLIER",
+        "lead_classification": "LEAD_ONLY",
+        "suspect_names": [],
+        "victim_names": [],
+        "incident_date_or_year": "2002",
+        "county_state": "King County, WA 4",
+        "docket_ids": [
+          "docket_4"
+        ],
+        "unanswered_comment_questions": []
+      }
+    },
+    {
+      "id": "v006",
+      "model": "TemporalFactLedger",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_0",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 0",
+            "location_text": "entryway",
+            "source_type": "court_ruling",
+            "source_doc_id": "doc_0",
+            "citation_locator": "p.1",
+            "hedging_required": false
+          }
+        ]
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_0",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 0",
+            "physical_clues_json": [],
+            "location_text": "entryway",
+            "source_type": "court_ruling",
+            "source_doc_id": "doc_0",
+            "citation_locator": "p.1",
+            "hedging_required": false,
+            "contradicts_json": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "v007",
+      "model": "TemporalFactLedger",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_1",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 1",
+            "location_text": "entryway",
+            "source_type": "police_affidavit",
+            "source_doc_id": "doc_1",
+            "citation_locator": "p.2",
+            "hedging_required": false,
+            "physical_clues_json": [
+              "overturned table"
+            ]
+          }
+        ]
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_1",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 1",
+            "physical_clues_json": [
+              "overturned table"
+            ],
+            "location_text": "entryway",
+            "source_type": "police_affidavit",
+            "source_doc_id": "doc_1",
+            "citation_locator": "p.2",
+            "hedging_required": false,
+            "contradicts_json": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "v008",
+      "model": "TemporalFactLedger",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_2",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00+00:00",
+            "event_summary": "Affidavit notes event 2",
+            "location_text": "entryway",
+            "source_type": "news_report",
+            "source_doc_id": "doc_2",
+            "citation_locator": "p.3",
+            "hedging_required": true
+          }
+        ]
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_2",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00+00:00",
+            "event_summary": "Affidavit notes event 2",
+            "physical_clues_json": [],
+            "location_text": "entryway",
+            "source_type": "news_report",
+            "source_doc_id": "doc_2",
+            "citation_locator": "p.3",
+            "hedging_required": true,
+            "contradicts_json": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "v009",
+      "model": "TemporalFactLedger",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_3",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 3",
+            "location_text": "entryway",
+            "source_type": "court_ruling",
+            "source_doc_id": "doc_3",
+            "citation_locator": "p.4",
+            "hedging_required": false
+          }
+        ]
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_3",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 3",
+            "physical_clues_json": [],
+            "location_text": "entryway",
+            "source_type": "court_ruling",
+            "source_doc_id": "doc_3",
+            "citation_locator": "p.4",
+            "hedging_required": false,
+            "contradicts_json": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "v010",
+      "model": "TemporalFactLedger",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_4",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 4",
+            "location_text": "entryway",
+            "source_type": "police_affidavit",
+            "source_doc_id": "doc_4",
+            "citation_locator": "p.5",
+            "hedging_required": false
+          }
+        ]
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_4",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 4",
+            "physical_clues_json": [],
+            "location_text": "entryway",
+            "source_type": "police_affidavit",
+            "source_doc_id": "doc_4",
+            "citation_locator": "p.5",
+            "hedging_required": false,
+            "contradicts_json": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "v011",
+      "model": "ComplianceClearedCase",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_0",
+        "defendant_name": "Defendant 0",
+        "incident_year": 2000,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "AFFIRMED",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000000,
+        "anonymization_artifact_sha256": "776e3a23c912ab77148f140d7d3afba72a86d3c5bb4945cf78fdc5cce602204d",
+        "audit_id": "audit_0",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": true,
+        "audited_at": 1700000100
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "case_id": "case_0",
+        "defendant_name": "Defendant 0",
+        "incident_year": 2000,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "AFFIRMED",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000000,
+        "anonymization_artifact_sha256": "776e3a23c912ab77148f140d7d3afba72a86d3c5bb4945cf78fdc5cce602204d",
+        "audit_id": "audit_0",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": true,
+        "audited_at": 1700000100
+      }
+    },
+    {
+      "id": "v012",
+      "model": "ComplianceClearedCase",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "defendant_name": "Defendant 1",
+        "incident_year": 2001,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "STANDING_CONVICTION",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000001,
+        "anonymization_artifact_sha256": "2e96105c29d2c92c48ffb367fa6e4b40db08207d649bcf83aa1cec30532a1e17",
+        "audit_id": "audit_1",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": false,
+        "audited_at": 1700000101
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "defendant_name": "Defendant 1",
+        "incident_year": 2001,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "STANDING_CONVICTION",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000001,
+        "anonymization_artifact_sha256": "2e96105c29d2c92c48ffb367fa6e4b40db08207d649bcf83aa1cec30532a1e17",
+        "audit_id": "audit_1",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": false,
+        "audited_at": 1700000101
+      }
+    },
+    {
+      "id": "v013",
+      "model": "ComplianceClearedCase",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_2",
+        "defendant_name": "Defendant 2",
+        "incident_year": 2002,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "AFFIRMED",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000002,
+        "anonymization_artifact_sha256": "73d68809233d210fefa83481fe8ebfe627494328a9406933cad1b3c4b8021ab4",
+        "audit_id": "audit_2",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": true,
+        "audited_at": 1700000102
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "case_id": "case_2",
+        "defendant_name": "Defendant 2",
+        "incident_year": 2002,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "AFFIRMED",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000002,
+        "anonymization_artifact_sha256": "73d68809233d210fefa83481fe8ebfe627494328a9406933cad1b3c4b8021ab4",
+        "audit_id": "audit_2",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": true,
+        "audited_at": 1700000102
+      }
+    },
+    {
+      "id": "v014",
+      "model": "ComplianceClearedCase",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_3",
+        "defendant_name": "Defendant 3",
+        "incident_year": 2003,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "STANDING_CONVICTION",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000003,
+        "anonymization_artifact_sha256": "5413d234fd11475c1538d8d3b390d381f3f6d99b3bf02c48c71540510aea3793",
+        "audit_id": "audit_3",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": false,
+        "audited_at": 1700000103
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "case_id": "case_3",
+        "defendant_name": "Defendant 3",
+        "incident_year": 2003,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "STANDING_CONVICTION",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000003,
+        "anonymization_artifact_sha256": "5413d234fd11475c1538d8d3b390d381f3f6d99b3bf02c48c71540510aea3793",
+        "audit_id": "audit_3",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": false,
+        "audited_at": 1700000103
+      }
+    },
+    {
+      "id": "v015",
+      "model": "ComplianceClearedCase",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_4",
+        "defendant_name": "Defendant 4",
+        "incident_year": 2004,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "AFFIRMED",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000004,
+        "anonymization_artifact_sha256": "5e6c2df6ec165d22ab672c652a50e5f0b990350fd4ebb6fc2535c76410fb4da3",
+        "audit_id": "audit_4",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": true,
+        "audited_at": 1700000104
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "case_id": "case_4",
+        "defendant_name": "Defendant 4",
+        "incident_year": 2004,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "AFFIRMED",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000004,
+        "anonymization_artifact_sha256": "5e6c2df6ec165d22ab672c652a50e5f0b990350fd4ebb6fc2535c76410fb4da3",
+        "audit_id": "audit_4",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": true,
+        "audited_at": 1700000104
+      }
+    },
+    {
+      "id": "v016",
+      "model": "ScenePlan",
+      "payload": {
+        "scene_plan_id": "plan_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "seq_index": 1,
+        "story_purpose": "Show the record for beat 0",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 0 occurred.",
+        "narration_version_sha256": "8142a46f12cead02a22872fdbb38d78b16228046ef248ee2f0873c5dd80e0d45",
+        "cited_fact_ids_json": [
+          "fact_0"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "CODE_STICKMAN",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 8000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_0",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "created_at": 100,
+        "updated_at": 100,
+        "plan_status": "DRAFT"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "scene_plan_id": "plan_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "plan_version": 1,
+        "seq_index": 1,
+        "story_purpose": "Show the record for beat 0",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 0 occurred.",
+        "narration_version_sha256": "8142a46f12cead02a22872fdbb38d78b16228046ef248ee2f0873c5dd80e0d45",
+        "cited_fact_ids_json": [
+          "fact_0"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "CODE_STICKMAN",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "keyframe_refs_json": [],
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 8000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "sound_cues_json": [],
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_0",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "asset_version_sha256": null,
+        "plan_status": "DRAFT",
+        "reviewed_by": null,
+        "reviewed_at": null,
+        "created_at": 100,
+        "updated_at": 100
+      }
+    },
+    {
+      "id": "v017",
+      "model": "ScenePlan",
+      "payload": {
+        "scene_plan_id": "plan_1",
+        "episode_id": "ep_1",
+        "scene_id": "scene_1",
+        "seq_index": 2,
+        "story_purpose": "Show the record for beat 1",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 1 occurred.",
+        "narration_version_sha256": "5947e3c8d9c16c47e2abb6f6579113d09c1df570c0ebb3bb3b76408371429ea6",
+        "cited_fact_ids_json": [
+          "fact_1"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "AUDIO_EVIDENCE_CARD",
+        "motif_component": "AudioEvidenceCard",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 6000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_1",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "created_at": 100,
+        "updated_at": 101,
+        "plan_status": "PLAN_APPROVED",
+        "reviewed_by": "editor_1",
+        "reviewed_at": 200,
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "scene_plan_id": "plan_1",
+        "episode_id": "ep_1",
+        "scene_id": "scene_1",
+        "plan_version": 1,
+        "seq_index": 2,
+        "story_purpose": "Show the record for beat 1",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 1 occurred.",
+        "narration_version_sha256": "5947e3c8d9c16c47e2abb6f6579113d09c1df570c0ebb3bb3b76408371429ea6",
+        "cited_fact_ids_json": [
+          "fact_1"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "AUDIO_EVIDENCE_CARD",
+        "motif_component": "AudioEvidenceCard",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "keyframe_refs_json": [],
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 6000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "sound_cues_json": [],
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_1",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "asset_version_sha256": null,
+        "plan_status": "PLAN_APPROVED",
+        "reviewed_by": "editor_1",
+        "reviewed_at": 200,
+        "created_at": 100,
+        "updated_at": 101
+      }
+    },
+    {
+      "id": "v018",
+      "model": "ScenePlan",
+      "payload": {
+        "scene_plan_id": "plan_2",
+        "episode_id": "ep_1",
+        "scene_id": "scene_2",
+        "seq_index": 3,
+        "story_purpose": "Show the record for beat 2",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 2 occurred.",
+        "narration_version_sha256": "6241a19a2ca9f71abb6357a716251a41bb4608585da858f99a18bca6f4f650a1",
+        "cited_fact_ids_json": [
+          "fact_2"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "FOIA_REAL_FOOTAGE",
+        "motif_component": "FoiaFootageFrame",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 9000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_2",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "created_at": 100,
+        "updated_at": 102,
+        "plan_status": "EDITED_APPROVED",
+        "reviewed_by": "editor_1",
+        "reviewed_at": 200,
+        "asset_version_sha256": "846f3dbe8b5c3b7e99b46fe666a745fa2fa9f6bb7fa95da033db3ad618b2a312",
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "scene_plan_id": "plan_2",
+        "episode_id": "ep_1",
+        "scene_id": "scene_2",
+        "plan_version": 1,
+        "seq_index": 3,
+        "story_purpose": "Show the record for beat 2",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 2 occurred.",
+        "narration_version_sha256": "6241a19a2ca9f71abb6357a716251a41bb4608585da858f99a18bca6f4f650a1",
+        "cited_fact_ids_json": [
+          "fact_2"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "FOIA_REAL_FOOTAGE",
+        "motif_component": "FoiaFootageFrame",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "keyframe_refs_json": [],
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 9000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "sound_cues_json": [],
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_2",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "asset_version_sha256": "846f3dbe8b5c3b7e99b46fe666a745fa2fa9f6bb7fa95da033db3ad618b2a312",
+        "plan_status": "EDITED_APPROVED",
+        "reviewed_by": "editor_1",
+        "reviewed_at": 200,
+        "created_at": 100,
+        "updated_at": 102
+      }
+    },
+    {
+      "id": "v019",
+      "model": "ScenePlan",
+      "payload": {
+        "scene_plan_id": "plan_3",
+        "episode_id": "ep_1",
+        "scene_id": "scene_3",
+        "seq_index": 4,
+        "story_purpose": "Show the record for beat 3",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 3 occurred.",
+        "narration_version_sha256": "a64c420fcd4b577632b0e9dfa0f7e1ecf4beb03a67203ba6ae6af29325689313",
+        "cited_fact_ids_json": [
+          "fact_3"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "FLOW_HERO_VIDEO",
+        "motif_component": "HeroVideoBridge",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 8000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_3",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "created_at": 100,
+        "updated_at": 103,
+        "plan_status": "DRAFT",
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "scene_plan_id": "plan_3",
+        "episode_id": "ep_1",
+        "scene_id": "scene_3",
+        "plan_version": 1,
+        "seq_index": 4,
+        "story_purpose": "Show the record for beat 3",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 3 occurred.",
+        "narration_version_sha256": "a64c420fcd4b577632b0e9dfa0f7e1ecf4beb03a67203ba6ae6af29325689313",
+        "cited_fact_ids_json": [
+          "fact_3"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "FLOW_HERO_VIDEO",
+        "motif_component": "HeroVideoBridge",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "keyframe_refs_json": [],
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 8000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "sound_cues_json": [],
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_3",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "asset_version_sha256": null,
+        "plan_status": "DRAFT",
+        "reviewed_by": null,
+        "reviewed_at": null,
+        "created_at": 100,
+        "updated_at": 103
+      }
+    },
+    {
+      "id": "v020",
+      "model": "ScenePlan",
+      "payload": {
+        "scene_plan_id": "plan_4",
+        "episode_id": "ep_1",
+        "scene_id": "scene_4",
+        "seq_index": 5,
+        "story_purpose": "Show the record for beat 4",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 4 occurred.",
+        "narration_version_sha256": "01ebac3697ced47d5324e912c9a129f7f14a644a05163cd633d844b5548107a8",
+        "cited_fact_ids_json": [
+          "fact_4"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "STILL_2K_PANZOOM",
+        "motif_component": "Illustrative2KPanZoom",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 20000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_4",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "created_at": 100,
+        "updated_at": 104,
+        "plan_status": "DRAFT",
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "scene_plan_id": "plan_4",
+        "episode_id": "ep_1",
+        "scene_id": "scene_4",
+        "plan_version": 1,
+        "seq_index": 5,
+        "story_purpose": "Show the record for beat 4",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 4 occurred.",
+        "narration_version_sha256": "01ebac3697ced47d5324e912c9a129f7f14a644a05163cd633d844b5548107a8",
+        "cited_fact_ids_json": [
+          "fact_4"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "STILL_2K_PANZOOM",
+        "motif_component": "Illustrative2KPanZoom",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "keyframe_refs_json": [],
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 20000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "sound_cues_json": [],
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_4",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "asset_version_sha256": null,
+        "plan_status": "DRAFT",
+        "reviewed_by": null,
+        "reviewed_at": null,
+        "created_at": 100,
+        "updated_at": 104
+      }
+    },
+    {
+      "id": "v021",
+      "model": "VoiceTrackManifest",
+      "payload": {
+        "episode_id": "ep_1",
+        "total_master_ms": 6500,
+        "segments": [
+          {
+            "segment_id": "seg_0_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 4000,
+            "audio_path": "audio/narr_0_1.wav",
+            "narration_version_sha256": "5cbc872475c3742ab3e3b9cd562a18fbc57506f188644b1a389ba1f4d72e02ec"
+          },
+          {
+            "segment_id": "seg_0_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 4000,
+            "end_ms": 4500
+          },
+          {
+            "segment_id": "seg_0_3",
+            "episode_id": "ep_1",
+            "seq_index": 3,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 4500,
+            "end_ms": 6500,
+            "foia_asset_id": "foia_0"
+          }
+        ],
+        "word_timestamps": [
+          {
+            "segment_id": "seg_0_1",
+            "word": "According",
+            "start_ms": 0,
+            "end_ms": 400
+          }
+        ],
+        "cue_points": [
+          {
+            "cue_id": "cue_0",
+            "at_ms": 10,
+            "label": "bed"
+          }
+        ],
+        "amplitude_envelope": [
+          0.0,
+          0.5,
+          1.0
+        ]
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "total_master_ms": 6500,
+        "segments": [
+          {
+            "segment_id": "seg_0_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 4000,
+            "audio_path": "audio/narr_0_1.wav",
+            "foia_asset_id": null,
+            "narration_version_sha256": "5cbc872475c3742ab3e3b9cd562a18fbc57506f188644b1a389ba1f4d72e02ec"
+          },
+          {
+            "segment_id": "seg_0_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 4000,
+            "end_ms": 4500,
+            "audio_path": null,
+            "foia_asset_id": null,
+            "narration_version_sha256": null
+          },
+          {
+            "segment_id": "seg_0_3",
+            "episode_id": "ep_1",
+            "seq_index": 3,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 4500,
+            "end_ms": 6500,
+            "audio_path": null,
+            "foia_asset_id": "foia_0",
+            "narration_version_sha256": null
+          }
+        ],
+        "word_timestamps": [
+          {
+            "segment_id": "seg_0_1",
+            "word": "According",
+            "start_ms": 0,
+            "end_ms": 400
+          }
+        ],
+        "cue_points": [
+          {
+            "cue_id": "cue_0",
+            "at_ms": 10,
+            "label": "bed"
+          }
+        ],
+        "amplitude_envelope": [
+          0.0,
+          0.5,
+          1.0
+        ]
+      }
+    },
+    {
+      "id": "v022",
+      "model": "VoiceTrackManifest",
+      "payload": {
+        "episode_id": "ep_1",
+        "total_master_ms": 6550,
+        "segments": [
+          {
+            "segment_id": "seg_1_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 4100,
+            "audio_path": "audio/narr_1_1.wav",
+            "narration_version_sha256": "478f5f7b6235d0f30a8e5907ee26da3fbf78aa6f49014b763b4658c50a9bd2f8"
+          },
+          {
+            "segment_id": "seg_1_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 4100,
+            "end_ms": 4550
+          },
+          {
+            "segment_id": "seg_1_3",
+            "episode_id": "ep_1",
+            "seq_index": 3,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 4550,
+            "end_ms": 6550,
+            "foia_asset_id": "foia_1"
+          }
+        ],
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "total_master_ms": 6550,
+        "segments": [
+          {
+            "segment_id": "seg_1_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 4100,
+            "audio_path": "audio/narr_1_1.wav",
+            "foia_asset_id": null,
+            "narration_version_sha256": "478f5f7b6235d0f30a8e5907ee26da3fbf78aa6f49014b763b4658c50a9bd2f8"
+          },
+          {
+            "segment_id": "seg_1_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 4100,
+            "end_ms": 4550,
+            "audio_path": null,
+            "foia_asset_id": null,
+            "narration_version_sha256": null
+          },
+          {
+            "segment_id": "seg_1_3",
+            "episode_id": "ep_1",
+            "seq_index": 3,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 4550,
+            "end_ms": 6550,
+            "audio_path": null,
+            "foia_asset_id": "foia_1",
+            "narration_version_sha256": null
+          }
+        ],
+        "word_timestamps": [],
+        "cue_points": [],
+        "amplitude_envelope": []
+      }
+    },
+    {
+      "id": "v023",
+      "model": "VoiceTrackManifest",
+      "payload": {
+        "episode_id": "ep_1",
+        "total_master_ms": 6950,
+        "segments": [
+          {
+            "segment_id": "seg_2_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 4200,
+            "audio_path": "audio/narr_2_1.wav",
+            "narration_version_sha256": "8cc34ac44de1a446ca2adf418cbb70148eb3db73b912a873c8ebdd198024d481"
+          },
+          {
+            "segment_id": "seg_2_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 4200,
+            "end_ms": 4950
+          },
+          {
+            "segment_id": "seg_2_3",
+            "episode_id": "ep_1",
+            "seq_index": 3,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 4950,
+            "end_ms": 6950,
+            "foia_asset_id": "foia_2"
+          }
+        ],
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "total_master_ms": 6950,
+        "segments": [
+          {
+            "segment_id": "seg_2_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 4200,
+            "audio_path": "audio/narr_2_1.wav",
+            "foia_asset_id": null,
+            "narration_version_sha256": "8cc34ac44de1a446ca2adf418cbb70148eb3db73b912a873c8ebdd198024d481"
+          },
+          {
+            "segment_id": "seg_2_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 4200,
+            "end_ms": 4950,
+            "audio_path": null,
+            "foia_asset_id": null,
+            "narration_version_sha256": null
+          },
+          {
+            "segment_id": "seg_2_3",
+            "episode_id": "ep_1",
+            "seq_index": 3,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 4950,
+            "end_ms": 6950,
+            "audio_path": null,
+            "foia_asset_id": "foia_2",
+            "narration_version_sha256": null
+          }
+        ],
+        "word_timestamps": [],
+        "cue_points": [],
+        "amplitude_envelope": []
+      }
+    },
+    {
+      "id": "v024",
+      "model": "VoiceTrackManifest",
+      "payload": {
+        "episode_id": "ep_1",
+        "total_master_ms": 6900,
+        "segments": [
+          {
+            "segment_id": "seg_3_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 4300,
+            "audio_path": "audio/narr_3_1.wav",
+            "narration_version_sha256": "467d78dde41f014c004c07072365e6aea3dbc1fa91cfd5a65f930437bc588ead"
+          },
+          {
+            "segment_id": "seg_3_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 4300,
+            "end_ms": 4900
+          },
+          {
+            "segment_id": "seg_3_3",
+            "episode_id": "ep_1",
+            "seq_index": 3,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 4900,
+            "end_ms": 6900,
+            "foia_asset_id": "foia_3"
+          }
+        ],
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "total_master_ms": 6900,
+        "segments": [
+          {
+            "segment_id": "seg_3_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 4300,
+            "audio_path": "audio/narr_3_1.wav",
+            "foia_asset_id": null,
+            "narration_version_sha256": "467d78dde41f014c004c07072365e6aea3dbc1fa91cfd5a65f930437bc588ead"
+          },
+          {
+            "segment_id": "seg_3_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 4300,
+            "end_ms": 4900,
+            "audio_path": null,
+            "foia_asset_id": null,
+            "narration_version_sha256": null
+          },
+          {
+            "segment_id": "seg_3_3",
+            "episode_id": "ep_1",
+            "seq_index": 3,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 4900,
+            "end_ms": 6900,
+            "audio_path": null,
+            "foia_asset_id": "foia_3",
+            "narration_version_sha256": null
+          }
+        ],
+        "word_timestamps": [],
+        "cue_points": [],
+        "amplitude_envelope": []
+      }
+    },
+    {
+      "id": "v025",
+      "model": "VoiceTrackManifest",
+      "payload": {
+        "episode_id": "ep_1",
+        "total_master_ms": 6920,
+        "segments": [
+          {
+            "segment_id": "seg_4_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 4400,
+            "audio_path": "audio/narr_4_1.wav",
+            "narration_version_sha256": "6fde277759f42ee439f156d9964fd57f8f8656869ceadc0902ba9406ab9c038b"
+          },
+          {
+            "segment_id": "seg_4_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 4400,
+            "end_ms": 4920
+          },
+          {
+            "segment_id": "seg_4_3",
+            "episode_id": "ep_1",
+            "seq_index": 3,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 4920,
+            "end_ms": 6920,
+            "foia_asset_id": "foia_4"
+          }
+        ],
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "total_master_ms": 6920,
+        "segments": [
+          {
+            "segment_id": "seg_4_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 4400,
+            "audio_path": "audio/narr_4_1.wav",
+            "foia_asset_id": null,
+            "narration_version_sha256": "6fde277759f42ee439f156d9964fd57f8f8656869ceadc0902ba9406ab9c038b"
+          },
+          {
+            "segment_id": "seg_4_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 4400,
+            "end_ms": 4920,
+            "audio_path": null,
+            "foia_asset_id": null,
+            "narration_version_sha256": null
+          },
+          {
+            "segment_id": "seg_4_3",
+            "episode_id": "ep_1",
+            "seq_index": 3,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 4920,
+            "end_ms": 6920,
+            "audio_path": null,
+            "foia_asset_id": "foia_4",
+            "narration_version_sha256": null
+          }
+        ],
+        "word_timestamps": [],
+        "cue_points": [],
+        "amplitude_envelope": []
+      }
+    },
+    {
+      "id": "v026",
+      "model": "SpatialAnchor",
+      "payload": {
+        "anchor_id": "anchor_0",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "grid_cell": "A1",
+        "x_px": 128,
+        "y_px": 72
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "anchor_id": "anchor_0",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "cited_fact_id": null,
+        "grid_cell": "A1",
+        "span_cols": 1.0,
+        "span_rows": 1.0,
+        "x_px": 128,
+        "y_px": 72,
+        "target_zoom": 2.5,
+        "travel_axis": null,
+        "lock_status": "DRAFT",
+        "locked_by": null,
+        "locked_at": null,
+        "still_asset_sha256": null
+      }
+    },
+    {
+      "id": "v027",
+      "model": "SpatialAnchor",
+      "payload": {
+        "anchor_id": "anchor_1",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "grid_cell": "A1",
+        "x_px": 128,
+        "y_px": 72,
+        "lock_status": "IN_REVIEW",
+        "contract_version": "v4",
+        "cited_fact_id": "fact_1"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "anchor_id": "anchor_1",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "cited_fact_id": "fact_1",
+        "grid_cell": "A1",
+        "span_cols": 1.0,
+        "span_rows": 1.0,
+        "x_px": 128,
+        "y_px": 72,
+        "target_zoom": 2.5,
+        "travel_axis": null,
+        "lock_status": "IN_REVIEW",
+        "locked_by": null,
+        "locked_at": null,
+        "still_asset_sha256": null
+      }
+    },
+    {
+      "id": "v028",
+      "model": "SpatialAnchor",
+      "payload": {
+        "anchor_id": "anchor_2",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "grid_cell": "A1",
+        "x_px": 128,
+        "y_px": 72,
+        "lock_status": "LOCKED",
+        "locked_by": "editor_1",
+        "locked_at": 300,
+        "still_asset_sha256": "9d6ebcb19b0010822d8efb6ecd03f2595680c411b58ecd0ffaaede4492e2b8aa",
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "anchor_id": "anchor_2",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "cited_fact_id": null,
+        "grid_cell": "A1",
+        "span_cols": 1.0,
+        "span_rows": 1.0,
+        "x_px": 128,
+        "y_px": 72,
+        "target_zoom": 2.5,
+        "travel_axis": null,
+        "lock_status": "LOCKED",
+        "locked_by": "editor_1",
+        "locked_at": 300,
+        "still_asset_sha256": "9d6ebcb19b0010822d8efb6ecd03f2595680c411b58ecd0ffaaede4492e2b8aa"
+      }
+    },
+    {
+      "id": "v029",
+      "model": "SpatialAnchor",
+      "payload": {
+        "anchor_id": "anchor_3",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "grid_cell": "J10",
+        "x_px": 2432,
+        "y_px": 1368,
+        "span_cols": 2.0,
+        "span_rows": 1.5,
+        "target_zoom": 1.7,
+        "travel_axis": "L_TO_R",
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "anchor_id": "anchor_3",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "cited_fact_id": null,
+        "grid_cell": "J10",
+        "span_cols": 2.0,
+        "span_rows": 1.5,
+        "x_px": 2432,
+        "y_px": 1368,
+        "target_zoom": 1.7,
+        "travel_axis": "L_TO_R",
+        "lock_status": "DRAFT",
+        "locked_by": null,
+        "locked_at": null,
+        "still_asset_sha256": null
+      }
+    },
+    {
+      "id": "v030",
+      "model": "SpatialAnchor",
+      "payload": {
+        "anchor_id": "anchor_4",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "grid_cell": "A10",
+        "x_px": 128,
+        "y_px": 72,
+        "target_zoom": 1.0,
+        "travel_axis": "STATIC",
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "anchor_id": "anchor_4",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "cited_fact_id": null,
+        "grid_cell": "A10",
+        "span_cols": 1.0,
+        "span_rows": 1.0,
+        "x_px": 128,
+        "y_px": 72,
+        "target_zoom": 1.0,
+        "travel_axis": "STATIC",
+        "lock_status": "DRAFT",
+        "locked_by": null,
+        "locked_at": null,
+        "still_asset_sha256": null
+      }
+    },
+    {
+      "id": "v031",
+      "model": "CaseBible",
+      "payload": {
+        "episode_id": "ep_0",
+        "style_dna_json": {
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ]
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 500
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_0",
+        "style_dna_json": {
+          "evidence_crimson_hex": "#C92A2A",
+          "paper_bg_hex": "#E9E2D2",
+          "ink_hex": "#1B1B1D",
+          "slate_hex": "#3A4F66",
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ]
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 500
+      }
+    },
+    {
+      "id": "v032",
+      "model": "CaseBible",
+      "payload": {
+        "episode_id": "ep_1",
+        "style_dna_json": {
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ],
+          "evidence_crimson_hex": "#C92A2A",
+          "paper_bg_hex": "#E9E2D2",
+          "ink_hex": "#1B1B1D",
+          "slate_hex": "#3A4F66"
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 501,
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "style_dna_json": {
+          "evidence_crimson_hex": "#C92A2A",
+          "paper_bg_hex": "#E9E2D2",
+          "ink_hex": "#1B1B1D",
+          "slate_hex": "#3A4F66",
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ]
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 501
+      }
+    },
+    {
+      "id": "v033",
+      "model": "CaseBible",
+      "payload": {
+        "episode_id": "ep_2",
+        "style_dna_json": {
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ],
+          "evidence_crimson_hex": "#C92A2A",
+          "paper_bg_hex": "#E9E2D2",
+          "ink_hex": "#1B1B1D",
+          "slate_hex": "#3A4F66"
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 502,
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_2",
+        "style_dna_json": {
+          "evidence_crimson_hex": "#C92A2A",
+          "paper_bg_hex": "#E9E2D2",
+          "ink_hex": "#1B1B1D",
+          "slate_hex": "#3A4F66",
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ]
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 502
+      }
+    },
+    {
+      "id": "v034",
+      "model": "CaseBible",
+      "payload": {
+        "episode_id": "ep_3",
+        "style_dna_json": {
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ],
+          "evidence_crimson_hex": "#C92A2A",
+          "paper_bg_hex": "#E9E2D2",
+          "ink_hex": "#1B1B1D",
+          "slate_hex": "#3A4F66"
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 503,
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_3",
+        "style_dna_json": {
+          "evidence_crimson_hex": "#C92A2A",
+          "paper_bg_hex": "#E9E2D2",
+          "ink_hex": "#1B1B1D",
+          "slate_hex": "#3A4F66",
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ]
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 503
+      }
+    },
+    {
+      "id": "v035",
+      "model": "CaseBible",
+      "payload": {
+        "episode_id": "ep_4",
+        "style_dna_json": {
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ],
+          "evidence_crimson_hex": "#C92A2A",
+          "paper_bg_hex": "#E9E2D2",
+          "ink_hex": "#1B1B1D",
+          "slate_hex": "#3A4F66"
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 504,
+        "contract_version": "v4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_4",
+        "style_dna_json": {
+          "evidence_crimson_hex": "#C92A2A",
+          "paper_bg_hex": "#E9E2D2",
+          "ink_hex": "#1B1B1D",
+          "slate_hex": "#3A4F66",
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ]
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 504
+      }
+    },
+    {
+      "id": "v036",
+      "model": "ProductionManifest",
+      "payload": {
+        "manifest_id": "manifest_0",
+        "episode_id": "ep_0",
+        "case_id": "case_0",
+        "cold_open_archetype": "911_CALL_IN_MEDIA_RES",
+        "flow_backend_mode": "GEMINI_OMNI_INTERACTIONS",
+        "target_duration_ms": 1200000,
+        "code_foia_ms": 780000,
+        "still_2k_ms": 340000,
+        "hero_ms": 80000,
+        "hero_clip_count": 10,
+        "hero_duration_sec": 80,
+        "scene_plan_ids": [
+          "plan_0"
+        ],
+        "voice_total_master_ms": 1200000
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "manifest_id": "manifest_0",
+        "episode_id": "ep_0",
+        "case_id": "case_0",
+        "fps": 30,
+        "cold_open_archetype": "911_CALL_IN_MEDIA_RES",
+        "flow_backend_mode": "GEMINI_OMNI_INTERACTIONS",
+        "target_duration_ms": 1200000,
+        "code_foia_ms": 780000,
+        "still_2k_ms": 340000,
+        "hero_ms": 80000,
+        "max_hero_clips": 10,
+        "max_hero_duration_sec": 80,
+        "hero_clip_count": 10,
+        "hero_duration_sec": 80,
+        "scene_plan_ids": [
+          "plan_0"
+        ],
+        "voice_total_master_ms": 1200000,
+        "timeline_validated_sha256": null
+      }
+    },
+    {
+      "id": "v037",
+      "model": "ProductionManifest",
+      "payload": {
+        "contract_version": "v4",
+        "manifest_id": "manifest_1",
+        "episode_id": "ep_1",
+        "case_id": "case_1",
+        "fps": 30,
+        "cold_open_archetype": "SINGLE_FORENSIC_ANOMALY",
+        "flow_backend_mode": "VERTEX_VEO_ENTERPRISE",
+        "target_duration_ms": 21000,
+        "code_foia_ms": 12000,
+        "still_2k_ms": 5000,
+        "hero_ms": 4000,
+        "max_hero_clips": 4,
+        "max_hero_duration_sec": 20,
+        "hero_clip_count": 1,
+        "hero_duration_sec": 4,
+        "scene_plan_ids": [
+          "plan_1"
+        ],
+        "voice_total_master_ms": 20800,
+        "timeline_validated_sha256": "2828f11df3a42fbca3f53f7d45838eb8e88ce0d7dd1fae3c0b638fb717553bb4"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "manifest_id": "manifest_1",
+        "episode_id": "ep_1",
+        "case_id": "case_1",
+        "fps": 30,
+        "cold_open_archetype": "SINGLE_FORENSIC_ANOMALY",
+        "flow_backend_mode": "VERTEX_VEO_ENTERPRISE",
+        "target_duration_ms": 21000,
+        "code_foia_ms": 12000,
+        "still_2k_ms": 5000,
+        "hero_ms": 4000,
+        "max_hero_clips": 4,
+        "max_hero_duration_sec": 20,
+        "hero_clip_count": 1,
+        "hero_duration_sec": 4,
+        "scene_plan_ids": [
+          "plan_1"
+        ],
+        "voice_total_master_ms": 20800,
+        "timeline_validated_sha256": "2828f11df3a42fbca3f53f7d45838eb8e88ce0d7dd1fae3c0b638fb717553bb4"
+      }
+    },
+    {
+      "id": "v038",
+      "model": "ProductionManifest",
+      "payload": {
+        "contract_version": "v4",
+        "manifest_id": "manifest_2",
+        "episode_id": "ep_2",
+        "case_id": "case_2",
+        "fps": 30,
+        "cold_open_archetype": "ALIBI_THAT_CRACKED",
+        "flow_backend_mode": "HUMAN_BATCH_DESK",
+        "target_duration_ms": 22000,
+        "code_foia_ms": 13000,
+        "still_2k_ms": 5000,
+        "hero_ms": 4000,
+        "max_hero_clips": 4,
+        "max_hero_duration_sec": 20,
+        "hero_clip_count": 1,
+        "hero_duration_sec": 4,
+        "scene_plan_ids": [
+          "plan_2"
+        ],
+        "voice_total_master_ms": 21800,
+        "timeline_validated_sha256": "7d014c2f528c87a503a84d145aab8966f54bc9a768535c0cb7b2ff5022b1bf72"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "manifest_id": "manifest_2",
+        "episode_id": "ep_2",
+        "case_id": "case_2",
+        "fps": 30,
+        "cold_open_archetype": "ALIBI_THAT_CRACKED",
+        "flow_backend_mode": "HUMAN_BATCH_DESK",
+        "target_duration_ms": 22000,
+        "code_foia_ms": 13000,
+        "still_2k_ms": 5000,
+        "hero_ms": 4000,
+        "max_hero_clips": 4,
+        "max_hero_duration_sec": 20,
+        "hero_clip_count": 1,
+        "hero_duration_sec": 4,
+        "scene_plan_ids": [
+          "plan_2"
+        ],
+        "voice_total_master_ms": 21800,
+        "timeline_validated_sha256": "7d014c2f528c87a503a84d145aab8966f54bc9a768535c0cb7b2ff5022b1bf72"
+      }
+    },
+    {
+      "id": "v039",
+      "model": "ProductionManifest",
+      "payload": {
+        "contract_version": "v4",
+        "manifest_id": "manifest_3",
+        "episode_id": "ep_3",
+        "case_id": "case_3",
+        "fps": 30,
+        "cold_open_archetype": "CHRONOLOGICAL_COUNTDOWN",
+        "flow_backend_mode": "GEMINI_OMNI_INTERACTIONS",
+        "target_duration_ms": 23000,
+        "code_foia_ms": 14000,
+        "still_2k_ms": 5000,
+        "hero_ms": 4000,
+        "max_hero_clips": 4,
+        "max_hero_duration_sec": 20,
+        "hero_clip_count": 1,
+        "hero_duration_sec": 4,
+        "scene_plan_ids": [
+          "plan_3"
+        ],
+        "voice_total_master_ms": 22800,
+        "timeline_validated_sha256": "52903167ea7057991d3c9a2bb90cfb3feda2db497e99383f15452924dc38d3d3"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "manifest_id": "manifest_3",
+        "episode_id": "ep_3",
+        "case_id": "case_3",
+        "fps": 30,
+        "cold_open_archetype": "CHRONOLOGICAL_COUNTDOWN",
+        "flow_backend_mode": "GEMINI_OMNI_INTERACTIONS",
+        "target_duration_ms": 23000,
+        "code_foia_ms": 14000,
+        "still_2k_ms": 5000,
+        "hero_ms": 4000,
+        "max_hero_clips": 4,
+        "max_hero_duration_sec": 20,
+        "hero_clip_count": 1,
+        "hero_duration_sec": 4,
+        "scene_plan_ids": [
+          "plan_3"
+        ],
+        "voice_total_master_ms": 22800,
+        "timeline_validated_sha256": "52903167ea7057991d3c9a2bb90cfb3feda2db497e99383f15452924dc38d3d3"
+      }
+    },
+    {
+      "id": "v040",
+      "model": "ProductionManifest",
+      "payload": {
+        "contract_version": "v4",
+        "manifest_id": "manifest_4",
+        "episode_id": "ep_4",
+        "case_id": "case_4",
+        "fps": 30,
+        "cold_open_archetype": "911_CALL_IN_MEDIA_RES",
+        "flow_backend_mode": "VERTEX_VEO_ENTERPRISE",
+        "target_duration_ms": 24000,
+        "code_foia_ms": 15000,
+        "still_2k_ms": 5000,
+        "hero_ms": 4000,
+        "max_hero_clips": 4,
+        "max_hero_duration_sec": 20,
+        "hero_clip_count": 1,
+        "hero_duration_sec": 4,
+        "scene_plan_ids": [
+          "plan_4"
+        ],
+        "voice_total_master_ms": 23800,
+        "timeline_validated_sha256": "c8abfd9ea1a9a76a35d517d169f635b8340f297162a4c84feaf622ac5a72ae93"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "manifest_id": "manifest_4",
+        "episode_id": "ep_4",
+        "case_id": "case_4",
+        "fps": 30,
+        "cold_open_archetype": "911_CALL_IN_MEDIA_RES",
+        "flow_backend_mode": "VERTEX_VEO_ENTERPRISE",
+        "target_duration_ms": 24000,
+        "code_foia_ms": 15000,
+        "still_2k_ms": 5000,
+        "hero_ms": 4000,
+        "max_hero_clips": 4,
+        "max_hero_duration_sec": 20,
+        "hero_clip_count": 1,
+        "hero_duration_sec": 4,
+        "scene_plan_ids": [
+          "plan_4"
+        ],
+        "voice_total_master_ms": 23800,
+        "timeline_validated_sha256": "c8abfd9ea1a9a76a35d517d169f635b8340f297162a4c84feaf622ac5a72ae93"
+      }
+    },
+    {
+      "id": "v041",
+      "model": "TimelineSpec",
+      "payload": {
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "scene_plan_id": "plan_0",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_ms": 8000
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "scene_plan_id": "plan_0",
+        "fps": 30,
+        "width_px": 1920,
+        "height_px": 1080,
+        "motif_registry": "MOTIF_REGISTRY_V1",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_ms": 8000,
+        "start_frame_sha256": null,
+        "end_frame_sha256": null
+      }
+    },
+    {
+      "id": "v042",
+      "model": "TimelineSpec",
+      "payload": {
+        "episode_id": "ep_1",
+        "scene_id": "scene_1",
+        "scene_plan_id": "plan_1",
+        "motif_component": "AudioEvidenceCard",
+        "prompt_mode": "FIRST_FRAME",
+        "duration_ms": 8000,
+        "start_frame_sha256": "1fe50df9512b2606b1cead4083fc5ac9ac64c34d0043b1716de2c4ad8f0e779e",
+        "contract_version": "v4",
+        "fps": 30,
+        "width_px": 1920,
+        "height_px": 1080,
+        "motif_registry": "MOTIF_REGISTRY_V1"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "scene_id": "scene_1",
+        "scene_plan_id": "plan_1",
+        "fps": 30,
+        "width_px": 1920,
+        "height_px": 1080,
+        "motif_registry": "MOTIF_REGISTRY_V1",
+        "motif_component": "AudioEvidenceCard",
+        "prompt_mode": "FIRST_FRAME",
+        "duration_ms": 8000,
+        "start_frame_sha256": "1fe50df9512b2606b1cead4083fc5ac9ac64c34d0043b1716de2c4ad8f0e779e",
+        "end_frame_sha256": null
+      }
+    },
+    {
+      "id": "v043",
+      "model": "TimelineSpec",
+      "payload": {
+        "episode_id": "ep_1",
+        "scene_id": "scene_2",
+        "scene_plan_id": "plan_2",
+        "motif_component": "RedactedDocReveal",
+        "prompt_mode": "FIRST_AND_LAST_FRAME",
+        "duration_ms": 8000,
+        "start_frame_sha256": "207bd0b3f259bec907781cf601ae0fe281400204cdb11495d4b753c208aa454a",
+        "end_frame_sha256": "a3a9c8cc96c67253768a415c6e37528e692647d28fe7c6ac3be11aeb8f839db0",
+        "contract_version": "v4",
+        "fps": 30,
+        "width_px": 1920,
+        "height_px": 1080,
+        "motif_registry": "MOTIF_REGISTRY_V1"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "scene_id": "scene_2",
+        "scene_plan_id": "plan_2",
+        "fps": 30,
+        "width_px": 1920,
+        "height_px": 1080,
+        "motif_registry": "MOTIF_REGISTRY_V1",
+        "motif_component": "RedactedDocReveal",
+        "prompt_mode": "FIRST_AND_LAST_FRAME",
+        "duration_ms": 8000,
+        "start_frame_sha256": "207bd0b3f259bec907781cf601ae0fe281400204cdb11495d4b753c208aa454a",
+        "end_frame_sha256": "a3a9c8cc96c67253768a415c6e37528e692647d28fe7c6ac3be11aeb8f839db0"
+      }
+    },
+    {
+      "id": "v044",
+      "model": "TimelineSpec",
+      "payload": {
+        "episode_id": "ep_1",
+        "scene_id": "scene_3",
+        "scene_plan_id": "plan_3",
+        "motif_component": "FoiaFootageFrame",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_ms": 3000,
+        "contract_version": "v4",
+        "fps": 30,
+        "width_px": 1920,
+        "height_px": 1080,
+        "motif_registry": "MOTIF_REGISTRY_V1"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "scene_id": "scene_3",
+        "scene_plan_id": "plan_3",
+        "fps": 30,
+        "width_px": 1920,
+        "height_px": 1080,
+        "motif_registry": "MOTIF_REGISTRY_V1",
+        "motif_component": "FoiaFootageFrame",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_ms": 3000,
+        "start_frame_sha256": null,
+        "end_frame_sha256": null
+      }
+    },
+    {
+      "id": "v045",
+      "model": "TimelineSpec",
+      "payload": {
+        "episode_id": "ep_1",
+        "scene_id": "scene_4",
+        "scene_plan_id": "plan_4",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "FIRST_AND_LAST_FRAME",
+        "duration_ms": 10000,
+        "start_frame_sha256": "96a350bd3168edc819134695b8583c9c79588bacbdc40fad1cdee102f5f47071",
+        "end_frame_sha256": "9423713d0ab9f5d5dd6b455d2cc30de6f3fd0d5aac88d6fc03c2229370aee919",
+        "contract_version": "v4",
+        "fps": 30,
+        "width_px": 1920,
+        "height_px": 1080,
+        "motif_registry": "MOTIF_REGISTRY_V1"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "scene_id": "scene_4",
+        "scene_plan_id": "plan_4",
+        "fps": 30,
+        "width_px": 1920,
+        "height_px": 1080,
+        "motif_registry": "MOTIF_REGISTRY_V1",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "FIRST_AND_LAST_FRAME",
+        "duration_ms": 10000,
+        "start_frame_sha256": "96a350bd3168edc819134695b8583c9c79588bacbdc40fad1cdee102f5f47071",
+        "end_frame_sha256": "9423713d0ab9f5d5dd6b455d2cc30de6f3fd0d5aac88d6fc03c2229370aee919"
+      }
+    },
+    {
+      "id": "v046",
+      "model": "FlowJobCard",
+      "payload": {
+        "flow_job_id": "job_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "idempotency_key": "idem_0_key",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_bucket_sec": 8,
+        "estimated_micro_usd": 0,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 0"
+        },
+        "updated_at": 1000,
+        "state": "PENDING"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "flow_job_id": "job_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "idempotency_key": "idem_0_key",
+        "assigned_account_id": null,
+        "provider_route": "GEMINI_OMNI_INTERACTIONS",
+        "engine_model": "gemini-omni-1.2-flash",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "resolution": "720p",
+        "duration_bucket_sec": 8,
+        "variations": 1,
+        "estimated_micro_usd": 0,
+        "estimated_credits": 0,
+        "start_frame_png": null,
+        "end_frame_png": null,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 0"
+        },
+        "provider_operation_id": null,
+        "attempts_used": 0,
+        "state": "PENDING",
+        "output_asset_path": null,
+        "updated_at": 1000
+      }
+    },
+    {
+      "id": "v047",
+      "model": "FlowJobCard",
+      "payload": {
+        "flow_job_id": "job_1",
+        "episode_id": "ep_1",
+        "scene_id": "scene_1",
+        "idempotency_key": "idem_1_key",
+        "prompt_mode": "FIRST_FRAME",
+        "duration_bucket_sec": 8,
+        "estimated_micro_usd": 0,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 1"
+        },
+        "updated_at": 1001,
+        "start_frame_png": "frames/start_1.png",
+        "contract_version": "v4",
+        "provider_route": "GEMINI_OMNI_INTERACTIONS",
+        "engine_model": "gemini-omni-1.2-flash",
+        "resolution": "720p",
+        "variations": 1,
+        "estimated_credits": 0,
+        "attempts_used": 0,
+        "state": "RUNNING"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "flow_job_id": "job_1",
+        "episode_id": "ep_1",
+        "scene_id": "scene_1",
+        "idempotency_key": "idem_1_key",
+        "assigned_account_id": null,
+        "provider_route": "GEMINI_OMNI_INTERACTIONS",
+        "engine_model": "gemini-omni-1.2-flash",
+        "prompt_mode": "FIRST_FRAME",
+        "resolution": "720p",
+        "duration_bucket_sec": 8,
+        "variations": 1,
+        "estimated_micro_usd": 0,
+        "estimated_credits": 0,
+        "start_frame_png": "frames/start_1.png",
+        "end_frame_png": null,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 1"
+        },
+        "provider_operation_id": null,
+        "attempts_used": 0,
+        "state": "RUNNING",
+        "output_asset_path": null,
+        "updated_at": 1001
+      }
+    },
+    {
+      "id": "v048",
+      "model": "FlowJobCard",
+      "payload": {
+        "flow_job_id": "job_2",
+        "episode_id": "ep_1",
+        "scene_id": "scene_2",
+        "idempotency_key": "idem_2_key",
+        "prompt_mode": "FIRST_AND_LAST_FRAME",
+        "duration_bucket_sec": 8,
+        "estimated_micro_usd": 0,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 2"
+        },
+        "updated_at": 1002,
+        "start_frame_png": "frames/start_2.png",
+        "end_frame_png": "frames/end_2.png",
+        "contract_version": "v4",
+        "provider_route": "GEMINI_OMNI_INTERACTIONS",
+        "engine_model": "gemini-omni-1.2-flash",
+        "resolution": "720p",
+        "variations": 1,
+        "estimated_credits": 0,
+        "attempts_used": 0,
+        "state": "ACCEPTED",
+        "output_asset_path": "renders/job_2.mp4",
+        "provider_operation_id": "op_2"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "flow_job_id": "job_2",
+        "episode_id": "ep_1",
+        "scene_id": "scene_2",
+        "idempotency_key": "idem_2_key",
+        "assigned_account_id": null,
+        "provider_route": "GEMINI_OMNI_INTERACTIONS",
+        "engine_model": "gemini-omni-1.2-flash",
+        "prompt_mode": "FIRST_AND_LAST_FRAME",
+        "resolution": "720p",
+        "duration_bucket_sec": 8,
+        "variations": 1,
+        "estimated_micro_usd": 0,
+        "estimated_credits": 0,
+        "start_frame_png": "frames/start_2.png",
+        "end_frame_png": "frames/end_2.png",
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 2"
+        },
+        "provider_operation_id": "op_2",
+        "attempts_used": 0,
+        "state": "ACCEPTED",
+        "output_asset_path": "renders/job_2.mp4",
+        "updated_at": 1002
+      }
+    },
+    {
+      "id": "v049",
+      "model": "FlowJobCard",
+      "payload": {
+        "flow_job_id": "job_3",
+        "episode_id": "ep_1",
+        "scene_id": "scene_3",
+        "idempotency_key": "idem_3_key",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_bucket_sec": 15,
+        "estimated_micro_usd": 0,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 3"
+        },
+        "updated_at": 1003,
+        "contract_version": "v4",
+        "provider_route": "VERTEX_VEO_ENTERPRISE",
+        "engine_model": "vertex-veo-enterprise",
+        "resolution": "720p",
+        "variations": 1,
+        "estimated_credits": 0,
+        "attempts_used": 0,
+        "state": "SUBMITTING"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "flow_job_id": "job_3",
+        "episode_id": "ep_1",
+        "scene_id": "scene_3",
+        "idempotency_key": "idem_3_key",
+        "assigned_account_id": null,
+        "provider_route": "VERTEX_VEO_ENTERPRISE",
+        "engine_model": "vertex-veo-enterprise",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "resolution": "720p",
+        "duration_bucket_sec": 15,
+        "variations": 1,
+        "estimated_micro_usd": 0,
+        "estimated_credits": 0,
+        "start_frame_png": null,
+        "end_frame_png": null,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 3"
+        },
+        "provider_operation_id": null,
+        "attempts_used": 0,
+        "state": "SUBMITTING",
+        "output_asset_path": null,
+        "updated_at": 1003
+      }
+    },
+    {
+      "id": "v050",
+      "model": "FlowJobCard",
+      "payload": {
+        "flow_job_id": "job_4",
+        "episode_id": "ep_1",
+        "scene_id": "scene_4",
+        "idempotency_key": "idem_4_key",
+        "prompt_mode": "FIRST_FRAME",
+        "duration_bucket_sec": 3,
+        "estimated_micro_usd": 0,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 4"
+        },
+        "updated_at": 1004,
+        "start_frame_png": "frames/start_4.png",
+        "contract_version": "v4",
+        "provider_route": "HUMAN_BATCH_DESK",
+        "engine_model": "manual-desk-video",
+        "resolution": "720p",
+        "variations": 1,
+        "estimated_credits": 0,
+        "attempts_used": 1,
+        "state": "STRIKE_1_RETRY_SAFE"
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "flow_job_id": "job_4",
+        "episode_id": "ep_1",
+        "scene_id": "scene_4",
+        "idempotency_key": "idem_4_key",
+        "assigned_account_id": null,
+        "provider_route": "HUMAN_BATCH_DESK",
+        "engine_model": "manual-desk-video",
+        "prompt_mode": "FIRST_FRAME",
+        "resolution": "720p",
+        "duration_bucket_sec": 3,
+        "variations": 1,
+        "estimated_micro_usd": 0,
+        "estimated_credits": 0,
+        "start_frame_png": "frames/start_4.png",
+        "end_frame_png": null,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 4"
+        },
+        "provider_operation_id": null,
+        "attempts_used": 1,
+        "state": "STRIKE_1_RETRY_SAFE",
+        "output_asset_path": null,
+        "updated_at": 1004
+      }
+    },
+    {
+      "id": "v051",
+      "model": "EpisodeAnalyticsSnapshot",
+      "payload": {
+        "snapshot_id": "snap_0",
+        "episode_id": "ep_0",
+        "days_since_publish": 1,
+        "captured_at": 2000
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "snapshot_id": "snap_0",
+        "episode_id": "ep_0",
+        "days_since_publish": 1,
+        "ctr_pct": null,
+        "retention_30s_pct": null,
+        "retention_min6_14_pct": null,
+        "avd_pct": null,
+        "watch_hours_total": 0.0,
+        "rpm_micro_usd": null,
+        "adsense_status": "UNKNOWN",
+        "adsense_source": "UNAVAILABLE",
+        "adsense_checked_at": null,
+        "metrics_source": "YT_ANALYTICS_API",
+        "captured_at": 2000
+      }
+    },
+    {
+      "id": "v052",
+      "model": "EpisodeAnalyticsSnapshot",
+      "payload": {
+        "contract_version": "v4",
+        "snapshot_id": "snap_1",
+        "episode_id": "ep_1",
+        "days_since_publish": 2,
+        "watch_hours_total": 1.0,
+        "adsense_status": "GREEN_FULL_ADS",
+        "adsense_source": "STUDIO_CSV_EXPORT",
+        "metrics_source": "STUDIO_CSV_EXPORT",
+        "captured_at": 3001,
+        "ctr_pct": 4.2,
+        "retention_30s_pct": 40.0,
+        "retention_min6_14_pct": 22.5,
+        "avd_pct": 35.0,
+        "rpm_micro_usd": 1000,
+        "adsense_checked_at": 4001
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "snapshot_id": "snap_1",
+        "episode_id": "ep_1",
+        "days_since_publish": 2,
+        "ctr_pct": 4.2,
+        "retention_30s_pct": 40.0,
+        "retention_min6_14_pct": 22.5,
+        "avd_pct": 35.0,
+        "watch_hours_total": 1.0,
+        "rpm_micro_usd": 1000,
+        "adsense_status": "GREEN_FULL_ADS",
+        "adsense_source": "STUDIO_CSV_EXPORT",
+        "adsense_checked_at": 4001,
+        "metrics_source": "STUDIO_CSV_EXPORT",
+        "captured_at": 3001
+      }
+    },
+    {
+      "id": "v053",
+      "model": "EpisodeAnalyticsSnapshot",
+      "payload": {
+        "contract_version": "v4",
+        "snapshot_id": "snap_2",
+        "episode_id": "ep_2",
+        "days_since_publish": 3,
+        "watch_hours_total": 2.0,
+        "adsense_status": "NOT_LINKED",
+        "adsense_source": "UNAVAILABLE",
+        "metrics_source": "YT_ANALYTICS_API",
+        "captured_at": 3002
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "snapshot_id": "snap_2",
+        "episode_id": "ep_2",
+        "days_since_publish": 3,
+        "ctr_pct": null,
+        "retention_30s_pct": null,
+        "retention_min6_14_pct": null,
+        "avd_pct": null,
+        "watch_hours_total": 2.0,
+        "rpm_micro_usd": null,
+        "adsense_status": "NOT_LINKED",
+        "adsense_source": "UNAVAILABLE",
+        "adsense_checked_at": null,
+        "metrics_source": "YT_ANALYTICS_API",
+        "captured_at": 3002
+      }
+    },
+    {
+      "id": "v054",
+      "model": "EpisodeAnalyticsSnapshot",
+      "payload": {
+        "contract_version": "v4",
+        "snapshot_id": "snap_3",
+        "episode_id": "ep_3",
+        "days_since_publish": 4,
+        "watch_hours_total": 3.0,
+        "adsense_status": "YELLOW_LIMITED",
+        "adsense_source": "MANUAL_CREATOR_ENTRY",
+        "metrics_source": "COMBINED",
+        "captured_at": 3003,
+        "ctr_pct": 1.0,
+        "retention_30s_pct": 40.0,
+        "retention_min6_14_pct": 22.5,
+        "avd_pct": 35.0,
+        "rpm_micro_usd": 1000,
+        "adsense_checked_at": 4003
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "snapshot_id": "snap_3",
+        "episode_id": "ep_3",
+        "days_since_publish": 4,
+        "ctr_pct": 1.0,
+        "retention_30s_pct": 40.0,
+        "retention_min6_14_pct": 22.5,
+        "avd_pct": 35.0,
+        "watch_hours_total": 3.0,
+        "rpm_micro_usd": 1000,
+        "adsense_status": "YELLOW_LIMITED",
+        "adsense_source": "MANUAL_CREATOR_ENTRY",
+        "adsense_checked_at": 4003,
+        "metrics_source": "COMBINED",
+        "captured_at": 3003
+      }
+    },
+    {
+      "id": "v055",
+      "model": "EpisodeAnalyticsSnapshot",
+      "payload": {
+        "contract_version": "v4",
+        "snapshot_id": "snap_4",
+        "episode_id": "ep_4",
+        "days_since_publish": 5,
+        "watch_hours_total": 4.0,
+        "adsense_status": "NONE",
+        "adsense_source": "STUDIO_CSV_EXPORT",
+        "metrics_source": "STUDIO_CSV_EXPORT",
+        "captured_at": 3004,
+        "ctr_pct": 0.0,
+        "retention_30s_pct": 40.0,
+        "retention_min6_14_pct": 22.5,
+        "avd_pct": 35.0,
+        "rpm_micro_usd": 1000,
+        "adsense_checked_at": 4004
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "snapshot_id": "snap_4",
+        "episode_id": "ep_4",
+        "days_since_publish": 5,
+        "ctr_pct": 0.0,
+        "retention_30s_pct": 40.0,
+        "retention_min6_14_pct": 22.5,
+        "avd_pct": 35.0,
+        "watch_hours_total": 4.0,
+        "rpm_micro_usd": 1000,
+        "adsense_status": "NONE",
+        "adsense_source": "STUDIO_CSV_EXPORT",
+        "adsense_checked_at": 4004,
+        "metrics_source": "STUDIO_CSV_EXPORT",
+        "captured_at": 3004
+      }
+    },
+    {
+      "id": "v056",
+      "model": "ReadyToUploadPack",
+      "payload": {
+        "contract_version": "v4",
+        "episode_id": "ep_0",
+        "episode_slug": "ep_slug_0",
+        "ready_pack_dir": "ready_to_upload/ep_slug_0",
+        "ready_bundle_sha256": "d02f46ec7e3ac9d50a7397c53b9618b846293649600fce054a529d1db13359ea",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "46932ec87e856c2b5af59bbedb8f8a6551b73dd75921a8a9076406d41c8827d9",
+        "integrated_lufs": -14.0,
+        "true_peak_dbtp": -1.2,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_0.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": true,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_0",
+        "episode_slug": "ep_slug_0",
+        "ready_pack_dir": "ready_to_upload/ep_slug_0",
+        "ready_bundle_sha256": "d02f46ec7e3ac9d50a7397c53b9618b846293649600fce054a529d1db13359ea",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "46932ec87e856c2b5af59bbedb8f8a6551b73dd75921a8a9076406d41c8827d9",
+        "integrated_lufs": -14.0,
+        "true_peak_dbtp": -1.2,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_0.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": true,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      }
+    },
+    {
+      "id": "v057",
+      "model": "ReadyToUploadPack",
+      "payload": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "episode_slug": "ep_slug_1",
+        "ready_pack_dir": "ready_to_upload/ep_slug_1",
+        "ready_bundle_sha256": "93db9dc111b649382b9b8914e26d78c6af16c78e0d0a588bd9198b7533e307a7",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "9c1c68241878167b9d513c462ca0c29e82e5dbd81653a1b2c0acc582483e2491",
+        "integrated_lufs": -14.2,
+        "true_peak_dbtp": -1.5,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_1.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": false,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_1",
+        "episode_slug": "ep_slug_1",
+        "ready_pack_dir": "ready_to_upload/ep_slug_1",
+        "ready_bundle_sha256": "93db9dc111b649382b9b8914e26d78c6af16c78e0d0a588bd9198b7533e307a7",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "9c1c68241878167b9d513c462ca0c29e82e5dbd81653a1b2c0acc582483e2491",
+        "integrated_lufs": -14.2,
+        "true_peak_dbtp": -1.5,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_1.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": false,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      }
+    },
+    {
+      "id": "v058",
+      "model": "ReadyToUploadPack",
+      "payload": {
+        "contract_version": "v4",
+        "episode_id": "ep_2",
+        "episode_slug": "ep_slug_2",
+        "ready_pack_dir": "ready_to_upload/ep_slug_2",
+        "ready_bundle_sha256": "b7a08c97408a35b4bcf1e91b33c9e4df52ffc42cf19ffa3b54e1f174814ce341",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "8ca407eeb339945886c7b3d65ff748f32f7295b79f09c08b03ab27c809653786",
+        "integrated_lufs": -14.0,
+        "true_peak_dbtp": -1.2,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_2.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": true,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_2",
+        "episode_slug": "ep_slug_2",
+        "ready_pack_dir": "ready_to_upload/ep_slug_2",
+        "ready_bundle_sha256": "b7a08c97408a35b4bcf1e91b33c9e4df52ffc42cf19ffa3b54e1f174814ce341",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "8ca407eeb339945886c7b3d65ff748f32f7295b79f09c08b03ab27c809653786",
+        "integrated_lufs": -14.0,
+        "true_peak_dbtp": -1.2,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_2.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": true,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      }
+    },
+    {
+      "id": "v059",
+      "model": "ReadyToUploadPack",
+      "payload": {
+        "contract_version": "v4",
+        "episode_id": "ep_3",
+        "episode_slug": "ep_slug_3",
+        "ready_pack_dir": "ready_to_upload/ep_slug_3",
+        "ready_bundle_sha256": "64874be3f9db619976be668f702bb73923882fd2077798d07d0f0100fc7e02ef",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "cfee62f74e683289c6992e1f8a0c3c90d13c91fcf09bca66728f7bb7720d976f",
+        "integrated_lufs": -14.2,
+        "true_peak_dbtp": -1.5,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PENDING_MANUAL_SPOT_CHECK",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_3.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": false,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_3",
+        "episode_slug": "ep_slug_3",
+        "ready_pack_dir": "ready_to_upload/ep_slug_3",
+        "ready_bundle_sha256": "64874be3f9db619976be668f702bb73923882fd2077798d07d0f0100fc7e02ef",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "cfee62f74e683289c6992e1f8a0c3c90d13c91fcf09bca66728f7bb7720d976f",
+        "integrated_lufs": -14.2,
+        "true_peak_dbtp": -1.5,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PENDING_MANUAL_SPOT_CHECK",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_3.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": false,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      }
+    },
+    {
+      "id": "v060",
+      "model": "ReadyToUploadPack",
+      "payload": {
+        "contract_version": "v4",
+        "episode_id": "ep_4",
+        "episode_slug": "ep_slug_4",
+        "ready_pack_dir": "ready_to_upload/ep_slug_4",
+        "ready_bundle_sha256": "9da8aa90270fe759e59f40790a6a82ebb0776d4f397bb5a3db640a6fc1dd5863",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "36e41498ff33100706ebe0284aee0d3205d6537f0a596202173ad5d70ab56cc2",
+        "integrated_lufs": -14.0,
+        "true_peak_dbtp": -1.2,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_4.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": true,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [
+          "spot-check the title card"
+        ],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      },
+      "canonical": {
+        "contract_version": "v4",
+        "episode_id": "ep_4",
+        "episode_slug": "ep_slug_4",
+        "ready_pack_dir": "ready_to_upload/ep_slug_4",
+        "ready_bundle_sha256": "9da8aa90270fe759e59f40790a6a82ebb0776d4f397bb5a3db640a6fc1dd5863",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "36e41498ff33100706ebe0284aee0d3205d6537f0a596202173ad5d70ab56cc2",
+        "integrated_lufs": -14.0,
+        "true_peak_dbtp": -1.2,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_4.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": true,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [
+          "spot-check the title card"
+        ],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      }
+    }
+  ],
+  "adversarial": [
+    {
+      "id": "a001",
+      "model": "SeedPacket",
+      "reason": "extra_field",
+      "payload": {
+        "track": "TRACK_A_OUTLIER",
+        "suspect_names": [
+          "Alex Rivera 0"
+        ],
+        "victim_names": [],
+        "incident_date_or_year": "1998",
+        "county_state": "King County, WA",
+        "docket_ids": [],
+        "unanswered_comment_questions": [],
+        "narrative_outline": "three act structure"
+      }
+    },
+    {
+      "id": "a002",
+      "model": "SeedPacket",
+      "reason": "field_too_long",
+      "payload": {
+        "track": "TRACK_A_OUTLIER",
+        "suspect_names": [
+          "Alex Rivera 0"
+        ],
+        "victim_names": [],
+        "incident_date_or_year": "1998",
+        "county_state": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "docket_ids": [],
+        "unanswered_comment_questions": []
+      }
+    },
+    {
+      "id": "a003",
+      "model": "SeedPacket",
+      "reason": "multi_sentence_question",
+      "payload": {
+        "track": "TRACK_A_OUTLIER",
+        "suspect_names": [
+          "Alex Rivera 0"
+        ],
+        "victim_names": [],
+        "incident_date_or_year": "1998",
+        "county_state": "King County, WA",
+        "docket_ids": [],
+        "unanswered_comment_questions": [
+          "What happened. Then they left town."
+        ]
+      }
+    },
+    {
+      "id": "a004",
+      "model": "SeedPacket",
+      "reason": "missing_lookup_key",
+      "payload": {
+        "track": "TRACK_A_OUTLIER",
+        "suspect_names": [],
+        "victim_names": [],
+        "incident_date_or_year": "1998",
+        "county_state": "King County, WA",
+        "docket_ids": [],
+        "unanswered_comment_questions": []
+      }
+    },
+    {
+      "id": "a005",
+      "model": "SeedPacket",
+      "reason": "deprecated_identifier",
+      "payload": {
+        "track": "TRACK_A_OUTLIER",
+        "suspect_names": [
+          "VEO_3_1_LITE"
+        ],
+        "victim_names": [],
+        "incident_date_or_year": "1998",
+        "county_state": "King County, WA",
+        "docket_ids": [],
+        "unanswered_comment_questions": []
+      }
+    },
+    {
+      "id": "a006",
+      "model": "TemporalFactLedger",
+      "reason": "news_without_hedging",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_0",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 0",
+            "location_text": "entryway",
+            "source_type": "news_report",
+            "source_doc_id": "doc_0",
+            "citation_locator": "p.1",
+            "hedging_required": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "a007",
+      "model": "TemporalFactLedger",
+      "reason": "bad_source_type",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_0",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 0",
+            "location_text": "entryway",
+            "source_type": "blog",
+            "source_doc_id": "doc_0",
+            "citation_locator": "p.1",
+            "hedging_required": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "a008",
+      "model": "TemporalFactLedger",
+      "reason": "case_mismatch",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_0",
+            "case_id": "case_other",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 0",
+            "location_text": "entryway",
+            "source_type": "court_ruling",
+            "source_doc_id": "doc_0",
+            "citation_locator": "p.1",
+            "hedging_required": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "a009",
+      "model": "TemporalFactLedger",
+      "reason": "extra_field",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": [
+          {
+            "fact_id": "fact_0",
+            "case_id": "case_1",
+            "datetime_iso": "2014-06-02T15:04:00Z",
+            "event_summary": "Affidavit notes event 0",
+            "location_text": "entryway",
+            "source_type": "court_ruling",
+            "source_doc_id": "doc_0",
+            "citation_locator": "p.1",
+            "hedging_required": false
+          }
+        ],
+        "creator_commentary": "sensational"
+      }
+    },
+    {
+      "id": "a010",
+      "model": "TemporalFactLedger",
+      "reason": "empty_facts",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_1",
+        "facts": []
+      }
+    },
+    {
+      "id": "a011",
+      "model": "ComplianceClearedCase",
+      "reason": "disposition",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_0",
+        "defendant_name": "Defendant 0",
+        "incident_year": 2000,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "REVERSED",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000000,
+        "anonymization_artifact_sha256": "776e3a23c912ab77148f140d7d3afba72a86d3c5bb4945cf78fdc5cce602204d",
+        "audit_id": "audit_0",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": true,
+        "audited_at": 1700000100
+      }
+    },
+    {
+      "id": "a012",
+      "model": "ComplianceClearedCase",
+      "reason": "anonymization",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_0",
+        "defendant_name": "Defendant 0",
+        "incident_year": 2000,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "AFFIRMED",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "NOT_STARTED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000000,
+        "anonymization_artifact_sha256": "776e3a23c912ab77148f140d7d3afba72a86d3c5bb4945cf78fdc5cce602204d",
+        "audit_id": "audit_0",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": true,
+        "audited_at": 1700000100
+      }
+    },
+    {
+      "id": "a013",
+      "model": "ComplianceClearedCase",
+      "reason": "audit_flag",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_0",
+        "defendant_name": "Defendant 0",
+        "incident_year": 2000,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "AFFIRMED",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000000,
+        "anonymization_artifact_sha256": "776e3a23c912ab77148f140d7d3afba72a86d3c5bb4945cf78fdc5cce602204d",
+        "audit_id": "audit_0",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": false,
+        "altered_content_disclosure": true,
+        "audited_at": 1700000100
+      }
+    },
+    {
+      "id": "a014",
+      "model": "ComplianceClearedCase",
+      "reason": "missing_hash",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_0",
+        "defendant_name": "Defendant 0",
+        "incident_year": 2000,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "AFFIRMED",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000000,
+        "audit_id": "audit_0",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": true,
+        "audited_at": 1700000100
+      }
+    },
+    {
+      "id": "a015",
+      "model": "ComplianceClearedCase",
+      "reason": "extra_field",
+      "payload": {
+        "contract_version": "v4",
+        "case_id": "case_0",
+        "defendant_name": "Defendant 0",
+        "incident_year": 2000,
+        "jurisdiction": "Washington",
+        "verification_source": "CourtListener",
+        "disposition_status": "AFFIRMED",
+        "conviction_confirmed": true,
+        "primary_record_verified": true,
+        "anonymization_status": "APPROVED",
+        "anonymized_by": "editor_1",
+        "anonymized_at": 1700000000,
+        "anonymization_artifact_sha256": "776e3a23c912ab77148f140d7d3afba72a86d3c5bb4945cf78fdc5cce602204d",
+        "audit_id": "audit_0",
+        "provenance_whitelist_ok": true,
+        "that_vs_how_passed": true,
+        "anti_legal_persona_passed": true,
+        "first_30s_adsense_safe": true,
+        "spoken_pii_audit_passed": true,
+        "altered_content_disclosure": true,
+        "audited_at": 1700000100,
+        "legal_advice": "file a motion"
+      }
+    },
+    {
+      "id": "a016",
+      "model": "ScenePlan",
+      "reason": "extra_field",
+      "payload": {
+        "scene_plan_id": "plan_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "seq_index": 1,
+        "story_purpose": "Show the record for beat 0",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 0 occurred.",
+        "narration_version_sha256": "8142a46f12cead02a22872fdbb38d78b16228046ef248ee2f0873c5dd80e0d45",
+        "cited_fact_ids_json": [
+          "fact_0"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "CODE_STICKMAN",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 8000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_0",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "created_at": 100,
+        "updated_at": 100,
+        "plan_status": "DRAFT",
+        "story_outline": "cold open"
+      }
+    },
+    {
+      "id": "a017",
+      "model": "ScenePlan",
+      "reason": "deprecated_prompt_mode",
+      "payload": {
+        "scene_plan_id": "plan_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "seq_index": 1,
+        "story_purpose": "Show the record for beat 0",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 0 occurred.",
+        "narration_version_sha256": "8142a46f12cead02a22872fdbb38d78b16228046ef248ee2f0873c5dd80e0d45",
+        "cited_fact_ids_json": [
+          "fact_0"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "CODE_STICKMAN",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "FRAMES_MOTION_ONLY",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 8000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_0",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "created_at": 100,
+        "updated_at": 100,
+        "plan_status": "DRAFT"
+      }
+    },
+    {
+      "id": "a018",
+      "model": "ScenePlan",
+      "reason": "deprecated_motif",
+      "payload": {
+        "scene_plan_id": "plan_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "seq_index": 1,
+        "story_purpose": "Show the record for beat 0",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 0 occurred.",
+        "narration_version_sha256": "8142a46f12cead02a22872fdbb38d78b16228046ef248ee2f0873c5dd80e0d45",
+        "cited_fact_ids_json": [
+          "fact_0"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "CODE_STICKMAN",
+        "motif_component": "CrimeScenePanZoom",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 8000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_0",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "created_at": 100,
+        "updated_at": 100,
+        "plan_status": "DRAFT"
+      }
+    },
+    {
+      "id": "a019",
+      "model": "ScenePlan",
+      "reason": "empty_citations",
+      "payload": {
+        "scene_plan_id": "plan_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "seq_index": 1,
+        "story_purpose": "Show the record for beat 0",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 0 occurred.",
+        "narration_version_sha256": "8142a46f12cead02a22872fdbb38d78b16228046ef248ee2f0873c5dd80e0d45",
+        "cited_fact_ids_json": [],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "CODE_STICKMAN",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 8000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_0",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "created_at": 100,
+        "updated_at": 100,
+        "plan_status": "DRAFT"
+      }
+    },
+    {
+      "id": "a020",
+      "model": "ScenePlan",
+      "reason": "approval_without_reviewer",
+      "payload": {
+        "scene_plan_id": "plan_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "seq_index": 1,
+        "story_purpose": "Show the record for beat 0",
+        "intended_audience_effect": "Orient the viewer to the cited record",
+        "approved_narration_text": "According to the affidavit, beat 0 occurred.",
+        "narration_version_sha256": "8142a46f12cead02a22872fdbb38d78b16228046ef248ee2f0873c5dd80e0d45",
+        "cited_fact_ids_json": [
+          "fact_0"
+        ],
+        "visual_concept": "Charcoal documentary plate",
+        "visual_engine": "CODE_STICKMAN",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "NONE",
+        "visual_prompt": "Monochrome charcoal, no graphic injury",
+        "expected_output_summary": "A cited visual that matches the narration",
+        "timing_start_ms": 0,
+        "timing_end_ms": 8000,
+        "transition_spec_json": {
+          "transition_type": "CUT",
+          "duration_ms": 0
+        },
+        "edit_instructions": "Hold the cited clue in the safe zone",
+        "acceptance_criteria_json": [
+          {
+            "criterion_id": "crit_0",
+            "kind": "SEMANTIC",
+            "text": "Does visual match approved narration and cited evidence without misleading the viewer?"
+          }
+        ],
+        "created_at": 100,
+        "updated_at": 100,
+        "plan_status": "PLAN_APPROVED",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "a021",
+      "model": "VoiceTrackManifest",
+      "reason": "extra_field",
+      "payload": {
+        "episode_id": "ep_1",
+        "total_master_ms": 6500,
+        "segments": [
+          {
+            "segment_id": "seg_0_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 4000,
+            "audio_path": "audio/narr_0_1.wav",
+            "narration_version_sha256": "5cbc872475c3742ab3e3b9cd562a18fbc57506f188644b1a389ba1f4d72e02ec"
+          },
+          {
+            "segment_id": "seg_0_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 4000,
+            "end_ms": 4500
+          },
+          {
+            "segment_id": "seg_0_3",
+            "episode_id": "ep_1",
+            "seq_index": 3,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 4500,
+            "end_ms": 6500,
+            "foia_asset_id": "foia_0"
+          }
+        ],
+        "word_timestamps": [
+          {
+            "segment_id": "seg_0_1",
+            "word": "According",
+            "start_ms": 0,
+            "end_ms": 400
+          }
+        ],
+        "cue_points": [
+          {
+            "cue_id": "cue_0",
+            "at_ms": 10,
+            "label": "bed"
+          }
+        ],
+        "amplitude_envelope": [
+          0.0,
+          0.5,
+          1.0
+        ],
+        "beat_outline": "act two"
+      }
+    },
+    {
+      "id": "a022",
+      "model": "VoiceTrackManifest",
+      "reason": "overlap",
+      "payload": {
+        "episode_id": "ep_1",
+        "total_master_ms": 8000,
+        "segments": [
+          {
+            "segment_id": "seg_9_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 5000,
+            "audio_path": "audio/narr_9_1.wav",
+            "narration_version_sha256": "555a95fc735b03c27ef3aff3f8286c667c0581684952ea73a5504c46c3508b4e"
+          },
+          {
+            "segment_id": "seg_9_2",
+            "episode_id": "ep_1",
+            "seq_index": 2,
+            "segment_kind": "NARRATION",
+            "start_ms": 4000,
+            "end_ms": 8000,
+            "audio_path": "audio/narr_9_2.wav",
+            "narration_version_sha256": "618177698dbc66fe9203816a22390bc1ee841cc1b17aa4d14f187a525142cd58"
+          }
+        ],
+        "word_timestamps": [],
+        "cue_points": [
+          {
+            "cue_id": "cue_0",
+            "at_ms": 10,
+            "label": "bed"
+          }
+        ],
+        "amplitude_envelope": [
+          0.0,
+          0.5,
+          1.0
+        ]
+      }
+    },
+    {
+      "id": "a023",
+      "model": "VoiceTrackManifest",
+      "reason": "twist_too_short",
+      "payload": {
+        "episode_id": "ep_1",
+        "total_master_ms": 200,
+        "segments": [
+          {
+            "segment_id": "seg_8_1",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "TWIST_PAD",
+            "start_ms": 0,
+            "end_ms": 200
+          }
+        ]
+      }
+    },
+    {
+      "id": "a024",
+      "model": "VoiceTrackManifest",
+      "reason": "narration_without_audio",
+      "payload": {
+        "episode_id": "ep_1",
+        "total_master_ms": 1000,
+        "segments": [
+          {
+            "segment_id": "seg_narr",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "NARRATION",
+            "start_ms": 0,
+            "end_ms": 1000,
+            "narration_version_sha256": "ed9be6ad7f84c52f5fad94aaaa94d6051d5994e7f742575372db92b4ee048171"
+          }
+        ]
+      }
+    },
+    {
+      "id": "a025",
+      "model": "VoiceTrackManifest",
+      "reason": "foia_without_asset",
+      "payload": {
+        "episode_id": "ep_1",
+        "total_master_ms": 1000,
+        "segments": [
+          {
+            "segment_id": "seg_foia",
+            "episode_id": "ep_1",
+            "seq_index": 1,
+            "segment_kind": "FOIA_AUDIO_SLOT",
+            "start_ms": 0,
+            "end_ms": 1000
+          }
+        ]
+      }
+    },
+    {
+      "id": "a026",
+      "model": "SpatialAnchor",
+      "reason": "extra_field",
+      "payload": {
+        "anchor_id": "anchor_0",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "grid_cell": "A1",
+        "x_px": 128,
+        "y_px": 72,
+        "sub_quadrant": "NE"
+      }
+    },
+    {
+      "id": "a027",
+      "model": "SpatialAnchor",
+      "reason": "grid_cell",
+      "payload": {
+        "anchor_id": "anchor_0",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "grid_cell": "K1",
+        "x_px": 128,
+        "y_px": 72
+      }
+    },
+    {
+      "id": "a028",
+      "model": "SpatialAnchor",
+      "reason": "lock_without_proof",
+      "payload": {
+        "anchor_id": "anchor_0",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "grid_cell": "A1",
+        "x_px": 128,
+        "y_px": 72,
+        "lock_status": "LOCKED"
+      }
+    },
+    {
+      "id": "a029",
+      "model": "SpatialAnchor",
+      "reason": "zoom_out_of_range",
+      "payload": {
+        "anchor_id": "anchor_0",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "grid_cell": "A1",
+        "x_px": 128,
+        "y_px": 72,
+        "target_zoom": 3.9
+      }
+    },
+    {
+      "id": "a030",
+      "model": "SpatialAnchor",
+      "reason": "span_not_positive",
+      "payload": {
+        "anchor_id": "anchor_0",
+        "episode_id": "ep_1",
+        "still_2k_id": "still_0",
+        "clue_name": "overturned table",
+        "grid_cell": "A1",
+        "x_px": 128,
+        "y_px": 72,
+        "span_cols": 0
+      }
+    },
+    {
+      "id": "a031",
+      "model": "CaseBible",
+      "reason": "crimson_in_flow_palette",
+      "payload": {
+        "episode_id": "ep_0",
+        "style_dna_json": {
+          "flow_keyframe_safe_palette": [
+            "#C92A2A"
+          ]
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 500
+      }
+    },
+    {
+      "id": "a032",
+      "model": "CaseBible",
+      "reason": "no_characters",
+      "payload": {
+        "episode_id": "ep_0",
+        "style_dna_json": {
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ]
+        },
+        "characters_json": [],
+        "locked_at": 500
+      }
+    },
+    {
+      "id": "a033",
+      "model": "CaseBible",
+      "reason": "extra_field",
+      "payload": {
+        "episode_id": "ep_0",
+        "style_dna_json": {
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ]
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 500,
+        "script": "do not store the script here"
+      }
+    },
+    {
+      "id": "a034",
+      "model": "CaseBible",
+      "reason": "contract_version",
+      "payload": {
+        "episode_id": "ep_0",
+        "style_dna_json": {
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ]
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "#3A4F66"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 500,
+        "contract_version": "v3"
+      }
+    },
+    {
+      "id": "a035",
+      "model": "CaseBible",
+      "reason": "bad_hex",
+      "payload": {
+        "episode_id": "ep_0",
+        "style_dna_json": {
+          "flow_keyframe_safe_palette": [
+            "#1B1B1D",
+            "#E9E2D2",
+            "#3A4F66",
+            "#C4A574"
+          ]
+        },
+        "characters_json": [
+          {
+            "character_id": "detective_01",
+            "prop": "notepad",
+            "color_hex": "crimson"
+          },
+          {
+            "character_id": "suspect_01",
+            "prop": "coat",
+            "color_hex": "#C4A574"
+          }
+        ],
+        "locked_at": 500
+      }
+    },
+    {
+      "id": "a036",
+      "model": "ProductionManifest",
+      "reason": "hero_clip_cap",
+      "payload": {
+        "manifest_id": "manifest_0",
+        "episode_id": "ep_0",
+        "case_id": "case_0",
+        "cold_open_archetype": "911_CALL_IN_MEDIA_RES",
+        "flow_backend_mode": "GEMINI_OMNI_INTERACTIONS",
+        "target_duration_ms": 1200000,
+        "code_foia_ms": 780000,
+        "still_2k_ms": 340000,
+        "hero_ms": 80000,
+        "hero_clip_count": 11,
+        "hero_duration_sec": 80,
+        "scene_plan_ids": [
+          "plan_0"
+        ],
+        "voice_total_master_ms": 1200000
+      }
+    },
+    {
+      "id": "a037",
+      "model": "ProductionManifest",
+      "reason": "split_mismatch",
+      "payload": {
+        "manifest_id": "manifest_0",
+        "episode_id": "ep_0",
+        "case_id": "case_0",
+        "cold_open_archetype": "911_CALL_IN_MEDIA_RES",
+        "flow_backend_mode": "GEMINI_OMNI_INTERACTIONS",
+        "target_duration_ms": 10,
+        "code_foia_ms": 780000,
+        "still_2k_ms": 340000,
+        "hero_ms": 80000,
+        "hero_clip_count": 10,
+        "hero_duration_sec": 80,
+        "scene_plan_ids": [
+          "plan_0"
+        ],
+        "voice_total_master_ms": 1200000
+      }
+    },
+    {
+      "id": "a038",
+      "model": "ProductionManifest",
+      "reason": "fps",
+      "payload": {
+        "manifest_id": "manifest_0",
+        "episode_id": "ep_0",
+        "case_id": "case_0",
+        "cold_open_archetype": "911_CALL_IN_MEDIA_RES",
+        "flow_backend_mode": "GEMINI_OMNI_INTERACTIONS",
+        "target_duration_ms": 1200000,
+        "code_foia_ms": 780000,
+        "still_2k_ms": 340000,
+        "hero_ms": 80000,
+        "hero_clip_count": 10,
+        "hero_duration_sec": 80,
+        "scene_plan_ids": [
+          "plan_0"
+        ],
+        "voice_total_master_ms": 1200000,
+        "fps": 24
+      }
+    },
+    {
+      "id": "a039",
+      "model": "ProductionManifest",
+      "reason": "voice_drift",
+      "payload": {
+        "manifest_id": "manifest_0",
+        "episode_id": "ep_0",
+        "case_id": "case_0",
+        "cold_open_archetype": "911_CALL_IN_MEDIA_RES",
+        "flow_backend_mode": "GEMINI_OMNI_INTERACTIONS",
+        "target_duration_ms": 1200000,
+        "code_foia_ms": 780000,
+        "still_2k_ms": 340000,
+        "hero_ms": 80000,
+        "hero_clip_count": 10,
+        "hero_duration_sec": 80,
+        "scene_plan_ids": [
+          "plan_0"
+        ],
+        "voice_total_master_ms": 1201000
+      }
+    },
+    {
+      "id": "a040",
+      "model": "ProductionManifest",
+      "reason": "deprecated_identifier",
+      "payload": {
+        "manifest_id": "manifest_0",
+        "episode_id": "ep_0",
+        "case_id": "case_0",
+        "cold_open_archetype": "911_CALL_IN_MEDIA_RES",
+        "flow_backend_mode": "GEMINI_OMNI_INTERACTIONS",
+        "target_duration_ms": 1200000,
+        "code_foia_ms": 780000,
+        "still_2k_ms": 340000,
+        "hero_ms": 80000,
+        "hero_clip_count": 10,
+        "hero_duration_sec": 80,
+        "scene_plan_ids": [
+          "VEO_3_1_LITE"
+        ],
+        "voice_total_master_ms": 1200000
+      }
+    },
+    {
+      "id": "a041",
+      "model": "TimelineSpec",
+      "reason": "prompt_mode_none",
+      "payload": {
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "scene_plan_id": "plan_0",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "NONE",
+        "duration_ms": 8000
+      }
+    },
+    {
+      "id": "a042",
+      "model": "TimelineSpec",
+      "reason": "deprecated_prompt_mode",
+      "payload": {
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "scene_plan_id": "plan_0",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "FRAMES_MOTION_ONLY",
+        "duration_ms": 8000
+      }
+    },
+    {
+      "id": "a043",
+      "model": "TimelineSpec",
+      "reason": "not_an_mvp_motif",
+      "payload": {
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "scene_plan_id": "plan_0",
+        "motif_component": "Illustrative2KPanZoom",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_ms": 8000
+      }
+    },
+    {
+      "id": "a044",
+      "model": "TimelineSpec",
+      "reason": "deprecated_motif",
+      "payload": {
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "scene_plan_id": "plan_0",
+        "motif_component": "CrimeScenePanZoom",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_ms": 8000
+      }
+    },
+    {
+      "id": "a045",
+      "model": "TimelineSpec",
+      "reason": "first_and_last_over_10s",
+      "payload": {
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "scene_plan_id": "plan_0",
+        "motif_component": "StickmanStage",
+        "prompt_mode": "FIRST_AND_LAST_FRAME",
+        "duration_ms": 11000,
+        "start_frame_sha256": "b6727c2edf12e374b5a2e621280c38763abfdaf918ba4d8f68dc3dc5d232fb7b",
+        "end_frame_sha256": "d15eb8f8fbbacf0774c11554710fc797e48144faf8991cdee879164ea077c7bd"
+      }
+    },
+    {
+      "id": "a046",
+      "model": "FlowJobCard",
+      "reason": "extra_field",
+      "payload": {
+        "flow_job_id": "job_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "idempotency_key": "idem_0_key",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_bucket_sec": 8,
+        "estimated_micro_usd": 0,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 0"
+        },
+        "updated_at": 1000,
+        "state": "PENDING",
+        "usd_per_second": 0.1
+      }
+    },
+    {
+      "id": "a047",
+      "model": "FlowJobCard",
+      "reason": "deprecated_model",
+      "payload": {
+        "flow_job_id": "job_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "idempotency_key": "idem_0_key",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_bucket_sec": 8,
+        "estimated_micro_usd": 0,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 0"
+        },
+        "updated_at": 1000,
+        "state": "PENDING",
+        "engine_model": "VEO_3_1_LITE"
+      }
+    },
+    {
+      "id": "a048",
+      "model": "FlowJobCard",
+      "reason": "text_to_video_with_frame",
+      "payload": {
+        "flow_job_id": "job_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "idempotency_key": "idem_0_key",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_bucket_sec": 8,
+        "estimated_micro_usd": 0,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 0"
+        },
+        "updated_at": 1000,
+        "state": "PENDING",
+        "start_frame_png": "frames/start.png",
+        "end_frame_png": null
+      }
+    },
+    {
+      "id": "a049",
+      "model": "FlowJobCard",
+      "reason": "first_and_last_over_10s",
+      "payload": {
+        "flow_job_id": "job_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "idempotency_key": "idem_0_key",
+        "prompt_mode": "FIRST_AND_LAST_FRAME",
+        "duration_bucket_sec": 12,
+        "estimated_micro_usd": 0,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 0"
+        },
+        "updated_at": 1000,
+        "state": "PENDING",
+        "start_frame_png": "frames/start.png",
+        "end_frame_png": "frames/end.png"
+      }
+    },
+    {
+      "id": "a050",
+      "model": "FlowJobCard",
+      "reason": "variations",
+      "payload": {
+        "flow_job_id": "job_0",
+        "episode_id": "ep_1",
+        "scene_id": "scene_0",
+        "idempotency_key": "idem_0_key",
+        "prompt_mode": "TEXT_TO_VIDEO",
+        "duration_bucket_sec": 8,
+        "estimated_micro_usd": 0,
+        "prompt_v1": "Monochrome tracking shot, no graphic injury",
+        "prompt_v2_safe": "Monochrome camera move across an empty room",
+        "fallback_spec_json": {
+          "visual_engine": "CODE_STICKMAN",
+          "motif_component": "StickmanStage",
+          "reason": "Neighbor-safe local fallback 0"
+        },
+        "updated_at": 1000,
+        "state": "PENDING",
+        "variations": 2
+      }
+    },
+    {
+      "id": "a051",
+      "model": "EpisodeAnalyticsSnapshot",
+      "reason": "extra_field",
+      "payload": {
+        "snapshot_id": "snap_0",
+        "episode_id": "ep_0",
+        "days_since_publish": 1,
+        "captured_at": 2000,
+        "monetizationDetails": {
+          "status": "on"
+        }
+      }
+    },
+    {
+      "id": "a052",
+      "model": "EpisodeAnalyticsSnapshot",
+      "reason": "fabricated_adsense",
+      "payload": {
+        "snapshot_id": "snap_0",
+        "episode_id": "ep_0",
+        "days_since_publish": 1,
+        "captured_at": 2000,
+        "adsense_status": "MONETIZED"
+      }
+    },
+    {
+      "id": "a053",
+      "model": "EpisodeAnalyticsSnapshot",
+      "reason": "day_zero",
+      "payload": {
+        "snapshot_id": "snap_0",
+        "episode_id": "ep_0",
+        "days_since_publish": 0,
+        "captured_at": 2000
+      }
+    },
+    {
+      "id": "a054",
+      "model": "EpisodeAnalyticsSnapshot",
+      "reason": "status_without_source",
+      "payload": {
+        "snapshot_id": "snap_0",
+        "episode_id": "ep_0",
+        "days_since_publish": 1,
+        "captured_at": 2000,
+        "adsense_status": "GREEN_FULL_ADS",
+        "adsense_source": "UNAVAILABLE"
+      }
+    },
+    {
+      "id": "a055",
+      "model": "EpisodeAnalyticsSnapshot",
+      "reason": "contract_version",
+      "payload": {
+        "snapshot_id": "snap_0",
+        "episode_id": "ep_0",
+        "days_since_publish": 1,
+        "captured_at": 2000,
+        "contract_version": "v2"
+      }
+    },
+    {
+      "id": "a056",
+      "model": "ReadyToUploadPack",
+      "reason": "missing_gate",
+      "payload": {
+        "contract_version": "v4",
+        "episode_id": "ep_0",
+        "episode_slug": "ep_slug_0",
+        "ready_pack_dir": "ready_to_upload/ep_slug_0",
+        "ready_bundle_sha256": "d02f46ec7e3ac9d50a7397c53b9618b846293649600fce054a529d1db13359ea",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "46932ec87e856c2b5af59bbedb8f8a6551b73dd75921a8a9076406d41c8827d9",
+        "integrated_lufs": -14.0,
+        "true_peak_dbtp": -1.2,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_0.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": true,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE"
+        ]
+      }
+    },
+    {
+      "id": "a057",
+      "model": "ReadyToUploadPack",
+      "reason": "vision_failed",
+      "payload": {
+        "contract_version": "v4",
+        "episode_id": "ep_0",
+        "episode_slug": "ep_slug_0",
+        "ready_pack_dir": "ready_to_upload/ep_slug_0",
+        "ready_bundle_sha256": "d02f46ec7e3ac9d50a7397c53b9618b846293649600fce054a529d1db13359ea",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "46932ec87e856c2b5af59bbedb8f8a6551b73dd75921a8a9076406d41c8827d9",
+        "integrated_lufs": -14.0,
+        "true_peak_dbtp": -1.2,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "FAILED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_0.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": true,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      }
+    },
+    {
+      "id": "a058",
+      "model": "ReadyToUploadPack",
+      "reason": "true_peak",
+      "payload": {
+        "contract_version": "v4",
+        "episode_id": "ep_0",
+        "episode_slug": "ep_slug_0",
+        "ready_pack_dir": "ready_to_upload/ep_slug_0",
+        "ready_bundle_sha256": "d02f46ec7e3ac9d50a7397c53b9618b846293649600fce054a529d1db13359ea",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "46932ec87e856c2b5af59bbedb8f8a6551b73dd75921a8a9076406d41c8827d9",
+        "integrated_lufs": -14.0,
+        "true_peak_dbtp": -0.2,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_0.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": true,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      }
+    },
+    {
+      "id": "a059",
+      "model": "ReadyToUploadPack",
+      "reason": "extra_field",
+      "payload": {
+        "contract_version": "v4",
+        "episode_id": "ep_0",
+        "episode_slug": "ep_slug_0",
+        "ready_pack_dir": "ready_to_upload/ep_slug_0",
+        "ready_bundle_sha256": "d02f46ec7e3ac9d50a7397c53b9618b846293649600fce054a529d1db13359ea",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "46932ec87e856c2b5af59bbedb8f8a6551b73dd75921a8a9076406d41c8827d9",
+        "integrated_lufs": -14.0,
+        "true_peak_dbtp": -1.2,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "thumbnails/variant_0.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": true,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ],
+        "upload_now": true
+      }
+    },
+    {
+      "id": "a060",
+      "model": "ReadyToUploadPack",
+      "reason": "path_traversal",
+      "payload": {
+        "contract_version": "v4",
+        "episode_id": "ep_0",
+        "episode_slug": "ep_slug_0",
+        "ready_pack_dir": "ready_to_upload/ep_slug_0",
+        "ready_bundle_sha256": "d02f46ec7e3ac9d50a7397c53b9618b846293649600fce054a529d1db13359ea",
+        "final_mp4_relpath": "final_1080p30.mp4",
+        "final_mp4_sha256": "46932ec87e856c2b5af59bbedb8f8a6551b73dd75921a8a9076406d41c8827d9",
+        "integrated_lufs": -14.0,
+        "true_peak_dbtp": -1.2,
+        "lufs_passed": true,
+        "safe_zone_passed": true,
+        "vision_frame_qa_status": "PASSED",
+        "thumbnail_brand_passed": true,
+        "thumbnail_relpaths": [
+          "../secret.png"
+        ],
+        "chapters_relpath": "chapters.txt",
+        "youtube_synthetic_disclosure_required": true,
+        "provenance_bundle_relpath": "provenance_bundle.json",
+        "qa_certificate_relpath": "qa_certificate.json",
+        "human_review_flags": [],
+        "approved_release_gates": [
+          "FACTUAL_ACCURACY",
+          "PRIVACY_PII",
+          "SOURCE_RIGHTS",
+          "SYNTHETIC_DISCLOSURE",
+          "ILLUSTRATIVE_LABELING"
+        ]
+      }
+    }
+  ],
+  "grid": [
+    {
+      "args": {
+        "grid_cell": "A1",
+        "span_cols": 1,
+        "span_rows": 1,
+        "width_px": 2560,
+        "height_px": 1440
+      },
+      "expect": {
+        "grid_cell": "A1",
+        "col_index": 0,
+        "row_index": 0,
+        "x_px": 128,
+        "y_px": 72,
+        "span_cols": 1.0,
+        "span_rows": 1.0,
+        "zoom_x": 8.0,
+        "zoom_y": 8.0,
+        "target_zoom": 3.8,
+        "width_px": 2560,
+        "height_px": 1440
+      }
+    },
+    {
+      "args": {
+        "grid_cell": "J10",
+        "span_cols": 1,
+        "span_rows": 1,
+        "width_px": 2560,
+        "height_px": 1440
+      },
+      "expect": {
+        "grid_cell": "J10",
+        "col_index": 9,
+        "row_index": 9,
+        "x_px": 2432,
+        "y_px": 1368,
+        "span_cols": 1.0,
+        "span_rows": 1.0,
+        "zoom_x": 8.0,
+        "zoom_y": 8.0,
+        "target_zoom": 3.8,
+        "width_px": 2560,
+        "height_px": 1440
+      }
+    },
+    {
+      "args": {
+        "grid_cell": "E5",
+        "span_cols": 1,
+        "span_rows": 1,
+        "width_px": 2560,
+        "height_px": 1440
+      },
+      "expect": {
+        "grid_cell": "E5",
+        "col_index": 4,
+        "row_index": 4,
+        "x_px": 1152,
+        "y_px": 648,
+        "span_cols": 1.0,
+        "span_rows": 1.0,
+        "zoom_x": 8.0,
+        "zoom_y": 8.0,
+        "target_zoom": 3.8,
+        "width_px": 2560,
+        "height_px": 1440
+      }
+    },
+    {
+      "args": {
+        "grid_cell": "A1",
+        "span_cols": 5,
+        "span_rows": 3,
+        "width_px": 2560,
+        "height_px": 1440
+      },
+      "expect": {
+        "grid_cell": "A1",
+        "col_index": 0,
+        "row_index": 0,
+        "x_px": 128,
+        "y_px": 72,
+        "span_cols": 5.0,
+        "span_rows": 3.0,
+        "zoom_x": 1.6,
+        "zoom_y": 2.6667,
+        "target_zoom": 1.6,
+        "width_px": 2560,
+        "height_px": 1440
+      }
+    },
+    {
+      "args": {
+        "grid_cell": "A1",
+        "span_cols": 1,
+        "span_rows": 4,
+        "width_px": 2560,
+        "height_px": 1440
+      },
+      "expect": {
+        "grid_cell": "A1",
+        "col_index": 0,
+        "row_index": 0,
+        "x_px": 128,
+        "y_px": 72,
+        "span_cols": 1.0,
+        "span_rows": 4.0,
+        "zoom_x": 8.0,
+        "zoom_y": 2.0,
+        "target_zoom": 2.0,
+        "width_px": 2560,
+        "height_px": 1440
+      }
+    },
+    {
+      "args": {
+        "grid_cell": "A1",
+        "span_cols": 1,
+        "span_rows": 1,
+        "width_px": 2048,
+        "height_px": 1152
+      },
+      "expect": {
+        "grid_cell": "A1",
+        "col_index": 0,
+        "row_index": 0,
+        "x_px": 102,
+        "y_px": 58,
+        "span_cols": 1.0,
+        "span_rows": 1.0,
+        "zoom_x": 8.0,
+        "zoom_y": 8.0,
+        "target_zoom": 3.8,
+        "width_px": 2048,
+        "height_px": 1152
+      }
+    },
+    {
+      "args": {
+        "grid_cell": "J1",
+        "span_cols": 2,
+        "span_rows": 2,
+        "width_px": 2560,
+        "height_px": 1440
+      },
+      "expect": {
+        "grid_cell": "J1",
+        "col_index": 9,
+        "row_index": 0,
+        "x_px": 2432,
+        "y_px": 72,
+        "span_cols": 2.0,
+        "span_rows": 2.0,
+        "zoom_x": 4.0,
+        "zoom_y": 4.0,
+        "target_zoom": 3.8,
+        "width_px": 2560,
+        "height_px": 1440
+      }
+    },
+    {
+      "args": {
+        "grid_cell": "A10",
+        "span_cols": 8,
+        "span_rows": 1,
+        "width_px": 2560,
+        "height_px": 1440
+      },
+      "expect": {
+        "grid_cell": "A10",
+        "col_index": 0,
+        "row_index": 9,
+        "x_px": 128,
+        "y_px": 1368,
+        "span_cols": 8.0,
+        "span_rows": 1.0,
+        "zoom_x": 1.0,
+        "zoom_y": 8.0,
+        "target_zoom": 1.6,
+        "width_px": 2560,
+        "height_px": 1440
+      }
+    }
+  ]
+}
