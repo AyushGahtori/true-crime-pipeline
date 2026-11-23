@@ -1,0 +1,17 @@
+contract_version: v4
+providers:
+  fixture_video:
+    model_id: fixture-video-model
+    api: fixture-api
+    pricing:
+      usd_per_second: 0.01
+    limits:
+      max_hero_clips: 10
+      max_hero_duration_sec: 80
+  fixture_text:
+    model_id: fixture-text-model
+    api: fixture-api
+    pricing:
+      usd_per_million_tokens: 0.02
+    limits:
+      requests_per_minute: 60
