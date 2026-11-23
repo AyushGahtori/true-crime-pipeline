@@ -1,0 +1,1 @@
+"""Deterministic director manifest rules and laws."""
