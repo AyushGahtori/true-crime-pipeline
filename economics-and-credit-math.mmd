@@ -1,28 +1,26 @@
 ---
-title: Economics, Gemini Omni 1.2 Flash Interactions API and 1,200s runtime split (v3)
+title: Economics v4 — Global $135/mo multi-provider ledger and 0%-cache conservative math
 ---
 flowchart TB
-  subgraph PRIMARY["Primary Default · Gemini Interactions API ($135/mo Total Cap)"]
-    OMNI_API["gemini-omni-1.2-flash Interactions API (~$0.10/sec 720p plan)<br/>Single-Config Cap: <=10 clips / 80s = $8.00 base / $10.40 DB Cap"]
-    IMG_API["Official Gemini Image API (Early Illustrative 2K Plates)<br/>$0.30-$0.50/ep · Clearly Labeled Illustrative"]
-    DS["DeepSeek V4.1 Flash / V4-Pro Reserve<br/>Byte-0 Static Cache + Off-Peak (~$0.75-$1.90/ep)"]
-    TTS["Studio TTS + ASR + Vision QA<br/>~$0.45-$0.70/ep (verified in M0.5 sandbox)"]
+  subgraph LEDGER["Authoritative monthly_budget_ledger (ALL_PROVIDERS <= $135/mo · OFFLINE_TEST == $0)"]
+    OMNI["gemini-omni-1.2-flash (720p)<br/>Max 10 clips / 80s · $8.00 base / $10.40 ep cap ($104/mo)"]
+    IMG["Gemini Image API (Early Illustrative 2K)<br/>~$0.30-$0.50/ep ($5/mo)"]
+    DS["DeepSeek V4.1 Flash / V4-Pro<br/>0%-cache worst case ~$2.80-$3.80/ep ($38/mo)<br/>Best-effort cached ~$0.75-$1.90/ep"]
+    TTS["TTS + Offline WhisperX ($0 ASR!) + Vision QA<br/>~$0.45-$0.50/ep ($7/mo)"]
   end
 
-  subgraph EP["Honest Single 20-Min (1,200s) Episode Allocation"]
-    L1["Layer 1 · Code-to-Video + FOIA (13.0 min / 780s)<br/>$0 Video API · ~$0.95-$1.35 DeepSeek"]
+  subgraph EP["Canonical 20-Min (1,200s) Episode Allocation"]
+    L1["Layer 1 · Code-to-Video + FOIA (13.0 min / 780s)<br/>$0 Video API · Offline WhisperX Word Alignment"]
     L2["Layer 2 · Illustrative 2K Stills (5.67 min / 340s)<br/>$0 Video API · crime_scene_2k Sole Owner"]
     L3["Layer 3 · Omni 1.2 Flash Hero (1.33 min / 80s, <=10 clips)<br/>$8.00 base / $10.40 durable SQLite USD cap"]
   end
 
-  OPT["Separate Optional Adapters (Non-Interchangeable)<br/>VERTEX_VEO_ENTERPRISE (GCP IAM/GCS) or<br/>HUMAN_BATCH_DESK (Atomic 24h+5m Lock + ToS Notice)"]
-
-  OMNI_API --> L3
-  IMG_API --> L2
+  OMNI --> L3
+  IMG --> L2
   DS --> L1 & L2 & L3
-  OPT -.->|separate adapter route| L3
+  TTS --> L1
 
   classDef core fill:#daeae4,stroke:#316d5b,color:#173b30
   classDef warn fill:#fff1ce,stroke:#947333,color:#40300b
   class L1,L2,L3 core
-  class OPT warn
+  class LEDGER warn

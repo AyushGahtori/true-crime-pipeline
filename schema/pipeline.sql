@@ -1,8 +1,10 @@
--- Automated True-Crime Pipeline · pipeline.db · schema version 3
--- Sole SQLite WAL Writer: Python Backend (apps/batch_desk_ui uses FastAPI HTTP/WS only).
+-- Automated True-Crime Pipeline · pipeline.db · schema version 4
+-- Authoritative state, multi-provider USD budget ledger, versioned ScenePlan contract,
+-- offline-test zero-spend enforcement, and human release sign-off gates.
+-- Sole SQLite WAL Writer: Python Backend (apps/batch_desk_ui uses loopback FastAPI HTTP/WS only).
 --
 -- Runtime & Storage Requirements (F-22):
---   * Minimum SQLite runtime version: >= 3.51.3 (fixes WAL-reset concurrency bug; verified at app startup).
+--   * Minimum SQLite runtime version: >= 3.51.3 (fixes WAL-reset concurrency bug; verified at startup).
 --   * Must reside on local host filesystem (NTFS / ext4 / APFS); reject SMB/NFS/UNC paths at startup.
 --   * Connection Pragmas:
 --       PRAGMA journal_mode = WAL;
@@ -11,7 +13,7 @@
 --       PRAGMA busy_timeout = 5000;
 
 --------------------------------------------------------------------------------
--- 0. Metadata, Audit Log & Lookup Vocabularies
+-- 0. Metadata, Audit Log & Authoritative Lookup Vocabularies
 --------------------------------------------------------------------------------
 
 CREATE TABLE meta (
@@ -20,12 +22,14 @@ CREATE TABLE meta (
 ) STRICT, WITHOUT ROWID;
 
 INSERT INTO meta VALUES
-  ('schema_version', '3'),
+  ('schema_version', '4'),
   ('min_sqlite_version', '3.51.3'),
   ('primary_video_model', 'gemini-omni-1.2-flash'),
-  ('primary_video_api', 'gemini-interactions-api');
+  ('primary_video_api', 'gemini-interactions-api'),
+  ('primary_word_aligner', 'whisperx-local'),
+  ('global_monthly_budget_cap_micro_usd', '135000000'),
+  ('offline_test_spend_cap_micro_usd', '0');
 
--- Immutable audit trail for security-sensitive mutations (F-06, F-19)
 CREATE TABLE audit_log (
   audit_seq    INTEGER PRIMARY KEY AUTOINCREMENT,
   actor_id     TEXT NOT NULL,
@@ -47,15 +51,17 @@ INSERT INTO episode_states VALUES
   ('SCOUTED', 2, 0),
   ('EVIDENCE_AND_2K_LOCKED', 3, 0),
   ('COMPLIANCE_PASSED', 4, 0),
-  ('VOICE_READY', 5, 0),
-  ('MANIFEST_LINTED', 6, 0),
-  ('CODE_RENDERED', 7, 0),
-  ('AWAITING_FLOW_BATCH', 8, 0),
-  ('POST_FLOW_PROCESSING', 9, 0),
-  ('MASTERED', 10, 0),
-  ('PENDING_HUMAN_SIGNOFF', 11, 0),
-  ('READY_TO_UPLOAD', 12, 0),
-  ('PUBLISHED', 13, 1),
+  ('SCENE_PLAN_APPROVED', 5, 0),
+  ('VOICE_READY', 6, 0),
+  ('MANIFEST_LINTED', 7, 0),
+  ('ANIMATIC_APPROVED', 8, 0),
+  ('CODE_RENDERED', 9, 0),
+  ('AWAITING_FLOW_BATCH', 10, 0),
+  ('POST_FLOW_PROCESSING', 11, 0),
+  ('MASTERED', 12, 0),
+  ('PENDING_HUMAN_SIGNOFF', 13, 0),
+  ('READY_TO_UPLOAD', 14, 0),
+  ('PUBLISHED', 15, 1),
   ('QUARANTINED_LEGAL_HOLD', 89, 0),
   ('REJECTED_KILL_SWITCH', 90, 1),
   ('ABORTED_COPYCAT_WAVE', 91, 1);
@@ -72,7 +78,6 @@ INSERT INTO visual_engines VALUES
   ('FOIA_REAL_FOOTAGE', 0),
   ('FLOW_HERO_VIDEO', 1);
 
--- Explicit crash-safe lifecycle for external paid video jobs (F-10)
 CREATE TABLE flow_job_states (
   state       TEXT PRIMARY KEY,
   is_terminal INTEGER NOT NULL DEFAULT 0 CHECK (is_terminal IN (0,1))
@@ -99,7 +104,7 @@ INSERT INTO cold_open_archetypes VALUES
   ('ALIBI_THAT_CRACKED'),
   ('CHRONOLOGICAL_COUNTDOWN');
 
--- Authoritative Motif Registry V1 (F-16: Single Source of Truth)
+-- Authoritative Motif Registry V1 (Single Source of Truth across Part 1, Part 2 & Tasks)
 CREATE TABLE motif_registry (
   motif_component TEXT PRIMARY KEY,
   owner_package   TEXT NOT NULL CHECK (owner_package IN ('render_catalog','crime_scene_2k','flow_adapter')),
@@ -107,12 +112,10 @@ CREATE TABLE motif_registry (
 ) STRICT, WITHOUT ROWID;
 
 INSERT INTO motif_registry VALUES
-  -- Authoritative 4-Motif MVP Slice (F-16)
   ('StickmanStage',          'render_catalog', 1),
   ('AudioEvidenceCard',      'render_catalog', 1),
   ('RedactedDocReveal',      'render_catalog', 1),
   ('FoiaFootageFrame',       'render_catalog', 1),
-  -- Extended Remotion 2D Catalog (V1 Full 12)
   ('TimelineScrubber',       'render_catalog', 0),
   ('AnimatedMapRoute',       'render_catalog', 0),
   ('CellTowerTriangulation', 'render_catalog', 0),
@@ -121,13 +124,11 @@ INSERT INTO motif_registry VALUES
   ('QuotePullout',           'render_catalog', 0),
   ('EvidenceGridMatrix',     'render_catalog', 0),
   ('ChapterSlateTransition', 'render_catalog', 0),
-  -- Dedicated Python 2K Illustrative Reconstruction Renderer (sole owner of 2K pan/zoom + callouts)
   ('Illustrative2KPanZoom',  'crime_scene_2k', 0),
-  -- Dedicated Paid Video Generation Bridge (Gemini Omni 1.2 Flash Interactions API)
   ('HeroVideoBridge',        'flow_adapter',   0);
 
 --------------------------------------------------------------------------------
--- 1. Agent 1 · YouTube Watchlist (Strict 30-Day ToS Retention), Quotas & SI
+-- 1. Agent 1 · YouTube Watchlist (Mandatory 30-Day Retention), Quotas & SI
 --------------------------------------------------------------------------------
 
 CREATE TABLE quota_buckets (
@@ -150,7 +151,7 @@ CREATE TABLE channels_watchlist (
   subscriber_count    INTEGER NOT NULL CHECK (subscriber_count >= 0),
   median_20_views     INTEGER NOT NULL DEFAULT 0 CHECK (median_20_views >= 0),
   last_polled_at      INTEGER NOT NULL DEFAULT 0,
-  yt_ttl_expires_at   INTEGER NOT NULL, -- Non-null 30-day refresh/delete SLA (F-20)
+  yt_ttl_expires_at   INTEGER NOT NULL,
   discovered_via      TEXT NOT NULL DEFAULT 'SEED' CHECK (discovered_via IN ('SEED','SPILLOVER')),
   is_active           INTEGER NOT NULL DEFAULT 1 CHECK (is_active IN (0,1))
 ) STRICT, WITHOUT ROWID;
@@ -177,22 +178,21 @@ CREATE TABLE outlier_candidates (
   policy_kill_reason     TEXT,
   status                 TEXT NOT NULL CHECK (status IN ('CANDIDATE','GREENLIT','REJECTED','CONSUMED','EXPIRED_TOS_PURGED')),
   created_at             INTEGER NOT NULL,
-  -- F-20: Every YouTube-sourced row MUST carry an explicit non-null 30-day expiry timestamp
   CHECK (track != 'TRACK_A_OUTLIER' OR yt_ttl_expires_at IS NOT NULL)
 ) STRICT;
 
 CREATE TABLE saturation_checks (
-  check_id          TEXT PRIMARY KEY,
-  candidate_id      TEXT NOT NULL REFERENCES outlier_candidates(candidate_id),
-  phase             TEXT NOT NULL CHECK (phase IN ('SCOUTING','PRE_RENDER_DAILY_RECHECK')),
-  aliases_json      TEXT NOT NULL,
-  n_mega_excl       INTEGER NOT NULL,
-  n_recent_excl     INTEGER NOT NULL,
-  n_14d_wave        INTEGER NOT NULL,
-  si_score          INTEGER NOT NULL,
+  check_id           TEXT PRIMARY KEY,
+  candidate_id       TEXT NOT NULL REFERENCES outlier_candidates(candidate_id),
+  phase              TEXT NOT NULL CHECK (phase IN ('SCOUTING','PRE_RENDER_DAILY_RECHECK')),
+  aliases_json       TEXT NOT NULL,
+  n_mega_excl        INTEGER NOT NULL,
+  n_recent_excl      INTEGER NOT NULL,
+  n_14d_wave         INTEGER NOT NULL,
+  si_score           INTEGER NOT NULL,
   sunk_cost_override INTEGER NOT NULL DEFAULT 0 CHECK (sunk_cost_override IN (0,1)),
-  aborted           INTEGER NOT NULL DEFAULT 0 CHECK (aborted IN (0,1)),
-  checked_at        INTEGER NOT NULL
+  aborted            INTEGER NOT NULL DEFAULT 0 CHECK (aborted IN (0,1)),
+  checked_at         INTEGER NOT NULL
 ) STRICT;
 
 CREATE TABLE courtlistener_cache (
@@ -204,7 +204,7 @@ CREATE TABLE courtlistener_cache (
 ) STRICT, WITHOUT ROWID;
 
 --------------------------------------------------------------------------------
--- 2. Agents 2 & 3 · Disposition Gate (INSERT+UPDATE), Anonymization States, Rights
+-- 2. Agents 2 & 3 · Disposition Gate, Explicit Anonymization & Rights Provenance
 --------------------------------------------------------------------------------
 
 CREATE TABLE cases (
@@ -218,7 +218,6 @@ CREATE TABLE cases (
   verification_source           TEXT NOT NULL,
   disposition_status            TEXT NOT NULL CHECK (disposition_status IN ('AFFIRMED','STANDING_CONVICTION','REVERSED','VACATED','ACQUITTED','PENDING')),
   conviction_confirmed          INTEGER NOT NULL DEFAULT 0 CHECK (conviction_confirmed IN (0,1)),
-  -- F-04: Explicit reviewable anonymization state (NEVER default-approved!)
   anonymization_status          TEXT NOT NULL DEFAULT 'NOT_STARTED' CHECK (anonymization_status IN ('NOT_STARTED','IN_REVIEW','APPROVED')),
   anonymized_by                 TEXT,
   anonymized_at                 INTEGER,
@@ -228,7 +227,6 @@ CREATE TABLE cases (
   CHECK (anonymization_status != 'APPROVED' OR (anonymized_by IS NOT NULL AND anonymized_at IS NOT NULL AND anonymization_artifact_sha256 IS NOT NULL))
 ) STRICT;
 
--- F-03: Guard conviction confirmation on BOTH INSERT and UPDATE
 CREATE TRIGGER trg_case_disposition_guard_insert
 BEFORE INSERT ON cases
 WHEN NEW.conviction_confirmed = 1 AND NEW.disposition_status NOT IN ('AFFIRMED','STANDING_CONVICTION')
@@ -243,7 +241,6 @@ BEGIN
   SELECT RAISE(ABORT, 'LEGAL_DISPOSITION: Cannot keep conviction_confirmed=1 after disposition_status changed outside AFFIRMED/STANDING_CONVICTION');
 END;
 
--- F-03: Automatically quarantine downstream episodes & revoke approvals if a case status flips adversely
 CREATE TRIGGER trg_case_disposition_quarantine
 AFTER UPDATE OF disposition_status ON cases
 WHEN NEW.disposition_status IN ('REVERSED','VACATED','ACQUITTED','PENDING')
@@ -301,7 +298,6 @@ BEGIN
   SELECT RAISE(ABORT, 'RULE_09: news_report fact must keep hedging_required = 1');
 END;
 
--- F-14 & F-15: Per-asset component rights provenance (FOIA access != reuse permission) + honest ASR disagreement metric
 CREATE TABLE foia_media_assets (
   asset_id                    TEXT PRIMARY KEY,
   case_id                     TEXT NOT NULL REFERENCES cases(case_id),
@@ -351,7 +347,7 @@ CREATE TABLE compliance_audits (
 ) STRICT;
 
 --------------------------------------------------------------------------------
--- 3. Conveyor Episodes, Illustrative 2K Stills, Anchors, Segmented Voice & Scenes
+-- 3. Conveyor Episodes, Illustrative 2K Stills, Versioned ScenePlan Contract, Voice & Scenes
 --------------------------------------------------------------------------------
 
 CREATE TABLE episodes (
@@ -364,7 +360,6 @@ CREATE TABLE episodes (
   turning_point_count        INTEGER NOT NULL DEFAULT 0,
   target_duration_ms         INTEGER NOT NULL DEFAULT 1200000,
   total_master_ms            INTEGER NOT NULL DEFAULT 0,
-  -- F-02 & F-18: Durable USD budget cap in micro-USD (default $10.40 = $8.00 base + $2.40 dynamic escrow for 10x8s Omni 1.2 Flash 720p)
   video_budget_cap_micro_usd INTEGER NOT NULL DEFAULT 10400000 CHECK (video_budget_cap_micro_usd >= 0),
   max_hero_clips             INTEGER NOT NULL DEFAULT 10 CHECK (max_hero_clips BETWEEN 0 AND 10),
   max_hero_duration_sec      INTEGER NOT NULL DEFAULT 80 CHECK (max_hero_duration_sec BETWEEN 0 AND 80),
@@ -384,7 +379,6 @@ CREATE TABLE case_bibles (
   locked_at         INTEGER NOT NULL
 ) STRICT, WITHOUT ROWID;
 
--- F-05 & F-09: Dedicated 2K still assets table enforcing illustrative-reconstruction labeling & FK target
 CREATE TABLE still_assets (
   still_2k_id                    TEXT PRIMARY KEY,
   episode_id                     TEXT NOT NULL REFERENCES episodes(episode_id),
@@ -397,7 +391,6 @@ CREATE TABLE still_assets (
   created_at                     INTEGER NOT NULL
 ) STRICT;
 
--- F-04 & F-09: Explicit lock workflow + FK to still_assets + strict A1..J10 grid_cell CHECK
 CREATE TABLE spatial_anchors (
   anchor_id            TEXT PRIMARY KEY,
   episode_id           TEXT NOT NULL REFERENCES episodes(episode_id),
@@ -418,7 +411,6 @@ CREATE TABLE spatial_anchors (
   CHECK (lock_status != 'LOCKED' OR (locked_by IS NOT NULL AND locked_at IS NOT NULL AND still_asset_sha256 IS NOT NULL))
 ) STRICT;
 
--- F-09: Kind-specific media requirements & non-overlap triggers on voice_segments
 CREATE TABLE voice_segments (
   segment_id      TEXT PRIMARY KEY,
   episode_id      TEXT NOT NULL REFERENCES episodes(episode_id),
@@ -461,9 +453,64 @@ BEGIN
   SELECT RAISE(ABORT, 'TIMELINE_OVERLAP: updated voice_segments interval overlaps an existing segment');
 END;
 
+-- F-05 & F-06: Versioned ScenePlan Contract enforcing Plan First -> Creation Second -> Editing Last
+CREATE TABLE scene_plans (
+  scene_plan_id              TEXT PRIMARY KEY,
+  episode_id                 TEXT NOT NULL REFERENCES episodes(episode_id),
+  scene_id                   TEXT NOT NULL,
+  plan_version               INTEGER NOT NULL DEFAULT 1 CHECK (plan_version >= 1),
+  seq_index                  INTEGER NOT NULL CHECK (seq_index >= 1),
+  story_purpose              TEXT NOT NULL,
+  intended_audience_effect   TEXT NOT NULL,
+  approved_narration_text    TEXT NOT NULL,
+  narration_version_sha256   TEXT NOT NULL,
+  cited_fact_ids_json        TEXT NOT NULL CHECK (cited_fact_ids_json != '[]'),
+  visual_concept             TEXT NOT NULL,
+  visual_engine              TEXT NOT NULL REFERENCES visual_engines(engine),
+  motif_component            TEXT NOT NULL REFERENCES motif_registry(motif_component),
+  prompt_mode                TEXT NOT NULL CHECK (prompt_mode IN ('NONE','TEXT_TO_VIDEO','FIRST_FRAME','FIRST_AND_LAST_FRAME')),
+  visual_prompt              TEXT NOT NULL,
+  keyframe_refs_json         TEXT NOT NULL DEFAULT '[]',
+  expected_output_summary    TEXT NOT NULL,
+  timing_start_ms            INTEGER NOT NULL CHECK (timing_start_ms >= 0),
+  timing_end_ms              INTEGER NOT NULL CHECK (timing_end_ms > timing_start_ms),
+  transition_spec_json       TEXT NOT NULL,
+  sound_cues_json            TEXT NOT NULL DEFAULT '[]',
+  edit_instructions          TEXT NOT NULL,
+  acceptance_criteria_json   TEXT NOT NULL CHECK (acceptance_criteria_json != '[]'),
+  asset_version_sha256       TEXT,
+  plan_status                TEXT NOT NULL DEFAULT 'DRAFT'
+                             CHECK (plan_status IN ('DRAFT','PLAN_APPROVED','ASSETS_CREATED','EDITED_APPROVED','STALE_NEEDS_REAPPROVAL')),
+  reviewed_by                TEXT,
+  reviewed_at                INTEGER,
+  created_at                 INTEGER NOT NULL,
+  updated_at                 INTEGER NOT NULL,
+  UNIQUE (episode_id, scene_id, plan_version),
+  CHECK (plan_status NOT IN ('PLAN_APPROVED','EDITED_APPROVED') OR (reviewed_by IS NOT NULL AND reviewed_at IS NOT NULL)),
+  CHECK (plan_status != 'EDITED_APPROVED' OR asset_version_sha256 IS NOT NULL)
+) STRICT;
+
+-- F-05: Changing narration invalidates approved plan & upstream assets, preventing stale audio/visual mismatches!
+CREATE TRIGGER trg_scene_plan_invalidate_on_narration_edit
+BEFORE UPDATE OF approved_narration_text, narration_version_sha256, timing_start_ms, timing_end_ms ON scene_plans
+WHEN OLD.narration_version_sha256 != NEW.narration_version_sha256
+  AND OLD.plan_status IN ('PLAN_APPROVED','ASSETS_CREATED','EDITED_APPROVED')
+BEGIN
+  UPDATE scene_plans
+  SET plan_status = 'STALE_NEEDS_REAPPROVAL',
+      asset_version_sha256 = NULL
+  WHERE scene_plan_id = NEW.scene_plan_id;
+
+  UPDATE episodes
+  SET timeline_validated_sha256 = NULL,
+      updated_at = NEW.updated_at
+  WHERE episode_id = NEW.episode_id;
+END;
+
 CREATE TABLE scenes (
   scene_id             TEXT PRIMARY KEY,
   episode_id           TEXT NOT NULL REFERENCES episodes(episode_id),
+  scene_plan_id        TEXT NOT NULL REFERENCES scene_plans(scene_plan_id),
   seq_index            INTEGER NOT NULL CHECK (seq_index >= 1),
   act_number           INTEGER NOT NULL CHECK (act_number IN (1,2,3)),
   visual_engine        TEXT NOT NULL REFERENCES visual_engines(engine),
@@ -512,8 +559,24 @@ CREATE TABLE published_entropy_history (
 ) STRICT, WITHOUT ROWID;
 
 --------------------------------------------------------------------------------
--- 4. External Video Jobs (Idempotent, T2V/F2V, Crash-Safe), Budget Reservations & Optional Accounts
+-- 4. Multi-Provider Global Monthly Budget Ledger, External Video Jobs & Crash Safety (F-01, F-02, F-10)
 --------------------------------------------------------------------------------
+
+-- F-02: Global across-all-providers + per-provider monthly budget caps in authoritative pipeline.db
+CREATE TABLE monthly_budget_ledger (
+  year_month         TEXT NOT NULL,       -- e.g. '2026-11'
+  provider_id        TEXT NOT NULL,       -- 'ALL_PROVIDERS' | 'gemini_omni' | 'gemini_image' | 'deepseek_chat' | 'tts' | 'vision_qa'
+  hard_cap_micro_usd INTEGER NOT NULL CHECK (hard_cap_micro_usd >= 0),
+  PRIMARY KEY (year_month, provider_id)
+) STRICT, WITHOUT ROWID;
+
+INSERT INTO monthly_budget_ledger VALUES
+  ('2026-11', 'ALL_PROVIDERS', 135000000),  -- $135.00/mo global autonomous ceiling across ALL providers
+  ('2026-11', 'gemini_omni',   104000000),  -- $104.00/mo ceiling (10 eps * $10.40)
+  ('2026-11', 'gemini_image',    5000000),  --  $5.00/mo
+  ('2026-11', 'deepseek_chat',  38000000),  -- $38.00/mo conservative NO-cache upper bound
+  ('2026-11', 'tts',             5000000),  --  $5.00/mo
+  ('2026-11', 'vision_qa',       2000000);  --  $2.00/mo
 
 CREATE TABLE google_accounts (
   account_id               TEXT PRIMARY KEY,
@@ -522,7 +585,7 @@ CREATE TABLE google_accounts (
   daily_credits_cap        INTEGER NOT NULL DEFAULT 50 CHECK (daily_credits_cap > 0),
   daily_credits_left       INTEGER NOT NULL DEFAULT 50 CHECK (daily_credits_left >= 0),
   first_daily_spend_utc_ms INTEGER NOT NULL DEFAULT 0,
-  next_daily_reset_utc_ms  INTEGER NOT NULL DEFAULT 0, -- first_daily_spend + 86400000 + 300000 (24h+5m guard)
+  next_daily_reset_utc_ms  INTEGER NOT NULL DEFAULT 0,
   nano_pro_daily_left      INTEGER NOT NULL DEFAULT 100 CHECK (nano_pro_daily_left >= 0),
   upscale_2k_daily_left    INTEGER NOT NULL DEFAULT 200 CHECK (upscale_2k_daily_left >= 0)
 ) STRICT, WITHOUT ROWID;
@@ -532,13 +595,12 @@ INSERT INTO google_accounts VALUES
   ('acct_2', 'Optional Pro #2', 1000, 50, 50, 0, 0, 100, 200),
   ('acct_3', 'Optional Pro #3', 1000, 50, 50, 0, 0, 100, 200);
 
--- F-01, F-07, F-10: Supported Gemini Omni 1.2 Flash + nullable frames by prompt_mode + UNIQUE(episode_id, scene_id) + idempotency_key
 CREATE TABLE flow_jobs (
   flow_job_id           TEXT PRIMARY KEY,
   episode_id            TEXT NOT NULL REFERENCES episodes(episode_id),
   scene_id              TEXT NOT NULL REFERENCES scenes(scene_id),
   idempotency_key       TEXT NOT NULL UNIQUE,
-  assigned_account_id   TEXT REFERENCES google_accounts(account_id), -- Nullable for Headless API runs
+  assigned_account_id   TEXT REFERENCES google_accounts(account_id),
   provider_route        TEXT NOT NULL DEFAULT 'GEMINI_OMNI_INTERACTIONS'
                         CHECK (provider_route IN ('GEMINI_OMNI_INTERACTIONS','VERTEX_VEO_ENTERPRISE','HUMAN_BATCH_DESK')),
   engine_model          TEXT NOT NULL DEFAULT 'gemini-omni-1.2-flash'
@@ -554,13 +616,12 @@ CREATE TABLE flow_jobs (
   prompt_v1             TEXT NOT NULL,
   prompt_v2_safe        TEXT NOT NULL,
   fallback_spec_json    TEXT NOT NULL,
-  provider_operation_id TEXT, -- Persisted in pipeline.db immediately upon dispatch for crash reconciliation (F-10)
+  provider_operation_id TEXT,
   attempts_used         INTEGER NOT NULL DEFAULT 0 CHECK (attempts_used BETWEEN 0 AND 2),
   state                 TEXT NOT NULL DEFAULT 'PENDING' REFERENCES flow_job_states(state),
   output_asset_path     TEXT,
   updated_at            INTEGER NOT NULL,
   UNIQUE (episode_id, scene_id),
-  -- F-07: Enforce frame presence strictly by prompt_mode & Omni 1.2 Flash 3..10s limit on 2-frame transitions
   CHECK (
     (prompt_mode = 'TEXT_TO_VIDEO' AND start_frame_png IS NULL AND end_frame_png IS NULL)
     OR (prompt_mode = 'FIRST_FRAME' AND start_frame_png IS NOT NULL AND end_frame_png IS NULL)
@@ -568,38 +629,79 @@ CREATE TABLE flow_jobs (
   )
 ) STRICT;
 
--- F-18: Durable, atomic USD budget-reservation ledger inside the single-writer state DB
-CREATE TABLE budget_reservations (
+-- F-01 & F-02: Cross-provider transactional USD spend reservation ledger
+CREATE TABLE provider_spend_reservations (
   reservation_id      TEXT PRIMARY KEY,
-  episode_id          TEXT NOT NULL REFERENCES episodes(episode_id),
-  flow_job_id         TEXT NOT NULL REFERENCES flow_jobs(flow_job_id),
-  attempt_number      INTEGER NOT NULL CHECK (attempt_number IN (1,2)),
+  episode_id          TEXT REFERENCES episodes(episode_id),
+  job_id              TEXT NOT NULL,
+  attempt_number      INTEGER NOT NULL CHECK (attempt_number >= 1),
+  provider_id         TEXT NOT NULL CHECK (provider_id IN ('gemini_omni','gemini_image','deepseek_chat','tts','vision_qa','vertex_veo')),
+  purpose             TEXT NOT NULL CHECK (purpose IN ('PRODUCTION','LIVE_SANDBOX','OFFLINE_TEST')),
+  year_month          TEXT NOT NULL,
   estimated_micro_usd INTEGER NOT NULL CHECK (estimated_micro_usd >= 0),
   actual_micro_usd    INTEGER CHECK (actual_micro_usd >= 0),
   status              TEXT NOT NULL CHECK (status IN ('RESERVED','COMMITTED','RELEASED','UNKNOWN_HOLD')),
   created_at          INTEGER NOT NULL,
   settled_at          INTEGER,
-  UNIQUE (flow_job_id, attempt_number)
+  UNIQUE (job_id, attempt_number)
 ) STRICT;
 
--- F-18: Atomically block any new paid reservation that would breach episode video_budget_cap_micro_usd
-CREATE TRIGGER trg_budget_cap_guard
-BEFORE INSERT ON budget_reservations
-WHEN (
-  SELECT COALESCE(SUM(
-    CASE
-      WHEN status = 'COMMITTED' THEN COALESCE(actual_micro_usd, estimated_micro_usd)
-      WHEN status IN ('RESERVED','UNKNOWN_HOLD') THEN estimated_micro_usd
-      ELSE 0
-    END
-  ), 0)
-  FROM budget_reservations
-  WHERE episode_id = NEW.episode_id
-) + NEW.estimated_micro_usd > (
-  SELECT video_budget_cap_micro_usd FROM episodes WHERE episode_id = NEW.episode_id
-)
+-- F-01: Routine offline tests MUST maintain strict zero billable spend
+CREATE TRIGGER trg_offline_test_zero_spend_guard
+BEFORE INSERT ON provider_spend_reservations
+WHEN NEW.purpose = 'OFFLINE_TEST' AND NEW.estimated_micro_usd > 0
 BEGIN
-  SELECT RAISE(ABORT, 'BUDGET_CAP_EXCEEDED: Episode durable USD reservation cap reached');
+  SELECT RAISE(ABORT, 'OFFLINE_TEST_ZERO_SPEND: Ordinary tests must use transport mocks with $0 estimated spend');
+END;
+
+-- F-02: Enforce per-episode video cap, per-provider monthly cap, AND global ALL_PROVIDERS monthly cap atomically!
+CREATE TRIGGER trg_provider_global_budget_cap_guard
+BEFORE INSERT ON provider_spend_reservations
+WHEN NEW.purpose IN ('PRODUCTION','LIVE_SANDBOX')
+  AND (
+    -- 1. Must have configured provider & ALL_PROVIDERS cap rows for this month
+    NOT EXISTS (SELECT 1 FROM monthly_budget_ledger WHERE year_month = NEW.year_month AND provider_id = 'ALL_PROVIDERS')
+    OR NOT EXISTS (SELECT 1 FROM monthly_budget_ledger WHERE year_month = NEW.year_month AND provider_id = NEW.provider_id)
+    -- 2. Global across-all-providers monthly cap check
+    OR (
+      SELECT COALESCE(SUM(
+        CASE WHEN status = 'COMMITTED' THEN COALESCE(actual_micro_usd, estimated_micro_usd)
+             WHEN status IN ('RESERVED','UNKNOWN_HOLD') THEN estimated_micro_usd ELSE 0 END
+      ), 0)
+      FROM provider_spend_reservations
+      WHERE year_month = NEW.year_month
+    ) + NEW.estimated_micro_usd > (
+      SELECT hard_cap_micro_usd FROM monthly_budget_ledger WHERE year_month = NEW.year_month AND provider_id = 'ALL_PROVIDERS'
+    )
+    -- 3. Per-provider monthly cap check
+    OR (
+      SELECT COALESCE(SUM(
+        CASE WHEN status = 'COMMITTED' THEN COALESCE(actual_micro_usd, estimated_micro_usd)
+             WHEN status IN ('RESERVED','UNKNOWN_HOLD') THEN estimated_micro_usd ELSE 0 END
+      ), 0)
+      FROM provider_spend_reservations
+      WHERE year_month = NEW.year_month AND provider_id = NEW.provider_id
+    ) + NEW.estimated_micro_usd > (
+      SELECT hard_cap_micro_usd FROM monthly_budget_ledger WHERE year_month = NEW.year_month AND provider_id = NEW.provider_id
+    )
+    -- 4. Per-episode video cap check when reserving paid video
+    OR (
+      NEW.episode_id IS NOT NULL
+      AND NEW.provider_id IN ('gemini_omni','vertex_veo')
+      AND (
+        SELECT COALESCE(SUM(
+          CASE WHEN status = 'COMMITTED' THEN COALESCE(actual_micro_usd, estimated_micro_usd)
+               WHEN status IN ('RESERVED','UNKNOWN_HOLD') THEN estimated_micro_usd ELSE 0 END
+        ), 0)
+        FROM provider_spend_reservations
+        WHERE episode_id = NEW.episode_id AND provider_id IN ('gemini_omni','vertex_veo')
+      ) + NEW.estimated_micro_usd > (
+        SELECT video_budget_cap_micro_usd FROM episodes WHERE episode_id = NEW.episode_id
+      )
+    )
+  )
+BEGIN
+  SELECT RAISE(ABORT, 'GLOBAL_OR_EPISODE_BUDGET_CAP_EXCEEDED: Multi-provider or per-episode USD reservation ceiling reached');
 END;
 
 CREATE TABLE flow_job_attempts (
@@ -625,7 +727,7 @@ BEGIN
 END;
 
 --------------------------------------------------------------------------------
--- 5. Mandatory Human Release Sign-Off Gate (F-06), QA Reports & Honest Analytics (F-12)
+-- 5. Mandatory 5-Gate Human Release Sign-Off (F-05, F-06) & Honest Analytics (F-12)
 --------------------------------------------------------------------------------
 
 CREATE TABLE release_approvals (
@@ -647,28 +749,31 @@ CREATE TABLE release_approvals (
   CHECK (status NOT IN ('APPROVED','REJECTED') OR (reviewer_id IS NOT NULL AND reviewed_at IS NOT NULL))
 ) STRICT;
 
--- F-04, F-06, F-09, Vision QA Fail-Closed: Hard-block READY_TO_UPLOAD / PUBLISHED unless ALL safeguards are proven
+-- Hard-block READY_TO_UPLOAD / PUBLISHED unless anonymization, ScenePlan versions, jobs, and 5 human gates pass!
 CREATE TRIGGER trg_episode_release_gate
 BEFORE UPDATE OF state ON episodes
 WHEN NEW.state IN ('READY_TO_UPLOAD','PUBLISHED')
   AND (
-    -- 1. Case must be AFFIRMED/STANDING_CONVICTION and explicitly anonymized
     NOT EXISTS (
       SELECT 1 FROM cases c
       WHERE c.case_id = NEW.case_id
         AND c.disposition_status IN ('AFFIRMED','STANDING_CONVICTION')
         AND c.anonymization_status = 'APPROVED'
     )
-    -- 2. Timeline must have transactional validation hash & ready_bundle_sha256
     OR NEW.timeline_validated_sha256 IS NULL
     OR NEW.ready_bundle_sha256 IS NULL
-    -- 3. No flow jobs left in fail-closed PENDING_MANUAL_SPOT_CHECK or UNKNOWN_RECONCILE
+    OR NOT EXISTS (SELECT 1 FROM scenes s WHERE s.episode_id = NEW.episode_id)
+    OR EXISTS (
+      SELECT 1 FROM scenes s
+      JOIN scene_plans sp ON sp.scene_plan_id = s.scene_plan_id
+      WHERE s.episode_id = NEW.episode_id
+        AND sp.plan_status != 'EDITED_APPROVED'
+    )
     OR EXISTS (
       SELECT 1 FROM flow_jobs fj
       WHERE fj.episode_id = NEW.episode_id
         AND fj.state IN ('PENDING','SUBMITTING','RUNNING','UNKNOWN_RECONCILE','PENDING_MANUAL_SPOT_CHECK','STRIKE_1_RETRY_SAFE')
     )
-    -- 4. All 5 mandatory human approval gates MUST be APPROVED for this exact ready_bundle_sha256
     OR (
       SELECT COUNT(DISTINCT gate_name)
       FROM release_approvals ra
@@ -678,7 +783,7 @@ WHEN NEW.state IN ('READY_TO_UPLOAD','PUBLISHED')
     ) < 5
   )
 BEGIN
-  SELECT RAISE(ABORT, 'RELEASE_GATE_BLOCKED: Cannot mark READY_TO_UPLOAD/PUBLISHED without APPROVED case anonymization, valid disposition, settled jobs, validated timeline, and all 5 human release approvals');
+  SELECT RAISE(ABORT, 'RELEASE_GATE_BLOCKED: Requires APPROVED anonymization, valid disposition, EDITED_APPROVED scene plans, settled jobs, validated timeline, and all 5 human release approvals');
 END;
 
 CREATE TABLE qa_reports (
@@ -695,12 +800,11 @@ CREATE TABLE qa_reports (
   created_at               INTEGER NOT NULL
 ) STRICT;
 
--- F-12: Explicit UNKNOWN / PENDING / NOT_LINKED states + provenance source (no fabricated videos.list monetization field!)
 CREATE TABLE episode_analytics (
   snapshot_id            TEXT PRIMARY KEY,
   episode_id             TEXT NOT NULL REFERENCES episodes(episode_id),
   days_since_publish     INTEGER NOT NULL CHECK (days_since_publish >= 1),
-  ctr_pct                REAL, -- Nullable when only Data/Analytics API ran without Studio CSV
+  ctr_pct                REAL,
   retention_30s_pct      REAL,
   retention_min6_14_pct  REAL,
   avd_pct                REAL,
@@ -717,7 +821,7 @@ CREATE TABLE episode_analytics (
 ) STRICT;
 
 --------------------------------------------------------------------------------
--- 6. Views for Conveyor Monitoring (Up to 3 Episodes Oldest-First)
+-- 6. Views for Conveyor & Global Budget Monitoring
 --------------------------------------------------------------------------------
 
 CREATE VIEW v_active_conveyor AS
@@ -727,10 +831,11 @@ SELECT
   e.flow_backend_mode,
   e.video_budget_cap_micro_usd,
   COALESCE((
-    SELECT SUM(CASE WHEN br.status = 'COMMITTED' THEN COALESCE(br.actual_micro_usd, br.estimated_micro_usd)
-                    WHEN br.status IN ('RESERVED','UNKNOWN_HOLD') THEN br.estimated_micro_usd ELSE 0 END)
-    FROM budget_reservations br WHERE br.episode_id = e.episode_id
-  ), 0) AS reserved_or_spent_micro_usd,
+    SELECT SUM(CASE WHEN r.status = 'COMMITTED' THEN COALESCE(r.actual_micro_usd, r.estimated_micro_usd)
+                    WHEN r.status IN ('RESERVED','UNKNOWN_HOLD') THEN r.estimated_micro_usd ELSE 0 END)
+    FROM provider_spend_reservations r
+    WHERE r.episode_id = e.episode_id AND r.provider_id IN ('gemini_omni','vertex_veo')
+  ), 0) AS video_reserved_or_spent_micro_usd,
   COUNT(fj.flow_job_id) AS total_flow_jobs,
   SUM(CASE WHEN fj.state IN ('ACCEPTED','SWITCHED_TO_FALLBACK') THEN 1 ELSE 0 END) AS completed_flow_jobs
 FROM episodes e

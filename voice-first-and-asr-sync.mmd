@@ -1,16 +1,16 @@
 ---
-title: Voice-first segmented timeline, proper-noun check and millisecond ASR sync
+title: Voice-first segmented timeline, WhisperX word aligner and proper-noun check (v4)
 ---
 flowchart LR
-  SCRIPT["Compliance-Cleared Script<br/>Narration Beats + FOIA Slot Placeholders + Twist Flags"]
-  CHUNK["Scene Chunker (1–3 min segments)<br/>Under 16,384 token cap · Consistent style prefix"]
-  TTS["Provider-Registry TTS Synthesis<br/>Gemini 3.8 TTS (Primary) / DeepSeek TTS Fallback<br/>Normalized to 48 kHz PCM + Per-Chunk LUFS/EQ Match"]
-  PAD["Room-Tone Twist Pads (0.45s–0.75s)<br/>+ Explicit FOIA/911 Audio Slots (Non-Monolithic!)"]
-  ASR["Millisecond ASR + Phonetic Diff Check<br/>DeepSeek ASR / WhisperX -> Flag mangled suspect/town names"]
-  ENV["RMS Amplitude Envelope Extractor (30 fps)"]
-  MAN["VoiceTrackManifest (Segmented Timeline)<br/>NarrationSegments + FoiaSlots + TwistPads = total_master_ms"]
+  SP["Approved ScenePlan[] (PLAN_APPROVED)<br/>Approved Narration SHA-256 + Citations"]
+  CHUNK["Scene Chunker (1–3 min segments)<br/>Consistent style prefix · Normalized 48 kHz PCM + -16 LUFS"]
+  TTS["Provider-Registry TTS Synthesis<br/>Gemini TTS / DeepSeek TTS -> 48 kHz stereo PCM"]
+  PAD["Room-Tone Twist Pads (0.45s–0.75s)<br/>+ Explicit FOIA/911 Audio Slots"]
+  WX["Local WhisperX Forced Aligner ($0/ep)<br/>Sole Owner of WordTimestamp[] on 48 kHz Audio<br/>(Optional cloud ASR bounded <= 90s / 4MiB 16kHz FLAC)"]
+  PN["Proper-Noun Phonetic Diff Gate<br/>Metaphone/Edit Check -> Flag Mangled Names"]
+  MAN["VoiceTrackManifest (Non-Overlapping)<br/>NarrationSegments + FoiaSlots + TwistPads = total_master_ms"]
 
-  SCRIPT --> CHUNK --> TTS --> PAD --> ASR & ENV --> MAN
+  SP --> CHUNK --> TTS --> PAD --> WX --> PN --> MAN
 
   classDef core fill:#daeae4,stroke:#316d5b,color:#173b30
-  class PAD,ASR,MAN core
+  class PAD,WX,MAN core

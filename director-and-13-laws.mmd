@@ -1,24 +1,25 @@
 ---
-title: Agent 4 — Two-layer director compiler and conflict-resolved 13 laws
+title: Agent 4 — ScenePlan workflow, craft rubric and conflict-resolved 13 laws (v4)
 ---
 flowchart TB
-  IN["Segmented VoiceTrackManifest + Fact Ledger +<br/>Early-Locked 2K Anchors + Last 5 Episodes"]
-  L1["Layer 1 · DeepSeek-V4.1-Flash-1017 Director<br/>Byte 0: Global Static Rules & Zod -> Episode CaseBible -> Dynamic Scene"]
-  L2{"Layer 2 · manifest_linter.py (Zero LLM)<br/>Enforces RULE_01–RULE_13 (Conflict-Free)"}
+  IN["craft_rubric.yaml (<=150 lines) + TemporalFactLedger +<br/>Early Illustrative 2K Anchors + Last 5 Episodes"]
+  SP["Stage 1 · Versioned ScenePlan[] (scene_plans)<br/>Purpose · Narration SHA-256 · Citations · Prompt · Edit Cues · Checks<br/>(Plan First: PLAN_APPROVED before Voice & Paid Assets!)"]
+  L1["Layer 1 · DeepSeek-V4.1-Flash-1017 Director<br/>13.0m Code/FOIA · 5.67m 2K · 1.33m Omni Hero (<=10 clips)"]
+  L2{"Layer 2 · manifest_linter.py (Zero LLM)<br/>Enforces RULE_01–RULE_13 + MOTIF_REGISTRY_V1"}
 
-  subgraph LAWS["Fixed Compiler Gates"]
+  subgraph LAWS["Canonical v4 Compiler Gates"]
     direction LR
-    BUD["Segmented RULE_01 & Act-Aware RULE_02<br/>sum(scenes)==total_master_ms<br/>Protect Act 2 >= 2 peaks · 6s+3.2s split"]
-    SAFE["CSS Safe-Zone & Flexible Spine<br/>CaseBoardSpine 210–270s boundary snap<br/>Fallback != neighbor engine"]
-    ANON["Split Law 11/12 & Whitelist<br/>Text-to-Video vs Frames Motion-Only<br/>Bigrams OK · Zero Crimson in Keyframes"]
+    BUD["Segmented RULE_01 & Multi-Provider RULE_02<br/>sum==total_master_ms · $10.40/ep · $135/mo ALL_PROVIDERS<br/>Protect Act 2 >= 2 peaks · >=2.5s split"]
+    SAFE["CSS Safe-Zone & Flexible Spine<br/>CaseBoardSpine 210–270s boundary snap<br/>Non-neighbor fallback_spec"]
+    ANON["Explicit prompt_mode & Whitelist<br/>TEXT_TO_VIDEO / FIRST_FRAME / FIRST_AND_LAST_FRAME (<=10s)<br/>Bigrams OK · Zero Crimson in Keyframes"]
   end
 
   RETRY{"Violations?<br/>(Retries <= 3)"}
-  DOWN["Act-Constrained Auto-Downgrade<br/>Swap excess hero -> non-neighbor fallback_spec"]
-  DRY["15-Second Pre-Flight Animatic (--dry-run)<br/>Segmented Audio + 480p Wireframe Cards"]
-  OUT["Validated ProductionManifest + TimelineSpec"]
+  DOWN["Act-Constrained Auto-Downgrade"]
+  DRY["Stage 2 · 480p Animatic Gate (ANIMATIC_APPROVED)<br/>Review Before Paid Video Generation!"]
+  OUT["Stage 3/4 · Locked TimelineSpec -> Asset Creation -> Final Edit"]
 
-  IN --> L1 --> L2
+  IN --> SP --> L1 --> L2
   L2 -.- LAWS
   L2 -->|Fail, retries < 3| RETRY -->|Exact RULE_ID diff| L1
   RETRY -->|Retries == 3| DOWN --> DRY
@@ -26,5 +27,5 @@ flowchart TB
 
   classDef gate fill:#fff1ce,stroke:#947333,color:#40300b
   classDef core fill:#daeae4,stroke:#316d5b,color:#173b30
-  class L2,RETRY gate
-  class L1,DRY,OUT core
+  class L2,RETRY,DRY gate
+  class SP,L1,OUT core

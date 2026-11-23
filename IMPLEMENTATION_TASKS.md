@@ -44,17 +44,18 @@ This repository is engineered so **two developers build and test 100% independen
 - **Milestone:** `M0 · Shared Contract Freeze & Provider Registry`
 - **Depends On:** `None`
 - **Git Worktree & Branch:** `main` -> `integration/main` (tags `foundation/task-001-complete`)
-- **Owned Write Scope:** Root `pyproject.toml`, `uv.lock`, `package.json`, `pnpm-workspace.yaml`, `tsconfig.base.json`, `providers.yaml`, `.gitignore`, `.gitattributes`, `scripts/agent-worktree.mjs`, `scripts/verify-harmony.mjs`, `.agent-handoffs/TEMPLATE.md`, empty package shells under `packages/*` and `apps/*`
-- **Mandatory Reference Files:** [README.md](README.md), [CONTRIBUTING_AGENTS.md](CONTRIBUTING_AGENTS.md), [parallel-part1-part2-architecture.md](parallel-part1-part2-architecture.md)
-- **Shared Contracts Produced:** Full Python (`3.12+`) + TypeScript (`Node 22+ / pnpm 10`) monorepo, config-driven `providers.yaml`, worktree CLI, and disjoint-subtree validator
+- **Owned Write Scope:** Root `pyproject.toml`, `uv.lock`, `package.json`, `pnpm-workspace.yaml`, `tsconfig.base.json`, `providers.yaml`, `craft_rubric.yaml`, `.gitignore`, `.gitattributes`, `scripts/agent-worktree.mjs`, `scripts/verify-harmony.mjs`, `.agent-handoffs/TEMPLATE.md`, empty package shells under `packages/*` and `apps/*`
+- **Mandatory Reference Files:** [README.md](README.md), [CONTRIBUTING_AGENTS.md](CONTRIBUTING_AGENTS.md), [parallel-part1-part2-architecture.md](parallel-part1-part2-architecture.md), [director-and-13-laws.md](director-and-13-laws.md)
+- **Shared Contracts Produced:** Full Python (`3.12+`) + TypeScript (`Node 22+ / pnpm 10`) monorepo, config-driven `providers.yaml`, concise `craft_rubric.yaml` (`<= 150 lines`), repo-wide offline zero-spend test harness, and wave-ordered worktree CLI
 
 #### Scope And Implementation Requirements
 
 - [ ] Initialize Git (`core.longpaths=true`, `core.autocrlf=false`), `.gitattributes`, and `.gitignore` blocking `.env*`, `*.db*`, `node_modules/`, `.venv/`, `ready_to_upload/`, and `artifacts/`.
-- [ ] Author config-driven `providers.yaml` centralizing all model IDs, peak/off-peak/cache rates, TTS token prices, Veo API `$0.05/sec` pricing, and RPM/daily quota limits so zero model strings or rates are hardcoded across packages.
+- [ ] Author config-driven `providers.yaml` centralizing ALL model IDs (`gemini-omni-1.2-flash` Interactions API `@ $0.10/sec` conservative 720p plan, `max_hero_clips = 10`, `max_hero_duration_sec = 80s`, `$10.40/ep` video cap, **`$135/mo` ALL-providers global ceiling**, DeepSeek dual `0%`-cache / cached projections, local WhisperX aligner) so zero model strings or rates are hardcoded across packages (`F-01`, `F-02`, `F-03`).
+- [ ] Author concise **`craft_rubric.yaml`** (`<= 150 lines`, `F-06`) encoding structured documentary pacing & visual clarity principles (`"interactive"` = high-engagement visual curiosity hooks/pacing) cleanly separated from episode research and per-scene `ScenePlan` inputs.
+- [ ] Enforce **Repo-Wide Zero-Spend Offline Test Guard (`F-01`)**: install global `pytest` socket-blocking & Vitest outbound-fetch blockers + scrubbed provider env vars across all ordinary worktree/CI test invocations, permitting outbound paid provider sockets ONLY when both `--live-sandbox` AND `ALLOW_PAID_SANDBOX=1` are explicitly passed post-integration (`Task 200`).
+- [ ] Implement `scripts/agent-worktree.mjs` (`create`, `check`, `commit`, `wave-merge`, `wave-rollback`) and `scripts/verify-harmony.mjs --task NNN --wave <id>` enforcing disjoint Part 1/Part 2 write ownership, wave dependency ordering (`F-07`), v4 contract drift scanning (`F-04`), secret scans, `node schema/schema-test.js`, and `node tools/merge-diagrams.js`.
 - [ ] Scaffold Python workspace (`shared_contracts`, `db`, `agent1_scout`, `agent2_evidence`, `agent3_gatekeeper`, `voice_sync`, `agent4_director`, `orchestrator`, `python_motion`, `crime_scene_2k`, `flow_adapter`, `agent6_mastering`, `analytics_feedback`) and pnpm workspace (`shared-contracts-ts`, `render_catalog`, `batch_desk_ui`, `e2e`).
-- [ ] Implement `scripts/agent-worktree.mjs` (`create`, `check`, `commit`, `remove`) and `scripts/verify-harmony.mjs --task NNN` enforcing disjoint Part 1/Part 2 write ownership, secret scans, `node schema/schema-test.js`, and `node tools/merge-diagrams.js`.
-- [ ] Pin core toolchain dependencies once (`pydantic>=2.9`, `pyyaml`, `pytest`, `ruff`, `mypy`, `torch/demucs`, `opencv-python-headless`, `ultralytics`, `pillow`, `scipy`, `numpy`, `remotion`, `zod`, `react`, `vitest`, `playwright`, `typescript`).
 
 #### Edge Cases And Failure Modes
 
@@ -76,29 +77,29 @@ This repository is engineered so **two developers build and test 100% independen
 - [ ] Confirm `pnpm typecheck`, `uv run pytest --collect-only`, `node schema/schema-test.js`, and `node tools/merge-diagrams.js` pass.
 - **Acceptance:** Monorepo, `providers.yaml`, and harmony guardrails green on Day 1.
 
-### Task 002: Freeze `packages/shared_contracts` v2 (Segmented Voice, `span_cells`, Split Law 11/12 & Analytics Models)
+### Task 002: Freeze `packages/shared_contracts` v4 (`ScenePlan`, `MOTIF_REGISTRY_V1`, `prompt_mode`, Analytics Models)
 
 - **Track & Owner:** `Shared Foundation`
-- **Milestone:** `M0 · Shared Contract Freeze & Provider Registry`
+- **Milestone:** `M0 · Canonical v4 Contract Freeze`
 - **Depends On:** `Task 001`
 - **Git Worktree & Branch:** `task/002-frozen-shared-contracts` in `../tc-wt/task-002-frozen-shared-contracts`
 - **Owned Write Scope:** `packages/shared_contracts/**`, `packages/shared-contracts-ts/**`, `.agent-handoffs/task-002.md`
 - **Mandatory Reference Files:** [parallel-part1-part2-architecture.md](parallel-part1-part2-architecture.md), [director-and-13-laws.md](director-and-13-laws.md), [voice-first-and-asr-sync.md](voice-first-and-asr-sync.md), [prompt-contracts.md](prompt-contracts.md)
-- **Shared Contracts Produced:** Bi-directional Pydantic v2 + Zod + JSON Schema parity models + pure-math external-margin `10x10` coordinate transform helpers
+- **Shared Contracts Produced:** Bi-directional Pydantic v2 + Zod + JSON Schema parity models (`v4`) + pure-math external-margin `10x10` coordinate transform helpers
 
 #### Scope And Implementation Requirements
 
-- [ ] Freeze Pydantic v2 (`extra="forbid"`) & Zod (`.strict()`) models for `SeedPacket`, `TemporalFactLedger`, `ComplianceClearedCase`, **segmented `VoiceTrackManifest`** (`NarrationSegment[]`, `FoiaAudioSlot[]`, `TwistPad[]`, `total_master_ms`), `SpatialAnchor` (`grid_cell`, `span_cols`, `span_rows`, `x_px`, `y_px`, `target_zoom`), `CaseBible`, `ProductionManifest`, `TimelineSpec` (`30 fps`, `prompt_mode: "FRAMES_MOTION_ONLY" | "TEXT_TO_VIDEO"`), `FlowJobCard`, `EpisodeAnalyticsSnapshot`, and `ReadyToUploadPack`.
-- [ ] Include pure deterministic `grid_cell_to_pixel_and_zoom(cell, sub_quadrant, span_cols, span_rows, width, height)` helper in `packages/shared_contracts` so both Part 1 (`Agent 2` early locking) and Part 2 (`crime_scene_2k`) share identical math with zero cross-repo write overlap!
-- [ ] Define `RenderBackendPort` protocol and `ProviderRegistryLoader` reading `providers.yaml`.
+- [ ] Freeze Pydantic v2 (`extra="forbid"`) & Zod (`.strict()`) models for `SeedPacket`, `TemporalFactLedger`, `ComplianceClearedCase`, **`ScenePlan`** (`story_purpose`, `intended_audience_effect`, `approved_narration_text`, `narration_version_sha256`, `cited_fact_ids_json`, `visual_concept`, `visual_prompt`, `keyframe_refs_json`, `expected_output_summary`, `transition_spec_json`, `sound_cues_json`, `edit_instructions`, `acceptance_criteria_json`, `plan_status` `F-05`), segmented `VoiceTrackManifest`, `SpatialAnchor`, `CaseBible`, `ProductionManifest`, `TimelineSpec` (`30 fps`, **`prompt_mode: "TEXT_TO_VIDEO" | "FIRST_FRAME" | "FIRST_AND_LAST_FRAME"`**, `MOTIF_REGISTRY_V1`), `FlowJobCard`, `EpisodeAnalyticsSnapshot`, and `ReadyToUploadPack`.
+- [ ] Include pure deterministic `grid_cell_to_pixel_and_zoom(...)` helper cleanly in `packages/shared_contracts`.
+- [ ] Define `RenderBackendPort`, `ProviderRegistryLoader` (`providers.yaml`), and `CraftRubricLoader` (`craft_rubric.yaml`).
 
 #### Edge Cases And Failure Modes
 
-- Enum/field drift between Python Pydantic and TypeScript Zod: automated parity test executes identical valid/invalid JSON test vectors through both runtimes.
+- Enum/field drift or retired identifiers (`FRAMES_MOTION_ONLY`, `VEO_3_1_LITE`, `CrimeScenePanZoom`): CI parity test fails immediately if deprecated v2 identifiers appear!
 
 #### Bug Prevention And Invariants
 
-- **Strict Schema Parity Invariant:** Zero `extra` fields permitted across Python/TypeScript boundaries.
+- **Strict Canonical v4 Schema Parity Invariant:** Zero `extra` fields permitted across Python/TypeScript boundaries.
 
 #### Independent Testability & Parallel Isolation
 
@@ -106,55 +107,55 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Verification, Testing And Acceptance Criteria
 
-- [ ] Run `uv run pytest packages/shared_contracts` and `pnpm --filter @tc/shared-contracts-ts test` verifying 100% parity on 60 valid and 60 adversarial vectors.
-- **Acceptance:** Frozen v2 shared contracts verified across Python and TypeScript.
+- [ ] Run offline `uv run pytest packages/shared_contracts` and `pnpm --filter @tc/shared-contracts-ts test` verifying 100% parity on 60 valid and 60 adversarial vectors (`$0` API calls).
+- **Acceptance:** Frozen v4 shared contracts verified across Python and TypeScript.
 
-### Task 003: Freeze Executable SQLite Schemas v2 (`pipeline.sql` & `telemetry.sql`) & Cross-Runtime Tests
+### Task 003: Freeze Executable SQLite Schemas v4 (`pipeline.sql` & `telemetry.sql`) & Cross-Runtime Tests
 
 - **Track & Owner:** `Shared Foundation`
-- **Milestone:** `M0 · Shared Contract Freeze & Provider Registry`
+- **Milestone:** `M0 · Canonical v4 Contract Freeze`
 - **Depends On:** `Task 001`, `Task 002`
 - **Git Worktree & Branch:** `task/003-frozen-sqlite-schemas` in `../tc-wt/task-003-frozen-sqlite-schemas`
 - **Owned Write Scope:** `schema/**`, `.agent-handoffs/task-003.md`
 - **Mandatory Reference Files:** [database-and-state-design.md](database-and-state-design.md), [schema/pipeline.sql](schema/pipeline.sql), [schema/telemetry.sql](schema/telemetry.sql), [schema/queries.sql](schema/queries.sql)
-- **Shared Contracts Produced:** Verified `schema/pipeline.sql` v2 (`disposition_status` trigger, `voice_segments`, `spatial_anchors.span_cols/span_rows`, `next_daily_reset_utc_ms`, `yt_ttl_expires_at`, `episode_analytics`) + dual Node/Python tests
+- **Shared Contracts Produced:** Verified `schema/pipeline.sql` v4 (`scene_plans`, `monthly_budget_ledger`, `provider_spend_reservations`, `trg_offline_test_zero_spend_guard`, `trg_provider_global_budget_cap_guard`, `release_approvals`, `trg_case_disposition_quarantine`, `total_input_tokens >= cached_input_tokens`) + dual Node/Python tests
 
 #### Scope And Implementation Requirements
 
-- [ ] Freeze `schema/pipeline.sql` v2, `schema/telemetry.sql`, and `schema/queries.sql`.
-- [ ] Verify triggers (`trg_case_disposition_guard`, `trg_fact_news_hedging_insert/update`, `trg_flow_two_strike_breaker`) and add `schema/schema_test.py` mirroring all 6+ scenarios in `schema/schema-test.js`.
+- [ ] Freeze `schema/pipeline.sql` v4 (`schema_version = '4'`), `schema/telemetry.sql` v3, and `schema/queries.sql` v4.
+- [ ] Implement `schema/schema_test.py` mirroring ALL **12** scenarios verified in `schema/schema-test.js`!
 
 #### Edge Cases And Failure Modes
 
-- `UPDATE` statement bypassing `INSERT` hedging trigger: both `BEFORE INSERT` and `BEFORE UPDATE` triggers verified.
+- `UPDATE` bypassing `INSERT` disposition/hedging/overlap triggers or non-zero `OFFLINE_TEST` budget slips: all guarded cleanly in SQLite triggers.
 
 #### Bug Prevention And Invariants
 
-- **Python Sole-Writer & Structural Trigger Invariant:** Critical legal/2-strike/hedging constraints enforce inside SQLite itself.
+- **Python Sole-Writer, Global `$135/mo` Cap & Zero-Spend Offline Test Invariant.**
 
 #### Independent Testability & Parallel Isolation
 
-- Validated directly against real SQLite in Node 24 and Python 3.12+.
+- Validated offline in Node 24 and Python 3.12+.
 
 #### Verification, Testing And Acceptance Criteria
 
-- [ ] Run `node schema/schema-test.js` and `uv run pytest schema/schema_test.py` with 100% pass.
-- **Acceptance:** `pipeline.sql` v2 and `telemetry.sql` frozen and verified.
+- [ ] Run `node schema/schema-test.js` (`12/12` pass) and `uv run pytest schema/schema_test.py` (`12/12` pass).
+- **Acceptance:** `pipeline.sql` v4 and `telemetry.sql` v3 frozen and verified.
 
-### Task 004: Build Deterministic Golden Fixture Packs v2 & Synthetic Media Assets (`fixtures/`)
+### Task 004: Build Deterministic v4 Golden Fixture Packs & Synthetic Media Assets (`fixtures/`)
 
 - **Track & Owner:** `Shared Foundation`
-- **Milestone:** `M0 · Shared Contract Freeze & Provider Registry`
+- **Milestone:** `M0 · Canonical v4 Contract Freeze`
 - **Depends On:** `Task 002`, `Task 003`
 - **Git Worktree & Branch:** `task/004-golden-fixture-packs` in `../tc-wt/task-004-golden-fixture-packs`
 - **Owned Write Scope:** `fixtures/golden_manifests/**`, `fixtures/recorded_apis/**`, `fixtures/synthetic_media/**`, `.agent-handoffs/task-004.md`
 - **Mandatory Reference Files:** [parallel-part1-part2-architecture.md](parallel-part1-part2-architecture.md), [code-animation-catalog.md](code-animation-catalog.md)
-- **Shared Contracts Produced:** Three v2 Golden Packs (`ep_golden_01_20min`, `ep_golden_02_2strike_fallback`, `ep_golden_03_2k_grid_heavy`) + synthetic 8 kHz 911 / bodycam-with-music / spoken-PII / watermark / analytics fixtures
+- **Shared Contracts Produced:** Three v4 Golden Packs (`ep_golden_01_20min`, `ep_golden_02_2strike_fallback`, `ep_golden_03_2k_grid_heavy`) + synthetic media + adversarial prompt-injection test payloads
 
 #### Scope And Implementation Requirements
 
-- [ ] Build 3 Golden Packs conforming to v2 contracts: `12.5m / 5.5m / 2.0m` runtime split, segmented `VoiceTrackManifest` (`Narration + FoiaAudioSlots + room-tone TwistPads`), early-locked `spatial_anchors` with `span_cols`/`span_rows`, monochrome Start/End PNGs (zero crimson), non-neighbor `fallback_spec`s, and `episode_analytics` mocks.
-- [ ] Generate synthetic media fixtures: `911_8khz_distorted.wav` (pure speech, NO music), `bodycam_440hz_music_042profanity.mp4` (music + profanity at `0:42` + corner TV watermark + synthetic face), `911_spoken_pii.wav` (spoken phone/address), and `recorded_apis/` (incl. Wikimedia `CC BY-NC` vs `CC0`, CourtListener `REVERSED` vs `AFFIRMED`, age-restricted YouTube response).
+- [ ] Build 3 Golden Packs conforming strictly to **v4** contracts: **`13.0m / 5.67m / 1.33m`** runtime split (`max_hero_clips = 10` / `80s`), versioned `ScenePlan[]` (`EDITED_APPROVED`), `MOTIF_REGISTRY_V1` components, `prompt_mode in {TEXT_TO_VIDEO, FIRST_FRAME, FIRST_AND_LAST_FRAME}`, segmented `VoiceTrackManifest`, explicitly locked `spatial_anchors` on illustrative 2K plates, monochrome Start/End PNGs (zero crimson), non-neighbor `fallback_spec`s, and honest `episode_analytics` mocks.
+- [ ] Generate synthetic media & adversarial injection fixtures (`911_8khz_distorted.wav`, `bodycam_440hz_music_042profanity.mp4`, `911_spoken_pii.wav`, mocked `recorded_apis/`, plus synthetic prompt-injection breakout `</data>` strings).
 
 #### Edge Cases And Failure Modes
 
@@ -222,7 +223,7 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Scope And Implementation Requirements
 
-- [ ] Bootstrap `pipeline.db` and `telemetry.db` from `schema/*.sql` (`user_version = 2`), run `VACUUM INTO` pre-migration snapshot + `PRAGMA quick_check`, and roll back automatically if any migration step fails.
+- [ ] Bootstrap `pipeline.db` and `telemetry.db` from `schema/*.sql` (`schema_version = 4`), run `VACUUM INTO` pre-migration snapshot + `PRAGMA quick_check`, and roll back automatically if any migration step fails.
 
 #### Edge Cases And Failure Modes
 
@@ -336,37 +337,37 @@ This repository is engineered so **two developers build and test 100% independen
 - [ ] Run `uv run pytest packages/db/tests/test_accounts_repo.py` proving `24h + 5m` lock prevents drift and unintended monthly draws.
 - **Acceptance:** Rolling `24h + 5m` account ledger verified.
 
-### Task 010: Implement Dynamic Model-Aware Credit Escrow & Act-Constrained Governor (`packages/db`)
+### Task 010: Implement Cross-Provider Global Budget Ledger & Episode USD/Escrow Governor (`packages/db`)
 
 - **Track & Owner:** `Part 1 · Developer A`
 - **Milestone:** `M1-P1 · Scout, Disposition Gate, Early 2K Lock & PII/AdSense`
 - **Depends On:** `Task 005`, `Task 009`
-- **Git Worktree & Branch:** `task/010-dynamic-credit-escrow` in `../tc-wt/task-010-dynamic-credit-escrow`
+- **Git Worktree & Branch:** `task/010-global-budget-ledger` in `../tc-wt/task-010-global-budget-ledger`
 - **Owned Write Scope:** `packages/db/src/escrow_repo.py`, `packages/db/tests/test_escrow_repo.py`, `.agent-handoffs/task-010.md`
-- **Mandatory Reference Files:** [economics-and-credit-math.md](economics-and-credit-math.md), [director-and-13-laws.md](director-and-13-laws.md)
-- **Shared Contracts Consumed / Produced:** `EpisodeCreditGovernor` supporting both Headless Gemini API USD caps (`$6.00/ep` base + `$2.40` escrow) and dynamic Pro credit escrow (`ceil(0.4 * base)`)
+- **Mandatory Reference Files:** [economics-and-credit-math.md](economics-and-credit-math.md), [schema/pipeline.sql](schema/pipeline.sql), [schema/queries.sql](schema/queries.sql)
+- **Shared Contracts Consumed / Produced:** `GlobalBudgetLedgerRepository` managing `monthly_budget_ledger` (`$135/mo ALL_PROVIDERS` cap + per-provider sub-caps) and `provider_spend_reservations` (with `$0 OFFLINE_TEST` guard + `$10.40/ep` `gemini_omni` video ceiling)
 
 #### Scope And Implementation Requirements
 
-- [ ] Size Retake Escrow dynamically by actual model mix (`Veo 3.1 Lite` vs `Omni 1.2 Flash`): `escrow = ceil(0.4 * base)` (ensuring `>= 3` Omni retakes or `6+` Veo Lite retakes within ceiling) rather than a fixed static 80-credit assumption!
-- [ ] Enforce Act 1 `<= 40%` budget cap and track `flow_backend_mode` (`HEADLESS_GEMINI_API` vs `HUMAN_BATCH_DESK`).
+- [ ] Implement transactional `reserve_provider_budget()` and `settle_provider_budget()` (`schema/queries.sql`) enforcing **`trg_offline_test_zero_spend_guard`** (`purpose = 'OFFLINE_TEST' -> $0`) and **`trg_provider_global_budget_cap_guard`** (`ALL_PROVIDERS <= $135/mo`, per-provider sub-caps incl. `deepseek_chat` `$38/mo` `0%`-cache upper bound, and `$10.40/ep` video cap).
+- [ ] Track Act 1 `<= 40%` hero allocation and `flow_backend_mode` (`GEMINI_OMNI_INTERACTIONS` vs `VERTEX_VEO_ENTERPRISE` vs `HUMAN_BATCH_DESK`).
 
 #### Edge Cases And Failure Modes
 
-- Mixed episode using 4 Omni 8s clips (`96 cr`) + 6 Veo Lite clips (`60 cr`): dynamic escrow allocates `ceil(0.4 * 156) = 63` credits cleanly.
+- DeepSeek batch + Gemini Omni clip running concurrently near month-end hitting global `$135` across providers: transactional SQLite trigger blocks the overflow cleanly regardless of which provider came last!
 
 #### Bug Prevention And Invariants
 
-- **Model-Scaled Retake Escrow Invariant:** Retake buffer scales proportionally to the selected clip models' real retake cost.
+- **Single Authoritative Cross-Provider USD Ledger Invariant (`F-01`, `F-02`):** `telemetry.db` is NEVER queried for budget admission control.
 
 #### Independent Testability & Parallel Isolation
 
-- Pure Python + SQLite concurrency tests.
+- Offline SQLite concurrency & cross-provider overflow tests (`$0` API calls).
 
 #### Verification, Testing And Acceptance Criteria
 
-- [ ] Run `uv run pytest packages/db/tests/test_escrow_repo.py` verifying Headless API USD caps, dynamic Pro escrow math, and Act 1 `<= 40%` enforcement.
-- **Acceptance:** Dynamic credit governor verified.
+- [ ] Run `uv run pytest packages/db/tests/test_escrow_repo.py` verifying `$0` `OFFLINE_TEST` guard, `$135/mo ALL_PROVIDERS` cap, and `$10.40/ep` cap.
+- **Acceptance:** Global multi-provider USD budget repository verified.
 
 ### Task 011: Implement Flow Job Queue & SQL 2-Strike Circuit Breaker Repository (`packages/db`)
 
@@ -376,16 +377,16 @@ This repository is engineered so **two developers build and test 100% independen
 - **Git Worktree & Branch:** `task/011-flow-job-repo` in `../tc-wt/task-011-flow-job-repo`
 - **Owned Write Scope:** `packages/db/src/flow_jobs_repo.py`, `packages/db/tests/test_flow_jobs_repo.py`, `.agent-handoffs/task-011.md`
 - **Mandatory Reference Files:** [flow-hybrid-and-batch-desk.md](flow-hybrid-and-batch-desk.md), [schema/pipeline.sql](schema/pipeline.sql)
-- **Shared Contracts Consumed / Produced:** `FlowJobRepository` supporting `HEADLESS_API_USD` (`$0` on safety block!) and `HUMAN_BATCH_DESK` pools
+- **Shared Contracts Consumed / Produced:** `FlowJobRepository` supporting `GEMINI_API_USD` (`$0` released on safety blocks!) and `HUMAN_BATCH_DESK` pools
 
 #### Scope And Implementation Requirements
 
-- [ ] Implement `record_attempt()` tracking `pool_source` (`HEADLESS_API_USD`, `DAILY`, `MONTHLY_BASE`, `MONTHLY_ESCROW`), billing `$0` when `pool_source == 'HEADLESS_API_USD'` and `qa_verdict == 'FAIL_SAFETY_BLOCK'`.
+- [ ] Implement `record_attempt()` tracking `pool_source` (`GEMINI_API_USD`, `VERTEX_USD`, `DAILY_CREDITS`, `MONTHLY_CREDITS`), settling `provider_spend_reservations` to `RELEASED` (`$0`) on safety blocks (`total_output_tokens == 0`) and persisting `provider_operation_id` / `UNKNOWN_RECONCILE` safely across crashes (`F-10`).
 - [ ] Enforce Strike 1 -> `STRIKE_1_RETRY_SAFE` (`prompt_v2_safe`) and Strike 2 -> `SWITCHED_TO_FALLBACK` (`trg_flow_two_strike_breaker` blocking Attempt 3).
 
 #### Edge Cases And Failure Modes
 
-- Safety block in Headless API mode erroneously deducting `$0.40`: verify `credits_charged = 0` on `FAIL_SAFETY_BLOCK` under `HEADLESS_API_USD`.
+- Safety block in Gemini Omni Interactions mode: settle reservation cleanly as `RELEASED` (`actual_micro_usd = 0`) so safety-rejected prompts release reserved USD headroom back to escrow!
 
 #### Bug Prevention And Invariants
 
@@ -412,7 +413,7 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Scope And Implementation Requirements
 
-- [ ] Enforce valid directed transitions (`QUEUED -> SCOUTED -> EVIDENCE_AND_2K_LOCKED -> COMPLIANCE_PASSED -> VOICE_READY -> MANIFEST_LINTED -> CODE_RENDERED -> AWAITING_FLOW_BATCH -> POST_FLOW_PROCESSING -> MASTERED -> READY_TO_UPLOAD -> PUBLISHED`).
+- [ ] Enforce valid directed transitions (`QUEUED -> SCOUTED -> EVIDENCE_AND_2K_LOCKED -> COMPLIANCE_PASSED -> SCENE_PLAN_APPROVED -> VOICE_READY -> MANIFEST_LINTED -> ANIMATIC_APPROVED -> CODE_RENDERED -> AWAITING_FLOW_BATCH -> POST_FLOW_PROCESSING -> MASTERED -> PENDING_HUMAN_SIGNOFF -> READY_TO_UPLOAD -> PUBLISHED`).
 - [ ] Allow up to **3 concurrent episodes** in `AWAITING_FLOW_BATCH` (fixing the 1-slot 3-day stall bug in optional Batch Desk mode) and query oldest-first (`ORDER BY created_at ASC`).
 
 #### Edge Cases And Failure Modes
@@ -476,7 +477,7 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Scope And Implementation Requirements
 
-- [ ] Load token/audio/video rates dynamically from `providers.yaml` (DeepSeek peak/off-peak/98% cache, Gemini TTS 2026 vs 2027 rate, Veo 3.1 Lite `$0.05/sec`, Image API) and log asynchronously into `telemetry.db` without sharing transactions with `pipeline.db`.
+- [ ] Load token/audio/video rates dynamically from `providers.yaml` (DeepSeek `0%`-cache conservative & best-effort cached rates, Gemini TTS, `gemini-omni-1.2-flash` `~$0.10/sec` conservative 720p plan, Image API) and log asynchronously into **non-authoritative `telemetry.db` (`total_input_tokens` where `cached_input_tokens <= total_input_tokens` CHECK holds)** without ever gating paid admission control!
 - [ ] Compute per-episode spend rollups and Byte-0 cross-episode cache-hit ratios, pruning rows `> 30` days.
 
 #### Edge Cases And Failure Modes
@@ -1239,12 +1240,12 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Scope And Implementation Requirements
 
-- [ ] Extract `TemporalFactLedger` via `evidence-ledger-extractor@2`, overriding `source_type` from the cited `primary_documents` row.
+- [ ] Extract `TemporalFactLedger` via `evidence-ledger-extractor@3` (tool-less, zero DB-write privileges, delimiter-sanitized random nonce wrapper `<untrusted_source_...>` rejecting injected instructions inside `<data>` breakouts — Additional Security Check #2), overriding `source_type` from the cited `primary_documents` row.
 - [ ] **Living Third-Party Anonymizer (`F-04`):** Automatically detect and replace names of unconvicted witnesses, neighbors, coworkers, and family members with neutral role aliases (`"Witness A"`, `"a coworker"`, `"Neighbor B"`), advancing `cases.anonymization_status` from `NOT_STARTED` -> `IN_REVIEW` (recording `anonymization_artifact_sha256`; NEVER default-approving to `APPROVED` without verified review metadata!).
 
 #### Edge Cases And Failure Modes
 
-- Appellate filing names an unconvicted former suspect who was cleared: anonymize strictly to `"an initial person of interest"` so zero defamatory naming reaches the script!
+- Appellate filing or third-party report contains fake `"IGNORE PREVIOUS INSTRUCTIONS"` / `"</data>"` prompt-injection payload: tool-less schema extractor ignores directives cleanly and passes offline adversarial injection tests!
 
 #### Bug Prevention And Invariants
 
@@ -1689,8 +1690,9 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Scope And Implementation Requirements
 
-- [ ] Consume `TemporalFactLedger`, `TurningPointBeat[]`, and **early-locked `spatial_anchors`** (`EVIDENCE_AND_2K_LOCKED`), generating narration beats PLUS explicit `foia_slot` placeholders sized to `scrubbed_foia` durations so Narration + FOIA = `~20.0 min`!
-- [ ] Enforce topology-safe spatial phrasing anchored to verified `spatial_anchors` (`"near the hallway window [B2]"`, `"beside the overturned table [E3]"`).
+- [ ] Consume `TemporalFactLedger`, `TurningPointBeat[]`, concise `craft_rubric.yaml` (`<= 150 lines`, clarifying `"interactive"` as engaging visual documentary pacing), and **explicitly `LOCKED` `spatial_anchors`** (`EVIDENCE_AND_2K_LOCKED`).
+- [ ] **Versioned Per-Scene `ScenePlan` Stage 1 Compiler (`Plan First`, `F-05`, `F-06`):** Persist one typed `scene_plans` row per scene binding `story_purpose`, `intended_audience_effect`, `approved_narration_text` + `narration_version_sha256`, `cited_fact_ids_json`, `visual_concept`, `prompt_mode`, `visual_prompt`, `keyframe_refs_json`, `expected_output_summary`, `timing`, `transition_spec_json`, `sound_cues_json`, `edit_instructions`, and `acceptance_criteria_json`, transitioning cleanly to `SCENE_PLAN_APPROVED` BEFORE voice synthesis or visual creation!
+- [ ] Enforce non-misleading, record-anchored phrasing referenced to verified `fact_ledger` IDs.
 
 #### Edge Cases And Failure Modes
 
@@ -2116,67 +2118,69 @@ This repository is engineered so **two developers build and test 100% independen
 - [ ] Run `uv run pytest packages/voice_sync/tests/test_stitcher.py` verifying room-tone floor, exact segment bounds, and `total_master_ms`.
 - **Acceptance:** Segmented voice timeline builder verified.
 
-### Task 066: Implement DeepSeek Speech-to-Text ASR Word-Level Aligner (`packages/voice_sync`)
+### Task 066: Implement Local WhisperX Forced Word-Level Aligner & Global Offset Mapper (`packages/voice_sync`)
 
 - **Track & Owner:** `Part 1 · Developer A`
 - **Milestone:** `M2-P1 · Segmented Voice-First, 13-Law Director & Conveyor`
 - **Depends On:** `Task 014`, `Task 065`
-- **Git Worktree & Branch:** `task/066-deepseek-asr-aligner` in `../tc-wt/task-066-deepseek-asr-aligner`
-- **Owned Write Scope:** `packages/voice_sync/src/deepseek_asr.py`, `packages/voice_sync/tests/test_deepseek_asr.py`, `.agent-handoffs/task-066.md`
-- **Mandatory Reference Files:** [voice-first-and-asr-sync.md](voice-first-and-asr-sync.md)
-- **Shared Contracts Consumed / Produced:** Per-segment millisecond `WordTimestamp[]` offset accurately onto global `total_master_ms`
+- **Git Worktree & Branch:** `task/066-whisperx-word-aligner` in `../tc-wt/task-066-whisperx-word-aligner`
+- **Owned Write Scope:** `packages/voice_sync/src/whisperx_aligner.py`, `packages/voice_sync/tests/test_whisperx_aligner.py`, `.agent-handoffs/task-066.md`
+- **Mandatory Reference Files:** [voice-first-and-asr-sync.md](voice-first-and-asr-sync.md), [research/voice-first-tts-asr-sync.md](research/voice-first-tts-asr-sync.md)
+- **Shared Contracts Consumed / Produced:** **Sole Owner of Millisecond `WordTimestamp[]` (`F-03`)** via local `$0` WhisperX forced alignment mapped accurately onto global `total_master_ms`
 
 #### Scope And Implementation Requirements
 
-- [ ] Run DeepSeek ASR (`providers.yaml` rates) per `NARRATION` segment, align tokens dynamically against script text, and offset timestamps cleanly by `segment.start_ms` so every word sits at its exact global master timeline millisecond!
+- [ ] Run local **WhisperX + Phoneme Wav2Vec2 forced aligner (`whisperx-local`)** offline (`$0` API cost, zero `8 MiB` / `120s` upload limit!) against each `NARRATION` segment's `48 kHz` WAV + `approved_narration_text`, offsetting every `WordTimestamp` cleanly by `segment.start_ms`!
 
 #### Edge Cases And Failure Modes
 
 - Offset forgetting `FOIA_AUDIO_SLOT` duration before Segment 3: verify timestamps after a `25s` FOIA slot jump cleanly by `+25,000 ms`!
+- Why DeepSeek ASR is NOT used here (`F-03`): DeepSeek Speech-to-Text enforces a hard `8 MiB / 120s` limit (`48 kHz` stereo PCM exceeds `8 MiB` in `< 1 min`) and returns no word-level timestamps.
 
 #### Bug Prevention And Invariants
 
-- **Global Timeline Offset Accuracy Invariant.**
+- **Offline Forced Alignment & Global Timeline Offset Accuracy Invariant (`F-03`).**
 
 #### Independent Testability & Parallel Isolation
 
-- Mocked ASR tests across multi-segment timelines containing FOIA gaps.
+- Offline unit tests with synthetic forced-alignment fixtures across multi-segment timelines containing FOIA gaps (`$0` network calls).
 
 #### Verification, Testing And Acceptance Criteria
 
-- [ ] Run `uv run pytest packages/voice_sync/tests/test_deepseek_asr.py` with 100% pass.
-- **Acceptance:** Segmented DeepSeek ASR aligner verified.
+- [ ] Run `uv run pytest packages/voice_sync/tests/test_whisperx_aligner.py` with 100% pass offline.
+- **Acceptance:** Local WhisperX word-level aligner verified.
 
-### Task 067: Implement Gemini 3.5 Transcribe & Local WhisperX Fallback (`packages/voice_sync`)
+### Task 067: Implement Bounded Cloud ASR Wrapper (`<= 90s / <= 4 MiB` `16 kHz` FLAC Slicer) (`packages/voice_sync`)
 
 - **Track & Owner:** `Part 1 · Developer A`
 - **Milestone:** `M2-P1 · Segmented Voice-First, 13-Law Director & Conveyor`
 - **Depends On:** `Task 066`
-- **Git Worktree & Branch:** `task/067-whisperx-gemini-asr-fallback` in `../tc-wt/task-067-whisperx-gemini-asr-fallback`
-- **Owned Write Scope:** `packages/voice_sync/src/asr_fallback.py`, `packages/voice_sync/tests/test_asr_fallback.py`, `.agent-handoffs/task-067.md`
-- **Mandatory Reference Files:** [voice-first-and-asr-sync.md](voice-first-and-asr-sync.md)
-- **Shared Contracts Consumed / Produced:** `WordAlignerPort` offline WhisperX + Gemini fallback
+- **Git Worktree & Branch:** `task/067-bounded-cloud-asr-slicer` in `../tc-wt/task-067-bounded-cloud-asr-slicer`
+- **Owned Write Scope:** `packages/voice_sync/src/bounded_cloud_asr.py`, `packages/voice_sync/tests/test_bounded_cloud_asr.py`, `.agent-handoffs/task-067.md`
+- **Mandatory Reference Files:** [voice-first-and-asr-sync.md](voice-first-and-asr-sync.md), [research/voice-first-tts-asr-sync.md](research/voice-first-tts-asr-sync.md)
+- **Shared Contracts Consumed / Produced:** Optional raw-FOIA cloud transcription adapter (DeepSeek ASR / Gemini Transcribe) strictly slicing/transcoding audio to **`16 kHz` mono FLAC `<= 90s / <= 4 MiB`** (`F-03`)
 
 #### Scope And Implementation Requirements
 
-- [ ] Implement WhisperX forced alignment and Gemini Transcribe with spoken-number expansion (`"2023"` -> `"twenty twenty three"`).
+- [ ] Before calling any optional cloud ASR (DeepSeek Speech-to-Text `8 MiB / 120s` max or Gemini Transcribe) on unscripted FOIA/911 audio, deterministically downsample to `16 kHz` mono FLAC and split on silence into **`<= 90s`** chunks strictly `< 4 MiB`, followed by WhisperX if word timestamps are needed (`never` send `48 kHz` stereo PCM to DeepSeek ASR!).
+- [ ] Include spoken-number normalization (`"2023"` -> `"twenty twenty three"`) cleanly.
 
 #### Edge Cases And Failure Modes
 
-- Missing numeric alignment tokens: number-expansion mapping restores exact millisecond bounds.
+- Caller passes a 3-minute `48 kHz` stereo WAV (`~34 MB`) directly: slicer enforces chunking + `16 kHz` FLAC transcode so every payload fits cleanly `< 4 MiB` & `<= 90s`!
 
 #### Bug Prevention And Invariants
 
-- **Backend Interchangeability Invariant.**
+- **Strict API Payload-Limit Invariant (`F-03`):** Hard-reject any cloud ASR payload `> 7.5 MiB` or `> 115s` prior to network transmission (mocked offline in tests).
 
 #### Independent Testability & Parallel Isolation
 
-- Synthetic speech WAV fallback tests.
+- Offline chunker/size-guard tests using 3-minute synthetic stereo `48 kHz` WAVs (`$0` API calls).
 
 #### Verification, Testing And Acceptance Criteria
 
-- [ ] Run `uv run pytest packages/voice_sync/tests/test_asr_fallback.py` with 100% pass.
-- **Acceptance:** ASR fallback aligner verified.
+- [ ] Run `uv run pytest packages/voice_sync/tests/test_bounded_cloud_asr.py` verifying strict `<= 90s / <= 4 MiB` slicing and mocked transport handling.
+- **Acceptance:** Bounded cloud ASR slicer verified compatible with DeepSeek/Gemini API limits.
 
 ### Task 068: Implement Millisecond Keyword Trigger & Free ASR Proper-Noun Phonetic Diff Check (`packages/voice_sync`)
 
@@ -2398,19 +2402,19 @@ This repository is engineered so **two developers build and test 100% independen
 - [ ] Run `uv run pytest packages/agent4_director/tests/test_cached_director_client.py` confirming identical byte-0 prefix across distinct episodes.
 - **Acceptance:** Cross-episode prompt cache ordering verified.
 
-### Task 075: Implement Layer 1 `director-manifest@2` Proposal Generator (`12.5m / 5.5m / 2.0m` Split) (`packages/agent4_director`)
+### Task 075: Implement Layer 1 `director-manifest@4` Proposal Generator (`13.0m / 5.67m / 1.33m` Split & `ScenePlan`) (`packages/agent4_director`)
 
 - **Track & Owner:** `Part 1 · Developer A`
 - **Milestone:** `M2-P1 · Segmented Voice-First, 13-Law Director & Conveyor`
 - **Depends On:** `Task 074`
 - **Git Worktree & Branch:** `task/075-agent4-manifest-proposer` in `../tc-wt/task-075-agent4-manifest-proposer`
 - **Owned Write Scope:** `packages/agent4_director/src/manifest_proposer.py`, `packages/agent4_director/tests/test_manifest_proposer.py`, `.agent-handoffs/task-075.md`
-- **Mandatory Reference Files:** [director-and-13-laws.md](director-and-13-laws.md), [economics-and-credit-math.md](economics-and-credit-math.md)
-- **Shared Contracts Consumed / Produced:** Proposes honest `12.5m Code/FOIA + 5.5m 2K + 2.0m Hero` (`<= 15 x 8s`) manifest + `30 fps` `TimelineSpec`
+- **Mandatory Reference Files:** [director-and-13-laws.md](director-and-13-laws.md), [economics-and-credit-math.md](economics-and-credit-math.md), [craft_rubric.yaml](craft_rubric.yaml)
+- **Shared Contracts Consumed / Produced:** Compiles **`13.0m Code/FOIA + 5.67m Illustrative 2K + 1.33m Omni Hero` (`max_hero_clips = 10 / 80s`)** manifest + `30 fps` `TimelineSpec` strictly bound to `PLAN_APPROVED` `scene_plans` (`F-02`, `F-04`, `F-05`)
 
 #### Scope And Implementation Requirements
 
-- [ ] Generate `ProductionManifest` + ~400-line `TimelineSpec` (`30 fps`) aligned to segmented `VoiceTrackManifest` (`Narration` + `FoiaAudioSlots` + `TwistPads`), inserting `CaseBoardSpine` inside **`210s–270s` flexible boundary-snapped windows** and selecting `<= 15` Flow hero clips (`2.0 min`).
+- [ ] Generate `ProductionManifest` + `TimelineSpec` (`30 fps`, `MOTIF_REGISTRY_V1`) from `PLAN_APPROVED` `scene_plans` aligned to segmented `VoiceTrackManifest`, inserting `CaseBoardSpine` inside **`210s–270s` flexible boundary-snapped windows** and enforcing single-config cap **`<= 10` Hero clips (`<= 80s`)** using `TEXT_TO_VIDEO` / `FIRST_FRAME` / `FIRST_AND_LAST_FRAME (<= 10s)`.
 
 #### Edge Cases And Failure Modes
 
@@ -2473,7 +2477,7 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Scope And Implementation Requirements
 
-- [ ] **`RULE_02` (Act-Constrained Downgrade):** Enforce model-aware base budget + dynamic escrow (`<= 16` clips). When auto-downgrading excess clips, **protect Cold Open AND protect Act 2's `>= 2` highest-scoring hero peaks** (`RULE_06`)—trimming Act 1/Act 3 excess clips first!
+- [ ] **`RULE_02` (Act-Constrained Downgrade & Global Cap Check, `F-02`, `F-04`):** Enforce single-config `providers.yaml` cap (`max_hero_clips = 10`, `max_hero_duration_sec = 80s`, `$10.40/ep` video limit) PLUS remaining global monthly headroom in `monthly_budget_ledger` (`ALL_PROVIDERS <= $135/mo`). When auto-downgrading excess clips, **protect Cold Open AND protect Act 2's `>= 2` highest-scoring hero peaks** (`RULE_06`).
 - [ ] **`RULE_04` (Non-Neighbor Fallback):** Require every `FLOW_HERO_VIDEO` scene's `fallback_spec.engine != prev_scene.engine` (and `!= next_scene.engine` when distinct)—typically selecting `STILL_2K_PANZOOM` between `CODE_STICKMAN` scenes so a 2-strike fallback can NEVER create a `> 50.0s` single-engine streak (`RULE_05`)!
 
 #### Edge Cases And Failure Modes
@@ -2505,7 +2509,7 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Scope And Implementation Requirements
 
-- [ ] Exempt continuous `FLOW_HERO_VIDEO` clips (`<= 8.0s`) from the `<= 6.0s` static micro-beat clock (eliminating `RULE_03` vs `RULE_05` false failures on 8s hero shots!).
+- [ ] Exempt continuous `FLOW_HERO_VIDEO` clips (`<= 10.0s`) from the `<= 6.0s` static micro-beat clock (eliminating `RULE_03` vs `RULE_05` false failures on continuous Omni hero shots!).
 - [ ] Validate `CaseBoardSpine` triggers inside `210s–270s` intervals strictly at completed scene/sentence boundaries (never mid-sentence or mid-911!).
 
 #### Edge Cases And Failure Modes
@@ -2711,39 +2715,39 @@ This repository is engineered so **two developers build and test 100% independen
 - [ ] Run `uv run pytest packages/agent4_director/tests/test_law_06.py` with 100% pass.
 - **Acceptance:** Law 6 validator verified.
 
-### Task 085: Implement `RULE_11` Split Motion-Only vs Text-to-Video Prompt Compressor (`packages/agent4_director`)
+### Task 085: Implement `RULE_11` Split `prompt_mode` Compressor (`FIRST_FRAME` / `FIRST_AND_LAST_FRAME` vs `TEXT_TO_VIDEO`) (`packages/agent4_director`)
 
 - **Track & Owner:** `Part 1 · Developer A`
 - **Milestone:** `M2-P1 · Segmented Voice-First, 13-Law Director & Conveyor`
 - **Depends On:** `Task 076`
 - **Git Worktree & Branch:** `task/085-linter-rule11-split-compressor` in `../tc-wt/task-085-linter-rule11-split-compressor`
 - **Owned Write Scope:** `packages/agent4_director/src/rules/rule_11_prompt_compress.py`, `packages/agent4_director/tests/test_rule_11.py`, `.agent-handoffs/task-085.md`
-- **Mandatory Reference Files:** [director-and-13-laws.md](director-and-13-laws.md)
-- **Shared Contracts Consumed / Produced:** Resolves Law 11 vs Law 12 conflict cleanly (`FRAMES_MOTION_ONLY` vs `TEXT_TO_VIDEO`)
+- **Mandatory Reference Files:** [director-and-13-laws.md](director-and-13-laws.md), [schema/pipeline.sql](schema/pipeline.sql)
+- **Shared Contracts Consumed / Produced:** Canonical v4 `prompt_mode` prompt validation (`TEXT_TO_VIDEO` | `FIRST_FRAME` | `FIRST_AND_LAST_FRAME` — zero retired `FRAMES_MOTION_ONLY` or `VEO_3_1_LITE` references! `F-04`)
 
 #### Scope And Implementation Requirements
 
-- [ ] Enforce `VEO_3_1_LITE` (`10–15 words`), `OMNI_1_2_FLASH` (`15–30 words`), negative-keyword `"no"`/`"don't show"` ban.
+- [ ] Enforce **`gemini-omni-1.2-flash`** motion prompt length (`15–30 words`, negative-keyword `"no"`/`"don't show"` ban) and duration bucket parity (`3s–15s` for `TEXT_TO_VIDEO`/`FIRST_FRAME`; **`3s–10s` max** for `FIRST_AND_LAST_FRAME`).
 - [ ] **Mode-Specific Enforcement:**
-  - When `prompt_mode == 'FRAMES_MOTION_ONLY'` (Start/End PNG attached): strictly forbid ALL appearance/clothing/material nouns (`hooded`, `detective`, `charcoal`, `coat`, `fedora`)—only motion verbs, pacing adverbs, direction, and camera moves!
-  - When `prompt_mode == 'TEXT_TO_VIDEO'` (no keyframes): permit concise stylized subject labels (`"Minimalist 2D stick figure"`).
+  - When `prompt_mode IN ('FIRST_FRAME', 'FIRST_AND_LAST_FRAME')`: strictly forbid appearance/clothing/material nouns (`hooded`, `detective`, `charcoal`, `coat`, `fedora`)—allowing strictly motion verbs, pacing adverbs, and camera moves!
+  - When `prompt_mode == 'TEXT_TO_VIDEO'` (null frames): permit concise stylized subject labels (`"Minimalist 2D stick figure"`).
 
 #### Edge Cases And Failure Modes
 
-- Prompt uses `"hooded 2D ink figure"` on a `FRAMES_MOTION_ONLY` job: caught deterministically and stripped to `"Figure runs steadily left-to-right down alley, smooth side tracking shot."`!
+- Prompt uses `"hooded 2D ink figure"` on a `FIRST_AND_LAST_FRAME` job: stripped cleanly to `"Figure moves steadily left-to-right down alley, smooth side tracking shot."`!
 
 #### Bug Prevention And Invariants
 
-- **Zero Law 11 / Law 12 Self-Contradiction Invariant.**
+- **Zero Deprecated `FRAMES_MOTION_ONLY` / `VEO_3_1_LITE` Contract Drift Invariant (`F-04`).**
 
 #### Independent Testability & Parallel Isolation
 
-- Pure Python mode-split word/noun checks.
+- Pure Python mode-split word/noun checks (`$0` API calls).
 
 #### Verification, Testing And Acceptance Criteria
 
-- [ ] Run `uv run pytest packages/agent4_director/tests/test_rule_11.py` confirming `FRAMES_MOTION_ONLY` strips appearance words while `TEXT_TO_VIDEO` allows stylized tags.
-- **Acceptance:** Conflict-free `RULE_11` prompt compressor verified.
+- [ ] Run `uv run pytest packages/agent4_director/tests/test_rule_11.py` confirming `FIRST_FRAME` / `FIRST_AND_LAST_FRAME` strip appearance words while `TEXT_TO_VIDEO` allows stylized tags.
+- **Acceptance:** Canonical v4 `RULE_11` prompt compressor verified.
 
 ### Task 086: Implement `RULE_12` Split Anonymizer & Cinematography Bigram Whitelist (`packages/agent4_director`)
 
@@ -2753,16 +2757,16 @@ This repository is engineered so **two developers build and test 100% independen
 - **Git Worktree & Branch:** `task/086-linter-rule12-bigram-anonymizer` in `../tc-wt/task-086-linter-rule12-bigram-anonymizer`
 - **Owned Write Scope:** `packages/agent4_director/src/rules/rule_12_anonymizer.py`, `packages/agent4_director/tests/test_rule_12.py`, `.agent-handoffs/task-086.md`
 - **Mandatory Reference Files:** [director-and-13-laws.md](director-and-13-laws.md)
-- **Shared Contracts Consumed / Produced:** Implements Stage 1 Regex Scrub with **Cinematography Bigram Whitelist** + Stage 2 Split Metaphor Tables (`TEXT_TO_VIDEO` vs `FRAMES_MOTION_ONLY`)
+- **Shared Contracts Consumed / Produced:** Stage 1 Regex Scrub with **Cinematography Bigram Whitelist** + Stage 2 Split Metaphor Tables (`TEXT_TO_VIDEO` vs `FIRST_FRAME`/`FIRST_AND_LAST_FRAME`)
 
 #### Scope And Implementation Requirements
 
-- [ ] **Cinematography Bigram Whitelist:** Before scanning for `"shoot"` / `"shot"` / `"gun"` / `"minor"`, mask whitelisted camera bigrams (`tracking shot`, `static shot`, `dolly shot`, `wide shot`, `medium shot`, `panning shot`, `establishing shot`, `minor detail` -> or strictly block standalone `"minor"` when referring to age/person!) so Law 12's own `"smooth side tracking shot"` never false-positives!
-- [ ] **Two Metaphor Templates:** Compile `TEXT_TO_VIDEO` prompts using atmospheric stylized silhouettes (`"Two dark charcoal silhouettes..."`) and `FRAMES_MOTION_ONLY` prompts using pure motion verbs (`"Figures move steadily across frosted hallway, flickering light, static camera."`) with zero appearance descriptors!
+- [ ] **Cinematography Bigram Whitelist:** Before scanning for `"shoot"` / `"shot"` / `"gun"` / `"minor"`, mask whitelisted camera bigrams (`tracking shot`, `static shot`, `dolly shot`, `wide shot`, `medium shot`, `panning shot`, `establishing shot`).
+- [ ] **Two Metaphor Templates:** Compile `TEXT_TO_VIDEO` prompts using atmospheric stylized silhouettes and `FIRST_FRAME`/`FIRST_AND_LAST_FRAME` prompts using pure motion + camera verbs with zero appearance descriptors!
 
 #### Edge Cases And Failure Modes
 
-- `"smooth side tracking shot"` false-flagged by naive `"shot"` violence regex: bigram whitelist clears it cleanly while still catching `"suspect shot the victim"`!
+- `"smooth side tracking shot"` false-flagged by naive `"shot"` regex: cleared cleanly while `"suspect shot the victim"` hard-fails!
 
 #### Bug Prevention And Invariants
 
@@ -2770,12 +2774,12 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Independent Testability & Parallel Isolation
 
-- Unit tests covering `"tracking shot"` pass vs `"suspect shot"` block across both modes.
+- Offline unit tests covering both modes.
 
 #### Verification, Testing And Acceptance Criteria
 
 - [ ] Run `uv run pytest packages/agent4_director/tests/test_rule_12.py` with 100% pass.
-- **Acceptance:** Conflict-free `RULE_12` anonymizer verified.
+- **Acceptance:** Canonical `RULE_12` anonymizer verified.
 
 ### Task 087: Implement `RULE_13` Dual-Prompt Pre-Compiler (`prompt_v1` + `prompt_v2_safe`) (`packages/agent4_director`)
 
@@ -2946,7 +2950,7 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Scope And Implementation Requirements
 
-- [ ] Validate all `ProductionManifest`, `TimelineSpec`, `CaseBible`, and segmented `VoiceTrackManifest` payloads via Pydantic `extra="forbid"`, run real `FlowJobRepository` 2-strike transitions (including `$0` safety block simulation in `HEADLESS_GEMINI_API` mode!), and produce deterministic stub outputs.
+- [ ] Validate all `ProductionManifest`, `TimelineSpec`, `CaseBible`, `ScenePlan`, and segmented `VoiceTrackManifest` payloads via Pydantic `extra="forbid"`, run real `FlowJobRepository` 2-strike transitions (including `$0` released reservation simulation in `GEMINI_OMNI_INTERACTIONS` mode!), and produce deterministic stub outputs at **$0.00 spend (`OFFLINE_TEST`)**.
 
 #### Edge Cases And Failure Modes
 
@@ -2973,11 +2977,11 @@ This repository is engineered so **two developers build and test 100% independen
 - **Git Worktree & Branch:** `task/093-headless-default-conveyor` in `../tc-wt/task-093-headless-default-conveyor`
 - **Owned Write Scope:** `packages/orchestrator/src/conveyor_scheduler.py`, `packages/orchestrator/tests/test_conveyor_scheduler.py`, `.agent-handoffs/task-093.md`
 - **Mandatory Reference Files:** [flow-hybrid-and-batch-desk.md](flow-hybrid-and-batch-desk.md), [database-and-state-design.md](database-and-state-design.md)
-- **Shared Contracts Consumed / Produced:** `ConveyorScheduler` supporting 24/7 `HEADLESS_GEMINI_API` default AND up to `3` FIFO episodes in `AWAITING_FLOW_BATCH` for optional `HUMAN_BATCH_DESK`
+- **Shared Contracts Consumed / Produced:** `ConveyorScheduler` supporting **`GEMINI_OMNI_INTERACTIONS`** default, staggered **`Plan -> Voice -> Create -> Edit`** checkpoints (`SCENE_PLAN_APPROVED` -> `ANIMATIC_APPROVED`), AND up to `3` FIFO episodes in `AWAITING_FLOW_BATCH` for optional `HUMAN_BATCH_DESK`
 
 #### Scope And Implementation Requirements
 
-- [ ] Under default `HEADLESS_GEMINI_API` mode: run Scout -> Evidence+2K -> Compliance -> Voice -> Director -> Render -> Mastering continuously end-to-end with zero human waiting!
+- [ ] Under default `GEMINI_OMNI_INTERACTIONS` mode: run Scout -> Evidence+2K -> Compliance -> **Stage 1 `ScenePlan` Approval -> Stage 2 Voice + WhisperX + Animatic Approval** -> Render -> Mastering continuously without manual account-clicking waits!
 - [ ] Under optional `HUMAN_BATCH_DESK` mode: allow up to `3` episodes parked cleanly in `AWAITING_FLOW_BATCH` (FIFO oldest-first drain) so a 3-day 15-clip episode NEVER blocks `Ep N+2` compute!
 
 #### Edge Cases And Failure Modes
@@ -3036,15 +3040,15 @@ This repository is engineered so **two developers build and test 100% independen
 - **Git Worktree & Branch:** `task/095-flow-dispatch-parker` in `../tc-wt/task-095-flow-dispatch-parker`
 - **Owned Write Scope:** `packages/orchestrator/src/flow_batch_parker.py`, `packages/orchestrator/tests/test_flow_batch_parker.py`, `.agent-handoffs/task-095.md`
 - **Mandatory Reference Files:** [flow-hybrid-and-batch-desk.md](flow-hybrid-and-batch-desk.md)
-- **Shared Contracts Consumed / Produced:** Dispatches `flow_jobs` directly to `HeadlessGeminiApiBackend` OR parks silently in `AWAITING_FLOW_BATCH` with `24h+5m` reset awareness
+- **Shared Contracts Consumed / Produced:** Dispatches `flow_jobs` directly to `GeminiOmniInteractionsBackend` OR parks silently in `AWAITING_FLOW_BATCH` with `24h+5m` reset awareness
 
 #### Scope And Implementation Requirements
 
-- [ ] Create `flow_jobs` rows (`variations=1`, `prompt_v1`, `prompt_v2_safe`, non-neighbor `fallback_spec`) and dispatch via `RenderBackendPort.dispatch_flow_jobs()` (`HEADLESS_GEMINI_API`) or queue by account (`HUMAN_BATCH_DESK`).
+- [ ] Create `flow_jobs` rows (`UNIQUE(episode_id, scene_id)`, `idempotency_key`, `prompt_mode`, `prompt_v1`, `prompt_v2_safe`, non-neighbor `fallback_spec`) and dispatch via `RenderBackendPort.dispatch_flow_jobs()` (`GEMINI_OMNI_INTERACTIONS` / `VERTEX_VEO_ENTERPRISE`) or queue by account (`HUMAN_BATCH_DESK`).
 
 #### Edge Cases And Failure Modes
 
-- `HEADLESS_GEMINI_API` mode accidentally waiting for human shift: immediate dispatch path skips `AWAITING_FLOW_BATCH` wait!
+- `GEMINI_OMNI_INTERACTIONS` mode accidentally waiting for human shift: immediate dispatch skips manual account tabs!
 
 #### Bug Prevention And Invariants
 
@@ -3121,23 +3125,24 @@ This repository is engineered so **two developers build and test 100% independen
 - [ ] Run `uv run pytest packages/orchestrator/tests/test_cli_daemon.py` with 100% pass.
 - **Acceptance:** Orchestrator CLI & daemon verified.
 
-### Task 098: Implement Budget, API Spend & Quota Guardrails (`providers.yaml`) (`packages/orchestrator`)
+### Task 098: Implement Multi-Provider Global Budget & `OFFLINE_TEST` Zero-Spend Guardrails (`packages/orchestrator`)
 
 - **Track & Owner:** `Part 1 · Developer A`
 - **Milestone:** `M2-P1 · Segmented Voice-First, 13-Law Director & Conveyor`
 - **Depends On:** `Task 014`, `Task 097`
 - **Git Worktree & Branch:** `task/098-budget-quota-guardrails` in `../tc-wt/task-098-budget-quota-guardrails`
 - **Owned Write Scope:** `packages/orchestrator/src/budget_guardrails.py`, `packages/orchestrator/tests/test_budget_guardrails.py`, `.agent-handoffs/task-098.md`
-- **Mandatory Reference Files:** [economics-and-credit-math.md](economics-and-credit-math.md)
-- **Shared Contracts Consumed / Produced:** Enforces `$60/mo` Veo API / `$90` DeepSeek reserve / `$5.00/ep` circuit breaker caps dynamically from `providers.yaml`
+- **Mandatory Reference Files:** [economics-and-credit-math.md](economics-and-credit-math.md), [schema/pipeline.sql](schema/pipeline.sql)
+- **Shared Contracts Consumed / Produced:** Enforces transactional **`$135/mo` `ALL_PROVIDERS` global cap**, per-provider sub-caps (incl. `$38/mo` `0%`-cache DeepSeek cap), `$10.40/ep` `gemini_omni` cap (`<= 10` clips / `80s`), and **`OFFLINE_TEST == $0.00`** trigger (`F-01`, `F-02`)
 
 #### Scope And Implementation Requirements
 
-- [ ] Track Headless Veo API USD spend (`$6.00/ep` target, `$0` on safety blocks), DeepSeek spend (`$1.40–$1.95` peak), and TTS spend, halting runaway retries cleanly before breaching monthly ceilings.
+- [ ] Execute every paid provider reservation via `provider_spend_reservations` inside authoritative `pipeline.db` (NEVER reading lagging `telemetry.db` for budget admission!).
+- [ ] Enforce BOTH `0%`-cache worst-case DeepSeek projections (`~$2.80–$3.80/ep`) AND `gemini-omni-1.2-flash` (`$8.00` base / `$10.40` hard cap/ep), halting runaway retries cleanly before breaching global `$135/mo` `ALL_PROVIDERS` cap!
 
 #### Edge Cases And Failure Modes
 
-- Runaway Agent 2/4 retry loop: per-episode `$5.00` DeepSeek breaker pauses episode safely.
+- DeepSeek batch + Gemini Omni clip hitting `$135/mo` simultaneously OR an ordinary test trying to reserve `$0.01`: `trg_provider_global_budget_cap_guard` / `trg_offline_test_zero_spend_guard` aborts atomically (`0` unbudgeted spend).
 
 #### Bug Prevention And Invariants
 
@@ -3195,7 +3200,7 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Scope And Implementation Requirements
 
-- [ ] Execute full 3-episode run (`HEADLESS_GEMINI_API` default + `HUMAN_BATCH_DESK` check) inside Developer A's workspace: Scout (mutually exclusive `SI`, 90d kill) -> Disposition Gate + Early 2K margin-grid `spatial_anchors` lock -> Granular Provenance + Music-Gated Demucs + Spoken & Visual PII scrub -> Segmented TTS/ASR + proper-noun check -> 13-Law `manifest_linter.py` + 480p `--dry-run` -> `RenderBackendStub` completion, validating all emitted JSON against `@tc/shared-contracts-ts` Zod parity!
+- [ ] Execute full 3-episode offline run (`GEMINI_OMNI_INTERACTIONS` transport mock + `HUMAN_BATCH_DESK` check, **`$0.00` API spend, outbound sockets blocked**) inside Developer A's workspace: Scout -> Disposition + Quarantine -> Explicitly `APPROVED` Anonymization + Early Illustrative 2K Anchors -> Component Rights + Music-Gated Demucs -> **`ScenePlan` Stage 1 Approval -> WhisperX Word Alignment** -> 13-Law `manifest_linter.py` (`<= 10` clips / `80s`) -> `RenderBackendStub` completion, validating 100% Zod parity!
 
 #### Edge Cases And Failure Modes
 
@@ -4257,7 +4262,7 @@ This repository is engineered so **two developers build and test 100% independen
 - Border vignette darkness misclassified as silhouette blob: exclude outer `16px` margin from face/blob heuristics.
 
 #### Bug Prevention And Invariants
-- Both `HeadlessGeminiApiBackend` and `HumanBatchDeskBackend` MUST reject uploading/staging any keyframe lacking `ImageSafetyVerdict.passed == True`.
+- All three adapters (`GeminiOmniInteractionsBackend`, `VertexVeoEnterpriseBackend`, `HumanBatchDeskBackend`) MUST reject uploading/staging any keyframe lacking `ImageSafetyVerdict.passed == True`.
 - Never silently auto-crop or blur a failed image; return exact violation codes so keyframe generator fixes palette cleanly or triggers `fallback_spec`.
 
 #### Independent Testability & Parallel Isolation
@@ -4611,7 +4616,7 @@ This repository is engineered so **two developers build and test 100% independen
 - **Tests:** 50-second multi-anchor guided still tour test (establishing wide shot -> `Anchor A` -> `Anchor B` -> `Anchor C`) checking beat synchronization and zero jarring snap cuts.
 
 #### Scope And Implementation Requirements
-- Implement `SpatialTourSequencer` translating multi-anchor `STILL_2K_PANZOOM` scene blocks (covering ~`5.5 min / 330s` per episode across 2–3 master 2K crime-scene stills without spending any video credits) into cohesive `10s–50s` animated spatial walkthroughs.
+- Implement `SpatialTourSequencer` translating multi-anchor `STILL_2K_PANZOOM` scene blocks (covering ~`5.67 min / 340s` per episode across 6–7 illustrative 2K stills without spending any paid video budget) into cohesive `10s–50s` animated spatial walkthroughs.
 - Synchronize camera arrival timestamps (`hold_start`, `hold_end`) directly against `voice_segments` cue timestamps (`words` timestamps inside `SceneSpec`) so the camera finishes panning right as the narrator speaks the target clue phrase (`"near the entryway"`, `"beside the overturned chair"`).
 - Support smooth dwell (`1.5%` ultra-slow breathing drift during narration beats so frames never look statically frozen) and cross-anchor travel curves (`0.9s–1.6s` smooth swoop).
 - Emit updated `scene_grade_manifest.json` records for every generated `STILL_2K_PANZOOM` MP4.
@@ -4659,7 +4664,7 @@ This repository is engineered so **two developers build and test 100% independen
 ### Task 150: Build Batch Renderer & CLI for `crime_scene_2k` (`packages/crime_scene_2k`)
 - **Owner:** Developer B (Part 2) | **Milestone:** M1-P2 | **Depends on:** Task 148, Task 149
 - **Files:** `packages/crime_scene_2k/src/crime_scene_2k/cli.py`, `packages/crime_scene_2k/src/crime_scene_2k/__init__.py`, `packages/crime_scene_2k/tests/test_cli_batch.py`
-- **Tests:** CLI batch execution tests rendering all `STILL_2K_PANZOOM` scenes from golden episode manifest, outputting `330s` cumulative clean `CFR 30fps` MP4 clips + JSON manifest.
+- **Tests:** CLI batch execution tests rendering all `STILL_2K_PANZOOM` scenes from golden episode manifest, outputting `340s` cumulative clean `CFR 30fps` MP4 clips + JSON manifest + mandatory `ILLUSTRATIVE RECONSTRUCTION` watermark.
 
 #### Scope And Implementation Requirements
 - Expose `crime-scene-2k` CLI and Python `CrimeScene2KService` API consumed by Part 2 workers and Agent 6 heal/batch pipelines (`crime-scene-2k render --manifest <path> --stills-dir <dir> --out-dir <dir> --scene <id?>`).
@@ -4801,7 +4806,7 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Edge Cases And Failure Modes
 - Account #1 resets at `19:03:00` while Account #2 resets at `19:14:30`: lock each tab independently by `account_id`, showing countdown timers cleanly without blocking Account #1's work.
-- Creator switches mid-episode from `HumanBatchDeskBackend` to `HeadlessGeminiApiBackend`: preserve already-ingested `clip_qa_passed` files seamlessly via shared `flow_clips` asset status and render remaining `pending` Hero clips through Headless API.
+- Creator switches mid-episode from `HumanBatchDeskBackend` to `GeminiOmniInteractionsBackend`: preserve already-ingested `clip_qa_passed` files seamlessly via shared `flow_jobs` state and render remaining `PENDING` Hero clips through Interactions API.
 
 #### Bug Prevention And Invariants
 - Never subtract credits before a valid clip or safety-fail state is confirmed on the desk action (`reserve -> commit/refund`).
@@ -4820,7 +4825,7 @@ This repository is engineered so **two developers build and test 100% independen
 - **Tests:** Drag-and-drop file ingestion tests verifying magic-byte validation, automatic duration bucket tolerance matching, stream normalization to `CFR 30fps`, and duplicate hash warnings.
 
 #### Scope And Implementation Requirements
-- Implement `FlowDropIngestor` validating raw `.mp4` / `.webm` / `.mov` files downloaded either automatically from `HeadlessGeminiApiBackend` or dragged onto a Batch Desk Job Card by a human operator.
+- Implement `FlowDropIngestor` validating raw `.mp4` / `.webm` / `.mov` files downloaded either automatically from `GeminiOmniInteractionsBackend` or dragged onto a Batch Desk Job Card by a human operator.
 - Validate container & codec streams via `ffprobe`: minimum width `>= 1280px` (`720p` minimum), non-zero video frames, duration within acceptable bucket bounds (`>= 0.85 * expected_bucket_sec`), and absence of corrupt moov atoms.
 - Automatically transcode/conform accepted Hero clips to unified pipeline intermediate spec (`1920x1080` Lanczos upscale if 720p, strict **`CFR 30fps`**, zero VFR drops, clean stripped or normalized stereo `48 kHz PCM` / silent audio placeholder) inside `workspace/flow_ingested/<scene_id>.mp4` so Agent 6 never hits mixed-FPS desync.
 - Compute SHA-256 hash upon ingest to warn immediately if the creator accidentally dropped the same Flow MP4 onto two different scene cards (`DuplicateClipDropError`).
@@ -4922,18 +4927,17 @@ This repository is engineered so **two developers build and test 100% independen
 ### Task 160: Build Standalone `flow_adapter` Episode Orchestrator & CLI (`packages/flow_adapter`)
 - **Owner:** Developer B (Part 2) | **Milestone:** M2-P2 | **Depends on:** Task 154, Task 157, Task 158, Task 159
 - **Files:** `packages/flow_adapter/src/flow_adapter/orchestrator.py`, `packages/flow_adapter/src/flow_adapter/__init__.py`, `packages/flow_adapter/tests/test_orchestrator_e2e.py`
-- **Tests:** E2E orchestrator test running `15` Hero clips (`2.0m`) under simulated Strike 1 safety rewrite + Strike 2 `fallback_spec` cascade cleanly on `ep_golden_01.json`.
+- **Tests:** 100% offline E2E orchestrator test running `<= 10` Hero clips (`<= 80s = 1.33m`) through `GEMINI_OMNI_INTERACTIONS` mock under simulated crash/`UNKNOWN_RECONCILE`, Strike 1 rewrite, and Strike 2 `fallback_spec` cascade cleanly on `ep_golden_01.json` (`$0.00` spend).
 
 #### Scope And Implementation Requirements
-- Implement `FlowOrchestrator` coordinating the end-to-end Hero scene fulfillment lifecycle for an episode:
-  1. Load validated `FLOW_HERO_VIDEO` scenes and bookends (`Task 135`).
-  2. Dispatch through selected `FlowAssetBackend` (`headless_api` default OR `human_batch_desk`).
-  3. Run `FlowDropIngestor` -> `1920x1080 CFR 30fps` conformation -> `VisionQA` -> `2-Strike Circuit Breaker`.
-  4. Resolve any `fallback_triggered` scenes immediately via `crime_scene_2k` or `@tc/render_catalog --scene` respecting the neighbor-streak `RULE_05` guard.
-  5. Emit final `hero_fulfillment_report.json` certifying 100% of episode Hero slots hold a clean `CFR 30fps 1920x1080` MP4 ready for Agent 6 Mastering.
+- Implement `FlowOrchestrator` coordinating the crash-safe Hero scene fulfillment lifecycle for an episode:
+  1. Reconcile any prior `SUBMITTING` / `RUNNING` / `UNKNOWN_RECONCILE` jobs (`reconcile_unknown_flow_jobs`) cleanly BEFORE dispatching new paid calls (`F-10`).
+  2. Load `PLAN_APPROVED` `FLOW_HERO_VIDEO` scenes & keyframes (`TEXT_TO_VIDEO` null frames, `FIRST_FRAME`, or `FIRST_AND_LAST_FRAME <= 10s`).
+  3. Reserve micro-USD in `provider_spend_reservations`, dispatch via `FlowAssetBackend`, run `FlowDropIngestor` -> `1920x1080 CFR 30fps` conformation -> fail-closed `VisionQA` -> `2-Strike Circuit Breaker`.
+  4. Resolve any `fallback_triggered` scenes via `crime_scene_2k` or `@tc/render_catalog --scene`.
 
 #### Edge Cases And Failure Modes
-- Process crash/restart after completing 9 of 15 Hero clips: read `hero_fulfillment_report.json` checkpoint cleanly and resume strictly from remaining 6 unfulfilled scenes with zero duplicate credit spend.
+- Process crash/restart after completing 6 of 10 Hero clips: startup reconciliation polls saved `provider_operation_id` without ever creating a duplicate paid job (`UNIQUE(episode_id, scene_id)`).
 
 #### Bug Prevention And Invariants
 - Assert exact total Hero + fallback MP4 duration equals `sum(manifest.hero_scenes.duration_sec)` within `+/-0.00s` frame precision (`round(d * 30)` frames).
@@ -4976,7 +4980,7 @@ This repository is engineered so **two developers build and test 100% independen
 - **Tests:** Audit asserting every clip attempt logs structured `cost_usd`, `latency_ms`, `provider_backend`, `safety_blocked`, and `attempt_num` records accurately.
 
 #### Scope And Implementation Requirements
-- Validate completeness and accuracy of telemetry events emitted by `flow_adapter` across both `HeadlessGeminiApiBackend` and `HumanBatchDeskBackend` paths so Episode Analytics (`Task 187–189`) and Economics Audits (`Task 199`) compute true unit economics cleanly.
+- Validate completeness and accuracy of BOTH `provider_spend_reservations` (authoritative `pipeline.db` ledger) and `telemetry.db` (`total_input_tokens >= cached_input_tokens`) across `GeminiOmniInteractionsBackend` and `HumanBatchDeskBackend` paths cleanly.
 - Assert `$0.40 * 15 = $6.00` base cost calculation (`<= $8.40` w/ dynamic 40% escrow) and `$0.00` safety-block ledger accuracy.
 
 #### Edge Cases And Failure Modes
@@ -5615,7 +5619,7 @@ This repository is engineered so **two developers build and test 100% independen
   - Runs `@tc/render_catalog` (all 12 motifs, 0 `<feTurbulence>`, `<5s` JS-boil verified).
   - Runs `python_motion` (monochrome crimson-free Flow bookends + 48kHz SFX + 480p animatic).
   - Runs `crime_scene_2k` (pre-locked `spatial_anchors`, edge-clamped screen projection).
-  - Runs `flow_adapter` (default `HeadlessGeminiApiBackend` mock + optional `HumanBatchDeskBackend` Strike-1/Strike-2 simulation).
+  - Runs `flow_adapter` (default `GeminiOmniInteractionsBackend` offline transport mock + optional `HumanBatchDeskBackend` Strike-1/Strike-2 simulation, `$0` API spend).
   - Runs `agent6_mastering` (strict `CFR 30fps`, per-track pre-norm -> `-filter_complex_script` -> `linear=true` `-14.0 LUFS`, continuous single grain leaving FOIA raw, Safe-Zone scan, `2x2` Vision QA mock, `<5s` surgical heal, Brand-Novel thumbnails, atomic `ready_to_upload/`).
 - Produce structured machine-readable `part2_harness_metrics.json`.
 
@@ -5656,13 +5660,13 @@ This repository is engineered so **two developers build and test 100% independen
 - [ ] Run `pytest tests/part2_harness/test_part2_invariants.py` with 100% pass across all forensic checks.
 - **Acceptance:** All v2 audit rendering/audio/heal guarantees proven empirically on Part 2 exports.
 
-### Task 189: Verify Early Thin Vertical Slice Part 2 Readiness (`Authoritative 4-Motif MVP + Omni 1.2 Flash + -14 LUFS`) (`tests/part2_harness`)
-- **Owner:** Developer B (Part 2) | **Milestone:** M0.5 Early Slice (Re-verified in M2-P2) | **Depends on:** Task 109, Task 115, Task 117, Task 118, Task 122, Task 147, Task 153, Task 168 (does NOT wait for full 12 motifs or Batch Desk UI! `F-17`)
+### Task 189: Verify Early Offline Vertical Slice Part 2 Readiness (`Authoritative 4-Motif MVP + Omni Mock + -14 LUFS`) (`tests/part2_harness`)
+- **Owner:** Developer B (Part 2) | **Milestone:** M0.5 Early Offline Slice | **Depends on:** Task 109, Task 115, Task 117, Task 118, Task 122, Task 147, Task 153, Task 168 (`F-01`, `F-17` — runs 100% offline at `$0.00` spend!)
 - **Files:** `tests/part2_harness/test_mvp_vertical_slice_p2.py`
-- **Tests:** Fast `<30s` offline smoke suite + opt-in bounded live `gemini-omni-1.2-flash` sandbox check compiling specifically the **authoritative `MOTIF_REGISTRY_V1` 4-Motif MVP Slice** (`StickmanStage`, `AudioEvidenceCard`, `RedactedDocReveal`, `FoiaFootageFrame`), `crime_scene_2k` (with `ILLUSTRATIVE RECONSTRUCTION` badge), `-14.0 LUFS` audio master, and 5-gate `release_approvals` sign-off before building motifs #5–#12 or the full UI (`F-16`, `F-17`).
+- **Tests:** Fast `<30s` strictly offline smoke suite (socket-blocked, `$0` API calls!) compiling the **authoritative `MOTIF_REGISTRY_V1` 4-Motif MVP Slice** (`StickmanStage`, `AudioEvidenceCard`, `RedactedDocReveal`, `FoiaFootageFrame`), `crime_scene_2k` (with `ILLUSTRATIVE RECONSTRUCTION` badge), mocked `gemini-omni-1.2-flash` Interactions transport (`OFFLINE_TEST`), `-14.0 LUFS` audio master, and 5-gate `release_approvals` sign-off (`F-01`, `F-16`, `F-17`).
 
 #### Scope And Implementation Requirements
-- Implement the **Early Thin Vertical Slice Gate (Part 2 side)** immediately after core rendering/mastering lands so Developer A and Developer B validate real cross-team integration and live `gemini-omni-1.2-flash` pricing/schema (`Task 193`) **early in Milestone M0.5** rather than after Task 188!
+- Implement the **Early Offline Thin Vertical Slice Gate (Part 2 side)** immediately after core rendering/mastering lands—guaranteeing **`$0.00` external API spend** (any real network call fails immediately; live connectivity check deferred post-integration to `Task 200` `F-01`).
 
 #### Edge Cases And Failure Modes
 - Manifest referencing only 4 MVP motifs accidentally failing catalog balance warnings: confirm `render_report.json` cleanly respects `--mvp-4-motifs` flag without raising spurious missing-variety warnings.
@@ -5704,7 +5708,7 @@ This repository is engineered so **two developers build and test 100% independen
 - **Tests:** Automated CLI help-text & schema-export freshness check verifying CLI docs match live parser options.
 
 #### Scope And Implementation Requirements
-- Author crisp operational documentation (`docs/PART2_RUNBOOK.md`) covering Part 2 package installation (`uv` / `pnpm`), `providers.yaml` configuration (`headless_api` default vs optional `human_batch_desk`), Playwright E2E commands, `<5s` heal diagnostics, and `-14.0 LUFS` troubleshooting.
+- Author crisp operational documentation (`docs/PART2_RUNBOOK.md`) covering Part 2 package installation (`uv` / `pnpm`), `providers.yaml` configuration (`gemini_omni_interactions` default vs optional `vertex_veo_enterprise` / `human_batch_desk`), offline socket-blocked Playwright E2E commands, `<5s` heal target diagnostics, and `-14.0 LUFS` troubleshooting.
 - Export SHA-256 contract verification manifests proving zero unapproved changes to `contracts/schemas/`.
 
 #### Edge Cases And Failure Modes
@@ -5742,19 +5746,19 @@ This repository is engineered so **two developers build and test 100% independen
 - [ ] Run `tools/verify_part2_cert.ps1` achieving 100% pass across all Part 2 suites and generate `PART2_CERT_REPORT.md`.
 - **Acceptance:** Developer B (Part 2) officially certified independent and merge-ready.
 
-### Task 193: Execute Milestone M0.5 Early Minimal End-to-End Thin Vertical Slice (`Part 1 Core + Authoritative 4-Motif MVP + Live Omni Sandbox + 5-Gate Sign-Off`)
-- **Owner:** Developer A & Developer B (Joint Early Checkpoint) | **Milestone:** M0.5 Early Vertical Slice (Re-run in M3-INT) | **Depends on:** Task 004, Task 042, Task 051, Task 081, Task 189 (Explicitly decoupled from full Tasks 100/192 so real integration & live provider contract are proven FIRST! `F-17`)
+### Task 193: Execute Milestone M0.5 Early Minimal End-to-End Offline Vertical Slice (`Plan -> Voice/WhisperX -> Create -> Edit`)
+- **Owner:** Developer A & Developer B (Joint Early Checkpoint) | **Milestone:** M0.5 Early Offline Slice | **Depends on:** Task 004, Task 042, Task 052, Task 066, Task 189 (Zero API spend — live provider check deferred to `Task 200`! `F-01`, `F-17`)
 - **Files:** `packages/integration_bridge/src/integration_bridge/mvp_slice.py`, `tests/integration/test_mvp_vertical_slice.py`
-- **Tests:** Minimal end-to-end 90-second documentary vertical slice piping `1` primary-record verified case (`AFFIRMED` + `anonymization_status='APPROVED'`) -> `1` clearly labeled illustrative 2K plate (`crime_scene_2k`) -> `1` segmented voice track -> **authoritative 4-motif MVP slice** (`StickmanStage`, `AudioEvidenceCard`, `RedactedDocReveal`, `FoiaFootageFrame`) -> `1` bounded live sandbox call to **`gemini-omni-1.2-flash` Interactions API** (`<= $2.00` cap, recording real billing/resolution/latency) -> `-14.0 LUFS` master -> **all 5 mandatory human release approvals**!
+- **Tests:** Strictly **offline (`$0.00` spent, outbound sockets blocked!)** minimal end-to-end 90-second documentary vertical slice piping `1` primary-record verified case (`AFFIRMED` + `anonymization_status='APPROVED'`) -> `1` clearly labeled illustrative 2K plate -> `1` approved `ScenePlan` (`PLAN_APPROVED`) -> WhisperX word-aligned voice track -> **authoritative 4-motif MVP slice** (`StickmanStage`, `AudioEvidenceCard`, `RedactedDocReveal`, `FoiaFootageFrame`) -> **mocked** `gemini-omni-1.2-flash` transport (`OFFLINE_TEST == $0`) -> `-14.0 LUFS` master -> **all 5 mandatory human release approvals**!
 
 #### Scope And Implementation Requirements
-- Execute the **Milestone M0.5 Minimal End-to-End Thin Vertical Slice (`F-17`)** BEFORE committing engineering hours to motifs #5–#12, 3-episode concurrency, or the full Batch Desk UI:
-  - Part 1 runs minimal Scout/Evidence (`AFFIRMED` disposition + explicit `anonymization_status='APPROVED'` + clearly labeled illustrative 2K plate `is_illustrative_reconstruction=1` + `lock_status='LOCKED'` anchor) -> segmented `voice_segments` -> minimal `manifest.json`.
-  - Part 2 renders `--mvp-4-motifs` (`StickmanStage`, `AudioEvidenceCard`, `RedactedDocReveal`, `FoiaFootageFrame`), `crime_scene_2k` (burning `ILLUSTRATIVE RECONSTRUCTION — NOT CRIME SCENE PHOTO`), runs 1 bounded live sandbox call (`--live-sandbox`, `<= $2.00`) against **`gemini-omni-1.2-flash` Interactions API** verifying real `budget_reservations`, resolution, and per-second cost, and masters `-14.0 LUFS` via Agent 6.
-  - Assert `trg_episode_release_gate` blocks `READY_TO_UPLOAD` until all 5 human gates in `release_approvals` are explicitly `APPROVED` for `ready_bundle_sha256`!
+- Execute the **Milestone M0.5 Minimal End-to-End Offline Slice (`F-01`, `F-05`, `F-17`)** at **`$0.00` external API cost** BEFORE committing engineering hours to motifs #5–#12 or the full UI:
+  - Part 1 enforces the 4-stage sequential lifecycle (`ScenePlan PLAN_APPROVED` -> WhisperX word timestamps -> `ANIMATIC_APPROVED`), proving narration revision invalidates dependent visuals cleanly (`STALE_NEEDS_REAPPROVAL`).
+  - Part 2 renders `--mvp-4-motifs`, `crime_scene_2k` (burning `ILLUSTRATIVE RECONSTRUCTION — NOT CRIME SCENE PHOTO`), runs mocked `gemini-omni-1.2-flash` Interactions transport (`OFFLINE_TEST == $0`), and masters `-14.0 LUFS` via Agent 6.
+  - Assert `trg_episode_release_gate` blocks `READY_TO_UPLOAD` until `ScenePlan` is `EDITED_APPROVED` and all 5 human gates in `release_approvals` are `APPROVED`!
 
 #### Edge Cases And Failure Modes
-- Path separator or timezone format mismatch between Part 1 Pydantic serializers and Part 2 TypeScript/Python consumers: assert UTF-8 ISO-8601 UTC timestamps and POSIX forward-slash relative URIs cleanly at the bridge boundary.
+- Real API key accidentally set in test shell: repo socket-blocker & credential scrub abort immediately BEFORE making any paid network call (`F-01`)!
 
 #### Bug Prevention And Invariants
 - Bridge code MUST NOT mutate locked `CaseBible`, `FactLedger`, `spatial_anchors`, or Part 1 linter decisions.
@@ -5773,7 +5777,7 @@ This repository is engineered so **two developers build and test 100% independen
 
 #### Scope And Implementation Requirements
 - Implement `LivePart2RenderAdapter` satisfying the exact `Part2RenderAdapter` protocol used in Part 1 (`Task 096`), cleanly hot-swapping out Part 1's offline stub without modifying any Agent 1–4 logic!
-- Verify all 12 Remotion visual archetypes, full `python_motion` SFX cue library (`500`-cue `-filter_complex_script`), multi-anchor `crime_scene_2k` tours (`330s`), dynamic model-mix escrow accounting (`providers.yaml`), and `ready_to_upload/` exporter execute cleanly on real Part 1 episode bundles.
+- Verify all 12 Remotion visual archetypes (`MOTIF_REGISTRY_V1`), full `python_motion` SFX cue library (`500`-cue `-filter_complex_script`), multi-anchor `crime_scene_2k` tours (`340s`), global `monthly_budget_ledger` USD reservations (`providers.yaml`), and `ready_to_upload/` exporter execute cleanly on real Part 1 episode bundles (all offline mocked `$0` in CI).
 - Verify SQLite database ownership remains 100% single-writer Python across the merged application (Part 1 orchestrator + FastAPI `desk_api` sharing the unified Python repository layer).
 
 #### Edge Cases And Failure Modes
@@ -5890,38 +5894,38 @@ This repository is engineered so **two developers build and test 100% independen
 ### Task 199: Audit 10-Episode Economics Model (`$135/mo` Autonomous Cap, `gemini-omni-1.2-flash` & `providers.yaml`) (`tests/integration`)
 - **Owner:** Developer A & Developer B (Joint Merge) | **Milestone:** M4-CERT | **Depends on:** Task 198
 - **Files:** `tests/integration/test_economics_10ep_audit.py`, `artifacts/milestones/ECONOMICS_10EP_AUDIT.md`
-- **Tests:** 10-episode production unit-economics simulation measuring true cumulative API spend across DeepSeek V4, Gemini Flash QA/2K Image API, TTS/ASR, and **`gemini-omni-1.2-flash` Interactions API** (`<= 10` clips / `80s` = `1.33m` @ conservative `$0.10/sec` 720p plan, updated with observed M0.5 sandbox invoice rate, `$0` settled on released safety rejections — `F-01`, `F-02`).
+- **Tests:** 10-episode production unit-economics simulation (`$0` live API calls) checking BOTH **Conservative `0%`-Cache (`~$117–$135/mo`)** AND Best-Effort Cached (`~$95–$120/mo`) cumulative spend across ALL providers (`ALL_PROVIDERS <= $135/mo`), `deepseek_chat <= $38/mo`, `gemini_omni <= $104/mo` (`<= 10` clips / `80s` = `1.33m`, `$10.40/ep` DB cap), local WhisperX (`$0` ASR), Image API, and TTS (`F-02`, `Additional Check #1`).
 
 #### Scope And Implementation Requirements
-- Validate the v3 audited unit-economics model cleanly across a 10-episode/month production run (`10 x 20-min = 200 min` documentary output):
-  - Verify `GeminiOmniInteractionsBackend` base spend (`$8.00/episode` = `$80.00/mo`) + `$2.40/ep` durable SQLite USD escrow (`$10.40/ep` hard cap via `trg_budget_cap_guard`, `$104/mo` worst-case video) + DeepSeek V4 + Image 2K + TTS/ASR stays strictly below the revised **`$135/mo` total autonomous compute cap**!
-  - Verify single-source-of-truth runtime & clip distribution across all 10 simulated manifests: **`~13.0m (780s)` Code/FOIA + `~5.67m (340s)` 2K Illustrative Stills + `~1.33m (80s)` Omni 1.2 Flash Hero (`max_hero_clips = 10` — zero 15-vs-16 contradiction!) = `20.0m (1,200s)`**.
+- Validate the canonical v4 unit-economics model across a 10-episode/month run via transactional `monthly_budget_ledger` + `provider_spend_reservations`:
+  - Assert **global `ALL_PROVIDERS` cap (`$135/mo`) holds across ALL providers combined even under `0%` DeepSeek KV-cache hit rate** (`$38/mo` DeepSeek cap)!
+  - Verify single-source-of-truth runtime distribution: **`13.0m (780s)` Code/FOIA + `5.67m (340s)` 2K Illustrative Stills + `1.33m (80s)` Omni 1.2 Flash (`max_hero_clips = 10`) = `20.0m (1,200s)`**.
   - Emit signed `artifacts/milestones/ECONOMICS_10EP_AUDIT.md`.
 
 #### Edge Cases And Failure Modes
-- Provider rate change tested via overriding `providers.yaml` override file in CI: verify zero hardcoded prices inside Python/TS packages—100% driven by `providers.yaml` and enforced by SQLite `budget_reservations`!
+- Provider rate override tested in `providers.yaml` + simultaneous DeepSeek/Omni reservations near `$135`: SQLite `trg_provider_global_budget_cap_guard` blocks excess spend atomically!
 
 #### Bug Prevention And Invariants
-- Assert zero 10-episode runs breach episode runtime tolerance (`1,200 +/- 15s`), `max_hero_clips = 10`, `$10.40/ep` durable DB video cap, or `$135/mo` total cap.
+- Assert zero 10-episode runs breach `max_hero_clips = 10`, `$10.40/ep` DB video cap, or `$135/mo ALL_PROVIDERS` cap under `0%`-cache conservative math.
 
 #### Independent Testability & Parallel Isolation
-- Offline deterministic budget-reservation calculator & schema-bound economics simulator.
+- Offline deterministic budget-reservation simulator (`OFFLINE_TEST == $0`).
 
 #### Verification, Testing And Acceptance Criteria
-- [ ] Run `pytest tests/integration/test_economics_10ep_audit.py` and verify `ECONOMICS_10EP_AUDIT.md` passes under `$135/mo` with exact `13.0m / 5.67m / 1.33m` runtime math.
-- **Acceptance:** Economics and runtime math verified completely transparent, single-sourced, and sustainable.
+- [ ] Run offline `pytest tests/integration/test_economics_10ep_audit.py` verifying `$135/mo ALL_PROVIDERS` solvency even at `0%` cache hits.
+- **Acceptance:** Cross-provider economics & `0%`-cache resilience verified cleanly.
 
-### Task 200: Compile Final 1,200-Second Documentary & Sign `V1_RELEASE_SCORECARD.md = GO` (`tests/integration`)
+### Task 200: Compile Final 1,200-Second Offline Documentary, Run Deferred Bounded Live Check & Sign `V1_RELEASE_SCORECARD.md = GO` (`tests/integration`)
 - **Owner:** Developer A & Developer B (Joint Merge) | **Milestone:** M4-CERT Final Gate | **Depends on:** Task 199
 - **Files:** `tools/verify_v1_release.ps1`, `artifacts/milestones/V1_RELEASE_SCORECARD.md`
-- **Tests:** Master end-to-end 1,200-second (`20.0-minute`) full documentary build executing every merged Part 1 + Part 2 stage cleanly, enforcing mandatory 5-gate human release approval (`trg_episode_release_gate`), and emitting a signed `GO` release scorecard.
+- **Tests:** Master end-to-end 1,200-second offline full build + all 200-task unit/contract/injection/conveyor suites (`$0` spend), followed **strictly last** by ONE explicitly opted-in bounded live connectivity check (`--live-sandbox` + `ALLOW_PAID_SANDBOX=1`, **`<= $2.00` hard cap, 1 call, `0` retries**) to verify live `gemini-omni-1.2-flash` endpoint/billing (`F-01`, `F-08`).
 
 #### Scope And Implementation Requirements
-- Execute the final flagship certification milestone (**1,200-Second Merged Documentary Build + Full Suite Regression**) uniting Developer A and Developer B deliverables cleanly:
-  1. Run schema integrity suite (`node schema/schema-test.js` **12/12**) + Mermaid diagram generator check (`node tools/merge-diagrams.js`).
-  2. Run full Part 1 regression (`Task 100` checks) + full Part 2 regression (`Task 192` checks) + full Joint Integration suite (`Tasks 193–199`).
-  3. Build one complete **`1,200.0s` (`36,000`-frame) Golden Merged Documentary Package** (`ready_to_upload/v1_cert_episode/`) exercising every visual engine (`13.0m` 12-motif Code/FOIA + `5.67m` 2K Illustrative tours w/ watermark + `1.33m` `gemini-omni-1.2-flash` Hero w/ simulated `UNKNOWN_RECONCILE`, Strike-1 rewrite & Strike-2 non-neighbor fallback), segmented Track 1–4 `-14.0 LUFS` linear audio mastering, single-pass continuous grain leaving FOIA raw, surgical self-heal, Brand-Novel thumbnails, `provenance_bundle.json`, and signed 5-gate `release_approvals`.
-  4. Record every exact observed metric, hardware benchmark (`remotion_js_boil_perf.json`, `2k_spatial_localization.json`), test pass count, runtime budget, LUFS reading, Safe-Zone count, and cost figure into `artifacts/milestones/V1_RELEASE_SCORECARD.md` stamped **`RELEASE_DECISION: GO`**. *(Monetization eligibility on YouTube Studio is monitored separately by human reviewers—never claimed as a deterministic automated guarantee, `F-13`.)*
+- Execute the final flagship certification milestone (**Wave-Merged Full Offline Matrix -> Deferred Bounded Connectivity Check -> Release Scorecard**):
+  1. Run schema integrity suite (`node schema/schema-test.js` **12/12**) + Mermaid diagram merge check (`node tools/merge-diagrams.js`) + `verify-harmony.mjs` contract drift check.
+  2. Run complete offline Part 1, Part 2, Playwright, Red-Team Legal/PII/Injection (`Additional Check #2`), Crash/Conveyor Soak (`<15ms` drift), and 1,200-second full documentary build (all `scene_plans` = `EDITED_APPROVED` + all 5 human `release_approvals` signed) at **`$0.00` external API spend**.
+  3. **ONLY after Steps 1–2 pass 100% green**, run ONE bounded post-integration live connectivity check (`--live-sandbox`, `purpose = 'LIVE_SANDBOX'`, hard cap `<= $2.00`, `1` test call, `0` automated retries) recording real `gemini-omni-1.2-flash` latency & invoice rate against `providers.yaml` (`F-01`).
+  4. Stamp `artifacts/milestones/V1_RELEASE_SCORECARD.md = GO` *(explicitly distinguishing verified runtime test results from blueprint/design specs; YouTube monetization monitored separately by human reviewers, `F-08`, `F-13`)*.
 
 #### Edge Cases And Failure Modes
 - Any single test failure, unsigned `release_approvals` gate, unresolved `PENDING_MANUAL_SPOT_CHECK`, LUFS deviation (`> 0.4 LU`), A/V drift (`> 15 ms`), leaked `.staging_` artifact, or Safe-Zone miss MUST automatically stamp `RELEASE_DECISION: NO-GO` and return non-zero exit code `1`.
@@ -5950,35 +5954,35 @@ The following capabilities remain intentionally excluded from V1 implementation 
 
 ---
 
-## Parallel Execution & Testing Runbook (2 Developers)
+## Parallel Execution, Wave Merge & Offline-First Testing Runbook (2 Developers)
 
 ### Day 1 — Shared Contract Freeze (`Tasks 001–004`)
-- Both developers pair on workspace monorepo scaffolding, frozen Pydantic + TypeScript schemas (`contracts/schemas/`), frozen `providers.yaml` (`gemini-omni-1.2-flash`, `max_hero_clips=10`, `$10.40/ep` cap), executable SQLite DDL (`schema/pipeline.sql` v3 verified `12/12` via `node schema/schema-test.js`, pinned `SQLite >= 3.51.3`), single `MOTIF_REGISTRY_V1`, and 3 signed golden episode stubs (`fixtures/ep_golden_01..03.json`).
+- Pair on monorepo scaffolding, frozen Pydantic + Zod schemas (`packages/shared_contracts/`), `providers.yaml` (`gemini-omni-1.2-flash`, `max_hero_clips=10`, `$10.40/ep` video cap, **`$135/mo ALL_PROVIDERS`** cap), **`craft_rubric.yaml`** (`<= 150 lines`), executable SQLite DDL (`schema/pipeline.sql` v4 verified `12/12` via `node schema/schema-test.js`, pinned `SQLite >= 3.51.3`), single `MOTIF_REGISTRY_V1`, and 3 signed golden fixtures (`fixtures/golden_manifests/`).
+- Enforce **Zero-Spend Offline Guard** across all worktrees (`pytest` socket blocker + scrubbed API keys + SQLite `trg_offline_test_zero_spend_guard`). Tag `integration/m0-frozen`.
 
-### Days 2–4 — Milestone M0.5 Minimal End-to-End Thin Vertical Slice (`Task 193` Early Gate)
-- **Before building motifs #5–#12, 3-episode concurrency, or the full Batch Desk UI (`F-17`):** both developers complete the minimal core path (`1` primary-record `AFFIRMED` case + `1` clearly labeled illustrative 2K plate + `1` segmented voice track + authoritative 4-Motif MVP [`StickmanStage`, `AudioEvidenceCard`, `RedactedDocReveal`, `FoiaFootageFrame`] + `1` bounded `<= $2.00` live `gemini-omni-1.2-flash` Interactions API sandbox call + `-14.0 LUFS` master + 5-gate human release approval) to prove real live provider pricing, latency, and cross-team contracts upfront!
+### Days 2–4 — Milestone M0.5 Minimal End-to-End Offline Slice (`Tasks 189`, `193`)
+- **Zero live paid API spend during M0.5 (`F-01`, `F-17`):** Execute one minimal episode (`1` `AFFIRMED` + `APPROVED` anonymization case, `1` illustrative 2K plate, `1` `PLAN_APPROVED` `ScenePlan`, WhisperX forced word alignment, authoritative 4-Motif MVP [`StickmanStage`, `AudioEvidenceCard`, `RedactedDocReveal`, `FoiaFootageFrame`], **mocked** Omni transport `$0`, `-14.0 LUFS` master, and 5-gate `release_approvals` block/pass test) proving end-to-end wire compatibility BEFORE building motifs #5–#12 or full UI.
 
-### Days 5–13 — Zero-Blocking Parallel Scale-Out
-| Phase | Developer A (Part 1: Autonomous Intelligence & Compilation) | Developer B (Part 2: Visual Engines, Mastering, Cockpit & Analytics) |
-| :--- | :--- | :--- |
-| **Milestone M1** (`Tasks 005–050` / `101–152`) | Python sole-writer SQLite (`>= 3.51.3`, local storage check), `scout` (Track A/B radar, authorized metadata leads, non-null 30-day full YT purge), `evidence` (INSERT+UPDATE disposition + quarantine, explicit `anonymization_status`, component rights provenance, music-gated Demucs + honest `asr_hypothesis_disagreement`, early illustrative 2K + `DRAFT->LOCKED` anchors). | `@tc/render_catalog` (4-motif MVP -> 12 2D motifs, zero `<feTurbulence>` `6fps-in-30fps` JS boil, CSS Safe-Zone guard, ungraded `scene_grade_manifest.json`), `python_motion` (monochrome crimson-free Start/End PNGs + T2V null frames, `48kHz` SFX, 480p animatic), `crime_scene_2k` (sole owner of `Illustrative2KPanZoom` w/ watermark & `<1px` projected callouts). |
-| **Milestone M2** (`Tasks 051–100` / `153–192`) | `director` (Voice-First non-overlapping `voice_segments`, DeepSeek V4 Act script + Law 11/12 T2V/F2V templates + cinematography whitelist, Manifest Compiler + `manifest_linter` enforcing `13.0m / 5.67m / 1.33m` & `max_hero_clips = 10`, Stub Part 2 Adapter -> `PART1_CERT_REPORT.md`). | `flow_adapter` (`GeminiOmniInteractionsBackend` + `budget_reservations` + `UNKNOWN_RECONCILE` + fail-closed Vision QA + separate optional Vertex/Batch Desk), `agent6_mastering` (`CFR 30fps`, per-track pre-norm -> `-filter_complex_script` -> linear `-14 LUFS`, single non-FOIA grain, surgical heal), loopback-locked FastAPI (`127.0.0.1` + token + 5-gate sign-off UI), honest `analytics_feedback` -> `PART2_CERT_REPORT.md`. |
+### Days 5–13 — Dependency-Ordered Parallel Waves (`W1-A..W5-A` & `W1-B..W4-B`, `F-07`)
+- Every worktree merges strictly into its track integration branch (`integration/part1` or `integration/part2`) by wave using `git merge --no-ff` + `node scripts/verify-harmony.mjs --wave <id>` (pinned base commit, Contract Bump PR for shared edits, `git revert -m 1` rollback on failure):
+  - **Part 1 Waves:** `W1-A` (`005–014` SQLite/Budget) -> `W2-A` (`015–032` Scout) -> `W3-A` (`033–044` Evidence/Disposition/2K) -> `W4-A` (`045–072` Rights/PII & WhisperX/`<=90s` Cloud ASR) -> `W5-A` (`073–100` `ScenePlan`, Director `13.0m/5.67m/1.33m`, `RenderBackendStub` -> `PART1_CERT_REPORT.md`).
+  - **Part 2 Waves:** `W1-B` (`101–115, 117–118, 122, 130–142` 4-Motif MVP & Motion) -> `W2-B` (`116, 119–121, 123–129, 143–152` +8 Vector Motifs & Sole-Owner `crime_scene_2k`) -> `W3-B` (`153–176` Crash-Safe Omni Mock + Agent 6) -> `W4-B` (`177–192` Loopback UI + 5-Gate Sign-Off + Honest Analytics -> `PART2_CERT_REPORT.md`).
 
-### Days 14–16 — Full Merge, Red-Team & V1 Release Certification (`Tasks 194–200`)
-- **Checkpoint 1 (`Tasks 194–198`):** Swap `StubPart2RenderAdapter` -> `LivePart2RenderAdapter`, run Law 4 live handoff, Legal/PII/Rights/Quarantine Red-Team Gauntlet, and 3-Slot Conveyor & Crash-Recovery Soak.
-- **Final Gate (`Tasks 199–200`):** Run 10-Episode Economics Audit (`<= $135/mo`), compile complete 1,200-second merged documentary package with signed 5-gate `release_approvals`, and stamp `V1_RELEASE_SCORECARD.md = GO`.
+### Days 14–16 — Full Merge, Offline Stress Matrix & Post-Integration Bounded Live Check (`Tasks 194–200`)
+- Merge `integration/part1` + `integration/part2` -> `integration/v1-rc`, run full offline E2E, Legal/PII/Injection Red-Team Gauntlet (`Task 197`), Crash/Conveyor Soak (`Task 198`), `0%`-Cache `$135/mo` Economics Audit (`Task 199`), and full 1,200s build (`$0.00` spent).
+- **Strictly Last (`Task 200`, only if 100% offline suites pass):** Opt in explicitly with `--live-sandbox` + `ALLOW_PAID_SANDBOX=1` (`<= $2.00` hard cap, 1 call, 0 retries) to verify live `gemini-omni-1.2-flash` endpoint & invoice rate before stamping `V1_RELEASE_SCORECARD.md = GO`.
 
 ---
 
-## Summary Milestone Matrix
+## Summary Milestone Matrix (v4)
 
 | Milestone | Scope | Task Range | Owner | Hard Exit Gate |
 | :--- | :--- | :--- | :--- | :--- |
-| **M0 — Contract Freeze** | Monorepo, Frozen Schemas, `pipeline.sql` v3, `MOTIF_REGISTRY_V1`, Fixtures | `001–004` | Joint (A + B) | `schema-test.js` **12/12** pass + signed fixtures |
-| **M0.5 — Early Thin Vertical Slice** | 1 Case, 1 Illustrative 2K, 4 MVP Motifs, 1 Live Omni Sandbox Call, 5-Gate Sign-Off | Core Subset + `189`, `193` | Joint (A + B) | Playable 90s `-14 LUFS` MP4 + live Omni cost verified |
-| **M1-P1 — Research & Evidence** | DB Repo (`>=3.51.3`), Scout (30d full purge), Disposition+Quarantine, Rights, Illustrative 2K | `005–050` | Developer A | `M1_P1_EXIT_CHECK.md` pass |
-| **M2-P1 — Director & Linter** | Segmented Voice/ASR, Law 11/12 T2V/F2V, Linter `RULE_01..13`, Stub Harness | `051–100` | Developer A | `PART1_CERT_REPORT.md` 100% green |
-| **M1-P2 — Local Visual Engines** | 12-Motif JS-Boil Remotion, Monochrome `python_motion`, Sole-Owner `crime_scene_2k` | `101–152` | Developer B | Local perf bench logged, `0` crimson PNGs, `<1px` callouts |
-| **M2-P2 — Omni, Agent 6, UI & Analytics** | Crash-Safe `flow_adapter`, `-14 LUFS` Mastering, Loopback FastAPI/5-Gate UI, Honest Analytics | `153–192` | Developer B | Playwright E2E + `PART2_CERT_REPORT.md` green |
-| **M3-INT — Full Live Merge** | 12-Motif Live Adapter, Law 4 & Closed-Loop Analytics Calibration | `194–196` | Joint (A + B) | Full 12-motif Part 1->2 handoff pass |
-| **M4-CERT — V1 Release** | Red-Team Gauntlet, Crash/Conveyor Soak, `$135/mo` Economics, 1,200s Build | `197–200` | Joint (A + B) | `V1_RELEASE_SCORECARD.md = GO` |
+| **M0 — Contract Freeze** | Monorepo, `providers.yaml`, `craft_rubric.yaml`, `pipeline.sql` v4, Offline Socket Guard | `001–004` | Joint (A + B) | `schema-test.js` **12/12** pass + `$0 OFFLINE_TEST` |
+| **M0.5 — Early Offline Vertical Slice** | 1 Case, 1 Illustrative 2K, 1 `ScenePlan`, WhisperX, 4 MVP Motifs, Mock Omni, 5-Gate Sign-Off | Core Subset + `189`, `193` | Joint (A + B) | Playable 90s `-14 LUFS` MP4 at **`$0.00` spent** |
+| **M1-P1 — Waves `W1-A..W3-A`** | DB (`>=3.51.3`, `$135` ledger), Scout (30d full purge), Disposition+Quarantine, Illustrative 2K | `005–044` | Developer A | Offline `W1–W3` wave gates 100% green |
+| **M2-P1 — Waves `W4-A..W5-A`** | Rights (`§105` narrowed), WhisperX, `ScenePlan`, Director `<=10` clips, Stub Cert | `045–100` | Developer A | `PART1_CERT_REPORT.md` 100% offline green |
+| **M1-P2 — Waves `W1-B..W2-B`** | 4-Motif MVP -> 12 Vector Motifs, Monochrome Keyframes, Sole-Owner `crime_scene_2k` | `101–152` | Developer B | Local perf bench logged, `0` crimson, `<1px` callouts |
+| **M2-P2 — Waves `W3-B..W4-B`** | Crash-Safe Omni Mock (`UNKNOWN_RECONCILE`), `-14 LUFS`, Loopback 5-Gate UI, Analytics | `153–192` | Developer B | Playwright E2E + `PART2_CERT_REPORT.md` offline green |
+| **M3-INT — Wave Cross-Track Merge** | 12-Motif Live Adapter, `ScenePlan` Stale Invalidation, Closed-Loop Analytics | `194–196` | Joint (A + B) | Offline cross-track handoff 100% green (`$0` spent) |
+| **M4-CERT — V1 Release** | Red-Team Injection/Legal Gauntlet, Soak, `0%`-Cache Audit, 1,200s Build + 1 Bounded Check | `197–200` | Joint (A + B) | Offline matrix 100% -> 1 `<= $2` check -> `GO` |

@@ -1,33 +1,47 @@
-# Contributing & Multi-Agent Parallel Workflow (Part 1 & Part 2)
+# Contributing & Wave-Ordered Worktree Merge Runbook (v4 · `F-07`)
 
-`Task 001`–`Task 004` freeze the repository skeleton, SQLite schemas, and `packages/shared_contracts/`. Every subsequent task (`Task 005`–`Task 192`) is executed inside an isolated Git worktree by either **Developer A (Part 1)** or **Developer B (Part 2)** with zero overlapping file writes.
+`Task 001`–`Task 004` freeze the canonical v4 contracts (`schema/pipeline.sql` v4, `providers.yaml`, `craft_rubric.yaml`, `MOTIF_REGISTRY_V1`, `packages/shared_contracts/`). After Day-1 freeze, **Developer A (Part 1)** and **Developer B (Part 2)** implement in isolated Git worktrees using **strictly offline zero-spend transport mocks (`F-01`)**, merging in **dependency-ordered waves** rather than a risky big-bang merge (`F-07`).
 
-## Six-Step Task Execution Protocol
+## 1. Zero-Spend Offline Guarantee In All Worktrees (`F-01`)
+- Every worktree test invocation (`verify-harmony.mjs --task NNN`, `pytest`, `vitest`) strips `GEMINI_API_KEY`, `DEEPSEEK_API_KEY`, `ELEVENLABS_API_KEY`, enables socket-blocking (`--disable-socket` / custom test fixture blocking outbound DNS/TCP except `127.0.0.1`), and binds SQLite reservations to `purpose = 'OFFLINE_TEST'` (`trg_offline_test_zero_spend_guard` aborts on `> $0`).
 
-1. **Create an isolated worktree from `integration/main` (or track integration branch `integration/part1` / `integration/part2`):**
-   ```text
-   node scripts/agent-worktree.mjs create 045 agent3-provenance-whitelist
+## 2. Branch Hierarchy & Pinned Base Rules (`F-07`)
+- **`main`** — Always releasable; receives commits ONLY via signed integration waves after Gate pass.
+- **`integration/m0-frozen`** — Tagged base commit after `Task 004`; EVERY Part 1 / Part 2 wave branches from the latest green track integration tag.
+- **`integration/part1` (Owner: Developer A)** & **`integration/part2` (Owner: Developer B)** — Track-level integration branches merged in dependency-ordered waves.
+- **`task/NNN-<slug>`** in `../tc-wt/task-NNN-<slug>` — Single-task worktree branch (`Owned Write Scope` strictly enforced).
+
+## 3. Dependency-Ordered Merge Waves & Stop/Go Gates
+
+### Part 1 Waves (`integration/part1`, Developer A Lead)
+| Wave | Task Batch | Shared-Contract Check & Stop/Go Gate |
+|---|---|---|
+| **W1-A · Storage & Budget** | `005–014` | `pytest packages/db` + `node schema/schema-test.js` (`12/12`) + offline zero-spend guard green. Tag `p1-w1`. |
+| **W2-A · Scout & Quotas** | `015–032` | `pytest packages/agent1_scout` (mocked YT API + 30d full purge + zero third-party `captions.download`). Tag `p1-w2`. |
+| **W3-A · Evidence, Disposition & Early 2K** | `033–044` | `pytest packages/agent2_evidence` (`INSERT+UPDATE` quarantine + `DRAFT->LOCKED` anchors + `is_illustrative_reconstruction=1`). Tag `p1-w3`. |
+| **W4-A · Rights, PII & Voice/WhisperX** | `045–072` | `pytest packages/agent3_gatekeeper packages/voice_sync` (17 USC §105 narrowed + WhisperX word sync + <=90s/4MiB cloud ASR bounds). Tag `p1-w4`. |
+| **W5-A · Director, `ScenePlan` & Stub Orchestrator** | `073–100` | `pytest packages/agent4_director packages/orchestrator` (`ScenePlan` `PLAN_APPROVED` gate + `max_hero_clips=10` + `PART1_CERT_REPORT.md`). Tag `p1-cert`. |
+
+### Part 2 Waves (`integration/part2`, Developer B Lead)
+| Wave | Task Batch | Shared-Contract Check & Stop/Go Gate |
+|---|---|---|
+| **W1-B · Core 4-Motif MVP & Motion Helpers** | `101–115, 117–118, 122, 130–142` | `pnpm --filter @tc/render_catalog test -- --mvp-4-motifs` (`MOTIF_REGISTRY_V1`) + monochrome Flow PNG tests (`0` crimson). Tag `p2-w1`. |
+| **W2-B · Remaining 8 Vector Motifs & 2K Engine** | `116, 119–121, 123–129, 143–152` | Full 12-motif test + `crime_scene_2k` edge-clamp/watermark tests (`ILLUSTRATIVE RECONSTRUCTION`) + reproducible local perf bench. Tag `p2-w2`. |
+| **W3-B · Omni Backend & Agent 6 Mastering** | `153–176` | `pytest packages/flow_adapter packages/agent6_mastering` (mocked Omni Interactions T2V/1F/2F + `UNKNOWN_RECONCILE` + `$135/mo` cap + `-14 LUFS`). Tag `p2-w3`. |
+| **W4-B · Loopback UI, 5-Gate Sign-Off & Analytics** | `177–192` | Loopback `127.0.0.1` + auth token tests + Playwright E2E + `PART2_CERT_REPORT.md`. Tag `p2-cert`. |
+
+## 4. Cross-Track Merge, Schema Conflict Protocol & Rollback
+1. **Shared-File Ownership Rule:** `schema/**`, `providers.yaml`, `craft_rubric.yaml`, and `packages/shared_contracts/**` are **jointly owned (`M0`)**. If either developer needs a schema/contract amendment mid-wave, they open a standalone **Contract Bump PR** against `main`, rebase `integration/part1` and `integration/part2` cleanly, and bump `schema_version` or `CONTRACT_VERSION`—never silently patching contracts inside a feature worktree!
+2. **Migration Conflict Resolution:** Only ONE sequential migration file (`migrations/000N_*.sql`) may hold sequence `N`; conflicts resolve cleanly during Contract Bump PR before re-running `node schema/schema-test.js`.
+3. **Executable Merge & Rollback Commands:**
+   ```powershell
+   # Promote validated wave -> track branch with --no-ff preserving wave boundary:
+   git checkout integration/part1
+   git merge --no-ff task/042-agent2-early-2k-anchor-lock
+   node scripts/verify-harmony.mjs --wave W3-A   # runs unit tests, contract parity, zero-spend socket guard
+
+   # Rollback a bad wave cleanly without rewriting shared history:
+   git revert -m 1 <wave_merge_commit_sha>
+   git tag rollback/W3-A-<timestamp>
    ```
-   Creates branch `task/045-agent3-provenance-whitelist` at `../tc-wt/task-045-agent3-provenance-whitelist`.
-2. **Read every file listed in the task's `Mandatory Reference Files`** plus the frozen types in `packages/shared_contracts/`.
-3. **Respect Disjoint Write Ownership:** Edit ONLY paths listed in the task's `Owned Write Scope` plus `.agent-handoffs/task-NNN.md`. Never edit shared lockfiles, `schema/*.sql`, or the other developer's packages unless the task explicitly owns them.
-4. **Record Cross-Cutting Needs in `.agent-handoffs/task-NNN.md`:** New package dependencies, barrel exports, or contract change requests go in the structured handoff manifest—never directly into root config files.
-5. **Run the Scope & Verification Gate:**
-   ```text
-   node scripts/verify-harmony.mjs --task 045
-   ```
-   Verifies disjoint subtree ownership, zero leaked API keys/secrets, clean lint/typecheck/tests, and valid handoff YAML.
-6. **Commit on Your Task Branch Only (Never Merge Directly):**
-   ```text
-   node scripts/agent-worktree.mjs commit 045 "implement deterministic provenance whitelist"
-   ```
-   Commits carry `TC-Task-ID`, `TC-Track` (`part1` | `part2` | `shared`), and `TC-Never-Merge: true`.
-
-## Track Ownership Summary
-
-| Track | Developer | Owned Directories | Standalone Test Mechanism |
-|---|---|---|---|
-| **Foundation** | Shared (`001`–`004`) | `packages/shared_contracts/**`, `schema/**`, `fixtures/**`, `scripts/**`, `tools/**` | `schema-test.js`, contract parity checks |
-| **Part 1** | Developer A (`005`–`100`) | `packages/db/**`, `packages/agent1_scout/**`, `packages/agent2_evidence/**`, `packages/agent3_gatekeeper/**`, `packages/voice_sync/**`, `packages/agent4_director/**`, `packages/orchestrator/**` | `RenderBackendStub` + recorded YouTube/CourtListener/TTS/DeepSeek fixtures |
-| **Part 2** | Developer B (`101`–`192`) | `packages/render_catalog/**`, `packages/python_motion/**`, `packages/crime_scene_2k/**`, `packages/flow_adapter/**`, `packages/agent6_mastering/**`, `apps/batch_desk_ui/**` | `fixtures/golden_manifests/**` + synthetic WAV/MP4 inputs producing real 1080p MP4s |
-| **Integration** | Both (`193`–`200`) | `tests/e2e/**`, `benchmarks/**`, root wiring | Live Part 1 -> Part 2 end-to-end 1,200s build |
+4. **Joint Cross-Track Gate (`Tasks 193–200`):** Merge `integration/part1` + `integration/part2` into `integration/v1-rc`, run the **complete offline cross-track matrix** (`Tasks 193–199`), and ONLY when 100% green invoke the **final deferred bounded live connectivity check (`<= $2.00`)** in `Task 200` before tagging `v1.0.0`.

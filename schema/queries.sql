@@ -1,4 +1,4 @@
--- Canonical SQL Statements for pipeline.db (v3)
+-- Canonical SQL Statements for pipeline.db (v4)
 
 -- name: due_watchlist_channels
 SELECT channel_id, uploads_playlist_id, median_20_views, yt_ttl_expires_at
@@ -10,7 +10,6 @@ ORDER BY last_polled_at ASC
 LIMIT :limit;
 
 -- name: purge_expired_yt_api_records
--- F-20: Clears ALL YouTube API-derived fields (not just raw JSON) when 30-day TTL expires
 UPDATE outlier_candidates
 SET raw_yt_payload_json = NULL,
     views_count = NULL,
@@ -35,8 +34,27 @@ FROM published_entropy_history
 ORDER BY published_at DESC
 LIMIT 5;
 
+-- name: reserve_provider_budget
+-- F-01 & F-02: Transactional multi-provider reservation protected by trg_offline_test_zero_spend_guard & trg_provider_global_budget_cap_guard
+INSERT INTO provider_spend_reservations (
+  reservation_id, episode_id, job_id, attempt_number, provider_id,
+  purpose, year_month, estimated_micro_usd, status, created_at
+) VALUES (
+  :reservation_id, :episode_id, :job_id, :attempt_number, :provider_id,
+  :purpose, :year_month, :estimated_micro_usd, 'RESERVED', :now_ms
+)
+RETURNING reservation_id, estimated_micro_usd, status;
+
+-- name: settle_provider_budget
+UPDATE provider_spend_reservations
+SET actual_micro_usd = :actual_micro_usd,
+    status = :final_status,
+    settled_at = :now_ms
+WHERE reservation_id = :reservation_id
+  AND status IN ('RESERVED', 'UNKNOWN_HOLD')
+RETURNING reservation_id, actual_micro_usd, status;
+
 -- name: atomic_refill_and_reserve_daily_account_credits
--- F-08: Atomically handles rolling 24h+5m refill AND enforces lockout while now < next_daily_reset_utc_ms when pool == 0
 UPDATE google_accounts
 SET
   daily_credits_left = CASE
@@ -58,9 +76,7 @@ WHERE account_id = :account_id
   AND :credits > 0
   AND :credits <= daily_credits_cap
   AND (
-    -- Window expired (or never used): refill cleanly to daily_credits_cap and debit :credits
     (next_daily_reset_utc_ms = 0 OR :now_ms >= next_daily_reset_utc_ms)
-    -- Active window: ONLY allow if remaining daily credits cover :credits (strictly locked when daily_credits_left < :credits until reset!)
     OR (:now_ms < next_daily_reset_utc_ms AND daily_credits_left >= :credits)
   )
 RETURNING account_id, daily_credits_left, first_daily_spend_utc_ms, next_daily_reset_utc_ms;
@@ -73,7 +89,6 @@ WHERE account_id = :account_id
 RETURNING account_id, daily_credits_left;
 
 -- name: reconcile_unknown_flow_jobs
--- F-10: Reconcile any interrupted SUBMITTING / RUNNING / UNKNOWN_RECONCILE jobs before dispatching new paid calls
 SELECT
   flow_job_id,
   episode_id,
@@ -114,16 +129,6 @@ WHERE e.state = 'AWAITING_FLOW_BATCH'
   AND fj.provider_route = 'HUMAN_BATCH_DESK'
   AND fj.state IN ('PENDING', 'STRIKE_1_RETRY_SAFE')
 ORDER BY e.created_at ASC, fj.assigned_account_id ASC, fj.flow_job_id ASC;
-
--- name: episode_ready_for_post_flow
-SELECT
-  episode_id,
-  COUNT(*) AS total_jobs,
-  SUM(CASE WHEN state IN ('ACCEPTED', 'SWITCHED_TO_FALLBACK') THEN 1 ELSE 0 END) AS done_jobs
-FROM flow_jobs
-WHERE episode_id = :episode_id
-GROUP BY episode_id
-HAVING total_jobs = done_jobs;
 
 -- name: analytics_performance_by_archetype
 SELECT

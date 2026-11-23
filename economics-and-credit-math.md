@@ -1,38 +1,27 @@
-# Token, Credit & Quota Economics Engine (v3 Config-Driven Registry)
+# Token, Credit & Global Across-Providers Budget Engine (v4 · `F-01`, `F-02`, Additional Check #1 & #3)
 
-All model IDs, token rates, clip limits, and USD caps live in **one single source of truth** (`providers.yaml`), enforced durably at runtime by `pipeline.db`'s `budget_reservations` table and `trg_budget_cap_guard` trigger (`F-02`, `F-18`). Diagram: [economics-and-credit-math.mmd](economics-and-credit-math.mmd).
+All model IDs, token rates, clip caps, and monthly ceilings load from `providers.yaml` and are enforced **transactionally across ALL providers** by `pipeline.db` (`monthly_budget_ledger` + `provider_spend_reservations` + `trg_provider_global_budget_cap_guard`). Diagram: [economics-and-credit-math.mmd](economics-and-credit-math.mmd).
 
-> **Important Provider Update (`F-01`, verified 2026-11-23):** Google shut down the Gemini Developer API Veo 3.1 Preview endpoints (`veo-3.1-lite-generate-preview`, `veo-3.1-fast-generate-preview`, `veo-3.1-generate-preview`) on **October 22, 2026**. All previous `$0.05/sec` (`$6/episode`) Veo 3.1 Lite figures are retired and replaced below.
+## 1. Zero-Spend Test Cap & Global Across-All-Providers `$135/mo` Hard Limit (`F-01`, `F-02`)
 
-## 1. Primary Default: `gemini-omni-1.2-flash` (Gemini Interactions API)
+1. **`OFFLINE_TEST` `$0.00` Trigger Guard (`F-01`):** Every test reservation carries `purpose = 'OFFLINE_TEST'`. SQLite trigger `trg_offline_test_zero_spend_guard` unconditionally aborts any `estimated_micro_usd > 0`, guaranteeing zero test credit burn alongside socket-blocking test harnesses.
+2. **Global Multi-Provider Ceiling (`F-02`):** `trg_provider_global_budget_cap_guard` sums `RESERVED + UNKNOWN_HOLD + COMMITTED` rows across **ALL providers** (`gemini_omni`, `gemini_image`, `deepseek_chat`, `tts`, `vision_qa`, `vertex_veo`) for the current `year_month` and blocks ANY call that would breach:
+   - Per-episode paid video cap: **`$10.40/ep`** (`10_400_000` micro-USD; `max_hero_clips = 10`, `max_hero_duration_sec = 80s`)
+   - Per-provider monthly ledger cap (e.g. `deepseek_chat` `$38.00/mo`, `gemini_omni` `$104.00/mo`)
+   - **Global `ALL_PROVIDERS` cap: `$135.00/mo` (`135_000_000` micro-USD)**!
+   - Non-authoritative `telemetry.db` (`total_input_tokens` + `CHECK (cached_input_tokens <= total_input_tokens)`) NEVER gates spend!
 
-- **Endpoint & Auth:** Official Gemini Developer API via `google-genai >= 2.30.1` (`client.interactions.create`, Files API upload polled until `ACTIVE`, `GEMINI_API_KEY`).
-- **Pricing Model (Paid Tier, token-billed):** `gemini-omni-1.2-flash` bills granularly by tokens (~`5,792` video output tokens/sec @ `720p`, yielding an effective **`~$0.07–$0.10/sec`** depending on prompt/reference density; see [Gemini API Pricing](https://ai.google.dev/gemini-api/docs/pricing?hl=en)).
-- **Conservative Planning Rate (`providers.yaml`):** We budget conservatively at **`$0.10/sec` @ 720p** (`$0.80` per `8s` clip) and mandate a **live sandbox billing verification in `M0.5`** before locking production rates.
-- **Single-Source Clip & Duration Cap (`F-02`):** Eliminates the old 15-vs-16 mismatch completely:
-  - `max_hero_clips = 10` (hard ceiling in `providers.yaml`, `manifest_linter.py`, and `episodes.max_hero_clips`)
-  - `max_hero_duration_sec = 80` (`1.33 min`, e.g., `10 x 8s` or mixed `3s–10s` buckets; `<= 10s` max for 2-frame transitions)
-  - **Base Episode Video Spend:** `80s × $0.10/sec = $8.00/episode`
-  - **Dynamic Retake Escrow (`30%`):** `$2.40/episode` (3 full 8s retakes; safety blocks where output tokens = 0 release reservation immediately)
-  - **Hard Episode Video Cap (`episodes.video_budget_cap_micro_usd`):** **`$10.40/episode`** (`10_400_000` micro-USD) enforced atomically inside SQLite `trg_budget_cap_guard`.
+## 2. Best-Effort DeepSeek Caching: Dual Conservative vs. Cached Projections (`Additional Check #1`)
 
-## 2. Distinct Separate Provider Integrations (Never Interchangeable)
+Because DeepSeek documents [Context Caching](https://api-docs.deepseek.com/guides/kv_cache/) as **best-effort** rather than a contractual guarantee (and exact cache hit rates vary across restarts and batch intervals), budget projections model **both** scenarios—and the `$135/mo` global ledger stays solvent even at **0% cache hits**:
 
-| Backend Route (`provider_route`) | Auth & API Contract | Use Case & Policy Constraints |
-|---|---|---|
-| **`GEMINI_OMNI_INTERACTIONS`** *(Primary Default)* | `GEMINI_API_KEY` + Interactions API (`gemini-omni-1.2-flash`) | Primary headless 24/7 generation (`$8.00–$10.40/ep`). Note regional restriction: video-input edits/extensions unavailable in EEA/CH/UK/some US states (text-to-video & image-keyframe-to-video unaffected). |
-| **`VERTEX_VEO_ENTERPRISE`** *(Separate Opt-In Adapter)* | GCP Project + Vertex AI OAuth / Service Account + Predict Long-Running API | Enterprise-tier alternative with distinct endpoint, GCS URI output contract, quotas, and Vertex billing SKU—implemented only as an isolated adapter if an operator holds GCP Enterprise access. |
-| **`HUMAN_BATCH_DESK`** *(Optional Manual Fallback)* | Local React UI (`apps/batch_desk_ui`) + atomic `google_accounts` credit ledger | Optional manual drag-and-drop workflow with explicit multi-account consumer ToS notice and atomic `24h + 5m` refill/lockout SQL (`atomic_refill_and_reserve_daily_account_credits`). |
+| Cost Component (`10 Episodes/Month`) | Conservative `0%` Cache Projection / Ep | Best-Effort Cached Projection / Ep | Monthly DB Ledger Cap (`monthly_budget_ledger`) |
+|---|---|---|---|
+| **Layer 1 · Code-to-Video & FOIA (`13.0m`)** | `$0` video | `$0` video | `$0.00/mo` |
+| **Layer 2 · Illustrative 2K Plates (`Gemini Image API`, `5.67m`)** | `$0.40` | `$0.30` | `$5.00/mo` (`gemini_image`) |
+| **Layer 3 · `gemini-omni-1.2-flash` `720p` (`1.33m`, `<= 10` clips)** | `$8.00` base / **`$10.40` cap** | `$8.00` base / `$10.40` cap | `$104.00/mo` (`gemini_omni`) |
+| **DeepSeek V4.1 Flash / V4-Pro** (Scripts, Ledger, Manifests) | **`$2.80–$3.80`** *(0% cache worst case!)* | `~$0.75–$1.90` | **`$38.00/mo`** (`deepseek_chat`) |
+| **TTS + Local WhisperX (`$0` ASR!) + Vision QA** | `$0.50` *(WhisperX offline = `$0`!)* | `$0.45` | `$5.00/mo` (`tts`) + `$2.00/mo` (`vision_qa`) |
+| **Total Across ALL Providers (10 Episodes)** | **~$117–$135/mo *(Fits `ALL_PROVIDERS` `$135` Cap!)*** | **~$95–$120/mo** | **`$135.00/mo` HARD GLOBAL CAP** |
 
-## 3. Honest 20-Minute (1,200-Second) Episode & Monthly Budget (`10 Episodes/Month`)
-
-| Cost Component | Episode Runtime / Usage | Base / Episode | Worst-Case Cap / Episode | 10-Episode Monthly Total |
-|---|---|---|---|---|
-| **Layer 1 · Code-to-Video & FOIA** | **13.0 min (780s)** | `$0.00` video | `$0.00` video | `$0.00` |
-| **Layer 2 · 2K Illustrative Stills** (`Gemini Image API`) | **5.67 min (340s)** (`~6–7` plates) | `~$0.30` | `~$0.50` | `~$3.00–$5.00` |
-| **Layer 3 · Hero Video** (`gemini-omni-1.2-flash` `720p`) | **1.33 min (80s)** (`<= 10` clips) | **`$8.00`** | **`$10.40`** (hard DB cap) | **`$80.00–$104.00`** |
-| **DeepSeek V4.1 Flash / V4-Pro** (Scripts, Ledger, Manifests) | Full 20-min episode | `~$1.35` peak (`~$0.75` off-peak) | `~$1.90` peak | `~$7.50–$19.00` |
-| **TTS + ASR Alignment + Flash Vision QA** | ~16 min narration + 2x2 QA | `~$0.45` | `~$0.70` | `~$4.50–$7.00` |
-| **Total Autonomous Compute** | **20.0 min (1,200s)** | **`~$10.10/ep`** | **`~$13.50/ep`** | **`~$95–$135/mo` (Hard Monthly Cap: `$135/mo`)** |
-
-*(Note: Worst-case 10-episode production with full retry headroom fits cleanly inside the revised **`$135/mo`** autonomous cap. All dollar admission control is enforced transactionally in `pipeline.db` `budget_reservations`, NEVER in async `telemetry.db`.)*
+*(Note: Using local WhisperX for all word-level timing keeps production ASR cost near `$0.00/ep`. Final live connectivity/invoice verification runs strictly post-integration under an explicit `$2.00` bounded sandbox flag.)*

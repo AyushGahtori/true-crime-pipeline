@@ -1,7 +1,7 @@
--- Automated True-Crime Pipeline · telemetry.db · schema version 2
--- Lossy, high-rate operational telemetry for analytics/profiling ONLY.
--- NEVER used as the source of truth for paid budget admission control or crash-safe job idempotency
--- (those live strictly in pipeline.db `budget_reservations` and `flow_jobs`).
+-- Automated True-Crime Pipeline · telemetry.db · schema version 3
+-- Non-authoritative operational telemetry ONLY (latency, cache-hit rates, render timings).
+-- NEVER used as the source of truth for paid spend caps or crash-safe idempotency
+-- (those live strictly in pipeline.db `provider_spend_reservations` & `flow_jobs`).
 -- Never shares a transaction with pipeline.db.
 
 CREATE TABLE api_token_usage (
@@ -10,8 +10,10 @@ CREATE TABLE api_token_usage (
   agent_name          TEXT NOT NULL,
   model_id            TEXT NOT NULL,
   is_off_peak         INTEGER NOT NULL DEFAULT 0 CHECK (is_off_peak IN (0,1)),
-  input_tokens        INTEGER NOT NULL DEFAULT 0 CHECK (input_tokens >= 0),
-  cached_input_tokens INTEGER NOT NULL DEFAULT 0 CHECK (cached_input_tokens >= 0),
+  -- Explicit semantics (Audit Security/Cost Check #3):
+  -- `total_input_tokens` = total prompt input tokens (cached + uncached); therefore cached_input_tokens <= total_input_tokens ALWAYS holds.
+  total_input_tokens  INTEGER NOT NULL DEFAULT 0 CHECK (total_input_tokens >= 0),
+  cached_input_tokens INTEGER NOT NULL DEFAULT 0 CHECK (cached_input_tokens >= 0 AND cached_input_tokens <= total_input_tokens),
   output_tokens       INTEGER NOT NULL DEFAULT 0 CHECK (output_tokens >= 0),
   vision_image_count  INTEGER NOT NULL DEFAULT 0 CHECK (vision_image_count >= 0),
   audio_tokens        INTEGER NOT NULL DEFAULT 0 CHECK (audio_tokens >= 0),

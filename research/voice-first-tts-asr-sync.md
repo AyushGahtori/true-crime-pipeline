@@ -1,8 +1,14 @@
-# Research: Segmented Voice-First Timeline, Proper-Noun Diff & Ingest Sync (`F-09`)
+# Research: Segmented Voice-First Timeline, WhisperX Word Alignment & Sync (v4 · `F-03`)
 
 *Last verified: 2026-11-23*
 
-- **Segmented Timeline Model (`voice_segments`):** Modeling Track 1 as ordered, non-overlapping `NARRATION` (requiring `audio_path`), `FOIA_AUDIO_SLOT` (requiring `foia_asset_id`), and `TWIST_PAD` segments (`sum == episodes.total_master_ms`) eliminates `RULE_01` conflicts during raw 911/bodycam playback. SQLite `BEFORE INSERT/UPDATE` triggers reject interval overlaps immediately.
-- **Per-Chunk Consistency & Room-Tone Pads:** Matching per-chunk loudness (`-16.0 LUFS`) across `1–3 min` TTS segments prevents volume jumps; low-level room tone (`-65 dBFS`) prevents jarring digital silence cutouts.
-- **ASR Proper-Noun Pronunciation Check:** Running phonetic diffing (`Metaphone` + edit distance) between ASR output and ground-truth suspect/location names flags TTS mispronunciations before rendering begins (treated as a fallible detector supplemented by human review).
-- **Strict Ingest Parity:** All TTS and rights-cleared FOIA media normalize deterministically to `CFR 30 fps` (`1920x1080 yuv420p`) and `48 kHz stereo PCM` at ingest to prevent cumulative 20-minute concat drift.
+## 1. Verified API Limits & Explicit Alignment Ownership (`F-03`)
+- **DeepSeek Speech-to-Text (`https://api-docs.deepseek.com/guides/asr/`):** Hard limit of **`8 MiB` file size** and **`120 seconds` audio duration**, and its response schema **does NOT return word-level timestamps**.
+  - *Math Check:* `48 kHz` 16-bit stereo PCM WAV produces `~11.52 MB/min`, immediately overflowing the `8 MiB` limit in `< 42 seconds` and overflowing `120s` on 3-minute narration chunks!
+- **Canonical v4 Solution:**
+  1. **Local WhisperX Forced Alignment (`whisperx-local`):** Sole owner of millisecond `WordTimestamp[]` for scripted TTS `NARRATION` segments (`$0.00` cost, no file-size or duration cap, phoneme-level forced alignment against known text).
+  2. **Bounded Optional Cloud Transcription (`16 kHz` Mono FLAC `<= 90s`):** Any optional DeepSeek/Gemini cloud ASR transcription for raw unscripted FOIA/911 speech first slices and transcodes audio to `16 kHz` mono FLAC (`<= 90s`, typically `< 1.5–4.0 MiB` — well inside `8 MiB` and `120s`), and never substitutes for WhisperX forced alignment.
+
+## 2. Segmented Timeline & Loudness Consistency
+- Ordered, non-overlapping `voice_segments` (`NARRATION`, `FOIA_AUDIO_SLOT`, `-65 dBFS` `TWIST_PAD`) locked by SHA-256 to `scene_plans.narration_version_sha256`.
+- Local `CFR 30 fps` / `48 kHz stereo PCM` normalization + phonetic proper-noun diff check prior to rendering.

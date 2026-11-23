@@ -1,24 +1,24 @@
 ---
-title: Database and state design — Python sole-writer WAL and analytics loop
+title: Database and state design v4 — Python sole writer, ScenePlan and global budget ledger
 ---
 flowchart LR
-  subgraph PIPE["pipeline.db (SQLite WAL · Python Backend Sole Writer)"]
+  subgraph PIPE["pipeline.db v4 (SQLite >= 3.51.3 WAL · Local Disk Only · Python Sole Writer)"]
     direction TB
-    AG1["Scouting & Quotas (30-Day YT ToS TTL)<br/>channels_watchlist · outlier_candidates<br/>saturation_checks · quota_buckets · courtlistener_cache"]
-    AG23["Evidence, Disposition & PII<br/>cases (disposition_status) · primary_documents<br/>fact_ledger · foia_media_assets (profanity+spoken_pii)<br/>compliance_audits"]
-    EP["Conveyor & Early Anchors<br/>episodes (up to 3 in Batch) · case_bibles<br/>spatial_anchors (span_cells) · scenes · voice_segments"]
-    FLOW["Flow Backend & 24h+5m Drift Guard<br/>google_accounts (next_daily_reset_utc_ms)<br/>credit_ledger (dynamic escrow) · flow_jobs · flow_job_attempts"]
-    OUT["QA & Post-Publish Analytics<br/>qa_reports · published_entropy_history · episode_analytics"]
-    AG1 --> AG23 --> EP --> FLOW --> OUT
+    AG1["Scouting & Quotas (Mandatory 30d Full YT Purge)<br/>channels_watchlist · outlier_candidates (non-null TTL)<br/>saturation_checks · quota_buckets · courtlistener_cache"]
+    AG23["Evidence, Quarantine & Component Rights<br/>cases (INSERT+UPDATE guard · NOT_STARTED->APPROVED)<br/>primary_documents · fact_ledger · foia_media_assets · compliance_audits"]
+    EP["Plan-First ScenePlan & Early Illustrative 2K<br/>episodes · scene_plans (STALE auto-invalidation) · still_assets<br/>spatial_anchors (DRAFT->LOCKED) · voice_segments · scenes"]
+    BUD["Global Multi-Provider Budget & Crash-Safe Jobs<br/>monthly_budget_ledger ($135/mo ALL_PROVIDERS) · provider_spend_reservations<br/>(OFFLINE_TEST==$0 trigger!) · flow_jobs (UNIQUE ep/scene, UNKNOWN_RECONCILE)"]
+    OUT["5-Gate Human Release Sign-Off & Honest Analytics<br/>release_approvals (5 gates) · audit_log · qa_reports<br/>episode_analytics (UNKNOWN default + Studio CSV)"]
+    AG1 --> AG23 --> EP --> BUD --> OUT
   end
 
-  UI["Batch Desk React UI<br/>(Calls FastAPI HTTP/WS — Zero Direct SQLite Writes!)"]
-  TEL[("telemetry.db (Lossy 30-day)<br/>provider_registry_costs · cache_hits · render_timings")]
+  UI["Loopback FastAPI (127.0.0.1 + Auth Token) + React UI<br/>(Zero Direct SQLite Writes · Zero Networked DB)"]
+  TEL[("telemetry.db v3 (Non-Authoritative)<br/>total_input_tokens >= cached_input_tokens · render_timings")]
   CAS[("Local Artifact Store<br/>scrubbed_foia/ · stills_2k/ · ready_to_upload/")]
 
-  UI <-->|FastAPI HTTP/WS| PIPE
-  EP -.->|async metrics| TEL
-  OUT -->|SHA-256 paths| CAS
+  UI <-->|FastAPI HTTP/WS + Token| PIPE
+  EP -.->|async profiling| TEL
+  OUT -->|SHA-256 bundles| CAS
 
   classDef core fill:#daeae4,stroke:#316d5b,color:#173b30
   class PIPE core

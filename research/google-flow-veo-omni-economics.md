@@ -1,16 +1,12 @@
-# Research: Gemini Omni 1.2 Flash Interactions API vs Retired Veo 3.1 Preview (`F-01`, `F-02`)
+# Research: Gemini Omni 1.2 Flash Pricing, Test Zero-Spend Guard & Single-Config Limits (v4 · `F-01`, `F-02`)
 
 *Last verified: 2026-11-23*
 
-## 1. Verified External Provider Facts
-- **Veo 3.1 Preview Shutdown (October 22, 2026):** Google shut down the Gemini Developer API Veo 3.1 Preview endpoints (`veo-3.1-generate-preview`, `veo-3.1-fast-generate-preview`, `veo-3.1-lite-generate-preview`) on October 22, 2026. Source: [Google AI Developers Forum](https://discuss.ai.google.dev/t/request-veo-3-api-access-for-project-reviewfilm/200412).
-- **Current Supported Gemini Developer API Video Model (`gemini-omni-1.2-flash`):** Served through the official **Interactions API** (`google-genai >= 2.30.1`, `client.interactions.create`) + Files API media uploads polled until `ACTIVE`.
-  - Supported modes: Text-to-Video (`3s–15s`), First-Frame-to-Video (`3s–15s`), First-and-Last-Frame Transition (`3s–10s` max), Image-referenced R2V (up to 6 images), resolutions `360p` / `720p` (default) / `1080p` / `4k`, configurable timeout (`600s` default).
-  - **Regional Restriction:** Uploading videos for video edits, extensions, or video references is unavailable in the EEA, Switzerland, UK, and some US states. V1 uses text-to-video and image-keyframe-to-video only.
-  - Reference: [Gemini Omni Flash Docs](https://aistudio.google.com/docs/omni.md) · [Interactions API](https://aistudio.google.com/docs/interactions-overview.md) · [Gemini API Pricing](https://ai.google.dev/gemini-api/docs/pricing?hl=en).
-- **Pricing Structure:** Token-billed video output (~`5,792` video output tokens/sec @ `720p`, yielding an effective **`~$0.07–$0.10/sec`** depending on version/density).
+## 1. Supported Primary Route (`gemini-omni-1.2-flash` Interactions API)
+- Veo 3.1 Preview endpoints on Gemini Developer API shut down Oct 22, 2026 ([Google AI Developers Forum](https://discuss.ai.google.dev/t/request-veo-3-api-access-for-project-reviewfilm/200412)).
+- `gemini-omni-1.2-flash` via Interactions API (`google-genai >= 2.30.1` + Files API) bills by tokens (~`5,792` video output tokens/sec @ `720p`, effective `~$0.07–$0.10/sec`; [Gemini API Pricing](https://ai.google.dev/gemini-api/docs/pricing?hl=en)).
+- Supported durations: `3s–15s` (`TEXT_TO_VIDEO`, `FIRST_FRAME`), `3s–10s` (`FIRST_AND_LAST_FRAME`); video-upload inputs unavailable in EEA/CH/UK/some US states.
 
-## 2. Planning Assumptions (To Be Confirmed via M0.5 Live Sandbox Invoice)
-- **Conservative Planning Rate:** `$0.10/sec` @ `720p` (`$0.80` per `8s` clip).
-- **Single-Source Budget Envelope:** `MAX_HERO_CLIPS = 10`, `max_hero_duration_sec = 80s` (`1.33 min`), Base `$8.00/ep`, Hard SQLite DB Cap `$10.40/ep` (`$80–$104/mo` video + DeepSeek/TTS/Image = **`<= $135/mo`** @ 10 eps).
-- **Separate Adapters:** `VERTEX_VEO_ENTERPRISE` (GCP Vertex AI IAM/GCS contract) and `HUMAN_BATCH_DESK` (optional manual UI with explicit multi-account ToS notice and atomic `24h + 5m` refill/lockout SQL) are completely distinct provider routes—never interchangeable aliases.
+## 2. Single-Config Caps & Offline-First Zero-Spend Enforcement (`F-01`, `F-02`)
+- **Single-Source Video Limits (`providers.yaml` + `schema/pipeline.sql` v4):** **`max_hero_clips = 10`**, **`max_hero_duration_sec = 80s`** (`1.33 min`), **`$8.00`** base / **`$10.40`** hard SQLite episode cap, rolled up with ALL other providers under `monthly_budget_ledger` **`ALL_PROVIDERS <= $135.00/mo`**.
+- **Zero-Spend Tests:** Standard tests execute strictly behind transport mocks + socket-blocking guards + `trg_offline_test_zero_spend_guard`; only 1 deferred bounded connectivity check (`<= $2.00`) runs post-integration (`Task 200`, opt-in).

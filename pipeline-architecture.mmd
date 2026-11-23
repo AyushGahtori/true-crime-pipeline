@@ -1,25 +1,26 @@
 ---
-title: Automated True-Crime Pipeline — End-to-end 6-agent hybrid architecture (v3)
+title: Automated True-Crime Pipeline v4 — Plan-First -> Voice -> Create -> Edit (Offline Test Guarded)
 ---
 flowchart TB
-  subgraph P1["Part 1 · Upstream Brain & Control Plane (Developer A)"]
-    A1["Agent 1 v3 · Dual-Track Scout<br/>70% YT Outliers (Mutually Exclusive SI, 30d Full Purge)<br/>30% MuckRock / CourtListener · Authorized Metadata Leads Only"]
-    A2["Agent 2 · Evidence Harvester & Illustrative 2K Lock<br/>INSERT+UPDATE Disposition Guard + Auto-Quarantine<br/>Explicit Anonymization & Early Illustrative 2K Anchor Lock"]
-    A3["Agent 3 · Rights, PII & Policy Risk Gatekeeper<br/>Component Rights Provenance · Music-Gated Demucs (ASR Disagreement)<br/>Visual + Spoken PII Scrub · Illustrative & Dramatization Labels"]
-    VS["Voice-First Segmented Timeline<br/>Non-Overlapping Narration + FOIA Slots + Twist Pads<br/>ASR Proper-Noun Diff + RMS Envelope (CFR 30fps / 48kHz)"]
-    A4["Agent 4 · Two-Layer Director Compiler<br/>manifest_linter.py (13 Laws, Single MOTIF_REGISTRY_V1)<br/>13.0m Code / 5.67m 2K / 1.33m Omni Hero (<=10 clips)"]
-    A1 --> A2 --> A3 --> VS --> A4
+  subgraph P1["Part 1 · Upstream Brain, ScenePlan & Voice (Developer A · Offline Mocked Tests)"]
+    A1["Agent 1 v4 · Scout & Quotas<br/>30d Full YT Purge · Authorized Metadata Leads Only · Tool-Less Extraction"]
+    A2["Agent 2 · Evidence & Illustrative 2K Lock<br/>INSERT+UPDATE Disposition Quarantine · Explicit Anonymization<br/>Illustrative 2K Plates -> DRAFT->LOCKED Anchors"]
+    A3["Agent 3 · Component Rights & PII Risk Controls<br/>Narrowed 17 USC 105 · Music-Gated Demucs (ASR Disagreement)<br/>Visual + Spoken PII Scrub"]
+    SP["Stage 1 · Versioned ScenePlan[] (craft_rubric.yaml <=150L)<br/>Purpose · Approved Narration · Citations · Prompt · Acceptance Checks"]
+    VS["Stage 2 · Segmented TTS + Local WhisperX Forced Aligner<br/>Non-Overlapping voice_segments · <=90s/4MiB Optional Cloud ASR"]
+    A4["Agent 4 · Director & 480p Animatic Approval<br/>manifest_linter.py (MOTIF_REGISTRY_V1) · 13.0m / 5.67m / 1.33m (<=10 clips)"]
+    A1 --> A2 --> A3 --> SP --> VS --> A4
   end
 
-  subgraph CONV["Single-Host State & Security Control Plane (SQLite >= 3.51.3 WAL)"]
-    Q["Python Sole Writer + Loopback FastAPI (127.0.0.1 + Auth Token)<br/>Durable USD budget_reservations & Crash-Safe Idempotency"]
+  subgraph CONV["Single-Host State & Multi-Provider Budget Plane (SQLite >= 3.51.3 WAL)"]
+    Q["Python Sole Writer + Loopback FastAPI (127.0.0.1 + Auth Token)<br/>monthly_budget_ledger ($135/mo ALL_PROVIDERS) · OFFLINE_TEST==$0 Guard"]
   end
 
-  subgraph P2["Part 2 · Visual Synthesis, Mastering, Human Sign-Off & Analytics (Developer B)"]
-    A5A["Agent 5A · Remotion 2D Motif Catalog (30 fps)<br/>6 fps JS Boil (Zero SVG Turbulence) · 4-Motif MVP -> 12 Motifs<br/>13.0 min (780s) · $0 Video API · Clean Ungraded Output"]
-    A5B["Agent 5B · Illustrative 2K Pan/Zoom (crime_scene_2k Sole Owner)<br/>External-Margin 10x10 + Screen-Space Callouts + Illustrative Badge<br/>5.67 min (340s) · $0 Video API"]
-    A5C["Agent 5C · Gemini Omni 1.2 Flash Interactions API (Primary)<br/>T2V & 1/2-Frame (3-10s) · UNKNOWN_RECONCILE · Fail-Closed QA<br/>Separate Optional Vertex Enterprise & 24h+5m Batch Desk"]
-    A6["Agent 6 · Mastering, Fail-Closed QA & 5-Gate Human Release Sign-Off<br/>Per-Track Norm -> Linear -14 LUFS · Single Non-FOIA Grain<br/>5 Mandatory Human Approvals -> ready_to_upload/"]
+  subgraph P2["Part 2 · Visual Synthesis, Mastering & 5-Gate Sign-Off (Developer B)"]
+    A5A["Stage 3 · Remotion 2D Catalog (30 fps, JS 6 fps Boil)<br/>4-Motif MVP -> 12 Motifs · Zero SVG Turbulence · Ungraded"]
+    A5B["Stage 3 · crime_scene_2k Sole Owner<br/>Screen-Space Projected Callouts + ILLUSTRATIVE RECONSTRUCTION Badge"]
+    A5C["Stage 3 · gemini-omni-1.2-flash Interactions API<br/>T2V/1F/2F(<=10s) · UNKNOWN_RECONCILE · Fail-Closed QA"]
+    A6["Stage 4 · Mastering, Healing & 5-Gate Human Release Sign-Off<br/>Per-Track Norm -> Linear -14 LUFS · Single Non-FOIA Grain<br/>5 Mandatory Human Approvals (ScenePlan EDITED_APPROVED) -> ready_to_upload/"]
     AN["Honest Post-Publish Analytics Loop<br/>YT Analytics Watch-Hours/Retention + Studio CSV Monetization (UNKNOWN default)"]
     A5A & A5B & A5C --> A6 --> AN
   end
@@ -30,6 +31,6 @@ flowchart TB
   classDef p1 fill:#daeae4,stroke:#316d5b,color:#173b30
   classDef gate fill:#fff1ce,stroke:#947333,color:#40300b
   classDef p2 fill:#dce8f5,stroke:#2e5a88,color:#132a42
-  class A1,A2,A3,VS,A4 p1
+  class A1,A2,A3,SP,VS,A4 p1
   class Q gate
   class A5A,A5B,A5C,A6,AN p2
