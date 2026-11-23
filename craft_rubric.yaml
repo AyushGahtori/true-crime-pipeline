@@ -1,0 +1,76 @@
+# Global pacing and visual-clarity principles.
+# Not episode research. Not a ScenePlan. Not a provider price list.
+version: 1
+id: documentary_craft_rubric_v1
+max_lines: 150
+
+interactive:
+  means: high-engagement visual curiosity hooks and documentary pacing
+  does_not_mean:
+    - clickable player widgets
+    - branching viewer choices
+    - chat or poll overlays
+
+separated_from:
+  - id: episode_research
+    holds: [case facts, sources, names, timelines]
+  - id: scene_plan
+    holds: [story purpose, narration, citations, visual prompt, acceptance checks]
+  rule: Do not store facts, narration, or per-scene prompts in this file.
+
+sequence:
+  - id: plan_first
+    gate: PLAN_APPROVED
+    before: [voice lock, paid picture]
+  - id: voice_second
+    gate: ANIMATIC_APPROVED
+    note: Word timing is local. Picture spend waits for a locked narration hash.
+  - id: create_third
+    note: Paid and rendered picture must match the approved narration hash.
+  - id: edit_last
+    gate: human sign-off
+    note: Mastering and the five release gates come after picture exists.
+
+pacing:
+  - id: opening_hook
+    window: "0:00-0:20"
+    require: one explicit primary-record curiosity question
+    compliance: adsense-clean, no unsupported sensational claim
+  - id: visual_variation
+    static_or_2k_max_hold_sec: 6.0
+    macro_engine_switch_before_sec: 50.0
+  - id: hero_motion
+    cut_clock: exempt while continuous hero motion is on screen
+  - id: case_board_spine
+    enter_window_sec: [210, 270]
+    snap: scene boundary
+  - id: remainder_beats
+    min_sec: 2.5
+  - id: cold_open
+    require: a different archetype from the last published episode
+
+visual_clarity:
+  - id: callouts
+    fields: [location, timestamp, action]
+    max_words: 12
+    min_duration_sec: "1.0 + 0.3 * word_count"
+    safe_zone: css
+    citations: fact_ledger ids
+  - id: illustrative_plates
+    watermark: "ILLUSTRATIVE RECONSTRUCTION — NOT CRIME SCENE PHOTO"
+    never_present_as: a crime scene photograph
+  - id: transcript_audio
+    badge: "TRANSCRIPT DRAMATIZATION"
+  - id: start_end_frames
+    forbid_hex: "#C92A2A"
+    grade: monochrome charcoal, no crimson
+  - id: fallback
+    rule: non-neighbor visual engine
+    never: repeat the same engine and call it a new approach
+
+not_in_this_file:
+  - model ids
+  - prices
+  - provider sockets
+  - episode facts
+  - scene prompts

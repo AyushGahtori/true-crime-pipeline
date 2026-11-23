@@ -1,0 +1,35 @@
+# Secrets
+.env
+.env.*
+.env*
+
+# SQLite databases and sidecars (pipeline.db, telemetry.db, WAL, journals)
+*.db
+*.db*
+*.sqlite
+*.sqlite3
+
+# Dependencies and virtualenvs
+node_modules/
+.venv/
+venv/
+
+# Publish output and generated run artifacts
+ready_to_upload/
+artifacts/
+
+# Tool caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+.pnpm-store/
+coverage/
+
+# OS junk
+.DS_Store
+Thumbs.db

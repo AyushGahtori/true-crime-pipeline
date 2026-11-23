@@ -1,0 +1,177 @@
+# Single source of truth for model IDs and prices.
+# Packages load this file. Do not copy model IDs or rates into package source.
+version: 4
+currency: USD
+micro_usd_per_usd: 1000000
+
+runtime_split:
+  code_foia_sec: 780
+  still_2k_panzoom_sec: 340
+  flow_hero_video_sec: 80
+  episode_target_sec: 1200
+
+budgets:
+  all_providers_monthly_cap_usd: 135.00
+  all_providers_monthly_cap_micro_usd: 135000000
+  per_episode_video_cap_usd: 10.40
+  per_episode_video_cap_micro_usd: 10400000
+  offline_test_cap_usd: 0.00
+  live_sandbox_cap_usd: 2.00
+  live_sandbox_requires:
+    - "--live-sandbox"
+    - "ALLOW_PAID_SANDBOX=1"
+  ledger:
+    - provider_id: ALL_PROVIDERS
+      monthly_cap_usd: 135.00
+      monthly_cap_micro_usd: 135000000
+    - provider_id: gemini_omni
+      monthly_cap_usd: 104.00
+      monthly_cap_micro_usd: 104000000
+    - provider_id: gemini_image
+      monthly_cap_usd: 5.00
+      monthly_cap_micro_usd: 5000000
+    - provider_id: deepseek_chat
+      monthly_cap_usd: 38.00
+      monthly_cap_micro_usd: 38000000
+    - provider_id: tts
+      monthly_cap_usd: 5.00
+      monthly_cap_micro_usd: 5000000
+    - provider_id: vision_qa
+      monthly_cap_usd: 2.00
+      monthly_cap_micro_usd: 2000000
+
+video:
+  default_adapter: GEMINI_OMNI_INTERACTIONS
+  primary:
+    adapter: GEMINI_OMNI_INTERACTIONS
+    provider_id: gemini_omni
+    model_id: gemini-omni-1.2-flash
+    api: gemini_interactions
+    sdk: google-genai>=2.30.1
+    resolution: 720p
+    frame_size: [1280, 720]
+    # Conservative plan rate. Research band is about $0.07-$0.10/sec at 720p.
+    # 80s * $0.10 = $8.00 base. The durable episode cap stays $10.40.
+    usd_per_sec: 0.10
+    usd_per_sec_observed_low: 0.07
+    video_output_tokens_per_sec_720p: 5792
+    max_hero_clips: 10
+    max_hero_duration_sec: 80
+    episode_base_usd: 8.00
+    episode_cap_usd: 10.40
+    episode_cap_micro_usd: 10400000
+    monthly_cap_usd: 104.00
+    default: true
+    prompt_modes:
+      TEXT_TO_VIDEO:
+        min_sec: 3
+        max_sec: 15
+        frames: 0
+      FIRST_FRAME:
+        min_sec: 3
+        max_sec: 15
+        frames: 1
+      FIRST_AND_LAST_FRAME:
+        min_sec: 3
+        max_sec: 10
+        frames: 2
+  adapters:
+    VERTEX_VEO_ENTERPRISE:
+      interchangeable_with_primary: false
+      provider_id: vertex_veo
+      default: false
+      credentials: gcp_oauth_iam
+      output: gcs_uri
+      note: Separate Vertex SKU. Never alias onto the Gemini Developer API client.
+    HUMAN_BATCH_DESK:
+      interchangeable_with_primary: false
+      provider_id: human_batch_desk
+      default: false
+      api_billing_usd: 0
+      daily_credit_cap: 50
+      reset_window: 24h+5m
+      note: Optional manual desk. Not an API substitute for the primary video model.
+
+# Veo 3.1 Preview on the Gemini Developer API shut down 2026-10-22.
+# It is not a default and must not be selected by adapters.
+disabled_defaults:
+  veo_3_1_developer_api:
+    model_family: veo-3.1
+    surface: gemini_developer_api
+    status: shut_down
+    shut_down_on: "2026-10-22"
+    selectable_as_default: false
+
+providers:
+  gemini_image:
+    provider_id: gemini_image
+    api: gemini_image_api
+    # The v4 blueprint names the official Gemini Image API and does not pin a SKU.
+    # This role id is the registry key. Replace it only in this file.
+    model_id: gemini-image
+    sku_pinned_in_blueprint: false
+    min_px: 2048
+    target_px: [2560, 1440]
+    usd_per_episode_conservative: 0.40
+    usd_per_episode_best_effort: 0.30
+    monthly_cap_usd: 5.00
+  deepseek_chat:
+    provider_id: deepseek_chat
+    cache: best_effort_not_guaranteed
+    models:
+      - id: DeepSeek-V4.1-Flash-1017
+        roles: [scripting, ledger, manifests, vision_grid]
+      - id: DeepSeek-V4-Pro-0813
+        roles: [contradiction_reasoning]
+    projections:
+      cache_hit_rate_0:
+        usd_per_episode_low: 2.80
+        usd_per_episode_high: 3.80
+        note: Ledger solvency uses this 0% cache case. Do not assume hits.
+      cached_best_effort:
+        usd_per_episode_low: 0.75
+        usd_per_episode_high: 1.90
+        note: Planning only. Cache hits are not contractual.
+    monthly_cap_usd: 38.00
+  tts:
+    provider_id: tts
+    models:
+      - id: gemini-3.8-flash-tts
+        role: primary_narration
+      - id: flash-lite-tts
+        role: alternate
+    # Episode table rolls TTS + vision QA together at $0.50 conservative / $0.45 cached.
+    usd_per_episode_with_vision_qa_conservative: 0.50
+    usd_per_episode_with_vision_qa_cached_projection: 0.45
+    monthly_cap_usd: 5.00
+  asr:
+    provider_id: whisperx_local
+    primary_word_aligner: whisperx-local
+    engine: WhisperX
+    usd_per_episode: 0.00
+    owns: word_timestamps
+    cloud_optional:
+      max_duration_sec: 90
+      max_bytes: 4194304
+      note: Optional cloud ASR is not the word aligner. DeepSeek ASR is 8 MiB / 120s and returns no word timestamps.
+  vision_qa:
+    provider_id: vision_qa
+    models:
+      - id: gemini-3.5-flash
+        roles: [omni_clip_qa, frame_spot_qa, thumbnail_audit]
+      - id: DeepSeek-V4.1-Flash-1017
+        roles: [grid_grounding, frame_spot_qa]
+    monthly_cap_usd: 2.00
+    unreachable_state: PENDING_MANUAL_SPOT_CHECK
+  gemini_text:
+    models:
+      - id: gemini-3.5-flash-lite
+        roles: [youtube_xray]
+      - id: gemini-3.8-flash
+        roles: [youtube_xray]
+    price_usd: null
+
+scrubbed_test_env:
+  - GEMINI_API_KEY
+  - DEEPSEEK_API_KEY
+  - ELEVENLABS_API_KEY
