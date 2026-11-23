@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import replace
+from pathlib import Path
 
 import pytest
 
@@ -305,6 +307,167 @@ def test_prune_dormant_and_graduated() -> None:
     result = manager.prune(NOW_MS)
     assert result.dormant_deactivated == ("UC_dormant",)
     assert result.graduated_deactivated == ("UC_grad",)
+    assert result.ledger.search_list_calls == 0
+    assert manager.search_units == 0
     assert manager._channels["UC_ok"].is_active
     assert not manager._channels["UC_dormant"].is_active
     assert not manager._channels["UC_grad"].is_active
+    stored = manager._db.execute(
+        """
+        SELECT channel_id, is_active, subscriber_count, discovered_via
+        FROM channels_watchlist
+        ORDER BY channel_id
+        """
+    ).fetchall()
+    by_id = {row["channel_id"]: row for row in stored}
+    assert by_id["UC_ok"]["is_active"] == 1
+    assert by_id["UC_dormant"]["is_active"] == 0
+    assert by_id["UC_grad"]["is_active"] == 0
+    assert by_id["UC_grad"]["subscriber_count"] == SUBSCRIBER_COUNT_MAX + 50_000
+
+
+def test_seed_from_recorded_batch_records_zero_search_units() -> None:
+    fixture = Path(__file__).resolve().parent / "fixtures" / "yt_channels_batch.json"
+    payload = json.loads(fixture.read_text(encoding="utf-8"))
+    ids = [item["id"] for item in payload["items"]]
+    calls: list[list[str]] = []
+
+    def fetcher(batch: list[str]) -> dict:
+        calls.append(list(batch))
+        assert len(batch) <= 50
+        wanted = set(batch)
+        return {
+            "kind": payload["kind"],
+            "items": [item for item in payload["items"] if item["id"] in wanted],
+        }
+
+    manager = WatchlistManager(now_ms=NOW_MS, channels_list=lambda **_kwargs: {"items": []})
+    result = manager.seed_from_channel_ids(ids, fetcher, now_ms=NOW_MS)
+
+    assert calls == [ids]
+    assert result.ledger.search_list_calls == 0
+    assert result.ledger.channels_list_calls == 1
+    assert manager.search_units == 0
+    assert [row.channel_id for row in result.admitted] == ["UC1111111111111111111111"]
+    stored = manager._db.execute(
+        """
+        SELECT uploads_playlist_id, channel_name, subscriber_count,
+               median_20_views, last_polled_at, yt_ttl_expires_at,
+               discovered_via, is_active
+        FROM channels_watchlist
+        WHERE channel_id = ?
+        """,
+        ("UC1111111111111111111111",),
+    ).fetchone()
+    assert stored["uploads_playlist_id"] == "UU1111111111111111111111"
+    assert stored["uploads_playlist_id"] != "PLnotanuploadsplaylist01"
+    assert stored["channel_name"] == "Lake County Cold Cases"
+    assert stored["subscriber_count"] == 45_000
+    assert stored["median_20_views"] == 0
+    assert stored["last_polled_at"] == 0
+    assert stored["yt_ttl_expires_at"] == NOW_MS + YT_TTL_MS
+    assert stored["discovered_via"] == "SEED"
+    assert stored["is_active"] == 1
+    columns = [
+        row[1]
+        for row in manager._db.execute("PRAGMA table_info(channels_watchlist)")
+    ]
+    assert columns == [
+        "channel_id",
+        "uploads_playlist_id",
+        "channel_name",
+        "subscriber_count",
+        "median_20_views",
+        "last_polled_at",
+        "yt_ttl_expires_at",
+        "discovered_via",
+        "is_active",
+    ]
+
+
+def test_embedded_spillover_respects_band_duration_and_prune_edges() -> None:
+    manager = WatchlistManager(now_ms=NOW_MS, channels_list=lambda **_kwargs: {"items": []})
+    keep = "UCkeep000000000000000001"
+    dormant = "UCdorm000000000000000001"
+    farm = "UCfarm000000000000000001"
+    low = "UClow0000000000000000001"
+    exact_upload = NOW_MS - DORMANT_MS
+    too_old = NOW_MS - DORMANT_MS - 1
+
+    def crime_uploads(published_at_ms: int) -> list[dict]:
+        titles = (
+            "The unsolved murder of Ada Brown",
+            "Cold case homicide special",
+            "A kidnapping that stayed open",
+        )
+        return [
+            {
+                "title": title,
+                "duration_sec": 600,
+                "published_at_ms": published_at_ms - index,
+            }
+            for index, title in enumerate(titles)
+        ]
+
+    discovered = manager.discover_spillover_channels(
+        [
+            {
+                "channel_id": keep,
+                "channel_name": "Band Ceiling",
+                "subscriberCount": SUBSCRIBER_COUNT_MAX,
+                "uploads": crime_uploads(exact_upload),
+            },
+            {
+                "channel_id": dormant,
+                "channel_name": "Gone Quiet",
+                "subscriber_count": 8_000,
+                "uploads": crime_uploads(too_old),
+            },
+            {
+                "channel_id": farm,
+                "channel_name": "Shorts Farm",
+                "subscriberCount": 8_000,
+                "uploads": [
+                    {
+                        "title": "Murder recap #shorts",
+                        "duration_sec": 45,
+                        "published_at_ms": NOW_MS - index,
+                    }
+                    for index in range(10)
+                ],
+            },
+            {
+                "channel_id": low,
+                "channel_name": "Below Band",
+                "subscriberCount": SUBSCRIBER_COUNT_MIN - 1,
+                "uploads": crime_uploads(NOW_MS),
+            },
+        ],
+        NOW_MS,
+    )
+
+    assert [row.channel_id for row in discovered.promoted] == [keep, dormant]
+    assert discovered.rejected == (farm, low)
+    assert discovered.ledger.search_list_calls == 0
+    assert manager.search_units == 0
+    ceiling = manager._db.execute(
+        """
+        SELECT uploads_playlist_id, discovered_via, subscriber_count
+        FROM channels_watchlist
+        WHERE channel_id = ?
+        """,
+        (keep,),
+    ).fetchone()
+    assert ceiling["uploads_playlist_id"] == channel_to_uploads_playlist_id(keep)
+    assert ceiling["uploads_playlist_id"] == "UU" + keep[2:]
+    assert ceiling["discovered_via"] == "SPILLOVER"
+    assert ceiling["subscriber_count"] == SUBSCRIBER_COUNT_MAX
+
+    pruned = manager.prune(NOW_MS)
+    assert keep not in pruned.dormant_deactivated
+    assert keep not in pruned.graduated_deactivated
+    assert dormant in pruned.dormant_deactivated
+    assert dormant not in pruned.graduated_deactivated
+    assert manager._channels[keep].is_active
+    assert not manager._channels[dormant].is_active
+    assert manager.search_units == 0
