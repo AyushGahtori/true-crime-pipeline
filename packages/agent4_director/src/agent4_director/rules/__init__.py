@@ -1,0 +1,1 @@
+"""Deterministic manifest linter rules (Agent 4)."""
