@@ -1,0 +1,1 @@
+"""Deterministic manifest lint rules for Agent 4."""
